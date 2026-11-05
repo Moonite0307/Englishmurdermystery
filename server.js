@@ -1,9 +1,13 @@
 /**
- * 沉浸式 AI 剧本杀语言学习助手 — 本地后端
+ * 沉浸式 AI 剧本杀语言学习助手 — 后端（本地 / 云托管通用）
  * 零依赖（Node.js 18+ 内置 fetch），职责：
- *   1. 托管静态文件（index.html）
- *   2. 读取 config.json 中的 API 密钥，代理转发大模型请求（SSE 流式透传）
- * 密钥只存在于本文件的 config.json 中，前端代码不包含任何 Key。
+ *   1. 托管静态文件（仅 index.html，config.json 等敏感文件一律不对外提供）
+ *   2. 读取 API 密钥配置，代理转发大模型请求（SSE 流式透传）
+ * 密钥来源（按优先级）：
+ *   1. 项目根目录 config.json（本地开发）
+ *   2. /etc/secrets/config.json（Render 私密文件）
+ *   3. 环境变量 API_BASE / API_KEY / MODEL（其他云平台）
+ * 前端代码不包含任何 Key。
  */
 "use strict";
 
@@ -12,9 +16,12 @@ const fs = require("fs");
 const path = require("path");
 const { exec } = require("child_process");
 
-const PORT = 8787;
+const IS_CLOUD = !!process.env.PORT;            // 云平台（Render/Railway 等）会注入 PORT
+const PORT = Number(process.env.PORT) || 8787;
+const HOST = IS_CLOUD ? "0.0.0.0" : "127.0.0.1";
 const ROOT = __dirname;
 const CONFIG_PATH = path.join(ROOT, "config.json");
+const SECRET_PATH = "/etc/secrets/config.json"; // Render Secret Files 挂载路径
 
 const MIME = {
   ".html": "text/html; charset=utf-8",
@@ -28,16 +35,25 @@ const MIME = {
 };
 
 function loadConfig() {
-  try {
-    const c = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"));
-    return {
-      apiBase: String(c.apiBase || "").replace(/\/+$/, ""),
-      apiKey: String(c.apiKey || ""),
-      model: String(c.model || "gpt-4o-mini")
-    };
-  } catch (e) {
-    return { apiBase: "", apiKey: "", model: "gpt-4o-mini" };
+  /* 每次请求实时读取，改完配置立即生效 */
+  for (const p of [CONFIG_PATH, SECRET_PATH]) {
+    try {
+      const c = JSON.parse(fs.readFileSync(p, "utf8"));
+      if (c.apiKey) {
+        return {
+          apiBase: String(c.apiBase || "").replace(/\/+$/, ""),
+          apiKey: String(c.apiKey || ""),
+          model: String(c.model || "gpt-4o-mini")
+        };
+      }
+    } catch (e) { /* 文件不存在或格式错误，尝试下一个来源 */ }
   }
+  /* 环境变量兜底（Render/Railway 等平台的环境变量配置） */
+  return {
+    apiBase: String(process.env.API_BASE || "").replace(/\/+$/, ""),
+    apiKey: String(process.env.API_KEY || ""),
+    model: String(process.env.MODEL || "gpt-4o-mini")
+  };
 }
 
 function sendJson(res, status, obj) {
@@ -59,13 +75,20 @@ function readBody(req) {
 }
 
 function serveStatic(req, res, urlPath) {
+  /* 安全：只对外提供 index.html。
+     config.json / server.js / .git / .workbuddy 等一律 404，
+     防止部署到公网后密钥文件被直接下载。 */
   let filePath = urlPath === "/" ? "/index.html" : urlPath;
   filePath = path.normalize(decodeURIComponent(filePath)).replace(/^(\.\.[/\\])+/, "");
+  const base = path.basename(filePath).toLowerCase();
+  const blocked =
+    base !== "index.html" ||                 /* 单文件应用，只放行 index.html */
+    filePath.includes("..");
+  if (blocked) { res.writeHead(404); res.end("Not Found"); return; }
   const abs = path.join(ROOT, filePath);
-  if (!abs.startsWith(ROOT)) { res.writeHead(403); res.end("Forbidden"); return; }
   fs.readFile(abs, (err, buf) => {
     if (err) { res.writeHead(404); res.end("Not Found"); return; }
-    res.writeHead(200, { "Content-Type": MIME[path.extname(abs).toLowerCase()] || "application/octet-stream" });
+    res.writeHead(200, { "Content-Type": MIME[".html"] });
     res.end(buf);
   });
 }
@@ -167,13 +190,12 @@ const server = http.createServer(async (req, res) => {
   res.writeHead(405); res.end("Method Not Allowed");
 });
 
-server.listen(PORT, "127.0.0.1", () => {
-  const url = "http://127.0.0.1:" + PORT;
+server.listen(PORT, HOST, () => {
   console.log("===============================================");
-  console.log("  沉浸式 AI 剧本杀语言学习助手 · 本地后端已启动");
-  console.log("  访问地址: " + url);
-  console.log("  密钥配置: " + CONFIG_PATH);
+  console.log("  沉浸式 AI 剧本杀语言学习助手 · 后端已启动");
+  console.log("  模式: " + (IS_CLOUD ? "云托管（监听 0.0.0.0:" + PORT + "）" : "本地（http://127.0.0.1:" + PORT + "）"));
+  console.log("  密钥配置: config.json / /etc/secrets/config.json / 环境变量");
   console.log("===============================================");
-  /* 自动打开浏览器（Windows） */
-  if (process.platform === "win32") exec('start "" "' + url + '"');
+  /* 本地 Windows 启动时自动打开浏览器 */
+  if (!IS_CLOUD && process.platform === "win32") exec('start "" "http://127.0.0.1:' + PORT + '"');
 });

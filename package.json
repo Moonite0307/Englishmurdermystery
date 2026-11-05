@@ -1,0 +1,13 @@
+{
+  "name": "script-kill-english",
+  "version": "1.0.0",
+  "private": true,
+  "description": "沉浸式 AI 剧本杀语言学习助手（零依赖 Node 后端 + 单文件前端）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
