@@ -585,13 +585,12 @@
     <!-- API 设置（可折叠） -->
     <div class="api-settings" id="api-settings">
       <button class="api-settings-toggle" id="api-settings-toggle">
-        <span class="arrow">▶</span> ⚙️ 大模型接口设置（OpenAI 兼容）
+        <span class="arrow">▶</span> ⚙️ 大模型接口设置（可选，默认已内置）
       </button>
       <div class="api-settings-body">
         <p class="api-hint">
-          推荐：运行随附的 <code>启动.bat</code>（server.js 本地后端），密钥写进 <code>config.json</code>，前端零配置。<br>
-          直开此文件时也可填界面设置：支持 OpenAI 兼容接口（Key 存本地 localStorage，不写入代码）。<br>
-          例：<code>https://api.openai.com/v1</code>、<code>https://api.deepseek.com/v1</code>、<code>http://localhost:11434/v1</code>（Ollama）
+          不填则使用内置默认接口，直接开玩；填写后将覆盖默认配置（仅保存在你自己的浏览器 localStorage）。<br>
+          支持 OpenAI 兼容接口，例：<code>https://api.openai.com/v1</code>、<code>https://api.deepseek.com/v1</code>、<code>http://localhost:11434/v1</code>（Ollama）
         </p>
         <div class="field">
           <label for="inp-api-base">API Base URL</label>
@@ -903,7 +902,15 @@ function resetGame() {
   setState("CONFIG");
 }
 
-/* ================= API 设置（localStorage 持久化，不硬编码 Key） ================= */
+/* ================= API 设置（静态版内置默认配置；界面设置可覆盖） ================= */
+/* 静态托管（GitHub Pages）下的内置默认接口配置：玩家打开即玩，无需填写。
+   注意：静态网页源码公开，此 Key 对访客可见，请务必在 DeepSeek 控制台设置消费上限。
+   如需更换 Key，直接修改下面三行即可（运营改这里 = 原来的 config.json）。 */
+const STATIC_DEFAULTS = {
+  apiBase: "https://api.deepseek.com/v1",
+  apiKey: "sk-6525610955094d2fbd545ecbc31109b6",
+  model: "deepseek-chat"
+};
 const LS_KEY = "script-kill-llm-settings";
 
 function loadSettings() {
@@ -916,15 +923,17 @@ function loadSettings() {
 }
 
 function getSettings() {
-  const apiBase = $("inp-api-base").value.trim().replace(/\/+$/, "");
-  const apiKey  = $("inp-api-key").value.trim();
-  const model   = $("inp-model").value.trim() || "gpt-4o-mini";
+  /* 界面填写优先；留空则回落到内置默认配置 */
+  const apiBase = $("inp-api-base").value.trim().replace(/\/+$/, "") || STATIC_DEFAULTS.apiBase;
+  const apiKey  = $("inp-api-key").value.trim()  || STATIC_DEFAULTS.apiKey;
+  const model   = $("inp-model").value.trim()    || STATIC_DEFAULTS.model;
   localStorage.setItem(LS_KEY, JSON.stringify({ apiBase, apiKey, model }));
   return { apiBase, apiKey, model };
 }
 
 function validateSettings(s) {
   if (backendMode) return true; // 后端模式无需界面配置
+  if (STATIC_DEFAULTS.apiKey) return true; // 内置默认密钥，玩家无需配置
   const ok = !!(s.apiBase && s.apiKey);
   $("api-error-tip").classList.toggle("show", !ok);
   $("inp-api-base").classList.toggle("error", !s.apiBase);
@@ -958,8 +967,15 @@ async function detectBackend() {
       $("backend-badge").classList.remove("hidden");
       return;
     }
-  } catch (e) { /* 非后端环境（如双击直开），回退到界面设置模式 */ }
-  /* 未连上后端：按访问方式给出不同引导 */
+  } catch (e) { /* 非后端环境（如双击直开/静态托管），回退到内置默认配置或界面设置 */ }
+  /* 静态托管且已内置默认密钥：玩家直接开玩，不显示任何配置引导 */
+  if (STATIC_DEFAULTS.apiKey) {
+    const badge = $("backend-badge");
+    badge.textContent = "☁️ 在线版 · AI 接口已内置，直接开玩（⚙️ 设置可自定义覆盖）";
+    badge.classList.remove("hidden");
+    return;
+  }
+  /* 未连上后端且无内置密钥：按访问方式给出不同引导 */
   const hint = $("direct-mode-hint");
   const host = location.hostname;
   if (host === "localhost" || host === "127.0.0.1" || host === "") {
