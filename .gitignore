@@ -1,0 +1,11 @@
+# 包含真实 API 密钥，严禁上传 GitHub
+config.json
+
+# WorkBuddy 工作区数据
+.workbuddy/
+
+# 系统/编辑器临时文件
+Thumbs.db
+.DS_Store
+*.log
+node_modules/

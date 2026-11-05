@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沉浸式 AI 剧本杀语言学习助手</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg-panel: #161a23;
+    --bg-sidebar: #11141c;
+    --bg-bubble-npc: #1e2430;
+    --bg-bubble-user: #2f6fed;
+    --bg-input: #1c212c;
+    --border: #2a3040;
+    --text: #e8eaf0;
+    --text-dim: #9aa3b5;
+    --accent: #4f8cff;
+    --accent-soft: rgba(79, 140, 255, 0.12);
+    --tip-yellow: #f0c948;
+    --danger: #ef5350;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+  }
+
+  /* ===== 通用 ===== */
+  .hidden { display: none !important; }
+  button { font-family: inherit; cursor: pointer; border: none; }
+  input, select, textarea { font-family: inherit; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 22px; border-radius: var(--radius);
+    background: var(--accent); color: #fff; font-size: 15px; font-weight: 600;
+    transition: filter .15s, transform .05s;
+  }
+  .btn:hover { filter: brightness(1.12); }
+  .btn:active { transform: scale(0.97); }
+  .btn:disabled { filter: grayscale(0.6) brightness(0.7); cursor: not-allowed; }
+  .btn-ghost {
+    background: transparent; color: var(--text-dim);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 8px 14px; font-size: 13px;
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+
+  /* ===== CONFIG 状态 ===== */
+  .center-screen {
+    height: 100%; width: 100%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .config-card {
+    width: 100%; max-width: 560px;
+    background: var(--bg-panel); border: 1px solid var(--border);
+    border-radius: 20px; padding: 36px 34px;
+    box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+  }
+  .app-title { text-align: center; margin-bottom: 6px; font-size: 26px; font-weight: 700; }
+  .app-title .icon { margin-right: 6px; }
+  .app-sub { text-align: center; color: var(--text-dim); font-size: 13px; margin-bottom: 28px; }
+  .error-banner {
+    background: rgba(239, 83, 80, 0.1); border: 1px solid rgba(239, 83, 80, 0.45);
+    color: #ff9b99; border-radius: 10px; padding: 10px 14px;
+    font-size: 13px; line-height: 1.6; margin-bottom: 16px;
+    word-break: break-all;
+  }
+  .backend-badge {
+    text-align: center; color: #69db7c; font-size: 12px;
+    border: 1px dashed rgba(105, 219, 124, 0.4); border-radius: 8px;
+    padding: 8px; margin-top: 18px;
+  }
+  .direct-mode-hint {
+    text-align: center; color: var(--tip-yellow); font-size: 12px;
+    border: 1px dashed rgba(240, 201, 72, 0.4); border-radius: 8px;
+    padding: 8px 10px; margin-top: 18px; line-height: 1.7;
+  }
+  .direct-mode-hint code { color: #7eb1ff; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 13px; color: var(--text-dim); margin-bottom: 7px; }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 12px 14px; border-radius: 10px;
+    background: var(--bg-input); border: 1px solid var(--border);
+    color: var(--text); font-size: 15px; outline: none;
+    transition: border-color .15s; resize: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); }
+  .field input.error, .field select.error { border-color: var(--danger); }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .btn-generate { width: 100%; margin-top: 8px; padding: 14px; font-size: 16px; }
+
+  /* API 设置折叠区 */
+  .api-settings { margin-top: 22px; border-top: 1px dashed var(--border); padding-top: 16px; }
+  .api-settings-toggle {
+    display: flex; align-items: center; gap: 6px;
+    background: none; color: var(--text-dim); font-size: 13px; padding: 4px 0;
+  }
+  .api-settings-toggle:hover { color: var(--text); }
+  .api-settings-toggle .arrow { transition: transform .2s; display: inline-block; }
+  .api-settings.open .api-settings-toggle .arrow { transform: rotate(90deg); }
+  .api-settings-body { display: none; padding-top: 14px; }
+  .api-settings.open .api-settings-body { display: block; }
+  .api-hint { font-size: 12px; color: var(--text-dim); line-height: 1.7; margin-bottom: 12px; }
+  .api-hint code { background: var(--bg-input); padding: 1px 6px; border-radius: 4px; font-size: 11px; }
+  .api-error-tip { color: var(--danger); font-size: 12px; margin-top: 10px; display: none; }
+  .api-error-tip.show { display: block; }
+
+  /* ===== PLANNING 状态 ===== */
+  /* 生成中画面 */
+  .planning-loading { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .loading-mask { font-size: 68px; line-height: 1; animation: float 1.6s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  .loading-title { font-size: 17px; color: var(--text-dim); letter-spacing: 3px; }
+  .dot-anim.big i { width: 9px; height: 9px; background: var(--accent); }
+  /* 剧本杀弹窗卡片 */
+  .script-modal {
+    position: fixed; inset: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(5, 6, 10, 0.85); padding: 24px;
+  }
+  .sm-frame {
+    width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto;
+    background: linear-gradient(160deg, #1d1912, #131009);
+    border: 1px double #c9a86a; border-radius: 10px;
+    padding: 26px 30px; box-shadow: 0 20px 70px rgba(0,0,0,.75);
+  }
+  .sm-ribbon { text-align: center; color: #c9a86a; font-size: 12px; letter-spacing: 8px; margin-bottom: 8px; }
+  .sm-title { text-align: center; color: #e8d5a8; font-size: 24px; font-weight: 700; letter-spacing: 3px; margin-bottom: 4px; }
+  .sm-meta { text-align: center; color: #8a7a55; font-size: 12px; margin-bottom: 20px; }
+  .sm-section { margin-bottom: 16px; }
+  .sm-label { color: #c9a86a; font-size: 13px; font-weight: 700; letter-spacing: 2px; margin-bottom: 6px; }
+  .sm-text { color: #d8cbb0; font-size: 14px; line-height: 1.9; }
+  .sm-chars .sm-char { color: #d8cbb0; font-size: 13.5px; line-height: 1.95; }
+  .sm-chars .sm-char b { color: #e8d5a8; }
+  .sm-tasks { margin-left: 22px; }
+  .sm-tasks li { color: #d8cbb0; font-size: 13.5px; line-height: 1.9; }
+  .sm-tasks li::marker { color: #c9a86a; font-weight: 700; }
+  .sm-foot { display: flex; gap: 12px; margin-top: 24px; }
+  .sm-foot .btn { flex: 1; background: #a8823f; }
+  .sm-foot .btn:hover { filter: brightness(1.15); }
+  /* 纯文本兜底卡片 */
+  .planning-card {
+    width: 100%; max-width: 680px; height: 100%; max-height: 860px;
+    display: flex; flex-direction: column;
+    background: var(--bg-panel); border: 1px solid var(--border);
+    border-radius: 20px; padding: 30px 32px;
+    box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+  }
+  .planning-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+  .planning-head h2 { font-size: 19px; }
+  .planning-body {
+    flex: 1; overflow-y: auto; white-space: pre-wrap;
+    background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px 22px; font-size: 14.5px; line-height: 1.9; color: #d3d9e6;
+  }
+  .planning-body .cursor {
+    display: inline-block; width: 8px; height: 17px; background: var(--accent);
+    vertical-align: text-bottom; animation: blink .8s infinite;
+    margin-left: 2px;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .planning-foot { margin-top: 18px; display: flex; gap: 12px; }
+  .btn-start { flex: 1; }
+
+  /* ===== PLAYING 布局 ===== */
+  .game-layout { display: flex; height: 100%; }
+
+  .sidebar {
+    width: 280px; min-width: 280px; height: 100%;
+    background: var(--bg-sidebar); border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; padding: 20px 16px;
+  }
+  .sidebar h3 { font-size: 15px; margin-bottom: 6px; }
+  .sidebar .script-name { font-size: 15px; font-weight: 700; color: var(--accent); line-height: 1.5; margin-bottom: 4px; }
+  .sidebar .script-meta { font-size: 11.5px; color: var(--text-dim); margin-bottom: 16px; }
+  .sidebar .section-label {
+    font-size: 12px; color: var(--text-dim); text-transform: uppercase;
+    letter-spacing: 1px; margin: 14px 0 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .task-goal-box {
+    background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 12px; font-size: 12px; line-height: 1.7; color: #c2cad9;
+    max-height: 220px; overflow-y: auto; white-space: pre-wrap;
+  }
+  .task-item { display: flex; gap: 7px; align-items: flex-start; padding: 4px 0; white-space: normal; }
+  .task-item .ti-check { flex-shrink: 0; }
+  .task-item.done .ti-text { color: #69db7c; text-decoration: line-through; opacity: .85; }
+  .task-toast {
+    margin: 0 0 16px 46px; font-size: 13px; color: #69db7c;
+    background: rgba(105, 219, 124, 0.08); border: 1px solid rgba(105,219,124,.35);
+    border-radius: 8px; padding: 8px 14px; animation: fadeIn .4s;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: none;} }
+  .vocab-list { flex: 1; overflow-y: auto; min-height: 0; }
+  .vocab-empty { font-size: 12px; color: var(--text-dim); padding: 8px 2px; }
+  .vocab-progress {
+    height: 8px; border-radius: 4px; overflow: hidden;
+    background: var(--bg-input); border: 1px solid var(--border);
+  }
+  .vocab-progress-bar {
+    height: 100%; width: 0%; border-radius: 4px;
+    background: linear-gradient(90deg, #4f8cff, #7ec8ff);
+    transition: width .4s ease;
+  }
+  .vocab-progress-note { font-size: 11px; color: var(--text-dim); margin: 4px 0 2px; }
+  /* 推理方向提示卡 */
+  .deduction-hint {
+    margin-top: 6px; padding: 8px 14px; font-size: 12.5px; line-height: 1.7;
+    color: #d9b8ff; background: rgba(171, 121, 255, 0.08);
+    border-left: 3px solid #ab79ff; border-radius: 6px;
+  }
+  body.light .deduction-hint { color: #6a2fc9; background: rgba(122, 77, 255, 0.08); }
+  /* 搜证提示条 */
+  .search-hint {
+    font-size: 12px; color: var(--tip-yellow); padding: 7px 12px; line-height: 1.6;
+    border: 1px dashed rgba(240, 201, 72, 0.4); border-radius: 10px;
+    margin-bottom: 8px;
+  }
+  body.light .search-hint { color: #8a6a00; border-color: rgba(138, 106, 0, 0.45); }
+  .vocab-item {
+    background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px;
+    padding: 8px 12px; margin-bottom: 8px; font-size: 12.5px;
+  }
+  .vocab-item .w { font-weight: 700; color: #7eb1ff; font-size: 13px; }
+  .vocab-item .pos { color: var(--tip-yellow); font-size: 11px; font-style: italic; margin-left: 6px; }
+  .vocab-item .m { color: var(--text-dim); margin-top: 3px; line-height: 1.5; }
+  .vocab-item { cursor: pointer; }
+  .vocab-item:hover { border-color: var(--accent); }
+  .sidebar-footer { margin-top: 12px; }
+  .btn-reset { width: 100%; }
+
+  .main-area { flex: 1; display: flex; flex-direction: column; height: 100%; min-width: 0; }
+
+  /* 聊天区 */
+  .chat-area { flex: 1; overflow-y: auto; padding: 58px 30px 26px; scroll-behavior: smooth; }
+  .msg-row { display: flex; margin-bottom: 20px; }
+  .msg-row.user { justify-content: flex-end; }
+  .msg-row.npc { justify-content: flex-start; }
+  .avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0; margin-top: 2px;
+  }
+  .msg-row.npc .avatar { background: #3a2f6b; margin-right: 12px; }
+  .msg-row.user .avatar { background: #1f5136; margin-left: 12px; order: 2; }
+  .bubble-wrap { max-width: 72%; min-width: 0; }
+  .bubble {
+    padding: 12px 16px; border-radius: 14px; font-size: 15px; line-height: 1.75;
+    word-break: break-word; white-space: pre-wrap;
+  }
+  .msg-row.npc .bubble { background: var(--bg-bubble-npc); border-top-left-radius: 4px; }
+  .msg-row.user .bubble { background: var(--bg-bubble-user); border-top-right-radius: 4px; color: #fff; }
+  .grammar-tip {
+    margin-top: 6px; padding: 6px 12px; font-size: 12.5px; line-height: 1.6;
+    color: var(--tip-yellow); background: rgba(240, 201, 72, 0.07);
+    border-left: 3px solid var(--tip-yellow); border-radius: 6px;
+  }
+  /* 翻译按钮 & 翻译内容 */
+  .translate-btn {
+    margin-top: 6px; background: none; border: none;
+    color: var(--text-dim); font-size: 12px; padding: 2px 4px;
+  }
+  .translate-btn:hover { color: var(--accent); text-decoration: underline; }
+  .translation-box {
+    margin-top: 6px; padding: 8px 12px; font-size: 13px; line-height: 1.7;
+    color: #b8c0d4; background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--border); border-radius: 6px;
+  }
+  /* 语法任务卡 */
+  .grammar-task-box {
+    margin-top: 8px; padding: 10px 14px; font-size: 13.5px; line-height: 1.7;
+    color: #cfe0ff; background: var(--accent-soft);
+    border: 1px dashed rgba(79, 140, 255, 0.55); border-radius: 10px;
+  }
+  .grammar-task-box .gt-title { font-weight: 700; color: var(--accent); }
+  .grammar-task-box .gt-sub { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+  .vocab-word {
+    border-bottom: 2px dashed #7eb1ff; cursor: pointer; color: #a8c8ff;
+  }
+  .vocab-word:hover { background: rgba(126, 177, 255, 0.15); }
+  .thinking {
+    margin-left: 46px; color: var(--text-dim); font-size: 13px; padding: 6px 0;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .dot-anim { display: inline-flex; gap: 4px; }
+  .dot-anim i {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--text-dim);
+    animation: bounce 1.2s infinite;
+  }
+  .dot-anim i:nth-child(2) { animation-delay: .2s; }
+  .dot-anim i:nth-child(3) { animation-delay: .4s; }
+  @keyframes bounce { 0%,60%,100%{transform:translateY(0);opacity:.4} 30%{transform:translateY(-5px);opacity:1} }
+  .stream-cursor {
+    display: inline-block; width: 7px; height: 15px; background: var(--accent);
+    vertical-align: text-bottom; margin-left: 2px; animation: blink .8s infinite;
+  }
+  .error-box {
+    background: rgba(239, 83, 80, 0.08); border: 1px solid rgba(239,83,80,.35);
+    color: #ff9b99; padding: 10px 14px; border-radius: 10px;
+    font-size: 13px; line-height: 1.6; margin-bottom: 16px;
+  }
+  .error-box .retry-link { color: var(--accent); cursor: pointer; text-decoration: underline; }
+
+  /* 生词释义浮层（词性 + 释义 + 名著例句 + 拼写校验关闭） */
+  .vocab-popover {
+    position: fixed; z-index: 999; width: 320px; max-width: calc(100vw - 24px);
+    background: #232a39; border: 1px solid var(--accent); border-radius: 12px;
+    padding: 14px 16px; font-size: 13px; line-height: 1.7;
+    box-shadow: 0 10px 30px rgba(0,0,0,.5); display: none;
+  }
+  .vocab-popover .vp-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; }
+  .vocab-popover .pw { font-weight: 700; color: #7eb1ff; font-size: 16px; }
+  .vocab-popover .vp-pos { color: var(--tip-yellow); font-size: 12px; font-style: italic; }
+  .vocab-popover .vp-meaning { color: #d3d9e6; margin-bottom: 8px; }
+  .vocab-popover .vp-example { color: #a8c8ff; font-style: italic; font-size: 12.5px; }
+  .vocab-popover .vp-example-cn { color: var(--text-dim); font-size: 12px; margin-bottom: 10px; }
+  .vocab-popover .vp-note { color: var(--text-dim); font-size: 11.5px; margin-bottom: 6px; }
+  .vocab-popover .vp-spell-row { display: flex; gap: 8px; }
+  .vocab-popover .vp-spell-row input {
+    flex: 1; padding: 8px 12px; border-radius: 8px;
+    background: var(--bg-input); border: 1px solid var(--border);
+    color: var(--text); font-size: 14px; outline: none;
+  }
+  .vocab-popover .vp-spell-row input:focus { border-color: var(--accent); }
+  .vocab-popover .vp-spell-btn {
+    padding: 8px 14px; border-radius: 8px; background: var(--accent); color: #fff; font-size: 13px;
+  }
+  .vocab-popover .vp-spell-error { color: var(--danger); font-size: 12px; margin-top: 6px; min-height: 14px; }
+  .vocab-popover.shake { animation: shake .3s; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  /* 行动选项 */
+  .options-area {
+    padding: 0 30px 12px 76px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .options-area:empty { display: none; }
+  .option-btn {
+    text-align: left; padding: 11px 16px; border-radius: 12px;
+    background: var(--accent-soft); border: 1px solid rgba(79, 140, 255, 0.4);
+    color: #bcd4ff; font-size: 14px; line-height: 1.5;
+    transition: background .15s, border-color .15s;
+  }
+  .option-btn:hover { background: rgba(79, 140, 255, 0.22); border-color: var(--accent); }
+  .option-btn .opt-prefix { color: var(--text-dim); font-size: 12px; margin-right: 8px; }
+  /* 自由发挥提示 */
+  .free-hint {
+    padding: 11px 16px; border-radius: 12px; font-size: 13.5px; line-height: 1.6;
+    background: rgba(105, 219, 124, 0.07); border: 1px dashed rgba(105, 219, 124, 0.45);
+    color: #9fe8b2;
+  }
+  body.light .free-hint { color: #2e8b57; }
+
+  /* 底部输入区 */
+  .input-area { padding: 14px 30px 22px; }
+  .input-box {
+    display: flex; align-items: flex-end; gap: 10px;
+    background: var(--bg-input); border: 1px solid var(--border);
+    border-radius: 16px; padding: 10px 12px;
+    transition: border-color .15s;
+  }
+  .input-box:focus-within { border-color: var(--accent); }
+  .input-box textarea {
+    flex: 1; background: none; border: none; outline: none; resize: none;
+    color: var(--text); font-size: 15px; line-height: 1.5; max-height: 120px;
+    min-height: 24px;
+  }
+  .btn-send {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-size: 18px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .btn-send:disabled { filter: grayscale(0.6) brightness(0.7); cursor: not-allowed; }
+  .input-hint { text-align: center; font-size: 11px; color: var(--text-dim); margin-top: 8px; }
+
+  /* 滚动条 */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #2c3444; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #3a4356; }
+
+  /* 昼夜主题切换按钮 */
+  .theme-toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 120;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--bg-panel); border: 1px solid var(--border);
+    font-size: 19px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: filter .15s, border-color .15s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); filter: brightness(1.2); }
+
+  /* NPC 说话人标签 & 头像 */
+  .speaker-label { font-size: 12px; color: var(--text-dim); margin-bottom: 4px; letter-spacing: .5px; }
+  .msg-row.npc .avatar.npc-avatar {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; transition: background .2s;
+  }
+
+  /* 音标行 & 发音按钮 */
+  .vocab-popover .vp-phon-row {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    margin: 4px 0 8px; font-size: 12.5px;
+  }
+  .vocab-popover .vp-phon { color: var(--text-dim); font-family: "Segoe UI", "Times New Roman", serif; }
+  .vocab-popover .vp-play {
+    background: var(--accent-soft); border: 1px solid var(--border);
+    color: var(--accent); border-radius: 6px; padding: 2px 8px; font-size: 11.5px;
+  }
+  .vocab-popover .vp-play:hover { border-color: var(--accent); background: rgba(79, 140, 255, 0.22); }
+  .vocab-popover .vp-play.speaking { animation: pulse .5s infinite alternate; }
+  @keyframes pulse { from { filter: brightness(1);} to { filter: brightness(1.6);} }
+
+  /* ===== 浅色（白天）主题 ===== */
+  body.light {
+    --bg: #eef1f5;
+    --bg-panel: #ffffff;
+    --bg-sidebar: #f4f6fa;
+    --bg-bubble-npc: #eaeef5;
+    --bg-bubble-user: #2f6fed;
+    --bg-input: #f3f5f8;
+    --border: #d9dfe9;
+    --text: #1d2430;
+    --text-dim: #5b6575;
+    --accent: #2f6fed;
+    --accent-soft: rgba(47, 111, 237, 0.1);
+  }
+  body.light .config-card, body.light .planning-card { box-shadow: 0 12px 40px rgba(30, 40, 70, 0.12); }
+  body.light .grammar-tip { color: #8a6a00; background: rgba(240, 201, 72, 0.14); }
+  body.light .translation-box { color: #5b6575; background: rgba(0, 0, 0, 0.04); }
+  body.light .task-goal-box { color: #5b6575; }
+  body.light .planning-body { color: #3a4558; }
+  body.light .vocab-word { color: #2f6fed; border-bottom-color: #2f6fed; }
+  body.light .vocab-word:hover { background: rgba(47, 111, 237, 0.12); }
+  body.light .vocab-item .w { color: #2f6fed; }
+  body.light .option-btn { color: #2f6fed; }
+  body.light .vocab-popover { background: #ffffff; box-shadow: 0 10px 34px rgba(30, 40, 70, 0.25); }
+  body.light .vocab-popover .pw { color: #2f6fed; }
+  body.light .vocab-popover .vp-example { color: #3a5fa0; }
+  body.light .grammar-task-box { color: #1d2430; }
+  body.light .grammar-task-box .gt-sub { color: #5b6575; }
+  body.light .sm-frame { background: linear-gradient(160deg, #faf4e6, #f1e9d4); box-shadow: 0 14px 50px rgba(60, 50, 20, 0.25); border-color: #a8853a; }
+  body.light .script-modal { background: rgba(240, 236, 225, 0.88); }
+  /* 白天模式下邀请函金色文字加深，保证可读性 */
+  body.light .sm-ribbon { color: #8a6a1f; }
+  body.light .sm-title { color: #5f4a10; }
+  body.light .sm-meta { color: #7a6a45; }
+  body.light .sm-label { color: #8a6a1f; }
+  body.light .sm-text, body.light .sm-chars .sm-char, body.light .sm-tasks li { color: #4a3f28; }
+  body.light .sm-chars .sm-char b { color: #6d5310; }
+  body.light .sm-tasks li::marker { color: #8a6a1f; }
+  body.light .thinking { color: #5b6575; }
+  body.light .dot-anim i { background: #5b6575; }
+  body.light .dot-anim.big i { background: #2f6fed; }
+
+  @media (max-width: 720px) {
+    .sidebar { display: none; }
+    .options-area { padding-left: 30px; }
+    .theme-toggle { top: 10px; right: 10px; width: 36px; height: 36px; font-size: 16px; }
+  }
+
+  /* ===== 结算画面 ===== */
+  .end-modal {
+    position: fixed; inset: 0; z-index: 110;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(5, 6, 10, 0.88); padding: 24px;
+  }
+  .em-frame {
+    width: 100%; max-width: 600px; max-height: 88vh; overflow-y: auto;
+    background: linear-gradient(160deg, #1a2030, #12141c);
+    border: 1px double #4f8cff; border-radius: 10px;
+    padding: 26px 30px; box-shadow: 0 20px 70px rgba(0,0,0,.75);
+  }
+  body.light .em-frame { background: #ffffff; box-shadow: 0 14px 50px rgba(30,40,70,.25); }
+  .em-ribbon { text-align: center; color: #7eb1ff; font-size: 12px; letter-spacing: 8px; margin-bottom: 8px; }
+  .em-title { text-align: center; color: #a8c8ff; font-size: 22px; letter-spacing: 2px; margin-bottom: 20px; }
+  body.light .em-title { color: #2f6fed; }
+  .em-section { margin-bottom: 18px; }
+  .em-label { color: #7eb1ff; font-size: 13px; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+  body.light .em-label { color: #2f6fed; }
+  .em-text { color: #d3d9e6; font-size: 13.5px; line-height: 1.9; white-space: pre-wrap; }
+  body.light .em-text { color: #3a4558; }
+  .em-vocab { display: flex; flex-wrap: wrap; gap: 8px; }
+  .vocab-chip {
+    background: var(--accent-soft); border: 1px solid rgba(79,140,255,.4);
+    border-radius: 14px; padding: 4px 12px; font-size: 13px; color: #7eb1ff; cursor: pointer;
+  }
+  body.light .vocab-chip { color: #2f6fed; }
+  .vocab-chip:hover { border-color: var(--accent); background: rgba(79,140,255,.2); }
+  .vocab-chip .chip-pos { font-size: 11px; color: var(--text-dim); margin-left: 4px; font-style: italic; }
+  .quiz-q { margin-bottom: 14px; }
+  .quiz-q .q-title { font-size: 13.5px; color: #d3d9e6; line-height: 1.7; margin-bottom: 8px; }
+  body.light .quiz-q .q-title { color: #3a4558; }
+  .quiz-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .quiz-opt {
+    text-align: left; padding: 8px 12px; border-radius: 8px; font-size: 13px;
+    background: var(--bg-input); border: 1px solid var(--border); color: var(--text); line-height: 1.5;
+  }
+  .quiz-opt:hover:not(:disabled) { border-color: var(--accent); }
+  .quiz-opt:disabled { cursor: default; }
+  .quiz-opt.correct { border-color: #69db7c; background: rgba(105,219,124,.12); color: #69db7c; }
+  .quiz-opt.wrong { border-color: #ef5350; background: rgba(239,83,80,.1); color: #ff9b99; }
+  .quiz-explain { margin-top: 6px; font-size: 12px; color: var(--text-dim); line-height: 1.6; }
+  .quiz-score { font-size: 13px; color: #69db7c; margin-top: 4px; }
+  .em-foot { margin-top: 22px; }
+  .em-foot .btn { width: 100%; }
+</style>
+</head>
+<body>
+
+<!-- 昼夜主题切换（全局） -->
+<button id="theme-toggle" class="theme-toggle" title="切换白天/黑夜模式">☀️</button>
+
+<!-- ============ 状态一：CONFIG 配置面板 ============ -->
+<div id="panel-config" class="center-screen">
+  <div class="config-card">
+    <h1 class="app-title"><span class="icon">🎭</span>沉浸式 AI 剧本杀语言学习助手</h1>
+    <p class="app-sub">选择剧本主题和难度，AI 生成专属英语剧本，在沉浸式对话中学英语</p>
+
+    <div class="error-banner hidden" id="error-banner"></div>
+    <p class="backend-badge hidden" id="backend-badge">✅ 已连接本地后端（server.js）· 密钥由服务器端 config.json 保管</p>
+    <p class="direct-mode-hint hidden" id="direct-mode-hint">
+      ⚠️ 当前是"文件直开"模式，未连接本地后端。<br>
+      要使用 config.json 里已配置好的密钥，请双击 <code>启动.bat</code>，或浏览器访问 <code>http://127.0.0.1:8787</code>
+    </p>
+
+    <div class="field">
+      <label for="sel-genre">剧本类型</label>
+      <select id="sel-genre">
+        <option value="推理本" selected>推理本</option>
+        <option value="情感本">情感本</option>
+        <option value="欢乐本">欢乐本</option>
+        <option value="恐怖本">恐怖本</option>
+        <option value="还原本">还原本</option>
+        <option value="机制本">机制本</option>
+        <option value="阵营本">阵营本</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="inp-theme">主题（选填，不填则由 AI 自由发挥）</label>
+      <input id="inp-theme" type="text" placeholder="例如：午夜图书馆 / 太空站疑云 / 古镇客栈" maxlength="60">
+    </div>
+
+    <div class="field">
+      <label for="inp-background">故事背景或设定（选填）</label>
+      <textarea id="inp-background" rows="2" placeholder="例如：维多利亚时代的伦敦 / 赛博朋克都市 / 玩家是一名新来的侦探"></textarea>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label for="sel-level">目标</label>
+        <select id="sel-level">
+          <option value="场景交涉" selected>场景交涉</option>
+          <option value="中考">中考</option>
+          <option value="高考">高考</option>
+          <option value="四级">四级</option>
+          <option value="六级">六级</option>
+          <option value="考研">考研</option>
+          <option value="雅思/托福">雅思/托福</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="sel-challenge">挑战难度</label>
+        <select id="sel-challenge">
+          <option value="简单模式" selected>简单模式（短句对话）</option>
+          <option value="困难模式">困难模式（长短句交错）</option>
+          <option value="地狱模式">地狱模式（长难句居多）</option>
+        </select>
+      </div>
+    </div>
+
+    <button id="btn-generate" class="btn btn-generate">✨ 生成剧本</button>
+
+    <!-- API 设置（可折叠） -->
+    <div class="api-settings" id="api-settings">
+      <button class="api-settings-toggle" id="api-settings-toggle">
+        <span class="arrow">▶</span> ⚙️ 大模型接口设置（OpenAI 兼容）
+      </button>
+      <div class="api-settings-body">
+        <p class="api-hint">
+          推荐：运行随附的 <code>启动.bat</code>（server.js 本地后端），密钥写进 <code>config.json</code>，前端零配置。<br>
+          直开此文件时也可填界面设置：支持 OpenAI 兼容接口（Key 存本地 localStorage，不写入代码）。<br>
+          例：<code>https://api.openai.com/v1</code>、<code>https://api.deepseek.com/v1</code>、<code>http://localhost:11434/v1</code>（Ollama）
+        </p>
+        <div class="field">
+          <label for="inp-api-base">API Base URL</label>
+          <input id="inp-api-base" type="text" placeholder="https://api.openai.com/v1">
+        </div>
+        <div class="row-2">
+          <div class="field">
+            <label for="inp-api-key">API Key</label>
+            <input id="inp-api-key" type="password" placeholder="sk-...">
+          </div>
+          <div class="field">
+            <label for="inp-model">模型名称</label>
+            <input id="inp-model" type="text" placeholder="gpt-4o-mini">
+          </div>
+        </div>
+        <p class="api-error-tip" id="api-error-tip">⚠ 请先在上方填写 API Base URL 和 API Key，才能调用大模型。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 状态二：PLANNING 剧本准备 ============ -->
+<div id="panel-planning" class="center-screen hidden">
+  <!-- 生成中画面 -->
+  <div id="planning-loading" class="planning-loading">
+    <div class="loading-mask">🎭</div>
+    <p class="loading-title">剧本生成中，请宿主准备迎接挑战……</p>
+    <div class="dot-anim big"><i></i><i></i><i></i></div>
+  </div>
+
+  <!-- 剧本杀风格弹窗卡片 -->
+  <div id="script-modal" class="script-modal hidden">
+    <div class="sm-frame">
+      <div class="sm-ribbon">⟡ 邀 请 函 ⟡</div>
+      <h2 class="sm-title" id="sm-title">剧本名</h2>
+      <div class="sm-meta" id="sm-meta">—</div>
+      <div class="sm-section"><div class="sm-label">【主线剧情】</div><div class="sm-text" id="sm-storyline"></div></div>
+      <div class="sm-section"><div class="sm-label">【出场角色】</div><div class="sm-chars" id="sm-characters"></div></div>
+      <div class="sm-section"><div class="sm-label">【任务目标】</div><ol class="sm-tasks" id="sm-tasks"></ol></div>
+      <div class="sm-foot">
+        <button id="btn-back-config" class="btn-ghost">← 换个剧本</button>
+        <button id="btn-start-game" class="btn">🎭 开始游戏</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JSON 解析失败时的兜底：纯文本大纲 -->
+  <div id="planning-fallback" class="planning-card hidden">
+    <div class="planning-head"><h2>📜 剧本大纲</h2></div>
+    <div class="planning-body" id="planning-body"></div>
+    <div class="planning-foot">
+      <button id="btn-back-config-fb" class="btn-ghost">← 换个剧本</button>
+      <button id="btn-start-game-fb" class="btn btn-start">🎬 开始游戏</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 状态三：PLAYING 游戏界面 ============ -->
+<div id="panel-playing" class="game-layout hidden">
+  <!-- 左侧边栏 -->
+  <aside class="sidebar">
+    <h3>🎭 当前剧本</h3>
+    <div class="script-name" id="sb-script-name">—</div>
+    <div class="script-meta" id="sb-script-meta">—</div>
+
+    <div class="section-label">🎯 任务目标</div>
+    <div class="task-goal-box" id="sb-task-goal">—</div>
+
+    <div class="section-label">📚 考纲词汇 <span id="vocab-progress-label" style="color:var(--accent)"></span></div>
+    <div class="vocab-progress"><div class="vocab-progress-bar" id="vocab-progress-bar"></div></div>
+    <div class="vocab-progress-note" id="vocab-progress-note">台词中已出现的考纲词汇进度</div>
+
+    <div class="section-label">📖 生词本 <span id="vocab-count" style="color:var(--accent)"></span></div>
+    <div class="vocab-list" id="vocab-list">
+      <div class="vocab-empty">点击台词中蓝色下划线的考纲词汇，加入生词本</div>
+    </div>
+
+    <div class="sidebar-footer">
+      <button id="btn-reset" class="btn-ghost btn-reset">↺ 重置 / 换剧本</button>
+    </div>
+  </aside>
+
+  <!-- 右侧主区域 -->
+  <main class="main-area">
+    <div class="chat-area" id="chat-area"></div>
+    <div class="options-area" id="options-area"></div>
+    <div class="input-area">
+      <div class="input-box">
+        <textarea id="inp-msg" rows="1" placeholder="用英语回复 NPC…（Enter 发送，Shift+Enter 换行）"></textarea>
+        <button id="btn-send" class="btn-send">➤</button>
+      </div>
+      <div class="input-hint">AI 扮演 NPC 与你对话 · 黄色为语法纠错 · 点「🌐 查看翻译」看中文 · 点击蓝色下划线考纲词汇加入生词本</div>
+    </div>
+  </main>
+</div>
+
+<!-- 生词释义浮层：词性 + 释义 + 名著例句 + 拼写正确才能关闭 -->
+<div class="vocab-popover" id="vocab-popover">
+  <div class="vp-head"><span class="pw" id="vp-word"></span><span class="vp-pos" id="vp-pos"></span></div>
+  <div class="vp-phon-row">
+    <span class="vp-phon" id="vp-phon-uk"></span>
+    <button class="vp-play" id="vp-play-uk" title="播放英式发音">🔊 英</button>
+    <span class="vp-phon" id="vp-phon-us"></span>
+    <button class="vp-play" id="vp-play-us" title="播放美式发音">🔊 美</button>
+  </div>
+  <div class="vp-meaning" id="vp-meaning"></div>
+  <div class="vp-example" id="vp-example"></div>
+  <div class="vp-example-cn" id="vp-example-cn"></div>
+  <div class="vp-note">✍️ 输入该单词的正确拼写后才能关闭</div>
+  <div class="vp-spell-row">
+    <input id="vp-spell-input" type="text" placeholder="拼写该单词…" autocomplete="off" spellcheck="false">
+    <button class="vp-spell-btn" id="vp-spell-btn">关闭</button>
+  </div>
+  <div class="vp-spell-error" id="vp-spell-error"></div>
+</div>
+
+<!-- 剧终结算画面 -->
+<div class="end-modal hidden" id="end-modal">
+  <div class="em-frame">
+    <div class="em-ribbon">⟡ 剧 终 ⟡</div>
+    <h2 class="em-title" id="em-title">剧本通关！</h2>
+    <div class="em-section">
+      <div class="em-label">📖 生词重现（点击可复习发音与释义）</div>
+      <div class="em-vocab" id="em-vocab"></div>
+    </div>
+    <div class="em-section">
+      <div class="em-label">✏️ 语法总结</div>
+      <div class="em-text" id="em-summary">正在生成本局回顾……</div>
+    </div>
+    <div class="em-section" id="em-quiz-section">
+      <div class="em-label">📝 自我检测 <button id="btn-skip-quiz" class="btn-ghost" style="font-size:11px;padding:3px 10px">跳过</button></div>
+      <div id="em-quiz"></div>
+    </div>
+    <div class="em-foot">
+      <button id="btn-new-script" class="btn">🆕 进入新剧本</button>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ================= 内置 Prompt 工程 ================= */
+const PROMPT_GENERATE_PLAN = `你是一个资深剧本杀编剧，熟悉线下剧本杀的标准玩法（读本 → 搜证 → 公聊推理 → 指认 → 复盘）。请根据玩家选择的剧本类型「{genre}」、目标「{level}」和挑战模式「{challenge}」，生成一份用于英语学习的剧本杀大纲。
+主题参考：{themeLine}
+背景设定参考：{bgLine}
+（若某项为"未指定"，请围绕剧本类型自由发挥，设计一个精彩、有代入感的设定。）
+你必须且只能输出严格的 JSON，格式为：
+{"script_name":"有悬疑感、有吸引力的剧本名","storyline":"主线剧情：背景故事，中文，3-5句话，要有代入感和悬念","characters":[{"name":"NPC名字","role":"身份与人设，中文一句话"}],"tasks":["任务节点一","任务节点二","任务节点三"],"core_vocab":["word1","word2","……"]}
+要求：
+1. 剧情设计必须符合剧本杀玩法：有明确的真相/结局预设，埋藏可供玩家搜证的线索（物证、证词、时间线），推理本要有真凶、动机、作案手法和 1-2 条误导性线索（red herring）；情感本要有细腻的人物关系与情感伏笔。
+2. 三个任务必须层层递进，对应"搜证 → 推理/深入 → 真相/结局"的节奏；任务描述必须模糊、目标导向（如"勘查案发现场""盘问在场嫌疑人""找出真凶"），严禁在任务文字中剧透凶手身份、关键线索内容或结局反转（不许出现"发现钟表匠就是凶手"这类写法）。
+3. 出场角色 2-4 个，人设鲜明、彼此有利益或情感关联。
+4. 后续英语对话的用词必须严格控制在{levelDesc}。
+5. 剧情节奏与对话句式符合挑战模式：{challengeDesc}。
+6. 【词汇表】core_vocab 必须恰好包含 120 个单词：从{levelDesc}范围内精心挑选与剧情场景最相关的 120 个核心考纲单词（写原形，不含短语，按首字母排序）。多于 120 个或少于 100 个都视为不合格。这些词将在整个剧本对话中分批使用；严禁用初中级简单词凑数。
+绝对不要输出 JSON 之外的任何文字。`;
+
+const PROMPT_PLAY_GAME = `你是一个沉浸式英语剧本杀的主持人（DM）兼 NPC 扮演者。
+【剧本类型】：{genre}（{genreDesc}）
+【剧本大纲】：{scriptPlan}
+【本剧考纲词汇表】：{coreVocab}
+【挑战模式】：{challengeDesc}
+
+【一、剧本杀玩法规则（必须严格遵守）】
+1. 你必须扮演剧本中的 NPC，全程用英语与玩家对话，绝不能出戏。
+2. 剧情按"开场 → 搜证 → 对话/推理 → 高潮 → 结局"的节奏层层推进。每轮回复必须自然承接玩家上一步的行动与话语，像真实剧本杀 DM 一样顺滑过渡，严禁剧情跳跃、场景突变或原地重复之前说过的内容。
+3. 搜证环节给出的线索（物证、证词、时间线、人物关系）必须具体且相互关联、能真正支撑后续推理，不要一次给完。
+4. 【推理与真相锁定】剧本真相以【剧本大纲】为唯一事实源，无论玩家如何推理，绝不修改既定真相去迎合玩家。当玩家的推理方向与真相不符时：
+   - 第 1、2 次方向错误：以 NPC 口吻自然暗示其推理有漏洞（如 "That doesn't quite add up..."），引导其换个方向思考，但不要说破。
+   - 严格统计玩家方向错误的次数（依据完整对话历史计数）：只有当累计错误满 3 次之后的那一轮，才在 deduction_hint 字段用中文给出明确的方向提示（指出该往哪个方向想，但不直接说出真相）；前两次错误绝不填写 deduction_hint。
+   - deduction_hint 平时一律填空字符串。
+5. 【类型风格】按【剧本类型】的要求演绎：推理本让玩家主导搜证和推理；情感本文笔细腻、注重内心与情感张力；欢乐本幽默轻松；恐怖本渲染氛围与心理压迫；还原本通过记忆碎片与闪回逐步还原真相；机制本设置规则与关卡小游戏；阵营本制造立场对立与拉拢试探。
+6. 【多角色交互】剧本中有多个 NPC，绝不能只让一个 NPC 从头说到尾：
+   - 玩家表示要找某个角色、向某个角色提问时，speaker 立即切换为对应 NPC。
+   - 每隔几轮可以让另一个 NPC 主动加入对话（插话、推门而入、送来新线索、与当前 NPC 发生争执），制造群像感与戏剧冲突。
+   - speaker 字段必须始终如实填写当前说话的 NPC 名字。
+
+【二、语法纠错（每轮必查，这是本应用的核心学习功能）】
+1. 每一轮都必须逐句检查玩家上一条英文消息的语法、拼写和用词错误。
+2. 只要有错误（哪怕很小），grammar_tip 必须按"❌ 错误原文 → 📍 错在哪 → ✅ 正确版本"的格式用中文详细指出，一个错误都不许漏；同时 NPC 要用正确语法在台词中自然复述玩家想表达的意思，让玩家看到正确说法。
+3. 只有玩家上一条英文消息完全正确时，grammar_tip 才填"无"；玩家没有发言（如游戏开场）时也填"无"。
+
+【三、互动模式（task_type 四种，按剧情阶段使用）】
+a. "search" 搜证模式（开场后的搜证环节专用）：options 列出 3-4 个当前可探索的方向（地点/人物/物品，均为英语）。玩家每探索一个，下一轮 options 只能列出剩余未探索的方向，严禁重复已探索过的选项；玩家也可能不点选项、直接用英语描述要搜什么，同样视为完成一次探索并从清单划掉。当可探索项所剩无几或玩家明确表示要推理时，退出搜证环节，之后不再使用 search。
+b. "free" 对话/推理主模式：不给选项，NPC 以开放性问题或情境引导玩家自由说英语（询问、推理、描述行动）。对话与推理环节以此为主。
+c. "choice" 选择题：只在剧情关键岔口使用，options 给 3 个英语行动选项，不要连续两轮使用。
+d. "grammar" 语法任务：NPC 结合当前剧情布置一个必须用正确语法产出的英语任务。grammar_task 只用中文说明【要表达的意思】和【必须使用的语法点】（如"用过去完成时表达：在你到达之前，凶手已经离开了"），绝对禁止在 grammar_task 中给出目标句的英文原文或可直接照抄的完整英文例句。约每 3-4 回合一次。
+   grammar 模式下 options 填空数组；非 grammar 模式下 grammar_task 填空字符串。
+
+【四、词汇规则】
+1. NPC 台词每轮必须自然融入 5-8 个【本剧考纲词汇表】中的单词，优先选用本局尚未使用过的词，整局游戏要覆盖词汇表中的绝大部分。严禁通篇只使用初中级简单词。
+2. vocab 数组：挑出台词中 4-6 个来自词汇表的重点词，每项必须包含：word（单词原形）、pos（词性）、phonetic_uk（英式音标 IPA）、phonetic_us（美式音标 IPA）、meaning（中文释义）、example（英文例句，优先出自经典电影台词、文学名著或仿其风格）、example_cn（例句的中文翻译）。
+3. 凡超出大纲的词必须放入 vocab 数组并给释义。
+
+【五、任务推进与结局】
+当玩家的行动完成了剧本的某个任务节点，completed_task 填该任务序号（1/2/3），否则填 0；每个任务只能完成一次，已完成的任务不要重复标记。当三个任务全部完成且剧情走向结局时，game_over 填 true，并以 NPC 身份给出结局台词；否则填 false。
+
+【六、输出格式】
+translation 字段：npc_dialogue 的完整中文翻译（必须始终提供，前端按需展示）。
+你必须且只能输出严格的 JSON，格式为：
+{"npc_dialogue":"NPC的英语台词","speaker":"当前说话的NPC名字（必须与剧本出场角色名字一致）","translation":"台词的完整中文翻译","grammar_tip":"语法纠错，无错填'无'","deduction_hint":"推理方向提示，平时填空字符串","task_type":"search/free/choice/grammar","options":["English option A","English option B","English option C"],"grammar_task":"中文描述的语法任务","completed_task":0,"game_over":false,"vocab":[{"word":"词","pos":"词性","phonetic_uk":"英式音标","phonetic_us":"美式音标","meaning":"中文释义","example":"英文例句","example_cn":"例句中文翻译"}]}
+绝对不要输出 JSON 之外的任何文字。`;
+
+const PROMPT_END_REVIEW = `本局剧本杀已结束。请基于整场对话记录，为玩家生成一份学习回顾。你必须且只能输出严格的 JSON，格式为：
+{"grammar_summary":"中文语法总结：列出玩家本局犯过的语法错误类型并给出正确用法，3-5条；若玩家表现出色则给予表扬并提供进阶建议","quiz":[{"q":"中文题干（考察本局出现过的生词或语法点）","options":["A选项","B选项","C选项","D选项"],"answer":0,"explain":"中文解析"}]}
+quiz 必须恰好 3 题，answer 为正确选项的下标（0-3）。绝对不要输出 JSON 之外的任何文字。`;
+
+/* ================= 难度 → 词汇大纲范围映射（英语） ================= */
+const LEVEL_VOCAB = {
+  "场景交涉": "日常交际与生活场景英语：高频口语、地道习语、惯用搭配与委婉表达（CEFR A2-B1），台词须体现地道英语母语者的表达方式",
+  "中考": "《义务教育英语课程标准》初中阶段约 1600 词及常用交际用语（CEFR A2-B1）",
+  "高考": "《普通高中英语课程标准》高考大纲约 3500 词（CEFR B1），重点覆盖高考高频核心词",
+  "四级": "《大学英语四级考试（CET-4）大纲》约 4500 词（CEFR B1-B2），重点覆盖四级高频核心词",
+  "六级": "《大学英语六级考试（CET-6）大纲》约 6000 词（CEFR B2-C1），重点覆盖六级高频核心词",
+  "考研": "《全国硕士研究生招生考试英语（一/二）大纲》约 5500 词，含学术与抽象词汇（CEFR B2），重点覆盖考研高频核心词",
+  "雅思/托福": "雅思与托福核心词汇（学术类+生活类，CEFR B2-C1），注重地道搭配、学术语域与高级表达"
+};
+function levelDesc() {
+  return LEVEL_VOCAB[scriptInfo.level] || scriptInfo.level;
+}
+
+/* 挑战难度 → 台词句式要求（控制长短句） */
+const CHALLENGE_DESC = {
+  "简单模式": "短句对话：NPC 台词以简短句为主（一般每句不超过 10 个词），口语化、直白易懂",
+  "困难模式": "长短句交错：以短句推进剧情，穿插 1-2 个复合长句铺陈氛围与信息",
+  "地狱模式": "长难句居多：大量使用从句嵌套、倒装、插入语、非谓语等复杂结构，接近英语长文本阅读（考研阅读/雅思学术文）的难度"
+};
+function challengeDesc() {
+  return CHALLENGE_DESC[scriptInfo.challenge] || scriptInfo.challenge;
+}
+
+/* 剧本类型 → 玩法风格要求 */
+const GENRE_DESC = {
+  "推理本": "以搜证和逻辑推理为核心：埋藏物证、证词、时间线和误导性线索（red herring），让玩家主导推理，体验抽丝剥茧找出真相的乐趣",
+  "情感本": "以细腻的情感描写为核心：注重人物内心独白、关系张力与情感伏笔，文笔温柔克制，让玩家沉浸于角色的喜怒哀乐",
+  "欢乐本": "以幽默搞笑为核心：台词俏皮、桥段轻松，多设计令人捧腹的误会与反差",
+  "恐怖本": "以氛围渲染为核心：通过环境、音效暗示与心理压迫制造恐惧，节奏张弛有度",
+  "还原本": "以记忆碎片为核心：通过闪回、旧物、只言片语逐步拼凑被掩埋的真相",
+  "机制本": "以规则与关卡为核心：设置谜题、小游戏式任务节点，完成任务才能解锁新信息",
+  "阵营本": "以立场对立为核心：NPC 各有阵营与目的，通过试探、拉拢、隐瞒制造博弈感"
+};
+function genreDesc() {
+  return GENRE_DESC[scriptInfo.genre] || scriptInfo.genre;
+}
+
+/* ================= 全局状态 ================= */
+let state = "CONFIG";               // CONFIG | PLANNING | PLAYING
+let messages = [];                  // 对话记忆（每次请求全量携带）
+let scriptPlan = "";                // 剧本大纲文本
+let vocabBook = new Map();          // 生词本：word -> {pos, meaning, example, example_cn}（点击生词时加入）
+let scriptInfo = { theme: "", genre: "推理本", background: "", language: "英语", level: "场景交涉", challenge: "简单模式" };
+let scriptData = null;               // 结构化剧本数据（弹窗展示用）
+let completedTasks = new Set();      // 已完成的任务序号
+let gameEnded = false;               // 是否已进入结算
+let searchedItems = new Set();       // 搜证环节已探索的方向（选项文本，小写）
+let currentTaskType = "free";        // 当前互动模式（search/free/choice/grammar）
+let busy = false;                   // 请求进行中，防止并发发送
+let lastUserPayload = null;         // 供失败重试
+let backendMode = false;            // 由 server.js 托管时为 true（密钥在后端 config.json）
+
+/* ================= DOM 引用 ================= */
+const $ = (id) => document.getElementById(id);
+const elPanelConfig   = $("panel-config");
+const elPanelPlanning = $("panel-planning");
+const elPanelPlaying  = $("panel-playing");
+const elChatArea      = $("chat-area");
+const elOptionsArea   = $("options-area");
+const elInpMsg        = $("inp-msg");
+const elBtnSend       = $("btn-send");
+const elVocabList     = $("vocab-list");
+const elVocabCount    = $("vocab-count");
+const elPopover       = $("vocab-popover");
+
+/* ================= 状态机（严格三状态切换） ================= */
+function setState(next) {
+  state = next;
+  elPanelConfig.classList.toggle("hidden",   next !== "CONFIG");
+  elPanelPlanning.classList.toggle("hidden", next !== "PLANNING");
+  elPanelPlaying.classList.toggle("hidden",  next !== "PLAYING");
+}
+
+function resetGame() {
+  messages = [];
+  scriptPlan = "";
+  scriptData = null;
+  vocabBook.clear();
+  avatarRegistry.clear();
+  completedTasks.clear();
+  searchedItems.clear();
+  appearedVocab.clear();
+  gameEnded = false;
+  $("end-modal").classList.add("hidden");
+  $("vocab-progress-label").textContent = "";
+  $("vocab-progress-bar").style.width = "0%";
+  busy = false;
+  lastUserPayload = null;
+  popoverEntry = null;
+  elPopover.style.display = "none";
+  hideBanner();
+  elChatArea.innerHTML = "";
+  elOptionsArea.innerHTML = "";
+  elVocabCount.textContent = "";
+  elVocabList.innerHTML = '<div class="vocab-empty">点击台词中蓝色下划线的考纲词汇，加入生词本</div>';
+  elInpMsg.value = "";
+  $("sb-script-name").textContent = "—";
+  $("sb-script-meta").textContent = "—";
+  $("sb-task-goal").textContent = "—";
+  setState("CONFIG");
+}
+
+/* ================= API 设置（localStorage 持久化，不硬编码 Key） ================= */
+const LS_KEY = "script-kill-llm-settings";
+
+function loadSettings() {
+  try {
+    const s = JSON.parse(localStorage.getItem(LS_KEY) || "{}");
+    if (s.apiBase) $("inp-api-base").value = s.apiBase;
+    if (s.apiKey)  $("inp-api-key").value  = s.apiKey;
+    if (s.model)   $("inp-model").value    = s.model;
+  } catch (e) { /* 忽略损坏的本地数据 */ }
+}
+
+function getSettings() {
+  const apiBase = $("inp-api-base").value.trim().replace(/\/+$/, "");
+  const apiKey  = $("inp-api-key").value.trim();
+  const model   = $("inp-model").value.trim() || "gpt-4o-mini";
+  localStorage.setItem(LS_KEY, JSON.stringify({ apiBase, apiKey, model }));
+  return { apiBase, apiKey, model };
+}
+
+function validateSettings(s) {
+  if (backendMode) return true; // 后端模式无需界面配置
+  const ok = !!(s.apiBase && s.apiKey);
+  $("api-error-tip").classList.toggle("show", !ok);
+  $("inp-api-base").classList.toggle("error", !s.apiBase);
+  $("inp-api-key").classList.toggle("error", s.apiBase && !s.apiKey);
+  if (!ok) $("api-settings").classList.add("open");
+  return ok;
+}
+
+/* ================= 显著错误横幅（避免"点了没反应"） ================= */
+function showBanner(msg) {
+  const b = $("error-banner");
+  b.textContent = "⚠ " + msg;
+  b.classList.remove("hidden");
+}
+function hideBanner() {
+  $("error-banner").classList.add("hidden");
+}
+
+/* ================= 后端模式探测 ================= */
+async function detectBackend() {
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 1500);
+    const r = await fetch("/api/config", { signal: ctrl.signal });
+    clearTimeout(timer);
+    if (!r.ok) throw new Error("no backend");
+    const j = await r.json();
+    if (j && j.configured) {
+      backendMode = true;
+      $("api-settings").classList.add("hidden");
+      $("backend-badge").classList.remove("hidden");
+      return;
+    }
+  } catch (e) { /* 非后端环境（如双击直开），回退到界面设置模式 */ }
+  /* 未连上后端：按访问方式给出不同引导 */
+  const hint = $("direct-mode-hint");
+  const host = location.hostname;
+  if (host === "localhost" || host === "127.0.0.1" || host === "") {
+    hint.innerHTML = '⚠️ 当前是"文件直开"模式，未连接本地后端。<br>要使用 config.json 里已配置好的密钥，请双击 <code>启动.bat</code>，或浏览器访问 <code>http://127.0.0.1:8787</code>';
+  } else {
+    hint.innerHTML = "☁️ 当前是<strong>在线静态版</strong>：请在下方「⚙️ 大模型接口设置」中填入你自己的 API Key（仅保存在你本地浏览器，不会上传）。<br>支持 OpenAI 兼容接口，例如 DeepSeek：<code>https://api.deepseek.com/v1</code> + 你的 Key + <code>deepseek-chat</code>";
+  }
+  hint.classList.remove("hidden");
+}
+
+/* ================= 大模型调用（流式 + 逐字动画兜底） ================= */
+/**
+ * 调用 OpenAI 兼容 chat/completions。
+ * onChunk(partial)：增量文本回调（流式为真实增量；非流式为前端逐字动画）。
+ * 返回完整文本。
+ */
+async function callLLM(msgs, onChunk) {
+  let url, headers, payload;
+  if (backendMode) {
+    /* 后端代理模式：密钥在服务器端 config.json，前端零 Key */
+    url = "/api/chat";
+    headers = { "Content-Type": "application/json" };
+    payload = { messages: msgs, temperature: 0.8 };
+  } else {
+    /* 直连模式：使用界面中填写的设置 */
+    const { apiBase, apiKey, model } = getSettings();
+    url = apiBase + "/chat/completions";
+    headers = { "Content-Type": "application/json", "Authorization": "Bearer " + apiKey };
+    payload = { model, messages: msgs, stream: true, temperature: 0.8 };
+  }
+
+  let res;
+  try {
+    res = await fetch(url, { method: "POST", headers, body: JSON.stringify(payload) });
+  } catch (err) {
+    throw new Error(backendMode
+      ? "无法连接本地后端（server.js 是否在运行？）：" + err.message
+      : "网络请求失败：" + err.message + "（浏览器直连多数接口有跨域限制，建议用启动.bat 走本地后端）");
+  }
+  if (!res.ok) {
+    const t = await res.text().catch(() => "");
+    throw new Error("接口返回错误 " + res.status + "：" + t.slice(0, 300));
+  }
+
+  const contentType = res.headers.get("content-type") || "";
+  let full = "";
+
+  if (contentType.includes("event-stream") && res.body && res.body.getReader) {
+    /* --- 真实 SSE 流式 --- */
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+    let buf = "";
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split("\n");
+      buf = lines.pop();
+      for (const line of lines) {
+        const t = line.trim();
+        if (!t.startsWith("data:")) continue;
+        const payload = t.slice(5).trim();
+        if (payload === "[DONE]") continue;
+        try {
+          const j = JSON.parse(payload);
+          const delta = j.choices && j.choices[0] && (j.choices[0].delta || j.choices[0].message);
+          const piece = delta && delta.content;
+          if (piece) { full += piece; onChunk && onChunk(piece); }
+        } catch (e) { /* 跳过残缺的分片 */ }
+      }
+    }
+  } else {
+    /* --- 非流式：前端逐字动画兜底 --- */
+    const data = await res.json();
+    full = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "";
+    if (full && onChunk) await typewriter(full, onChunk, 18);
+  }
+  if (!full) throw new Error("模型未返回任何内容，请检查模型名称是否正确。");
+  return full;
+}
+
+function typewriter(text, onChar, interval) {
+  return new Promise((resolve) => {
+    let i = 0;
+    const timer = setInterval(() => {
+      onChar(text[i++]);
+      if (i >= text.length) { clearInterval(timer); resolve(); }
+    }, interval);
+  });
+}
+
+/* ================= NPC 角色头像：名字 → 专属 emoji + 底色 ================= */
+const AVATAR_POOL = [
+  { e: "🕵️", c: "#3a2f6b" }, { e: "👩‍🔬", c: "#2d4a3a" }, { e: "👨‍✈️", c: "#4a3a2d" },
+  { e: "🧙", c: "#2d3a4a" }, { e: "👩‍⚕️", c: "#4a2d3a" }, { e: "🤖", c: "#3a4a4a" },
+  { e: "👽", c: "#2d4a2d" }, { e: "🦹", c: "#4a2d4a" }, { e: "👨‍🌾", c: "#4a462d" },
+  { e: "🧝", c: "#2d4a5e" }
+];
+const avatarRegistry = new Map();
+function getAvatar(name) {
+  if (!avatarRegistry.has(name)) {
+    avatarRegistry.set(name, AVATAR_POOL[avatarRegistry.size % AVATAR_POOL.length]);
+  }
+  return avatarRegistry.get(name);
+}
+
+/* 颜色工具：hex → rgba / 向白色提亮 */
+function hexWithAlpha(hex, alpha) {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
+  return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
+}
+function lightenHex(hex, pct) {
+  const h = hex.replace("#", "");
+  const mix = (x) => Math.round(x + (255 - x) * pct / 100);
+  const r = mix(parseInt(h.slice(0, 2), 16)), g = mix(parseInt(h.slice(2, 4), 16)), b = mix(parseInt(h.slice(4, 6), 16));
+  return "#" + [r, g, b].map(v => v.toString(16).padStart(2, "0")).join("");
+}
+
+/* ================= 发音播放（在线词典音频优先，本地 TTS 兜底） ================= */
+let ttsAudio = null;
+
+/* 方案一：有道词典发音接口（type=1 英音 / type=2 美音），返回 mp3 直接播放 */
+function speakOnline(text, lang) {
+  if (!ttsAudio) ttsAudio = new Audio();
+  ttsAudio.onerror = null;
+  ttsAudio.src = "https://dict.youdao.com/dictvoice?type=" + (lang === "en-GB" ? 1 : 2) + "&audio=" + encodeURIComponent(text);
+  const p = ttsAudio.play();
+  if (p && p.catch) p.catch(() => speakLocal(text, lang)); /* 自动播放被拦截 → 用本地 TTS */
+  ttsAudio.onerror = () => speakLocal(text, lang);
+}
+
+/* 方案二：浏览器本地语音合成（修复 voices 冷启动问题） */
+function speakLocal(text, lang) {
+  if (!("speechSynthesis" in window)) return;
+  const go = () => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = lang;
+    u.rate = 0.85;
+    const voices = speechSynthesis.getVoices();
+    const v = voices.find(x => String(x.lang || "").replace("_", "-").toLowerCase().startsWith(lang.toLowerCase()));
+    if (v) u.voice = v;
+    speechSynthesis.speak(u);
+  };
+  if (!speechSynthesis.getVoices().length) {
+    speechSynthesis.addEventListener("voiceschanged", go, { once: true });
+    setTimeout(go, 400); /* 事件未触发时的兜底 */
+  } else {
+    go();
+  }
+}
+
+function speak(text, lang) { speakOnline(text, lang); }
+/* 预热语音列表 */
+if ("speechSynthesis" in window) speechSynthesis.getVoices();
+
+/* ================= 昼夜主题切换 ================= */
+function updateThemeIcon() {
+  $("theme-toggle").textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
+}
+if (localStorage.getItem("script-kill-theme") === "light") document.body.classList.add("light");
+updateThemeIcon();
+$("theme-toggle").addEventListener("click", () => {
+  document.body.classList.toggle("light");
+  localStorage.setItem("script-kill-theme", document.body.classList.contains("light") ? "light" : "dark");
+  updateThemeIcon();
+});
+/* 部分浏览器语音列表异步加载 */
+if ("speechSynthesis" in window) speechSynthesis.getVoices();
+
+/* ================= 工具函数 ================= */
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function unescapeJsonStr(s) {
+  return String(s).replace(/\\n/g, "\n").replace(/\\t/g, "\t")
+    .replace(/\\r/g, "\r").replace(/\\"/g, '"').replace(/\\\\/g, "\\")
+    .replace(/\\u([0-9a-fA-F]{4})/g, (m, g) => String.fromCharCode(parseInt(g, 16)));
+}
+
+/* 从模型输出中提取第一个 { 到最后一个 } 之间的内容并解析 */
+function parseModelJson(raw) {
+  const start = raw.indexOf("{");
+  const end = raw.lastIndexOf("}");
+  if (start === -1 || end === -1 || end <= start) throw new Error("no json");
+  const jsonStr = raw.slice(start, end + 1);
+  return JSON.parse(jsonStr); // 失败会 throw，由调用方降级处理
+}
+
+/* 流式过程中增量提取 npc_dialogue，实现打字机观感 */
+function extractStreamingDialogue(accum) {
+  const m = accum.match(/"npc_dialogue"\s*:\s*"((?:[^"\\]|\\.)*)/);
+  if (!m) return null;
+  return unescapeJsonStr(m[1]);
+}
+
+function scrollChatBottom() {
+  elChatArea.scrollTop = elChatArea.scrollHeight;
+}
+
+function setBusy(b) {
+  busy = b;
+  elBtnSend.disabled = b;
+  elInpMsg.disabled = b;
+  if (!b) elInpMsg.focus();
+}
+
+/* ================= PLAYING：消息渲染 ================= */
+function addUserBubble(text) {
+  const row = document.createElement("div");
+  row.className = "msg-row user";
+  row.innerHTML =
+    '<div class="bubble-wrap"><div class="bubble"></div></div>' +
+    '<div class="avatar">🧑</div>';
+  row.querySelector(".bubble").textContent = text;
+  elChatArea.appendChild(row);
+  scrollChatBottom();
+}
+
+function addNpcBubble() {
+  const row = document.createElement("div");
+  row.className = "msg-row npc";
+  row.innerHTML =
+    '<div class="avatar npc-avatar">🎭</div>' +
+    '<div class="bubble-wrap">' +
+      '<div class="speaker-label hidden"></div>' +
+      '<div class="bubble"><span class="bubble-text"></span><span class="stream-cursor"></span></div>' +
+      '<div class="bubble-extra"></div>' +
+      '<div class="grammar-tip-slot"></div>' +
+    '</div>';
+  elChatArea.appendChild(row);
+  scrollChatBottom();
+  return {
+    text: row.querySelector(".bubble-text"),
+    bubble: row.querySelector(".bubble"),
+    cursor: row.querySelector(".stream-cursor"),
+    extra: row.querySelector(".bubble-extra"),
+    tipSlot: row.querySelector(".grammar-tip-slot"),
+    avatar: row.querySelector(".npc-avatar"),
+    speakerLabel: row.querySelector(".speaker-label"),
+    row
+  };
+}
+
+function addThinking() {
+  const d = document.createElement("div");
+  d.className = "thinking";
+  d.id = "thinking-indicator";
+  d.innerHTML = '<span>NPC 正在输入</span><span class="dot-anim"><i></i><i></i><i></i></span>';
+  elChatArea.appendChild(d);
+  scrollChatBottom();
+}
+
+function removeThinking() {
+  const d = $("thinking-indicator");
+  if (d) d.remove();
+}
+
+/* 在对话文本中高亮生词（按词长降序避免短词覆盖长词） */
+function renderTextWithVocab(text, vocab) {
+  const esc = escapeHtml(text);
+  if (!vocab || !vocab.length) return esc;
+  const sorted = [...vocab].sort((a, b) => String(b.word).length - String(a.word).length);
+  let html = esc;
+  for (const v of sorted) {
+    const word = String(v.word || "").trim();
+    if (!word) continue;
+    const escWord = escapeHtml(word);
+    const isLatin = /^[A-Za-z]/.test(word);
+    const pattern = isLatin
+      ? new RegExp("\\b(" + escWord.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")\\b", "gi")
+      : new RegExp("(" + escWord.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "g");
+    html = html.replace(pattern, '<span class="vocab-word" data-word="' + escWord + '">$1</span>');
+  }
+  return html;
+}
+
+/* ================= 任务进度（侧栏打勾） ================= */
+function renderScriptTasks() {
+  const box = $("sb-task-goal");
+  if (scriptData && Array.isArray(scriptData.tasks) && scriptData.tasks.length) {
+    box.innerHTML = "";
+    scriptData.tasks.forEach((t, i) => {
+      const d = document.createElement("div");
+      d.className = "task-item" + (completedTasks.has(i + 1) ? " done" : "");
+      const ck = document.createElement("span");
+      ck.className = "ti-check";
+      ck.textContent = completedTasks.has(i + 1) ? "✅" : "⬜";
+      const tx = document.createElement("span");
+      tx.className = "ti-text";
+      tx.textContent = String(t);
+      d.appendChild(ck); d.appendChild(tx);
+      box.appendChild(d);
+    });
+  } else {
+    box.textContent = scriptPlan;
+  }
+}
+
+function markTaskCompleted(n, taskText) {
+  if (!n || completedTasks.has(n)) return;
+  completedTasks.add(n);
+  renderScriptTasks();
+  const toast = document.createElement("div");
+  toast.className = "task-toast";
+  toast.textContent = "✅ 任务 " + n + " 已完成：" + (taskText || "");
+  elChatArea.appendChild(toast);
+  scrollChatBottom();
+}
+
+/* ================= 考纲词汇覆盖进度 ================= */
+const appearedVocab = new Set();   // 本局台词中出现过的考纲词（小写）
+function renderVocabProgress() {
+  const list = coreVocabList() || [];
+  const total = list.length;
+  if (!total) {
+    $("vocab-progress-label").textContent = "";
+    $("vocab-progress-bar").style.width = "0%";
+    $("vocab-progress-note").textContent = "台词中已出现的考纲词汇进度";
+    return;
+  }
+  let hit = 0;
+  for (const w of list) {
+    if (appearedVocab.has(String(w).trim().toLowerCase())) hit++;
+  }
+  $("vocab-progress-label").textContent = hit + "/" + total;
+  $("vocab-progress-bar").style.width = Math.min(100, Math.round(hit / total * 100)) + "%";
+  $("vocab-progress-note").textContent = "台词中已出现的考纲词汇进度（生词本需点击收集）";
+}
+
+/* 渲染一条完整的 NPC 回复（JSON 解析成功路径） */
+function finalizeNpcBubble(ui, data, rawText) {
+  ui.cursor.remove();
+  let dialogue, translation, tip, deductionHint, taskType, options, grammarTask, vocab, speaker, completedTask, gameOver;
+  if (data) {
+    dialogue = String(data.npc_dialogue || "");
+    speaker = String(data.speaker || "").trim();
+    translation = String(data.translation || "").trim();
+    tip = String(data.grammar_tip || "").trim();
+    deductionHint = String(data.deduction_hint || "").trim();
+    taskType = ["search", "choice", "grammar", "free"].includes(data.task_type) ? data.task_type : "free";
+    options = Array.isArray(data.options) ? data.options.filter(o => o).slice(0, 4) : [];
+    grammarTask = String(data.grammar_task || "").trim();
+    completedTask = parseInt(data.completed_task, 10) || 0;
+    gameOver = data.game_over === true;
+    vocab = Array.isArray(data.vocab) ? data.vocab.filter(v => v && v.word) : [];
+  } else {
+    /* JSON 解析失败：降级为纯文本展示，避免白屏 */
+    dialogue = rawText;
+    translation = ""; tip = ""; deductionHint = ""; taskType = "free";
+    options = []; grammarTask = ""; vocab = []; speaker = "";
+    completedTask = 0; gameOver = false;
+  }
+
+  /* 说话的 NPC：专属 emoji 头像 + 底色 + 名字标签 + 气泡淡彩（多角色一眼区分） */
+  if (speaker) {
+    const av = getAvatar(speaker);
+    ui.avatar.textContent = av.e;
+    ui.avatar.style.background = av.c;
+    ui.speakerLabel.textContent = speaker;
+    ui.speakerLabel.style.color = lightenHex(av.c, 60);
+    ui.speakerLabel.classList.remove("hidden");
+    /* 气泡按角色染色：头像底色做 22% 透明度背景 + 左侧色条 */
+    ui.bubble.style.background = hexWithAlpha(av.c, 0.22);
+    ui.bubble.style.borderLeft = "3px solid " + lightenHex(av.c, 40);
+  }
+
+  ui.bubble.innerHTML = renderTextWithVocab(dialogue, vocab);
+  ui.row._vocab = vocab; /* 供生词点击时查找完整词条 */
+
+  /* 翻译按钮：玩家不点就不展示翻译 */
+  if (translation) {
+    const btn = document.createElement("button");
+    btn.className = "translate-btn";
+    btn.textContent = "🌐 查看翻译";
+    btn.addEventListener("click", () => {
+      let box = ui.extra.querySelector(".translation-box");
+      if (!box) {
+        box = document.createElement("div");
+        box.className = "translation-box";
+        box.textContent = translation;
+        ui.extra.appendChild(box);
+      }
+      const visible = !box.classList.contains("hidden");
+      box.classList.toggle("hidden", visible);
+      btn.textContent = visible ? "🌐 查看翻译" : "🙈 收起翻译";
+      scrollChatBottom();
+    });
+    ui.extra.appendChild(btn);
+  }
+
+  /* 语法纠错提示（黄色小字） */
+  if (tip && tip !== "无") {
+    ui.tipSlot.innerHTML = '<div class="grammar-tip">✏️ ' + escapeHtml(tip) + "</div>";
+  }
+
+  /* 推理方向提示（紫色卡，第 3 次方向错误后触发） */
+  if (deductionHint) {
+    const dh = document.createElement("div");
+    dh.className = "deduction-hint";
+    dh.textContent = "🧭 推理提示：" + deductionHint;
+    ui.tipSlot.appendChild(dh);
+  }
+
+  /* 互动模式渲染：search → 搜证选项（递减）；choice → 行动选项；grammar → 语法任务卡；free → 自由发挥提示 */
+  currentTaskType = taskType;
+  if (taskType === "grammar" && grammarTask) {
+    renderGrammarTask(grammarTask);
+    elOptionsArea.innerHTML = "";
+  } else if (taskType === "free") {
+    renderGrammarTask(null);
+    renderFreeHint();
+  } else {
+    renderGrammarTask(null);
+    renderOptions(options, taskType);
+  }
+
+  /* 任务进度：打勾 + 提示 */
+  if (completedTask >= 1 && scriptData && Array.isArray(scriptData.tasks)) {
+    markTaskCompleted(completedTask, scriptData.tasks[completedTask - 1]);
+  }
+  /* 考纲词汇覆盖：累积本轮出现的词并刷新进度条 */
+  for (const v of vocab) {
+    appearedVocab.add(String(v.word).trim().toLowerCase());
+  }
+  renderVocabProgress();
+  /* 全部任务完成 → 自动结算 */
+  if (gameOver) endGame();
+  scrollChatBottom();
+}
+
+function renderFreeHint() {
+  elOptionsArea.innerHTML = "";
+  const d = document.createElement("div");
+  d.className = "free-hint";
+  d.textContent = "💭 自由发挥时间：用英语描述你想做的事或想说的话（越具体，剧情越精彩）";
+  elOptionsArea.appendChild(d);
+}
+
+function renderGrammarTask(taskText) {
+  const slot = $("grammar-task-slot-active");
+  if (slot) slot.remove();
+  if (!taskText) return;
+  const d = document.createElement("div");
+  d.id = "grammar-task-slot-active";
+  d.className = "grammar-task-box";
+  d.innerHTML =
+    '<div class="gt-title">✍️ 语法任务</div>' +
+    '<div class="gt-body"></div>' +
+    '<div class="gt-sub">请在下方输入框用正确的英语表达，NPC 会检查你的语法并纠正错误</div>';
+  d.querySelector(".gt-body").textContent = taskText;
+  elChatArea.appendChild(d);
+  scrollChatBottom();
+}
+
+/* mode: "choice" | "search"。搜证模式下已探索过的选项不再渲染，点击后从清单划掉 */
+function renderOptions(options, mode) {
+  elOptionsArea.innerHTML = "";
+  const isSearch = mode === "search";
+  if (isSearch) {
+    options = options.filter(o => !searchedItems.has(String(o).trim().toLowerCase()));
+    const hint = document.createElement("div");
+    hint.className = "search-hint";
+    hint.textContent = options.length
+      ? "🔍 搜证：选择一项进行探索（搜过的会自动消失），也可以直接用英语描述你要搜的地方"
+      : "✅ 可探索的方向都已搜完，用英语说出你的推理或下一步行动吧";
+    elOptionsArea.appendChild(hint);
+  }
+  if (!options.length) return;
+  options.forEach((opt) => {
+    const btn = document.createElement("button");
+    btn.className = "option-btn";
+    btn.innerHTML = '<span class="opt-prefix">' + (isSearch ? "🔍" : "◆") + "</span>" + escapeHtml(opt);
+    btn.addEventListener("click", () => {
+      if (busy) return;
+      if (isSearch) searchedItems.add(String(opt).trim().toLowerCase());
+      sendMessage(opt);
+    });
+    elOptionsArea.appendChild(btn);
+  });
+}
+
+/* ================= 生词本（点击蓝色下划线词汇加入） ================= */
+function addVocabEntry(entry) {
+  const w = String(entry.word || "").trim();
+  if (!w) return null;
+  const e = {
+    word: w,
+    pos: String(entry.pos || "").trim(),
+    phonetic_uk: String(entry.phonetic_uk || "").trim(),
+    phonetic_us: String(entry.phonetic_us || "").trim(),
+    meaning: String(entry.meaning || "暂无释义"),
+    example: String(entry.example || ""),
+    example_cn: String(entry.example_cn || "")
+  };
+  vocabBook.set(w, e);
+  renderVocabList();
+  return e;
+}
+
+function renderVocabList() {
+  elVocabList.innerHTML = "";
+  elVocabCount.textContent = vocabBook.size ? "(" + vocabBook.size + ")" : "";
+  if (!vocabBook.size) {
+    elVocabList.innerHTML = '<div class="vocab-empty">点击台词中蓝色下划线的考纲词汇，加入生词本</div>';
+    return;
+  }
+  for (const [w, e] of vocabBook) {
+    const item = document.createElement("div");
+    item.className = "vocab-item";
+    item.innerHTML = '<span class="w"></span><span class="pos"></span><div class="m"></div>';
+    item.querySelector(".w").textContent = w;
+    item.querySelector(".pos").textContent = e.pos ? "(" + e.pos + ")" : "";
+    item.querySelector(".m").textContent = e.meaning;
+    item.addEventListener("click", () => openPopover(e, null));
+    elVocabList.appendChild(item);
+  }
+}
+
+/* ================= 生词释义浮层（拼写正确才能关闭） ================= */
+let popoverEntry = null; /* 当前浮层展示的词条 */
+
+function openPopover(entry, anchorRect) {
+  popoverEntry = entry;
+  $("vp-word").textContent = entry.word;
+  $("vp-pos").textContent = entry.pos ? "(" + entry.pos + ")" : "";
+  $("vp-phon-uk").textContent = entry.phonetic_uk ? "🇬🇧 " + entry.phonetic_uk : "";
+  $("vp-phon-us").textContent = entry.phonetic_us ? "🇺🇸 " + entry.phonetic_us : "";
+  $("vp-play-uk").style.display = entry.phonetic_uk ? "" : "none";
+  $("vp-play-us").style.display = entry.phonetic_us ? "" : "none";
+  $("vp-meaning").textContent = entry.meaning;
+  $("vp-example").textContent = entry.example ? "📝 " + entry.example : "";
+  $("vp-example-cn").textContent = entry.example_cn;
+  $("vp-spell-input").value = "";
+  $("vp-spell-error").textContent = "";
+  elPopover.classList.remove("shake");
+  elPopover.style.display = "block";
+
+  /* 定位：靠近触发的生词；无锚点（侧栏点击）时居中偏右 */
+  const pw = 320, ph = elPopover.offsetHeight || 260;
+  let x, y;
+  if (anchorRect) {
+    x = Math.min(anchorRect.left, window.innerWidth - pw - 16);
+    y = anchorRect.bottom + 8;
+    if (y + ph > window.innerHeight) y = Math.max(8, anchorRect.top - ph - 8);
+  } else {
+    x = Math.max(8, (window.innerWidth - pw) / 2 + 140);
+    y = Math.max(60, (window.innerHeight - ph) / 2);
+  }
+  elPopover.style.left = Math.max(8, x) + "px";
+  elPopover.style.top = y + "px";
+  $("vp-spell-input").focus();
+}
+
+/* 拼写校验：正确才允许关闭（大小写不敏感） */
+function tryClosePopover() {
+  if (!popoverEntry) return;
+  const input = $("vp-spell-input").value.trim().toLowerCase();
+  const target = popoverEntry.word.trim().toLowerCase();
+  if (input === target) {
+    elPopover.style.display = "none";
+    popoverEntry = null;
+  } else {
+    $("vp-spell-error").textContent = "拼写不正确，请对照上方单词再试一次";
+    elPopover.classList.remove("shake");
+    void elPopover.offsetWidth; /* 重置动画 */
+    elPopover.classList.add("shake");
+    $("vp-spell-input").focus();
+  }
+}
+
+$("vp-spell-btn").addEventListener("click", tryClosePopover);
+$("vp-spell-input").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") { e.preventDefault(); tryClosePopover(); }
+});
+/* 英式 / 美式发音播放按钮 */
+$("vp-play-uk").addEventListener("click", () => { if (popoverEntry) speak(popoverEntry.word, "en-GB"); });
+$("vp-play-us").addEventListener("click", () => { if (popoverEntry) speak(popoverEntry.word, "en-US"); });
+
+/* 点击台词中的蓝色下划线考纲词汇 → 加入生词本 + 弹出完整释义 */
+document.addEventListener("click", (e) => {
+  const target = e.target.closest(".vocab-word");
+  if (target) {
+    const word = target.getAttribute("data-word");
+    const row = target.closest(".msg-row");
+    const list = (row && row._vocab) || [];
+    let entry = list.find(v => String(v.word).trim() === word);
+    if (entry && !vocabBook.has(word)) entry = addVocabEntry(entry); /* 点击时才加入生词本 */
+    if (!entry) entry = vocabBook.get(word);
+    if (entry) openPopover(entry, target.getBoundingClientRect());
+  }
+  /* 注意：浮层只能通过拼写正确关闭，点击其他区域不会关闭 */
+});
+
+/* ================= 剧终结算：生词重现 + 语法总结 + 自我检测 ================= */
+async function endGame() {
+  if (gameEnded) return;
+  gameEnded = true;
+  elOptionsArea.innerHTML = "";
+
+  /* 延迟 1.5 秒弹出，让玩家读完 NPC 的结局台词 */
+  setTimeout(async () => {
+    $("em-title").textContent = "🎉 剧本通关！" + ((scriptData && scriptData.script_name) || "");
+    /* 生词重现：可点击复习（发音 + 释义 + 拼写关闭） */
+    const vw = $("em-vocab");
+    vw.innerHTML = "";
+    if (!vocabBook.size) vw.innerHTML = '<span style="color:var(--text-dim);font-size:13px">本局没有收集生词</span>';
+    for (const [w, e] of vocabBook) {
+      const chip = document.createElement("button");
+      chip.className = "vocab-chip";
+      const b = document.createElement("span");
+      b.textContent = w;
+      const p = document.createElement("span");
+      p.className = "chip-pos";
+      p.textContent = e.pos;
+      chip.appendChild(b);
+      if (e.pos) chip.appendChild(p);
+      chip.addEventListener("click", () => openPopover(e, null));
+      vw.appendChild(chip);
+    }
+    $("em-summary").textContent = "正在生成本局回顾……";
+    $("em-quiz").innerHTML = "";
+    $("em-quiz-section").classList.remove("hidden");
+    $("end-modal").classList.remove("hidden");
+
+    /* 调用大模型生成语法总结 + 自我检测题 */
+    try {
+      const reviewMsgs = messages.concat([{ role: "user", content: PROMPT_END_REVIEW }]);
+      const raw = await callLLM(reviewMsgs, null);
+      let data = null;
+      try { data = parseModelJson(raw); } catch (e) { data = null; }
+      if (data && data.grammar_summary) {
+        $("em-summary").textContent = data.grammar_summary;
+      } else {
+        $("em-summary").textContent = "（回顾生成失败，可直接复习生词或开始新剧本）";
+      }
+      if (data && Array.isArray(data.quiz) && data.quiz.length) {
+        renderQuiz(data.quiz);
+      } else {
+        $("em-quiz").innerHTML = '<div style="color:var(--text-dim);font-size:12px">（题目生成失败）</div>';
+      }
+    } catch (err) {
+      $("em-summary").textContent = "（回顾生成失败：" + err.message + "）";
+    }
+  }, 1500);
+}
+
+function renderQuiz(quiz) {
+  const box = $("em-quiz");
+  box.innerHTML = "";
+  let answered = 0, score = 0;
+  const scoreEl = document.createElement("div");
+  scoreEl.className = "quiz-score";
+
+  quiz.slice(0, 3).forEach((item, qi) => {
+    const q = document.createElement("div");
+    q.className = "quiz-q";
+    const t = document.createElement("div");
+    t.className = "q-title";
+    t.textContent = (qi + 1) + ". " + String(item.q || "");
+    q.appendChild(t);
+    const opts = document.createElement("div");
+    opts.className = "quiz-opts";
+    const explain = document.createElement("div");
+    explain.className = "quiz-explain hidden";
+
+    (Array.isArray(item.options) ? item.options : []).forEach((opt, oi) => {
+      const btn = document.createElement("button");
+      btn.className = "quiz-opt";
+      btn.textContent = String(opt);
+      btn.addEventListener("click", () => {
+        if (q.dataset.answered) return;
+        q.dataset.answered = "1";
+        answered++;
+        const correct = parseInt(item.answer, 10) || 0;
+        const btns = opts.querySelectorAll(".quiz-opt");
+        btns.forEach((b, i) => {
+          b.disabled = true;
+          if (i === correct) b.classList.add("correct");
+        });
+        if (oi !== correct) btn.classList.add("wrong");
+        else score++;
+        explain.textContent = "💡 " + String(item.explain || "");
+        explain.classList.remove("hidden");
+        scoreEl.textContent = "已答 " + answered + "/" + Math.min(quiz.length, 3) + " · 得分 " + score;
+      });
+      opts.appendChild(btn);
+    });
+    q.appendChild(opts);
+    q.appendChild(explain);
+    box.appendChild(q);
+  });
+  box.appendChild(scoreEl);
+}
+
+/* ================= 错误展示（带重试） ================= */
+function showErrorBubble(msg, retryPayload) {
+  removeThinking();
+  const box = document.createElement("div");
+  box.className = "error-box";
+  box.innerHTML = "⚠ " + escapeHtml(msg) + '<br><span class="retry-link">点击此处重试</span>';
+  box.querySelector(".retry-link").addEventListener("click", () => {
+    box.remove();
+    if (retryPayload) retryPayload();
+  });
+  elChatArea.appendChild(box);
+  scrollChatBottom();
+}
+
+/* ================= CONFIG → PLANNING：生成剧本大纲 ================= */
+function showPlanningLoading() {
+  $("planning-loading").classList.remove("hidden");
+  $("script-modal").classList.add("hidden");
+  $("planning-fallback").classList.add("hidden");
+}
+
+/* 把结构化剧本转成文本（注入游戏 system prompt） */
+function formatScriptPlan(d) {
+  const chars = (Array.isArray(d.characters) ? d.characters : [])
+    .map(c => typeof c === "string" ? c : String(c.name || "") + "（" + String(c.role || "") + "）")
+    .join("；");
+  const tasks = (Array.isArray(d.tasks) ? d.tasks : []).map((t, i) => (i + 1) + "." + t).join("；");
+  const vocab = (Array.isArray(d.core_vocab) ? d.core_vocab : []).join(", ");
+  return "剧本名：" + (d.script_name || scriptInfo.theme) +
+    "\n主线剧情：" + (d.storyline || "") +
+    "\n出场角色：" + chars +
+    "\n任务节点：" + tasks +
+    (vocab ? "\n（本剧考纲词汇表见【本剧考纲词汇表】栏）" : "");
+}
+
+/* 剧本杀风格弹窗：主线剧情 / 出场角色 / 任务目标 */
+function buildScriptModal(d) {
+  $("sm-title").textContent = d.script_name || scriptInfo.theme;
+  $("sm-meta").textContent = scriptInfo.level + " · " + scriptInfo.challenge;
+  $("sm-storyline").textContent = d.storyline || "";
+
+  const cw = $("sm-characters");
+  cw.innerHTML = "";
+  for (const c of (Array.isArray(d.characters) ? d.characters : [])) {
+    const div = document.createElement("div");
+    div.className = "sm-char";
+    const nameEl = document.createElement("b");
+    const roleEl = document.createElement("span");
+    if (typeof c === "string") {
+      div.appendChild(document.createTextNode("🎭 "));
+      nameEl.textContent = c;
+      div.appendChild(nameEl);
+    } else {
+      div.appendChild(document.createTextNode("🎭 "));
+      nameEl.textContent = c.name || "";
+      roleEl.textContent = c.role ? " — " + c.role : "";
+      div.appendChild(nameEl);
+      div.appendChild(roleEl);
+    }
+    cw.appendChild(div);
+  }
+
+  const tw = $("sm-tasks");
+  tw.innerHTML = "";
+  for (const t of (Array.isArray(d.tasks) ? d.tasks : [])) {
+    const li = document.createElement("li");
+    li.textContent = String(t);
+    tw.appendChild(li);
+  }
+}
+
+async function generatePlan() {
+  hideBanner();
+  const s = getSettings();
+  if (!validateSettings(s)) {
+    showBanner("请先在「⚙️ 大模型接口设置」中填写 API Base URL 和 API Key。");
+    return;
+  }
+
+  scriptInfo = {
+    genre: $("sel-genre").value,
+    theme: $("inp-theme").value.trim(),
+    background: $("inp-background").value.trim(),
+    language: "英语",
+    level: $("sel-level").value,
+    challenge: $("sel-challenge").value
+  };
+
+  const prompt = PROMPT_GENERATE_PLAN
+    .replace("{genre}", scriptInfo.genre)
+    .replace("{level}", scriptInfo.level)
+    .replace("{levelDesc}", levelDesc())
+    .replace("{challenge}", scriptInfo.challenge)
+    .replace("{challengeDesc}", challengeDesc())
+    .replace("{themeLine}", scriptInfo.theme || "未指定")
+    .replace("{bgLine}", scriptInfo.background || "未指定");
+
+  setState("PLANNING");
+  showPlanningLoading();
+  const btnGen = $("btn-generate");
+  btnGen.disabled = true;
+  btnGen.textContent = "生成中…";
+
+  try {
+    const raw = await callLLM([{ role: "user", content: prompt }], null);
+    /* 尝试解析结构化剧本 JSON */
+    let data = null;
+    try { data = parseModelJson(raw); } catch (e) { data = null; }
+
+    $("planning-loading").classList.add("hidden");
+    if (data && data.storyline && Array.isArray(data.tasks) && data.tasks.length) {
+      scriptData = data;
+      scriptPlan = formatScriptPlan(data);
+      buildScriptModal(data);
+      $("script-modal").classList.remove("hidden");
+    } else {
+      /* 模型没按 JSON 返回：降级为纯文本大纲展示 */
+      scriptData = null;
+      scriptPlan = raw;
+      $("planning-body").textContent = raw;
+      $("planning-fallback").classList.remove("hidden");
+    }
+  } catch (err) {
+    setState("CONFIG");
+    if (!backendMode) $("api-settings").classList.remove("hidden");
+    showBanner("生成失败：" + err.message);
+    console.error("[剧本生成失败]", err);
+  } finally {
+    btnGen.disabled = false;
+    btnGen.textContent = "✨ 生成剧本";
+  }
+}
+
+/* ================= PLANNING → PLAYING：进入游戏 ================= */
+/* 本剧考纲词汇表（注入 play prompt，供整局分批覆盖；模型超量时均匀截取前 120 个） */
+function coreVocabList() {
+  if (scriptData && Array.isArray(scriptData.core_vocab) && scriptData.core_vocab.length) {
+    const clean = scriptData.core_vocab.map(w => String(w).trim()).filter(Boolean);
+    if (clean.length > 130) {
+      /* 超量时按剧情相关性无法判断，均匀采样保留 120 个，避免字母序偏斜 */
+      const step = clean.length / 120;
+      const picked = [];
+      for (let i = 0; i < 120; i++) picked.push(clean[Math.floor(i * step)]);
+      return picked;
+    }
+    return clean;
+  }
+  return null;
+}
+function coreVocabText() {
+  const list = coreVocabList();
+  return list ? list.join(", ") : "（编剧未生成词汇表，请按【挑战模式】对应的考纲词汇范围，每轮自行选用该级别中高频核心词）";
+}
+
+async function startGame() {
+  setState("PLAYING");
+  completedTasks.clear();
+  searchedItems.clear();
+  gameEnded = false;
+  appearedVocab.clear();
+  renderVocabProgress();
+  $("sb-script-name").textContent = (scriptData && scriptData.script_name) || scriptInfo.theme || scriptInfo.genre;
+  $("sb-script-meta").textContent = scriptInfo.genre + " · " + scriptInfo.level + " · " + scriptInfo.challenge;
+  $("sb-task-goal").textContent = "";
+  renderScriptTasks();
+
+  messages = [{
+    role: "system",
+    content: PROMPT_PLAY_GAME
+      .replace("{genre}", scriptInfo.genre)
+      .replace("{genreDesc}", genreDesc())
+      .replace("{scriptPlan}", scriptPlan)
+      .replace("{coreVocab}", coreVocabText())
+      .replace("{challengeDesc}", challengeDesc())
+  }];
+
+  /* 隐藏的启动消息：让 NPC 按剧本杀玩法开场并进入搜证环节（不展示在聊天界面） */
+  const boot = "（游戏开始。请以剧本杀 DM + NPC 的身份开场：交代场景与氛围，然后立即进入搜证环节——task_type 用 search，options 给出 3-4 个可供探索的方向（地点/人物/物品，均为英语）。speaker 填开场 NPC 的名字，必须与出场角色一致。本剧考纲词汇表中的词要开始分批融入台词。）";
+  messages.push({ role: "user", content: boot });
+  await requestNpcReply(boot, true);
+}
+
+/* ================= PLAYING：发送消息（输入框或选项按钮） ================= */
+async function sendMessage(text) {
+  if (busy || gameEnded || !text.trim()) return;
+  elOptionsArea.innerHTML = ""; // 发送后清空选项
+  addUserBubble(text.trim());
+  elInpMsg.value = "";
+  autoGrow();
+  await requestNpcReply(text.trim(), false);
+}
+
+async function requestNpcReply(userText, isBoot) {
+  setBusy(true);
+  if (!isBoot) {
+    messages.push({ role: "user", content: userText });
+  }
+  const lastMsgs = () => messages.map(m => ({ role: m.role, content: m.content }));
+
+  addThinking();
+  const ui = addNpcBubble();
+  let accum = "";
+
+  try {
+    const full = await callLLM(lastMsgs(), (piece) => {
+      accum += piece;
+      removeThinking();
+      /* 增量提取 npc_dialogue 实现逐字观感 */
+      const shown = extractStreamingDialogue(accum);
+      if (shown !== null) ui.text.textContent = shown;
+      scrollChatBottom();
+    });
+    accum = full;
+    removeThinking();
+
+    messages.push({ role: "assistant", content: accum });
+    let data = null;
+    try {
+      data = parseModelJson(accum);
+    } catch (e) {
+      data = null; /* 解析失败 → 降级纯文本 */
+    }
+    if (!data || typeof data.npc_dialogue !== "string") data = null;
+    finalizeNpcBubble(ui, data, accum);
+  } catch (err) {
+    removeThinking();
+    ui.row.remove();
+    messages.pop(); // 弹出本轮失败的 assistant 占位
+    showErrorBubble(err.message, () => requestNpcRetry(lastMsgs, userText));
+  } finally {
+    setBusy(false);
+  }
+}
+
+async function requestNpcRetry(getMsgs, userText) {
+  setBusy(true);
+  addThinking();
+  const ui = addNpcBubble();
+  let accum = "";
+  try {
+    const full = await callLLM(getMsgs(), (piece) => {
+      accum += piece;
+      removeThinking();
+      const shown = extractStreamingDialogue(accum);
+      if (shown !== null) ui.text.textContent = shown;
+      scrollChatBottom();
+    });
+    accum = full;
+    removeThinking();
+    messages.push({ role: "assistant", content: accum });
+    let data = null;
+    try { data = parseModelJson(accum); } catch (e) { data = null; }
+    if (!data || typeof data.npc_dialogue !== "string") data = null;
+    finalizeNpcBubble(ui, data, accum);
+  } catch (err) {
+    removeThinking();
+    ui.row.remove();
+    showErrorBubble(err.message, () => requestNpcRetry(getMsgs, userText));
+  } finally {
+    setBusy(false);
+  }
+}
+
+/* ================= 输入框自适应高度 & 回车发送 ================= */
+function autoGrow() {
+  elInpMsg.style.height = "auto";
+  elInpMsg.style.height = Math.min(elInpMsg.scrollHeight, 120) + "px";
+}
+
+elInpMsg.addEventListener("input", autoGrow);
+elInpMsg.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage(elInpMsg.value);
+  }
+});
+
+/* ================= 事件绑定 ================= */
+$("btn-generate").addEventListener("click", generatePlan);
+$("btn-back-config").addEventListener("click", () => setState("CONFIG"));
+$("btn-back-config-fb").addEventListener("click", () => setState("CONFIG"));
+$("btn-start-game").addEventListener("click", startGame);
+$("btn-start-game-fb").addEventListener("click", startGame);
+$("btn-reset").addEventListener("click", resetGame);
+$("btn-new-script").addEventListener("click", () => { resetGame(); });
+$("btn-skip-quiz").addEventListener("click", () => {
+  $("em-quiz-section").classList.add("hidden");
+});
+$("btn-send").addEventListener("click", () => sendMessage(elInpMsg.value));
+$("api-settings-toggle").addEventListener("click", () => {
+  $("api-settings").classList.toggle("open");
+});
+$("inp-theme").addEventListener("input", () => $("inp-theme").classList.remove("error"));
+["inp-api-base", "inp-api-key", "inp-model"].forEach((id) => {
+  $(id).addEventListener("input", () => {
+    $(id).classList.remove("error");
+    $("api-error-tip").classList.remove("show");
+  });
+});
+
+/* ================= 初始化 ================= */
+loadSettings();
+setState("CONFIG");
+detectBackend();
+</script>
+</body>
+</html>
