@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>沉浸式 AI 剧本杀语言学习助手</title>
 <style>
   :root {
@@ -234,8 +234,6 @@
   body.light .sh-tasks li.done { color: #1f8b4c; }
   body.light .run-badge.done { color: #1f8b4c; border-color: rgba(31, 139, 76, 0.45); }
   body.light .run-badge.playing { color: #8a6a00; border-color: rgba(138, 106, 0, 0.45); }
-  body.light .backend-badge { color: #1f8b4c; border-color: rgba(31, 139, 76, 0.45); }
-  body.light .direct-mode-hint { color: #8a6a00; border-color: rgba(138, 106, 0, 0.45); }
   .sh-actions { display: flex; gap: 8px; margin-top: 4px; }
   .sh-empty { color: var(--text-dim); font-size: 12px; }
   .choice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -272,17 +270,6 @@
     font-size: 13px; line-height: 1.6; margin-bottom: 16px;
     word-break: break-all;
   }
-  .backend-badge {
-    text-align: center; color: #69db7c; font-size: 12px;
-    border: 1px dashed rgba(105, 219, 124, 0.4); border-radius: 8px;
-    padding: 8px; margin-top: 18px;
-  }
-  .direct-mode-hint {
-    text-align: center; color: var(--tip-yellow); font-size: 12px;
-    border: 1px dashed rgba(240, 201, 72, 0.4); border-radius: 8px;
-    padding: 8px 10px; margin-top: 18px; line-height: 1.7;
-  }
-  .direct-mode-hint code { color: #7eb1ff; }
   .field { margin-bottom: 18px; }
   .field label { display: block; font-size: 13px; color: var(--text-dim); margin-bottom: 7px; }
   .field input, .field select, .field textarea {
@@ -295,22 +282,6 @@
   .field input.error, .field select.error { border-color: var(--danger); }
   .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .btn-generate { width: 100%; margin-top: 8px; padding: 14px; font-size: 16px; }
-
-  /* API 设置折叠区 */
-  .api-settings { margin-top: 22px; border-top: 1px dashed var(--border); padding-top: 16px; }
-  .api-settings-toggle {
-    display: flex; align-items: center; gap: 6px;
-    background: none; color: var(--text-dim); font-size: 13px; padding: 4px 0;
-  }
-  .api-settings-toggle:hover { color: var(--text); }
-  .api-settings-toggle .arrow { transition: transform .2s; display: inline-block; }
-  .api-settings.open .api-settings-toggle .arrow { transform: rotate(90deg); }
-  .api-settings-body { display: none; padding-top: 14px; }
-  .api-settings.open .api-settings-body { display: block; }
-  .api-hint { font-size: 12px; color: var(--text-dim); line-height: 1.7; margin-bottom: 12px; }
-  .api-hint code { background: var(--bg-input); padding: 1px 6px; border-radius: 4px; font-size: 11px; }
-  .api-error-tip { color: var(--danger); font-size: 12px; margin-top: 10px; display: none; }
-  .api-error-tip.show { display: block; }
 
   /* ===== PLANNING 状态 ===== */
   /* 生成中画面 */
@@ -385,7 +356,8 @@
   .btn-start { flex: 1; }
 
   /* ===== PLAYING 布局 ===== */
-  .game-layout { display: flex; height: 100%; }
+  .game-layout { display: flex; height: 100%; min-height: 0; }
+  body { height: var(--app-height, 100dvh); }
 
   .sidebar {
     width: 280px; min-width: 280px; height: 100%;
@@ -393,6 +365,16 @@
     display: flex; flex-direction: column; padding: 20px 16px;
   }
   .sidebar h3 { font-size: 15px; margin-bottom: 6px; }
+  .sidebar-content { flex: 1; min-height: 0; overflow-y: auto; padding-right: 3px; }
+  .player-script-panel { font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
+  .player-script-panel h4 { color: var(--accent); margin: 8px 0 4px; font-size: 14px; }
+  .player-script-panel p { margin: 5px 0 12px; white-space: pre-wrap; }
+  .public-background { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 12px; line-height: 1.8; }
+  .public-background summary { cursor: pointer; color: var(--text-dim); }
+  .public-background p { margin-top: 8px; white-space: pre-wrap; }
+  .panel-close, .mobile-game-toolbar, .sidebar-backdrop { display: none; }
+  .task-criterion { display: block; margin-top: 3px; color: var(--text-dim); font-size: 11px; line-height: 1.6; }
+  .reply-language-field { margin-top: 18px; }
   .sidebar .script-name { font-size: 15px; font-weight: 700; color: var(--accent); line-height: 1.5; margin-bottom: 4px; }
   .sidebar .script-meta { font-size: 11.5px; color: var(--text-dim); margin-bottom: 16px; }
   .sidebar .section-label {
@@ -449,13 +431,14 @@
   .vocab-item .m { color: var(--text-dim); margin-top: 3px; line-height: 1.5; }
   .vocab-item { cursor: pointer; }
   .vocab-item:hover { border-color: var(--accent); }
-  .sidebar-footer { margin-top: 12px; }
+  .sidebar-footer { margin-top: 12px; flex-shrink: 0; }
   .btn-reset { width: 100%; }
 
-  .main-area { flex: 1; display: flex; flex-direction: column; height: 100%; min-width: 0; }
+  .main-area { flex: 1; display: flex; flex-direction: column; height: 100%; min-width: 0; min-height: 0; }
 
   /* 聊天区 */
-  .chat-area { flex: 1; overflow-y: auto; padding: 58px 30px 26px; scroll-behavior: smooth; }
+  .chat-area { flex: 1; min-height: 0; overflow-y: auto; padding: 58px 30px 10px; scroll-behavior: smooth; overscroll-behavior: contain; }
+  .chat-area > :last-child { margin-bottom: 0; }
   .msg-row { display: flex; margin-bottom: 20px; }
   .msg-row.user { justify-content: flex-end; }
   .msg-row.npc { justify-content: flex-start; }
@@ -532,6 +515,7 @@
     background: #232a39; border: 1px solid var(--accent); border-radius: 12px;
     padding: 14px 16px; font-size: 13px; line-height: 1.7;
     box-shadow: 0 10px 30px rgba(0,0,0,.5); display: none;
+    max-height: calc(var(--app-height, 100dvh) - 24px); overflow-y: auto;
   }
   .vocab-popover .vp-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; }
   .vocab-popover .pw { font-weight: 600; color: #7eb1ff; font-size: 24px; letter-spacing: 0.4px; line-height: 1.25; }
@@ -578,7 +562,8 @@
 
   /* 行动选项 */
   .options-area {
-    padding: 0 30px 12px 76px; display: flex; flex-direction: column; gap: 8px;
+    padding: 0 30px 4px 76px; display: flex; flex-direction: column; gap: 8px;
+    max-height: 30%; overflow-y: auto; flex-shrink: 0;
   }
   .options-area:empty { display: none; }
   .option-btn {
@@ -663,9 +648,9 @@
   .vocab-popover .vp-spell-row.phrase-mode { justify-content: flex-end; }
 
   /* 底部输入区 */
-  .input-area { padding: 14px 30px 22px; }
+  .input-area { padding: 6px 30px max(10px, env(safe-area-inset-bottom)); flex-shrink: 0; }
   .input-box {
-    display: flex; align-items: flex-end; gap: 10px;
+    display: flex; align-items: center; gap: 10px;
     background: var(--bg-input); border: 1px solid var(--border);
     border-radius: 16px; padding: 10px 12px;
     transition: border-color .15s;
@@ -674,7 +659,7 @@
   .input-box textarea {
     flex: 1; background: none; border: none; outline: none; resize: none;
     color: var(--text); font-size: 15px; line-height: 1.5; max-height: 120px;
-    min-height: 24px;
+    min-height: 24px; margin: 0; padding: 0; display: block; min-width: 0;
   }
   .btn-send {
     width: 42px; height: 42px; border-radius: 50%;
@@ -683,6 +668,9 @@
   }
   .btn-send:disabled { filter: grayscale(0.6) brightness(0.7); cursor: not-allowed; }
   .input-hint { text-align: center; font-size: 11px; color: var(--text-dim); margin-top: 8px; }
+  .input-error { color: var(--danger); margin-top: 5px; font-size: 12px; line-height: 1.6; }
+  #inp-msg[aria-invalid="true"] { outline: none; }
+  .input-box:has(#inp-msg[aria-invalid="true"]) { border-color: var(--danger); }
 
   /* 滚动条 */
   ::-webkit-scrollbar { width: 8px; }
@@ -780,8 +768,36 @@
   body.light .dot-anim.big i { background: #2f6fed; }
 
   @media (max-width: 720px) {
-    .sidebar { display: none; }
-    .options-area { padding-left: 30px; }
+    .sidebar { display: flex; position: fixed; inset: 0 auto 0 0; z-index: 150; height: var(--app-height, 100dvh); width: min(90vw, 360px); min-width: 0; padding: max(12px, env(safe-area-inset-top)) 16px max(12px, env(safe-area-inset-bottom)); transform: translateX(-100%); visibility: hidden; transition: transform .2s, visibility .2s; }
+    .sidebar-open .sidebar { transform: translateX(0); visibility: visible; }
+    .sidebar-open .sidebar-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 140; }
+    .panel-close { display: block; align-self: flex-end; margin-bottom: 12px; min-height: 40px; }
+    .mobile-game-toolbar { display: flex; align-items: center; gap: 10px; flex-shrink: 0; padding: max(8px, env(safe-area-inset-top)) 58px 8px 12px; border-bottom: 1px solid var(--border); }
+    .mobile-game-toolbar button { min-height: 40px; color: var(--text); }
+    #mobile-task-progress { font-size: 12px; color: var(--text-dim); white-space: nowrap; }
+    .center-screen { padding: 12px; }
+    .config-card { max-height: calc(var(--app-height, 100dvh) - 24px); padding: 46px 16px 20px; }
+    .config-shortcuts, .config-top-actions, .account-bar { gap: 6px; flex-wrap: wrap; }
+    .row-2 { grid-template-columns: 1fr; gap: 0; }
+    .field input, .field select, .field textarea, .input-box textarea { font-size: 16px; }
+    .wizard-actions, .sm-foot, .planning-foot { flex-wrap: wrap; }
+    .wizard-actions button, .sm-foot button { min-height: 44px; }
+    .script-modal, .end-modal { padding: 12px; }
+    .sm-frame, .em-frame { max-height: calc(var(--app-height, 100dvh) - 24px); padding: 22px 16px; }
+    .sm-player-head { flex-wrap: wrap; gap: 4px 10px; }
+    .chat-area { padding: 14px 12px 4px; }
+    .msg-row { margin-bottom: 14px; }
+    .bubble-wrap { max-width: calc(100% - 40px); min-width: 0; }
+    .options-area { padding: 0 12px 4px; max-height: 26%; }
+    .option-btn { width: 100%; padding: 10px 12px; }
+    .opt-trans-btn { min-height: 32px; }
+    .input-area { padding: 4px 12px max(8px, env(safe-area-inset-bottom)); }
+    .input-hint { font-size: 10px; line-height: 1.5; margin-top: 4px; }
+    .input-box { border-radius: 12px; padding: 8px 10px; }
+    .btn-send { width: 40px; height: 40px; }
+    .loading-title { letter-spacing: 0; text-align: center; padding: 0 12px; }
+    .task-toast { margin-left: 0; }
+    .vocab-popover { width: calc(100vw - 24px); }
     .theme-toggle { top: 10px; right: 10px; width: 36px; height: 36px; font-size: 16px; }
   }
 
@@ -963,7 +979,15 @@
             <option value="地狱模式">地狱模式（7 人剧本 · 长难句居多）</option>
           </select>
         </div>
+        <div class="field">
+          <label for="sel-reply-language">你的回答语言</label>
+          <select id="sel-reply-language" class="reply-language-select">
+            <option value="en" selected>英文回答（仅允许英文）</option>
+            <option value="zh">中文回答（中英文均可）</option>
+          </select>
+        </div>
       </div>
+      <p class="wizard-note">NPC 仍用英语与你互动，并提供中文翻译。中文回答模式接受中文、英文及中英混合输入。</p>
       <div class="wizard-actions">
         <button class="btn-ghost" id="btn-back-exam-goal">← 返回</button>
         <button id="btn-generate" class="btn btn-start">✨ 生成剧本</button>
@@ -995,6 +1019,7 @@
         <button class="choice-card" data-daily-level="B1"><strong>B1 进阶</strong><small>自然对话，补充原因、偏好和细节</small></button>
         <button class="choice-card" data-daily-level="B2"><strong>B2 挑战</strong><small>更灵活的表达、委婉语气和复杂交涉</small></button>
       </div>
+      <div class="field reply-language-field"><label for="sel-daily-reply-language">你的回答语言</label><select id="sel-daily-reply-language" class="reply-language-select"><option value="en">英文回答（仅允许英文）</option><option value="zh">中文回答（中英文均可）</option></select></div>
       <div class="wizard-actions"><button class="btn-ghost" id="btn-back-daily-scene">← 返回场景</button><button id="btn-start-daily-stage" class="btn btn-start" disabled>开始这一关</button></div>
     </section>
 
@@ -1014,44 +1039,12 @@
         <button class="choice-card" data-random-level="B1"><strong>B1 进阶</strong><small>加入细节说明和协商</small></button>
         <button class="choice-card" data-random-level="B2"><strong>B2 挑战</strong><small>复杂情况和更灵活表达</small></button>
       </div>
+      <div class="field reply-language-field"><label for="sel-random-reply-language">你的回答语言</label><select id="sel-random-reply-language" class="reply-language-select"><option value="en">英文回答（仅允许英文）</option><option value="zh">中文回答（中英文均可）</option></select></div>
       <p class="wizard-note" id="random-assessment-note">完成九大板块全部 72 个场景后，此模式将按已学内容生成综合测评，并指出薄弱场景。</p>
       <div class="wizard-actions"><button class="btn-ghost" id="btn-back-random-mode">← 返回练习方式</button><button id="btn-generate-daily" class="btn btn-start" disabled>🎲 随机生成剧本</button></div>
     </section>
 
     <div class="error-banner hidden" id="error-banner"></div>
-    <p class="backend-badge hidden" id="backend-badge">✅ 已连接本地后端（server.js）· 密钥由服务器端 config.json 保管</p>
-    <p class="direct-mode-hint hidden" id="direct-mode-hint">
-      ⚠️ 当前是"文件直开"模式，未连接本地后端。<br>
-      要使用 config.json 里已配置好的密钥，请双击 <code>启动.bat</code>，或浏览器访问 <code>http://127.0.0.1:8787</code>
-    </p>
-
-    <!-- API 设置（可折叠） -->
-    <div class="api-settings" id="api-settings">
-      <button class="api-settings-toggle" id="api-settings-toggle">
-        <span class="arrow">▶</span> ⚙️ 大模型接口设置（可选，默认已内置）
-      </button>
-      <div class="api-settings-body">
-        <p class="api-hint">
-          不填则使用内置默认接口，直接开玩；填写后将覆盖默认配置（仅保存在你自己的浏览器 localStorage）。<br>
-          支持 OpenAI 兼容接口，例：<code>https://api.openai.com/v1</code>、<code>https://api.deepseek.com/v1</code>、<code>http://localhost:11434/v1</code>（Ollama）
-        </p>
-        <div class="field">
-          <label for="inp-api-base">API Base URL</label>
-          <input id="inp-api-base" type="text" placeholder="https://api.openai.com/v1">
-        </div>
-        <div class="row-2">
-          <div class="field">
-            <label for="inp-api-key">API Key</label>
-            <input id="inp-api-key" type="password" placeholder="sk-...">
-          </div>
-          <div class="field">
-            <label for="inp-model">模型名称</label>
-            <input id="inp-model" type="text" placeholder="gpt-4o-mini">
-          </div>
-        </div>
-        <p class="api-error-tip" id="api-error-tip">⚠ 请先在上方填写 API Base URL 和 API Key，才能调用大模型。</p>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -1102,7 +1095,7 @@
   <!-- 生成中画面 -->
   <div id="planning-loading" class="planning-loading">
     <div class="loading-mask">🎭</div>
-    <p class="loading-title">剧本生成中，请宿主准备迎接挑战……</p>
+    <p class="loading-title" id="planning-status" role="status">正在编排角色与故事……</p>
     <div class="dot-anim big"><i></i><i></i><i></i></div>
   </div>
 
@@ -1124,6 +1117,8 @@
       </div>
       <div class="sm-section"><div class="sm-label" id="sm-characters-label">【出场角色】</div><div class="sm-chars" id="sm-characters"></div></div>
       <div class="sm-section"><div class="sm-label" id="sm-tasks-label">【任务目标】</div><ol class="sm-tasks" id="sm-tasks"></ol></div>
+      <p class="wizard-note" id="sm-reading-guide">点击对话中任意不认识的英文单词可查看释义，并自行选择是否加入生词本，方便日后复习。蓝色标注的是考纲词汇。生词本可在学习首页查看。</p>
+      <p class="wizard-note" id="sm-reply-language"></p>
       <div class="sm-foot">
         <button id="btn-back-config" class="btn-ghost">← 换个剧本</button>
         <button id="btn-start-game" class="btn">🎭 开始游戏</button>
@@ -1145,7 +1140,10 @@
 <!-- ============ 状态三：PLAYING 游戏界面 ============ -->
 <div id="panel-playing" class="game-layout hidden">
   <!-- 左侧边栏 -->
-  <aside class="sidebar">
+  <button id="sidebar-backdrop" class="sidebar-backdrop" aria-label="关闭角色与任务面板" tabindex="-1"></button>
+  <aside class="sidebar" id="game-sidebar" aria-label="角色与任务" tabindex="-1">
+    <button id="btn-close-game-panel" class="btn-ghost panel-close" aria-label="关闭角色与任务面板">✕ 关闭</button>
+    <div class="sidebar-content">
     <h3 id="sb-title-label">🎭 当前剧本</h3>
     <div class="script-name" id="sb-script-name">—</div>
     <div class="script-meta" id="sb-script-meta">—</div>
@@ -1153,13 +1151,9 @@
     <div class="section-label">🎯 任务目标</div>
     <div class="task-goal-box" id="sb-task-goal">—</div>
 
-    <div class="section-label">📚 考纲词汇 <span id="vocab-progress-label" style="color:var(--accent)"></span></div>
-    <div class="vocab-progress"><div class="vocab-progress-bar" id="vocab-progress-bar"></div></div>
-    <div class="vocab-progress-note" id="vocab-progress-note">台词中已出现的考纲词汇进度</div>
-
-    <div class="section-label">📖 生词本 <span id="vocab-count" style="color:var(--accent)"></span></div>
-    <div class="vocab-list" id="vocab-list">
-      <div class="vocab-empty">点击台词中蓝色下划线的考纲词汇，加入生词本</div>
+    <div class="section-label">📜 我的角色本</div>
+    <div id="sb-player-script" class="player-script-panel"></div>
+    <details class="public-background"><summary>回看故事背景与登场角色</summary><div id="sb-story-background"></div></details>
     </div>
 
     <div class="sidebar-footer">
@@ -1168,15 +1162,20 @@
   </aside>
 
   <!-- 右侧主区域 -->
-  <main class="main-area">
+  <main class="main-area" id="game-main">
+    <div class="mobile-game-toolbar">
+      <button id="btn-game-panel" class="btn-ghost" aria-expanded="false" aria-controls="game-sidebar">☰ 角色 / 任务</button>
+      <span id="mobile-task-progress" role="status">0 / 3</span>
+    </div>
     <div class="chat-area" id="chat-area"></div>
     <div class="options-area" id="options-area"></div>
     <div class="input-area">
       <div class="input-box">
-        <textarea id="inp-msg" rows="1" placeholder="用英语回复 NPC…（Enter 发送，Shift+Enter 换行）"></textarea>
-        <button id="btn-send" class="btn-send">➤</button>
+        <textarea id="inp-msg" rows="1" aria-label="回复 NPC" aria-describedby="reply-language-note input-error" placeholder="用英语回复 NPC…"></textarea>
+        <button id="btn-send" class="btn-send" aria-label="发送回答">➤</button>
       </div>
-      <div class="input-hint">AI 扮演 NPC 与你对话 · 黄色为语法纠错 · 点「查看翻译」看中文 · 蓝色下划线=考纲词，金色虚线=口语搭配</div>
+      <div id="input-error" class="input-error hidden" role="alert"></div>
+      <div class="input-hint"><span id="reply-language-note">英文回答模式</span> · 点击任意英文单词查看释义，可选择加入生词本；蓝色为考纲词汇。</div>
     </div>
   </main>
 </div>
@@ -1274,12 +1273,15 @@ const PROMPT_GENERATE_PLAN = `你是一位资深剧本杀编剧，精通线下�
 - 主题参考：{themeLine}
 - 背景设定参考：{bgLine}
 （若某项为"未指定"，请围绕剧本类型自由发挥，设计一个精彩、有代入感的设定。）
+- 本局随机抽定的玩家身份方向：{playerRole}。围绕此身份设计核心冲突，不得把玩家写成旁观者。
+- 结构复杂度：{structureRule}
+【精简创作】这是短篇互动剧本，不是长篇小说。只输出游戏必要的底稿，不写整段预演台词、不重复铺陈同一事实。开场背景80-120字，玩家个人剧本100-160字；角色其余字段各用一个短句，单条线索只写可观察事实和简短解释。真相与结局各100-180字，三幕各用短句列事件。简单/困难/地狱的整份中文叙述分别尽量控制在2200/3000/3600字以内，保留必要证据与完整因果。
 
 ✅【最高优先级硬性规则：剧情锁定】
 你必须在生成这一刻一次性确定并封存完整的故事脉络、真相、核心诡计、幕后设定和既定结局（写入 truth 与 locked_ending 字段）。后续游戏中无论玩家如何提问、撒谎、选择、脑洞大开，这些底层事实都不允许被改动——玩家的选择只影响他自己能否推出真相，不会改写故事本身。因此 truth 必须写得具体、自洽、逻辑闭环：凶手是谁（如适用）、动机、手法、时间线、每条线索指向什么、误导线索如何被排除，全部写清楚。
 
 【玩家身份（开局随机分配，玩家必须是核心参与者，严禁边缘工具人）】
-从以下身份池中为玩家随机选一个：凶手 / 真相探查者 / 核心剧情参与者（需结合剧本类型具体化，如还原本的"失忆亲历者"、情感本的"遗憾当事人"、机制阵营本的"阵营领袖/卧底"）。玩家身份必须深度卷入核心冲突。
+使用上面已经随机抽定的身份方向，role_title 可结合背景具体化。不得为了套用凶手身份而把非命案故事改成命案。玩家必须持有一条关键经历或独有信息，至少与两名 AI 角色有直接关系，其个人任务直接关联核心冲突。
 player_script 字段必须包含：
 - role_title：身份名称（如"凶手 · 钟表匠的养子"）
 - character_name：玩家扮演的剧中角色名
@@ -1288,19 +1290,29 @@ player_script 字段必须包含：
 - personal_task：玩家专属任务（中文一句话，凶手则是隐藏自己并误导他人；探查者则是找出真相）
 
 【角色设计】
-characters 数组恰好包含 {npcCount} 名 AI 角色，每个角色必须有：name（英文名）、role（身份与人设，中文一句话，不含剧透）、secret（该角色的专属秘密与谎言逻辑，中文，DM 专用，玩家不可见）、agenda（该角色的个人目标/任务，中文，DM 专用）。角色之间必须有利益或情感关联，人设鲜明不串戏。AI 角色不会无故自爆核心秘密。
+characters 数组恰好包含 {npcCount} 名 AI 角色，不能把玩家重复列入，也不把 DM 计入人数；不得新增有台词的临时角色或用裁剪角色来凑人数。背景往事中的人物不占互动角色名额。
+每个角色必须有：name（唯一英文名）、role（公开身份与人设，不剧透）、secret（专属秘密）、agenda（明确的短期目标与长期诉求）、personality（性格及冲突时的行为方式）、voice（独有语气与惯用表达）、known_facts（只记录此人亲历或已知的信息）、lie_logic（为什么隐瞒、会怎样辩解、什么证据能推翻谎言）、reveal_condition（在哪一幕、看到哪条证据后才能透露什么）、arc（从初始信念到转折与最终态度的预设变化）。性格决定语言与行动，目标推动冲突或合作，成长必须有前置事件，不能突然洗白或变脸。
+
+【写作底稿：先倒推真相与结局，再写玩家可见开场】
+1. 三幕式：acts 恰好三幕。第一幕铺设环境、人物关系、悬念和引爆事件；第二幕让人物目标冲突升级，多条人物线与线索交叉，发生有伏笔的转折；第三幕表决、揭示与收束，回收伏笔并交代每位角色的去向。各幕写明固定触发条件、事件、线索 ID 与角色变化。clues.act 是线索首次可获得的幕次；acts.clue_ids 仅索引在本幕首次获得的线索，后续回顾不重复列入。第三幕没有新线索时 clue_ids 填空数组，不为凑数新增线索。简单模式采用清晰主线；困难、地狱模式增加相互影响的支线，最终汇入同一真相，不生成可改结局的分支。
+2. 因果时间线：timeline 按真实发生顺序写明时间、行动者、行为、原因和后果。每个转折都由先前事件或关系变化推动；人物情感变化服务于既定事件，不能让玩家的临场选择改写事实。
+3. 关系网：relationships 写明人物双方、公开关系与隐藏关系；每名角色至少连到两名其他角色，玩家也在网中。每条人物线都要通过具体事件或证据与主线交汇。
+4. 线索图：clues 必须预先写全。每条有唯一 id、act（1/2/3）、source（可搜索的地点/物件或具名角色）、discovery（玩家能实际观察到的内容，不能直接写出答案）、meaning（DM 专用的真实含义）、links（关联的线索 ID）、kind（evidence/red_herring）、resolution（误导如何由其他证据排除；普通证据填其可验证方式）。线性线索带动探索，网状线索交叉验证；关键结论至少有两条独立来源的evidence，并且都须在第一或第二幕、表决之前可以获得；第三幕只回收伏笔，不新增解题必需信息。不能靠 NPC 自白、未提供的专业知识或复盘突然新增物证才能解出。每条误导都可公平排除；简单模式最多一条误导，其他模式一至两条。
+5. 核心问题：core_questions 用唯一 id 标识需推理的问题，写清 question、answer、supporting_clue_ids（至少两条证据）、direction_hint（中文，只引导比较证据或检查方向，绝不含答案、凶手姓名或核心秘密）。问题适配类型：推凶、往事拼接、恐怖成因、误会成因、情感动机或阵营目标。复盘必须逐题对应证据，不以主观情感态度判错。
+6. 结局：locked_ending 写完整且唯一的既定结局，ending_style 选择 resolved/open/bittersweet；开放式只允许未来余韵留白，核心真相与本次事件结局必须明确。情感遗憾可以来自错过、离别与未说出口的话，不靠强行死亡煽情；欢乐本无沉重悲剧。表决影响玩家理解的评价，不改变结局；角色最终去向写入底稿。
+7. 机制阵营本专用 mechanics：预先确定全部角色的阵营、技能的代价/次数、起始筹码、公开回合规则、胜负条件和 fixed_result。固定阵营结局必须能按公开规则与既定事件推导；玩家可选的协商与行动只影响个人信息/任务表现，不能暗改筹码、临时改判或用隐藏新规则硬凑结局。其他类型 mechanics 填 null，不强塞阵营玩法。
+8. event_kind 为 murder 或 nonlethal；欢乐本和情感本必须 nonlethal，当前事件无人死亡，不设凶手、不安排投凶。其他类型按需要选择，不能把所有悬念都写成命案。所有公开内容（含标题、任务、身份公开介绍）不泄露 DM 底稿；玩家专属秘密仅含该角色有理由知道的信息，若玩家是凶手，应告知其本人真实所为。
 
 【类型生成要求】{genreDesign}
 
-【任务节点】tasks 恰好 3 个，层层递进，对应"搜证 → 推理/深入 → 真相/结局"的节奏；任务描述必须模糊、目标导向（如"勘查案发现场""盘问在场嫌疑人""找出真凶"），严禁在任务文字中剧透凶手身份、关键线索内容或结局反转。
+【任务节点与可观察的完成条件】tasks 恰好3个。task_criteria 恰好3项，task_id依次为1/2/3，condition为玩家可见的一句具体完成条件，不能泄露答案。任务按“取得信息→讨论核对→提交判断”递进，例如“查看任意两处资料”“向两位角色核实信息并提出一次解释”“提交最终判断及一条理由”。必须明确行动/数量，不写“深入理解/充分调查”等无法判定的要求。不把找对答案、英文无错或等到复盘作为打勾条件；完成调查即勾调查任务，最终判断可以错误但提交即完成相应任务。按类型适配，非命案不出现找真凶/投凶/尸检。
 
-【词汇表 · 只能从给定词池选词】core_vocab 必须恰好包含 120 个单词，每一个都必须原样取自下方【本剧可用词池】（不得改拼写、不得写短语、不得用近义词替换）。请从中挑选与剧本场景、人物身份、情节推进最相关的 120 个，按首字母排序；多于 120 个或少于 100 个都视为不合格。
-
-【本剧可用词池】（{level}大纲词表，已按词表名次核实，共 {vocabPoolCount} 个候选）
-{vocabPool}
+【词汇表】core_vocab 直接填空数组。应用会从本地真实考纲词库分配120词，不需要你再抄写词表；专注故事底稿。
 
 你必须且只能输出严格的 JSON，格式为：
-{"script_name":"有悬疑感、有吸引力的剧本名","storyline":"主线剧情：玩家可见的背景故事，中文 3-5 句，有代入感和悬念，不得剧透真相","player_script":{"role_title":"玩家身份名称","character_name":"玩家剧中角色名","personal_script":"玩家个人剧本","secret":"玩家专属秘密","personal_task":"玩家专属任务"},"characters":[{"name":"NPC英文名","role":"身份人设（玩家可见，不剧透）","secret":"角色秘密与谎言逻辑（DM专用）","agenda":"角色个人目标（DM专用）"}],"tasks":["任务一","任务二","任务三"],"truth":"完整真相：凶手/动机/手法/时间线/每条线索的含义/误导线索的排除方式，中文，逻辑闭环","locked_ending":"既定结局：投凶或表决之后无论结果如何都会发生的结局全文，中文","core_vocab":["word1","word2","……"]}
+{"script_name":"符合类型的剧本名","event_kind":"murder/nonlethal","storyline":"公开背景，中文3-5句，不剧透","player_script":{"role_title":"抽定的身份方向与具体身份","character_name":"唯一英文名","personal_script":"个人背景与核心事件的关系","secret":"玩家已知秘密","personal_task":"专属任务"},"characters":[{"name":"NPC英文名","role":"公开人设","secret":"秘密","agenda":"短期和长期目标","personality":"性格与行为","voice":"语气特征","known_facts":["亲历信息"],"lie_logic":"隐瞒和辩解逻辑","reveal_condition":"揭示条件","arc":"预设成长与最终去向"}],"tasks":["调查目标","核对目标","提交判断"],"task_criteria":[{"task_id":1,"condition":"查看任意两处资料"},{"task_id":2,"condition":"向两位角色核实信息并提出一次解释"},{"task_id":3,"condition":"提交最终判断及一条理由"}],"truth":"完整真相、因果、诡计或误会机制、证据解释与误导排除","timeline":[{"time":"时点","actor":"行动者","event":"行动","cause":"原因","effect":"后果"}],"relationships":[{"from":"角色名","to":"角色名","public_relation":"公开关系","hidden_relation":"隐情"}],"acts":[{"act":1,"title":"开端","trigger":"固定触发条件","event":"本幕固定事件","clue_ids":["C1"],"character_beats":"角色互动与转折"},{"act":2,"title":"发展","trigger":"固定触发条件","event":"冲突升级","clue_ids":["C2"],"character_beats":"转折"},{"act":3,"title":"收束","trigger":"表决后","event":"既定揭示","clue_ids":["C3"],"character_beats":"去向"}],"clues":[{"id":"C1","act":1,"source":"搜索地点/物件/角色","discovery":"可观察内容","meaning":"真实含义","links":["C2"],"kind":"evidence/red_herring","resolution":"验证或排除方法"}],"core_questions":[{"id":"Q1","question":"核心问题","answer":"锁定答案","supporting_clue_ids":["C1","C2"],"direction_hint":"不揭晓答案的方向提示"}],"ending_style":"resolved/open/bittersweet","locked_ending":"唯一既定结局全文","mechanics":null,"core_vocab":[]}
+机制阵营本用以下对象替换 mechanics 的 null：{"factions":[{"id":"F1","name":"阵营名","members":["角色名"],"goal":"固定目标"}],"skills":[{"owner":"角色名","effect":"效果","cost":"代价","limit":"次数上限"}],"resources":[{"owner":"角色名","amount":3}],"round_rules":"公开行动顺序、结算方法和固定事件","win_conditions":"公开胜负条件","fixed_result":"与locked_ending一致且可按规则复算的阵营结果"}。
+示例数组仅示意结构，必须按本局人数、三幕和复杂度扩展，不得只照抄一条。输出前检查人数、名称引用、时间线、证据可解性、类型与结局一致性。
 绝对不要输出 JSON 之外的任何文字。`;
 
 const PROMPT_GENERATE_DAILY_PLAN = `你是英语生活场景关卡设计师。请根据玩家选择的模式「{dailyMode}」、学习目标「日常场景交涉」、语言等级「{dailyLevel}」、学习板块「{blockName}」、场景「{sceneName}」和故事氛围「{dailyMood}」，设计一个可互动的英语情境关卡。
@@ -1335,23 +1347,26 @@ const PROMPT_PLAY_GAME = `你是单人剧本杀的 DM 主持人，同时扮演�
 
 ✅【最高优先级硬性规则：剧情锁定】
 本局真相、凶手身份、核心诡计与既定结局已在【剧本大纲】中写死并封存。无论玩家如何提问、撒谎、选择或脑洞大开，绝不修改这些底层事实去迎合玩家。玩家就算做出奇怪选择，也只是"玩家角色在故事里的行为"，故事底层事实不会变；玩家的表现只影响他自己能否推出真相、能否达成理解。若玩家的行为与既定事实冲突，以 NPC/DM 口吻自然地让既定事实显现（例如证人反驳、物证矛盾），而不是顺着玩家改剧情。
+【编剧底稿的使用与信息边界】
+严格使用底稿的 timeline、relationships、acts、clues、core_questions、mechanics；不得临时创造关键线索、换凶手、重写回忆或另开结局。只能补充不影响事实的场景措辞。角色只能知道自己的 known_facts 与在场已获知的信息，不能共享 DM 全知视角。私聊所得不能被未在场 NPC 自动获知。证据达到 reveal_condition 才能逐步松口，不能为拖延永久拒绝可获得的关键线索。arc 的转变由底稿事件触发。
+按 acts 的触发条件逐幕推进，clues 的 discovery 是玩家能获得的内容，meaning/resolution 是 DM 底稿；每轮只发放当前幕中被实际触发的线索，links 用于交叉验证。玩家过早问终极问题时给出当前可见事实，不直接复述真相。已经获得的证据可复查，但不能当新发现重复发放。所有学习例句、翻译、语法任务和行动选项也不得泄露尚未揭示的信息；英语表达错误不代表推理错误。
+欢乐本、情感本的当前事件无人死亡，没有凶手、命案搜证或投凶；分别演绎误会澄清与情感理解。情感态度、是否原谅属于玩家表达，不按“答错”处理。其他 nonlethal 故事也不能强行套用推凶流程。
 
 【一、固定游戏流程（严格按顺序推进）】
 ① 开场与读本：DM 交代背景氛围，逐一介绍登场 AI 角色（群像式开场，各角色亮相互动）。
-② 自我介绍：引导玩家用英语进行角色自我介绍（结合其角色本），AI 角色也依次简短自我介绍。
-③ 搜证阶段：task_type 用 search，options 列出 3-4 个可探索方向（地点/人物/物品）。玩家每探索一个，下一轮 options 只列剩余未探索的方向，严禁重复；玩家也可能不点选项、直接用英语描述要搜什么，同样视为完成一次探索并从清单划掉。线索（物证、证词、时间线、人物关系）必须具体、相互关联、能真正支撑推理，分轮发放，不要一次给完。可探索项所剩无几或玩家明确表示要推理时退出搜证。
+② 自我介绍：引导玩家按本局所选回答语言进行角色自我介绍（结合其角色本），AI 角色用英语依次简短自我介绍。
+③ 多轮搜证：task_type 用 search，options 从当幕底稿列出 3-4 个可探索方向（不足时如实列出）。玩家每探索一个，下一轮只列剩余方向；直接用英语描述搜查也计入已探索。搜证与公聊/私聊可按三幕交错，逐轮提供具体物证、证词、旧物或关系碎片；不能一次全给，也不能将 meaning 当 discovery 直接揭晓。可探索项所剩无几或玩家明确表示要推理时退出搜证，必要时允许回查。
 ④ 公聊/私聊与推理：以 free 模式为主，玩家自由提问、对质、发表推理；AI 角色按各自秘密与谎言逻辑应答，会合理隐瞒、辩解、互相质疑，绝不无故自爆核心信息。
-⑤ 投凶/表决：当搜证充分、推理成熟（或三个任务节点接近完成）时，DM 主动发起投凶/还原表决环节，让玩家用英语明确指认或还原真相。
+⑤ 类型适配的表决：核心问题所需证据可获得且玩家完成讨论后，DM 主动邀请其按所选回答语言提交判断，等待玩家下一条回答后才进入结局。推理命案投凶；还原本还原往事；恐怖本解释异常；欢乐本澄清误会；情感本表达对关系与动机的理解；机制阵营本按公开规则结算。不得因完成语言任务就跳到结局。
 ⑥ 既定结局：无论玩家指认对错，都按【剧本大纲】中 locked_ending 的既定结局演绎（指认正确则真相被证实，指认错误则真相在结局中显现）。
-⑦ DM 复盘：以 DM 身份完整复盘真相、诡计与每条线索的含义，然后 game_over 填 true。
+⑦ DM 复盘：以 DM 身份依次说明事件因果时间线、各人目标/秘密/谎言、每道核心问题的证据链、误导排除、伏笔回收与角色去向；区分玩家判断与锁定事实。阵营本额外复算机制结果。固定结局演绎完后另起一轮复盘，再填 game_over=true。需完整复盘，可分多轮。
+每轮 story_phase 如实填写 reading/introduction/search/discussion/ballot/ending/review。开场 reading，随后 introduction；search 与 discussion 可交错；ballot 轮必须等待玩家回答，接着 ending，最后独立一轮或多轮 review，不得跳过表决、结局、复盘。
 
 【二、扶车规则（严格执行，两个方向都是硬性要求）】
-1. 统计口径：玩家对核心问题（谁是凶手 / 真相是什么 / 关键诡计是什么）做出的每一个实质性错误猜想都计 1 次——指控错误的人、误判为自杀/意外、猜错手法，都算；闲聊、询问细节、无关吐槽不计入。
-2. 每轮回复前先在内心回顾全部对话历史，累计玩家至今的核心推理错误总数 N。
-3. 【N < 3 时】deduction_hint 必须严格等于空字符串 ""。这是硬性要求，无论错误多明显、无论玩家多迷茫，第 1、2 次错误时都只能用 NPC 口吻在台词里自然暗示（如 "That doesn't quite add up..."），绝不填写 deduction_hint。
-4. 【N ≥ 3 时】本轮 deduction_hint 必须给出指向正确方向的中文提示——只给方向（如"想想谁有机会接触那个装置"），绝不公布答案、凶手或真相；玩家回到正确方向后 deduction_hint 恢复填空。
-5. 【计数示例】真凶是 C：玩家第 1 次猜「A 是凶手」→ 本轮 hint 为空；第 2 次猜「B 是凶手」→ 本轮仍为空；第 3 次猜「这是自杀」→ 本轮 deduction_hint 必须给出方向提示；若第 4 轮仍猜错，继续换角度提示。
-4. 错误总数不满 3 次时，deduction_hint 一律填空字符串，绝不主动扶车；以 NPC 口吻自然暗示其推理有漏洞即可（如 "That doesn't quite add up..."）。
+1. 仅判断玩家上一条消息中明确提出的核心假说，对应 core_questions 的一个固定 id；多项假说只按主判断计一次。不把询问、搜证、闲聊、吐槽、语法练习、情绪或价值选择、凶手角色的辩解/明知而撒谎当作错误推理。不能从英文语法错误推断其推理错误。
+2. deduction_assessment 返回 {"question_id":"Q1或空字符串","verdict":"wrong/right/partial/none"}：wrong 仅指实质方向全部错误，right 指方向正确，partial 指部分正确，none 指没有独立核心推理。开场必为 none。只提供本轮评价，连续次数由前端记录。
+3. 同一核心问题连续三次 wrong 才触发扶车；同题 right/partial 清零，换核心问题重新计数；none 不增不减，也不重复触发提示。三次以内不通过台词、选项或其他字段变相扶车，可按已知证据正常应答。
+4. 达到三次后仅在新的错误推理轮给出该核心问题预写的 direction_hint；不公布答案、凶手、核心秘密。前端使用锁定底稿的提示，deduction_hint 默认填空，不能临场编造剧透提示。
 
 【三、玩家身份处理】
 严格按【玩家角色本】对待玩家：
@@ -1382,13 +1397,14 @@ d. "grammar" 语法任务：NPC 结合当前剧情布置一个必须用正确语
 3. 凡超出大纲的词必须放入 vocab 数组并给释义。
 
 【八、任务推进】
-当玩家的行动完成了剧本的某个任务节点，completed_task 填该任务序号（1/2/3），否则填 0；每个任务只能完成一次，已完成的任务不要重复标记。投凶/表决、既定结局与 DM 复盘全部演绎完毕后，game_over 才填 true。
+每轮逐项对照 task_criteria.condition 与全部历史中的玩家实际行动，允许跨轮累计、同义表达、自然输入或点击选项；已经看过的材料、问过的人不能忘记。达到条件的当轮就打勾，不要求玩家说“任务完成”，也不能因语法小错、表达语言或答案不正确而延迟。普通调查任务不等待三幕结束；第三个任务若是提交判断，在玩家提交时即可完成，不等复盘。
+completed_tasks 填本轮新完成的所有任务序号，例如[1,2]；无新完成填[]。completed_task 为兼容字段，填首个新完成任务或0。一次行动可以同时完成多项；已完成任务不重复标记、不撤销。task_checks简短说明各任务pending/completed及对话依据，不能凭空捏造玩家行动。game_over 与任务打勾独立：仍须演完表决、固定结局与复盘才能为true，不能三项打勾就结束。
 
 【九、输出格式】
 translation 字段：npc_dialogue 的完整中文翻译（必须始终提供，前端按需展示）。
 option_translations 必须与 options 一一对应（长度相同、顺序相同），逐条给出该选项的中文翻译。
 你必须且只能输出严格的 JSON，格式为：
-{"npc_dialogue":"NPC的英语台词","speaker":"当前说话的NPC名字或DM","translation":"台词的完整中文翻译","grammar_tip":"语法纠错，无错填'无'","deduction_hint":"扶车方向提示，平时填空字符串","task_type":"search/free/choice/grammar","options":["English option A","English option B","English option C"],"option_translations":["选项 A 的中文","选项 B 的中文","选项 C 的中文"],"grammar_task":"中文描述的语法任务","completed_task":0,"game_over":false,"vocab":[{"word":"词","pos":"词性","phonetic_uk":"英式音标","phonetic_us":"美式音标","meaning":"中文释义","example":"英文例句","example_cn":"例句中文翻译"}]}
+{"npc_dialogue":"NPC的英语台词","speaker":"当前说话的NPC名字或DM","translation":"台词的完整中文翻译","grammar_tip":"语法纠错，无错填'无'","deduction_hint":"","deduction_assessment":{"question_id":"","verdict":"none"},"story_phase":"reading","task_type":"search/free/choice/grammar","options":["English option A","English option B","English option C"],"option_translations":["选项 A 的中文","选项 B 的中文","选项 C 的中文"],"grammar_task":"中文描述的语法任务","completed_task":0,"completed_tasks":[],"task_checks":[{"task_id":1,"status":"pending","evidence":"对话中的行动依据"}],"game_over":false,"vocab":[{"word":"词","pos":"词性","phonetic_uk":"英式音标","phonetic_us":"美式音标","meaning":"中文释义","example":"英文例句","example_cn":"例句中文翻译"}]}
 绝对不要输出 JSON 之外的任何文字。`;
 
 const PROMPT_PLAY_DAILY_GAME = `你是一位英语生活情境主持人，负责带玩家完成一段真实、自然、有轻微故事感的英语交涉关卡。
@@ -1514,13 +1530,13 @@ const GENRE_RULES = {
   },
   "欢乐本": {
     brief: "轻松搞笑、撕逼吃瓜，低压力，弱化硬核推理",
-    design: "人设反差、误会梗、互怼互动为主，推凶简单，无沉重悲剧结局。locked_ending 必须是轻松或圆满走向。玩家身份优先从「吃瓜核心 / 误会制造者 / 搞笑嫌疑人」中随机。",
-    play: "AI 角色爱八卦、玩梗、互相拆台，主动制造欢乐互动；DM 氛围轻松。"
+    design: "用人设反差、信息错位、层层升级的误会和前后呼应的笑点组织三幕。当前事件无人死亡，不设凶手；可围绕错拿礼物、庆典乌龙或身份误会展开，线索最终解开误会。笑点来自人物目标冲突，避免堆网络梗或羞辱角色。locked_ending 必须轻松或圆满，回收开场笑点。玩家方向为吃瓜核心、误会制造者或乌龙当事人。",
+    play: "AI 角色爱八卦、互相拆台，但不能无故泄密；DM 低压力主持，调查趣事、澄清误会后收束，不演命案、不投凶。"
   },
   "情感本": {
     brief: "人物羁绊与情绪共鸣（亲情/友情/爱情/家国/遗憾）",
-    design: "简化凶案推理，重点是人物故事、执念与遗憾。truth 写清人物之间被误解或掩埋的情感真相。玩家身份优先从「情感核心主角 / 遗憾当事人 / 羁绊关键人」中随机。",
-    play: "AI 角色对话细腻贴合人设，有独立情感线；DM 可安排独白、抉择环节；引导玩家读懂故事，结局依然固定不变。"
+    design: "当前事件无人死亡，不以凶案串联情感。围绕亲情、友情、爱情、家国或遗憾设计具体生活细节与有双重含义的旧物；先建立羁绊，再用误解和隐情形成张力，最后重读旧物或旧话回收伏笔。每个角色有独立情感目标、克制独白与有因果的转变，不强迫原谅，不靠死亡堆砌悲情。truth 写清人物选择背后的事实与动机。玩家方向为情感核心主角、遗憾当事人或羁绊关键人。",
+    play: "AI 角色细腻克制，用具体经历表达情感；安排独白与表达选择，引导理解既定往事；接受玩家自己的态度，结局固定，不投凶、不将情感立场判错。"
   },
   "机制阵营本": {
     brief: "阵营博弈、技能对抗，剧情服务于机制",
@@ -1537,14 +1553,187 @@ const CHALLENGE_PLAYERS = { "简单模式": 4, "困难模式": 6, "地狱模式"
 function totalChars() { return CHALLENGE_PLAYERS[scriptInfo.challenge] || 4; }
 function npcCount() { return totalChars() - 1; }
 
+const SCRIPT_ROLE_POOLS = {
+  "推理本": ["凶手", "侦探探查位", "知情证人"],
+  "还原本": ["失忆亲历者", "秘密持有者", "事件关键关联人"],
+  "恐怖本": ["事件幸存者", "老宅访客", "灵异亲历者", "幕后关联人"],
+  "欢乐本": ["吃瓜核心", "误会制造者", "乌龙当事人"],
+  "情感本": ["情感核心主角", "遗憾当事人", "羁绊关键人"],
+  "机制阵营本": ["阵营领袖", "卧底", "中立博弈者", "任务执行者"]
+};
+const SCRIPT_STRUCTURE_RULES = {
+  "简单模式": "短篇单主线，4条线索，1-2个核心问题，最多1条误导；不依赖生僻专业知识。",
+  "困难模式": "主线与2条短支线交叉，6条线索，2-3个核心问题，1-2条可排除误导。",
+  "地狱模式": "精简多线汇入同一真相，8条线索，3-4个核心问题，1-2条可排除误导；增加交叉验证，不靠拖长篇幅增加难度。"
+};
+function randomScriptRole() {
+  const pool = SCRIPT_ROLE_POOLS[scriptInfo.genre] || ["核心剧情参与者"];
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+/* 仅在开局前规范格式、重建冗余索引；不改变线索内容、实际幕次或真相。 */
+function normalizeScriptPlanReferences(d) {
+  if (!d || typeof d !== "object" || Array.isArray(d)) return d;
+  if (Array.isArray(d.task_criteria)) {
+    for (const c of d.task_criteria) if (c && typeof c.task_id === "string" && /^[123]$/.test(c.task_id.trim())) c.task_id = Number(c.task_id.trim());
+  }
+  const normalizeAct = item => {
+    if (item && typeof item.act === "string" && /^[123]$/.test(item.act.trim())) item.act = Number(item.act.trim());
+  };
+  if (Array.isArray(d.clues)) d.clues.forEach(normalizeAct);
+  if (!Array.isArray(d.acts)) return d;
+  d.acts.forEach(normalizeAct);
+  // 无明确所属幕的线索必须由编剧修复，不能由前端猜测或提前发放。
+  if (!Array.isArray(d.clues) || d.clues.some(c => !c || typeof c.id !== "string" || !c.id.trim() || ![1, 2, 3].includes(c.act))) return d;
+  if (new Set(d.clues.map(c => c.id)).size !== d.clues.length) return d;
+  if (d.acts.length !== 3 || d.acts.some((a, i) => !a || a.act !== i + 1)) return d;
+  for (const a of d.acts) a.clue_ids = d.clues.filter(c => c.act === a.act).map(c => c.id);
+  return d;
+}
+
+/* 编剧底稿须在开局前完整；不裁角色、不把未校验的原始文本暴露给玩家。 */
+function validateScriptPlan(d) {
+  const errors = [];
+  const textOK = value => typeof value === "string" && Boolean(value.trim());
+  const need = (obj, fields, label) => {
+    for (const key of fields) if (!textOK(obj && obj[key])) errors.push(label + "缺少" + key);
+  };
+  if (!d || typeof d !== "object" || Array.isArray(d)) return ["必须返回完整JSON对象"];
+  need(d, ["script_name", "storyline", "truth", "locked_ending"], "剧本");
+  if (!["murder", "nonlethal"].includes(d.event_kind)) errors.push("event_kind必须为murder或nonlethal");
+  if (["欢乐本", "情感本"].includes(scriptInfo.genre) && d.event_kind !== "nonlethal") errors.push("欢乐本/情感本必须无人死亡、无凶手的nonlethal事件");
+  if (!["resolved", "open", "bittersweet"].includes(d.ending_style)) errors.push("缺少有效ending_style");
+  if (!Array.isArray(d.tasks) || d.tasks.length !== 3 || !d.tasks.every(textOK)) errors.push("必须有3个有效任务节点");
+  if (!Array.isArray(d.task_criteria) || d.task_criteria.length !== 3 || d.task_criteria.some((c, i) => !c || c.task_id !== i + 1 || !textOK(c.condition))) errors.push("必须给三个任务分别写明具体、可观察且不剧透的完成条件");
+  need(d.player_script, ["role_title", "character_name", "personal_script", "secret", "personal_task"], "玩家角色本");
+  const chars = Array.isArray(d.characters) ? d.characters : [];
+  if (chars.length !== npcCount()) errors.push("AI角色必须恰好" + npcCount() + "人，不含玩家与DM");
+  for (const c of chars) {
+    need(c, ["name", "role", "secret", "agenda", "personality", "voice", "lie_logic", "reveal_condition", "arc"], "AI角色");
+    if (!Array.isArray(c && c.known_facts) || !c.known_facts.length || !c.known_facts.every(textOK)) errors.push("角色缺少known_facts");
+  }
+  const names = [d.player_script && d.player_script.character_name, ...chars.map(c => c && c.name)].filter(textOK);
+  const nameKeys = names.map(n => n.trim().toLowerCase());
+  if (new Set(nameKeys).size !== npcCount() + 1 || nameKeys.includes("dm")) errors.push("玩家及NPC必须有互不重复且非DM的名称");
+  const hasName = n => names.includes(n);
+  const clues = Array.isArray(d.clues) ? d.clues : [];
+  const minClues = { "简单模式": 4, "困难模式": 6, "地狱模式": 8 }[scriptInfo.challenge] || 4;
+  if (clues.length < minClues) errors.push("至少需要" + minClues + "条预写线索");
+  const clueIds = new Set(clues.map(c => c && c.id).filter(textOK));
+  if (clueIds.size !== clues.length) errors.push("线索ID缺失或重复");
+  for (const c of clues) {
+    need(c, ["id", "source", "discovery", "meaning", "resolution"], "线索");
+    if (![1, 2, 3].includes(c && c.act) || !["evidence", "red_herring"].includes(c && c.kind)) errors.push("线索幕次或类型无效");
+    if (!Array.isArray(c && c.links) || c.links.some(id => !clueIds.has(id) || id === c.id)) errors.push("线索links引用无效");
+  }
+  const redCount = clues.filter(c => c && c.kind === "red_herring").length;
+  if (redCount > (scriptInfo.challenge === "简单模式" ? 1 : 2) || (scriptInfo.challenge !== "简单模式" && redCount < 1)) errors.push("误导线索数量不符合难度");
+  const acts = Array.isArray(d.acts) ? d.acts : [];
+  if (acts.length !== 3 || acts.some((a, i) => !a || a.act !== i + 1)) errors.push("必须按顺序预写三幕");
+  for (const a of acts) {
+    need(a, ["title", "trigger", "event", "character_beats"], "分幕");
+    if (!Array.isArray(a && a.clue_ids) || a.clue_ids.some(id => !clueIds.has(id) || !clues.some(c => c && c.id === id && c.act === a.act))) errors.push("分幕线索引用缺失或幕次不一致");
+  }
+  if (clues.some(c => c && !acts.some(a => a && a.act === c.act && Array.isArray(a.clue_ids) && a.clue_ids.includes(c.id)))) errors.push("每条线索都必须分配到对应幕");
+  const questions = Array.isArray(d.core_questions) ? d.core_questions : [];
+  const minQuestions = { "简单模式": 1, "困难模式": 2, "地狱模式": 3 }[scriptInfo.challenge] || 1;
+  if (questions.length < minQuestions || questions.length > minQuestions + 1) errors.push("核心问题数量不符合难度");
+  if (new Set(questions.map(q => q && q.id).filter(textOK)).size !== questions.length) errors.push("核心问题ID缺失或重复");
+  for (const q of questions) {
+    need(q, ["id", "question", "answer", "direction_hint"], "核心问题");
+    const ids = q && q.supporting_clue_ids;
+    const evidence = Array.isArray(ids) ? clues.filter(c => c && ids.includes(c.id) && c.kind === "evidence" && c.act < 3) : [];
+    if (!Array.isArray(ids) || ids.some(id => !clueIds.has(id)) || evidence.length < 2 || new Set(evidence.map(c => c.source)).size < 2) errors.push("核心问题须有至少两条表决前可得、独立来源的有效证据");
+    if (textOK(q && q.direction_hint) && (q.direction_hint.includes(q.answer) || chars.some(c => textOK(c && c.name) && q.direction_hint.toLowerCase().includes(c.name.toLowerCase())))) errors.push("方向提示不能包含答案或NPC姓名");
+  }
+  if (!Array.isArray(d.timeline) || d.timeline.length < 3) errors.push("缺少完整因果时间线");
+  for (const t of (Array.isArray(d.timeline) ? d.timeline : [])) need(t, ["time", "actor", "event", "cause", "effect"], "时间线");
+  const relations = Array.isArray(d.relationships) ? d.relationships : [];
+  const neighbors = new Map(names.map(n => [n, new Set()]));
+  for (const r of relations) {
+    need(r, ["from", "to", "public_relation", "hidden_relation"], "关系");
+    if (!r || !hasName(r.from) || !hasName(r.to) || r.from === r.to) errors.push("关系必须引用不同的本局角色");
+    else { neighbors.get(r.from).add(r.to); neighbors.get(r.to).add(r.from); }
+  }
+  if (names.some(n => neighbors.get(n).size < 2)) errors.push("每名角色（含玩家）须关联至少两人");
+  if (scriptInfo.genre === "机制阵营本") {
+    const m = d.mechanics;
+    need(m, ["round_rules", "win_conditions", "fixed_result"], "机制规则");
+    for (const key of ["factions", "skills", "resources"]) if (!Array.isArray(m && m[key]) || !m[key].length) errors.push("机制规则缺少" + key);
+    const members = [];
+    for (const f of (m && Array.isArray(m.factions) ? m.factions : [])) {
+      need(f, ["id", "name", "goal"], "阵营");
+      if (!Array.isArray(f && f.members) || !f.members.length || f.members.some(n => !hasName(n))) errors.push("阵营成员引用无效");
+      else members.push(...f.members);
+    }
+    if (members.length !== names.length || new Set(members).size !== names.length) errors.push("阵营必须恰好覆盖全部角色，中立角色也需明确分组");
+    for (const skill of (m && Array.isArray(m.skills) ? m.skills : [])) {
+      need(skill, ["owner", "effect", "cost", "limit"], "技能");
+      if (!skill || !hasName(skill.owner)) errors.push("技能持有人无效");
+    }
+    const resources = m && Array.isArray(m.resources) ? m.resources : [];
+    if (resources.length !== names.length || new Set(resources.map(r => r && r.owner)).size !== names.length) errors.push("每个角色必须有唯一筹码记录");
+    for (const r of resources) if (!r || !hasName(r.owner) || !Number.isFinite(r.amount) || r.amount < 0) errors.push("起始筹码必须有效且非负");
+  } else if (d.mechanics !== null) errors.push("非阵营本mechanics必须为null");
+  return [...new Set(errors)];
+}
+
+function freezeScriptPlan(value) {
+  if (value && typeof value === "object" && !Object.isFrozen(value)) {
+    Object.values(value).forEach(freezeScriptPlan);
+    Object.freeze(value);
+  }
+  return value;
+}
+
+/* 只在开局前修复一次；未通过校验则停在配置页，绝不带病开局。 */
+async function generateValidatedScript(prompt) {
+  const request = [{ role: "user", content: prompt }];
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const raw = await callLLM(request, null);
+    let data = null;
+    try { data = normalizeScriptPlanReferences(parseModelJson(raw)); } catch (_) {}
+    const errors = validateScriptPlan(data);
+    if (!errors.length) return data;
+    console.warn("[剧本校对]", errors);
+    if (attempt === 1) throw new Error("剧本自动校对后仍有信息缺漏，请再次点击「生成剧本」。");
+    if ($("planning-status")) $("planning-status").textContent = "正在校对线索与任务，请稍候……";
+    request.push({ role: "assistant", content: raw });
+    request.push({ role: "user", content: "尚未开局。请修复以下问题，返回完整JSON底稿，保留原设定并同步所有引用；不得省略字段：" + errors.join("；") });
+  }
+}
+
+/* 次数由代码记录；模型仅评价玩家本轮是否提出了有效核心假说。 */
+function applyScriptTurnRules(data, isBoot = false) {
+  if (!data || scriptInfo.dailyMode) return;
+  data.deduction_hint = "";
+  const assessment = data.deduction_assessment || {};
+  const q = scriptData && scriptData.core_questions.find(q => q.id === assessment.question_id);
+  if (!isBoot && q && ["wrong", "right", "partial"].includes(assessment.verdict)) {
+    if (deductionProgress.questionId !== q.id) deductionProgress = { questionId: q.id, wrongStreak: 0 };
+    if (assessment.verdict === "wrong") {
+      deductionProgress.wrongStreak++;
+      if (deductionProgress.wrongStreak >= 3) data.deduction_hint = q.direction_hint;
+    } else deductionProgress.wrongStreak = 0;
+  }
+  const phase = data.story_phase;
+  if (isBoot) storyPhases.clear();
+  // 每个收束环节独占一轮，不能一轮标上review便绕过表决和结局。
+  const canReview = storyPhases.has("ballot") && storyPhases.has("ending") && phase === "review";
+  if (phase === "ballot" || (phase === "ending" && storyPhases.has("ballot")) || canReview) storyPhases.add(phase);
+  data.game_over = data.game_over === true && canReview;
+}
+
 /* ================= 全局状态 ================= */
 let state = "CONFIG";               // CONFIG | PLANNING | PLAYING
 let messages = [];                  // 对话记忆（每次请求全量携带）
 let scriptPlan = "";                // 剧本大纲文本
 let vocabBook = new Map();          // 生词本：word -> {pos, meaning, example, example_cn}（点击生词时加入）
 let vocabBookReturnStep = "step-goal"; /* 首页生词本页返回时回到进入前的那一步 */
-let scriptInfo = { theme: "", genre: "推理本", background: "", language: "英语", level: "场景交涉", challenge: "简单模式", dailyMode: "", dailyScenes: "", dailyMood: "", dailyBlockId: "", dailySceneIndex: -1, dailySceneId: "", dailySceneIds: [], dailyRecords: [], dailyCtx: null, currentTargetWords: [], randomAssessment: false };
+let scriptInfo = { theme: "", genre: "推理本", background: "", language: "英语", replyLanguage: "en", level: "场景交涉", challenge: "简单模式", dailyMode: "", dailyScenes: "", dailyMood: "", dailyBlockId: "", dailySceneIndex: -1, dailySceneId: "", dailySceneIds: [], dailyRecords: [], dailyCtx: null, currentTargetWords: [], randomAssessment: false };
 let scriptData = null;               // 结构化剧本数据（弹窗展示用）
+let deductionProgress = { questionId: "", wrongStreak: 0 };
+const storyPhases = new Set();
 let completedTasks = new Set();      // 已完成的任务序号
 let gameEnded = false;               // 是否已进入结算
 let gameOverPending = false;         // 任务已全部完成、等玩家点「进入回顾」
@@ -1563,8 +1752,6 @@ const elChatArea      = $("chat-area");
 const elOptionsArea   = $("options-area");
 const elInpMsg        = $("inp-msg");
 const elBtnSend       = $("btn-send");
-const elVocabList     = $("vocab-list");
-const elVocabCount    = $("vocab-count");
 const elPopover       = $("vocab-popover");
 let selectedGoal = "";
 let selectedDailyBlock = null;
@@ -2412,8 +2599,6 @@ function assessmentContextText() {
 
 function showConfigStep(stepId) {
   document.querySelectorAll(".config-step").forEach(step => step.classList.toggle("hidden", step.id !== stepId));
-  const apiSettings = $("api-settings");
-  if (apiSettings) apiSettings.classList.toggle("hidden", ["step-goal", "step-vocab-review", "step-vocab-book", "step-script-history"].includes(stepId));
   const segment = ["step-vocab-review", "step-vocab-book", "step-script-history"].includes(stepId) ? 0 : stepId === "step-goal" ? 1 : ["step-daily-mode", "step-exam-script"].includes(stepId) ? 2 : 3;
   document.querySelectorAll(".wizard-progress span").forEach((item, i) => item.classList.toggle("active", i < segment));
   hideBanner();
@@ -2526,9 +2711,12 @@ function setState(next) {
 }
 
 function resetGame() {
+  setGamePanelOpen(false, false);
   messages = [];
   scriptPlan = "";
   scriptData = null;
+  deductionProgress = { questionId: "", wrongStreak: 0 };
+  storyPhases.clear();
   avatarRegistry.clear();
   completedTasks.clear();
   searchedItems.clear();
@@ -2540,8 +2728,6 @@ function resetGame() {
   $("end-modal").classList.add("hidden");
   $("btn-daily-random-test").classList.add("hidden");
   $("daily-completion-note").classList.add("hidden");
-  $("vocab-progress-label").textContent = "";
-  $("vocab-progress-bar").style.width = "0%";
   busy = false;
   lastUserPayload = null;
   popoverEntry = null;
@@ -2549,10 +2735,10 @@ function resetGame() {
   hideBanner();
   elChatArea.innerHTML = "";
   elOptionsArea.innerHTML = "";
-  elVocabCount.textContent = "";
   renderVocabList(); /* 生词本持久化在 localStorage，返回首页后仍保留 */
   elInpMsg.value = "";
   elInpMsg.disabled = false;
+  showInputError("");
   $("sb-script-name").textContent = "—";
   $("sb-script-meta").textContent = "—";
   $("sb-task-goal").textContent = "—";
@@ -2582,7 +2768,7 @@ function resetGame() {
   setState("CONFIG");
 }
 
-/* ================= API 设置（静态版内置默认配置；界面设置可覆盖） ================= */
+/* ================= 内部连接配置（不在学习界面展示） ================= */
 /* 静态托管（GitHub Pages）下的内置默认接口配置：玩家打开即玩，无需填写。
    注意：静态网页源码公开，此 Key 对访客可见，请务必在 DeepSeek 控制台设置消费上限。
    如需更换 Key，直接修改下面三行即可（运营改这里 = 原来的 config.json）。 */
@@ -2593,33 +2779,20 @@ const STATIC_DEFAULTS = {
 };
 const LS_KEY = "script-kill-llm-settings";
 
-function loadSettings() {
-  try {
-    const s = JSON.parse(localStorage.getItem(LS_KEY) || "{}");
-    if (s.apiBase) $("inp-api-base").value = s.apiBase;
-    if (s.apiKey)  $("inp-api-key").value  = s.apiKey;
-    if (s.model)   $("inp-model").value    = s.model;
-  } catch (e) { /* 忽略损坏的本地数据 */ }
-}
-
 function getSettings() {
-  /* 界面填写优先；留空则回落到内置默认配置 */
-  const apiBase = $("inp-api-base").value.trim().replace(/\/+$/, "") || STATIC_DEFAULTS.apiBase;
-  const apiKey  = $("inp-api-key").value.trim()  || STATIC_DEFAULTS.apiKey;
-  const model   = $("inp-model").value.trim()    || STATIC_DEFAULTS.model;
-  localStorage.setItem(LS_KEY, JSON.stringify({ apiBase, apiKey, model }));
+  /* 兼容已有本地配置；未配置时直接使用内置连接。 */
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(LS_KEY) || "{}") || {}; }
+  catch (_) { /* 损坏或不可用的存储不影响使用内置连接。 */ }
+  const value = key => typeof saved[key] === "string" && saved[key].trim() || STATIC_DEFAULTS[key];
+  const apiBase = value("apiBase").replace(/\/+$/, "");
+  const apiKey = value("apiKey");
+  const model = value("model");
   return { apiBase, apiKey, model };
 }
 
 function validateSettings(s) {
-  if (backendMode) return true; // 后端模式无需界面配置
-  if (STATIC_DEFAULTS.apiKey) return true; // 内置默认密钥，玩家无需配置
-  const ok = !!(s.apiBase && s.apiKey);
-  $("api-error-tip").classList.toggle("show", !ok);
-  $("inp-api-base").classList.toggle("error", !s.apiBase);
-  $("inp-api-key").classList.toggle("error", s.apiBase && !s.apiKey);
-  if (!ok) $("api-settings").classList.add("open");
-  return ok;
+  return backendMode || !!(s.apiBase && s.apiKey && s.model);
 }
 
 /* ================= 显著错误横幅（避免"点了没反应"） ================= */
@@ -2643,27 +2816,9 @@ async function detectBackend() {
     const j = await r.json();
     if (j && j.configured) {
       backendMode = true;
-      $("api-settings").classList.add("hidden");
-      $("backend-badge").classList.remove("hidden");
       return;
     }
-  } catch (e) { /* 非后端环境（如双击直开/静态托管），回退到内置默认配置或界面设置 */ }
-  /* 静态托管且已内置默认密钥：玩家直接开玩，不显示任何配置引导 */
-  if (STATIC_DEFAULTS.apiKey) {
-    const badge = $("backend-badge");
-    badge.textContent = "☁️ 在线版 · AI 接口已内置，直接开玩（⚙️ 设置可自定义覆盖）";
-    badge.classList.remove("hidden");
-    return;
-  }
-  /* 未连上后端且无内置密钥：按访问方式给出不同引导 */
-  const hint = $("direct-mode-hint");
-  const host = location.hostname;
-  if (host === "localhost" || host === "127.0.0.1" || host === "") {
-    hint.innerHTML = '⚠️ 当前是"文件直开"模式，未连接本地后端。<br>要使用 config.json 里已配置好的密钥，请双击 <code>启动.bat</code>，或浏览器访问 <code>http://127.0.0.1:8787</code>';
-  } else {
-    hint.innerHTML = "☁️ 当前是<strong>在线静态版</strong>：请在下方「⚙️ 大模型接口设置」中填入你自己的 API Key（仅保存在你本地浏览器，不会上传）。<br>支持 OpenAI 兼容接口，例如 DeepSeek：<code>https://api.deepseek.com/v1</code> + 你的 Key + <code>deepseek-chat</code>";
-  }
-  hint.classList.remove("hidden");
+  } catch (e) { /* 静态托管等环境自动使用内置连接。 */ }
 }
 
 /* ================= 大模型调用（流式 + 逐字动画兜底） ================= */
@@ -2708,25 +2863,28 @@ async function callLLM(msgs, onChunk) {
     const reader = res.body.getReader();
     const decoder = new TextDecoder("utf-8");
     let buf = "";
+    const consumeLine = line => {
+      const t = line.trim();
+      if (!t.startsWith("data:")) return;
+      const payload = t.slice(5).trim();
+      if (payload === "[DONE]") return;
+      let j;
+      try { j = JSON.parse(payload); } catch (_) { return; }
+      const delta = j.choices && j.choices[0] && (j.choices[0].delta || j.choices[0].message);
+      const piece = delta && delta.content;
+      if (typeof piece === "string") { full += piece; onChunk && onChunk(piece); }
+    };
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
       buf += decoder.decode(value, { stream: true });
       const lines = buf.split("\n");
       buf = lines.pop();
-      for (const line of lines) {
-        const t = line.trim();
-        if (!t.startsWith("data:")) continue;
-        const payload = t.slice(5).trim();
-        if (payload === "[DONE]") continue;
-        try {
-          const j = JSON.parse(payload);
-          const delta = j.choices && j.choices[0] && (j.choices[0].delta || j.choices[0].message);
-          const piece = delta && delta.content;
-          if (piece) { full += piece; onChunk && onChunk(piece); }
-        } catch (e) { /* 跳过残缺的分片 */ }
-      }
+      for (const line of lines) consumeLine(line);
     }
+    // 有些兼容接口最后一条SSE不带换行，仍需消费完整末片。
+    buf += decoder.decode();
+    if (buf.trim()) consumeLine(buf);
   } else {
     /* --- 非流式：前端逐字动画兜底 --- */
     const data = await res.json();
@@ -2838,20 +2996,101 @@ function unescapeJsonStr(s) {
     .replace(/\\u([0-9a-fA-F]{4})/g, (m, g) => String.fromCharCode(parseInt(g, 16)));
 }
 
-/* 从模型输出中提取第一个 { 到最后一个 } 之间的内容并解析 */
+/* 只修复格式：字符串内控制字符、非法转义与尾逗号；不补造缺失剧情或状态。 */
+function repairJsonSyntax(text) {
+  let result = "", inString = false;
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    if (inString && char === "\\") {
+      const next = text[i + 1];
+      const validUnicode = next === "u" && /^[0-9a-fA-F]{4}$/.test(text.slice(i + 2, i + 6));
+      if (next && ('"\\/bfnrt'.includes(next) || validUnicode)) {
+        result += char + next; i++;
+      } else result += "\\\\";
+    } else if (char === '"') {
+      inString = !inString; result += char;
+    } else if (inString && char.charCodeAt(0) < 32) {
+      result += JSON.stringify(char).slice(1, -1);
+    } else if (!inString && char === "," && /^\s*[}\]]/.test(text.slice(i + 1))) {
+      continue;
+    } else result += char;
+  }
+  return result;
+}
+
+/* 支持代码围栏、前后说明和被再次JSON编码的对象；绝不执行模型返回的代码。 */
 function parseModelJson(raw) {
-  const start = raw.indexOf("{");
-  const end = raw.lastIndexOf("}");
-  if (start === -1 || end === -1 || end <= start) throw new Error("no json");
-  const jsonStr = raw.slice(start, end + 1);
-  return JSON.parse(jsonStr); // 失败会 throw，由调用方降级处理
+  let text = String(raw || "").trim().replace(/^\uFEFF/, "");
+  for (let depth = 0; depth < 3; depth++) {
+    const start = text.indexOf("{");
+    const end = text.lastIndexOf("}");
+    const candidates = [text];
+    if (start >= 0 && end > start) candidates.push(text.slice(start, end + 1));
+    let decoded;
+    for (const candidate of candidates) {
+      for (const source of [candidate, repairJsonSyntax(candidate)]) {
+        try { decoded = JSON.parse(source); break; } catch (_) {}
+      }
+      if (decoded !== undefined) break;
+    }
+    if (typeof decoded === "string") { text = decoded; continue; }
+    if (decoded && typeof decoded === "object" && !Array.isArray(decoded)) return decoded;
+    break;
+  }
+  throw new Error("invalid model JSON");
+}
+
+function isSafeNpcDialogue(text) {
+  return typeof text === "string" && Boolean(text.trim()) &&
+    !/^[\s`]*[\[{]/.test(text) &&
+    !/"(?:npc_dialogue|speaker|translation|grammar_tip|deduction_assessment|task_type|task_checks|completed_tasks?|game_over|vocab)"\s*:/.test(text);
+}
+
+/* 主体已完整而词汇数组损坏时，仅恢复完整公开文本，不采信残缺的任务或结束标记。 */
+function recoverReplyString(raw, key) {
+  const match = new RegExp('(?:^|[,{])\\s*"' + key + '"\\s*:\\s*"').exec(raw);
+  if (!match) return null;
+  const start = match.index + match[0].length;
+  let value = "";
+  for (let i = start; i < raw.length; i++) {
+    const char = raw[i];
+    if (char === "\\") {
+      if (i + 1 >= raw.length) return null;
+      value += char + raw[++i];
+    } else if (char === '"') {
+      const rest = raw.slice(i + 1);
+      // 内文未转义引号只能在明确的字段边界闭合，避免把后续字段吞进台词。
+      if (/^\s*(?:,\s*"[A-Za-z_]+"\s*:|[}\]]|$)/.test(rest)) {
+        try { return JSON.parse(repairJsonSyntax('"' + value.replace(/(?<!\\)"/g, '\\"') + '"')); }
+        catch (_) { return null; }
+      }
+      value += '\\"';
+    } else value += char;
+  }
+  return null; // 台词被截断时不猜测后半句。
+}
+
+function parseNpcReply(raw) {
+  let data;
+  try { data = parseModelJson(raw); } catch (_) {}
+  if (data && isSafeNpcDialogue(data.npc_dialogue)) return data;
+  if (data) throw new Error("invalid NPC dialogue");
+  const dialogue = recoverReplyString(String(raw), "npc_dialogue");
+  if (!isSafeNpcDialogue(dialogue)) throw new Error("incomplete NPC reply");
+  const translation = recoverReplyString(String(raw), "translation") || "";
+  const speaker = recoverReplyString(String(raw), "speaker") || "DM";
+  return { npc_dialogue: dialogue, translation: isSafeNpcDialogue(translation) ? translation : "",
+    speaker: speaker.length <= 80 && isSafeNpcDialogue(speaker) ? speaker : "DM",
+    grammar_tip: "无", deduction_hint: "", task_type: "free", options: [], option_translations: [],
+    completed_task: 0, completed_tasks: [], game_over: false, vocab: [] };
 }
 
 /* 流式过程中增量提取 npc_dialogue，实现打字机观感 */
 function extractStreamingDialogue(accum) {
   const m = accum.match(/"npc_dialogue"\s*:\s*"((?:[^"\\]|\\.)*)/);
   if (!m) return null;
-  return unescapeJsonStr(m[1]);
+  const text = unescapeJsonStr(m[1]);
+  return isSafeNpcDialogue(text) ? text : null;
 }
 
 function scrollChatBottom() {
@@ -2861,8 +3100,9 @@ function scrollChatBottom() {
 function setBusy(b) {
   busy = b;
   elBtnSend.disabled = b;
-  elInpMsg.disabled = b;
-  if (!b) elInpMsg.focus();
+  elInpMsg.disabled = b || gameEnded || gameOverPending;
+  // 手机收到回复时不自动弹起软键盘。
+  if (!b && !elInpMsg.disabled && !window.matchMedia("(max-width: 720px)").matches) elInpMsg.focus();
 }
 
 /* ================= PLAYING：消息渲染 ================= */
@@ -3064,16 +3304,24 @@ function renderScriptTasks() {
       const tx = document.createElement("span");
       tx.className = "ti-text";
       tx.textContent = String(t);
+      const criterion = scriptData.task_criteria && scriptData.task_criteria.find(c => c.task_id === i + 1);
+      if (criterion) {
+        const note = document.createElement("small");
+        note.className = "task-criterion";
+        note.textContent = "完成条件：" + criterion.condition;
+        tx.appendChild(note);
+      }
       d.appendChild(ck); d.appendChild(tx);
       box.appendChild(d);
     });
   } else {
-    box.textContent = scriptPlan;
+    box.textContent = "本局任务将在对话中说明。";
   }
+  $("mobile-task-progress").textContent = completedTasks.size + " / " + ((scriptData && scriptData.tasks && scriptData.tasks.length) || 3);
 }
 
 function markTaskCompleted(n, taskText) {
-  if (!n || completedTasks.has(n)) return;
+  if (!Number.isInteger(n) || n < 1 || !scriptData || n > scriptData.tasks.length || completedTasks.has(n)) return;
   completedTasks.add(n);
   renderScriptTasks();
   const toast = document.createElement("div");
@@ -3085,24 +3333,6 @@ function markTaskCompleted(n, taskText) {
 
 /* ================= 考纲词汇覆盖进度 ================= */
 const appearedVocab = new Set();   // 本局台词中出现过的考纲词（小写）
-function renderVocabProgress() {
-  const list = coreVocabList() || [];
-  const total = list.length;
-  if (!total) {
-    $("vocab-progress-label").textContent = "";
-    $("vocab-progress-bar").style.width = "0%";
-    $("vocab-progress-note").textContent = "台词中已出现的考纲词汇进度";
-    return;
-  }
-  let hit = 0;
-  for (const w of list) {
-    if (appearedVocab.has(String(w).trim().toLowerCase())) hit++;
-  }
-  $("vocab-progress-label").textContent = hit + "/" + total;
-  $("vocab-progress-bar").style.width = Math.min(100, Math.round(hit / total * 100)) + "%";
-  $("vocab-progress-note").textContent = "台词中已出现的考纲词汇进度（生词本需点击收集）";
-}
-
 /* ================= 语法小修正：有几处错误就几条，按序号逐行列出 ================= */
 function grammarTipItems(tip) {
   const raw = String(tip || "").trim();
@@ -3142,6 +3372,7 @@ function buildGrammarTipCard(tip) {
 
 /* 渲染一条完整的 NPC 回复（JSON 解析成功路径） */
 function finalizeNpcBubble(ui, data, rawText) {
+  if (data && !isSafeNpcDialogue(data.npc_dialogue)) data = null;
   ui.cursor.remove();
   let dialogue, translation, tip, deductionHint, taskType, options, optionTranslations, grammarTask, vocab, speaker, completedTask, gameOver, keyPhrases;
   if (data) {
@@ -3159,8 +3390,8 @@ function finalizeNpcBubble(ui, data, rawText) {
     gameOver = data.game_over === true;
     vocab = Array.isArray(data.vocab) ? data.vocab.filter(v => v && v.word) : [];
   } else {
-    /* JSON 解析失败：降级为纯文本展示，避免白屏 */
-    dialogue = rawText;
+    /* 绝不把内部结构或模型原始回复当作玩家台词展示。 */
+    dialogue = "本轮回复未能正常显示，请重试。";
     translation = ""; tip = ""; deductionHint = ""; taskType = "free";
     options = []; grammarTask = ""; vocab = []; speaker = "";
     optionTranslations = []; keyPhrases = [];
@@ -3261,23 +3492,20 @@ function finalizeNpcBubble(ui, data, rawText) {
   if (completedTask >= 1 && scriptData && Array.isArray(scriptData.tasks)) {
     markTaskCompleted(completedTask, scriptData.tasks[completedTask - 1]);
   }
+  if (data && scriptData && Array.isArray(scriptData.tasks)) {
+    for (const n of completedTaskIds(data, scriptData.tasks.length)) markTaskCompleted(n, scriptData.tasks[n - 1]);
+  }
   /* 重点词覆盖：只统计本轮台词中真实出现过的重点词，并刷新进度条 */
   collectAppearedWords(dialogue);
-  renderVocabProgress();
-  /* 全部任务完成 → 先给「进入回顾」按钮，玩家点击后才进结算
-     game_over 由模型判定；模型没给但任务已全部打勾时同样放行 */
+  /* 剧本模式须演完表决、结局与复盘；日常关卡沿用全部任务完成即可回顾。 */
   const allTasksDone = Boolean(scriptData && Array.isArray(scriptData.tasks) && scriptData.tasks.length &&
     completedTasks.size >= scriptData.tasks.length);
-  if (gameOver || allTasksDone) showReviewEntryButton();
+  if (scriptInfo.dailyMode ? (gameOver || allTasksDone) : gameOver) showReviewEntryButton();
   scrollChatBottom();
 }
 
 function renderFreeHint() {
   elOptionsArea.innerHTML = "";
-  const d = document.createElement("div");
-  d.className = "free-hint";
-  d.textContent = "💭 自由发挥时间：用英语描述你想做的事或想说的话（越具体，剧情越精彩）";
-  elOptionsArea.appendChild(d);
 }
 
 function renderGrammarTask(taskText) {
@@ -3378,24 +3606,8 @@ function addVocabEntry(entry) {
 }
 
 function renderVocabList() {
-  elVocabList.innerHTML = "";
-  elVocabCount.textContent = vocabBook.size ? "(" + vocabBook.size + ")" : "";
   renderVocabBookCount();
   if ($("step-vocab-book") && !$("step-vocab-book").classList.contains("hidden")) renderVocabBookPage();
-  if (!vocabBook.size) {
-    elVocabList.innerHTML = '<div class="vocab-empty">点击台词中蓝色下划线的考纲词汇，加入生词本</div>';
-    return;
-  }
-  for (const [w, e] of vocabBook) {
-    const item = document.createElement("div");
-    item.className = "vocab-item";
-    item.innerHTML = '<span class="w"></span><span class="pos"></span><div class="m"></div>';
-    item.querySelector(".w").textContent = w;
-    item.querySelector(".pos").textContent = e.pos ? "(" + e.pos + ")" : "";
-    item.querySelector(".m").textContent = e.meaning;
-    item.addEventListener("click", () => openPopover(e, null));
-    elVocabList.appendChild(item);
-  }
 }
 
 /* 首页生词本入口：把局内收集的生词整表搬到开始页，点词直接看释义 */
@@ -4507,18 +4719,19 @@ function openPopover(entry, anchorRect, form) {
   elPopover.style.display = "block";
 
   /* 定位：靠近触发的生词；无锚点（侧栏点击）时居中偏右 */
-  const pw = 340, ph = elPopover.offsetHeight || 260;
+  const pw = elPopover.offsetWidth || 320, ph = elPopover.offsetHeight || 260;
+  const availableHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   let x, y;
   if (anchorRect) {
-    x = Math.min(anchorRect.left, window.innerWidth - pw - 16);
+    x = Math.min(anchorRect.left, window.innerWidth - pw - 12);
     y = anchorRect.bottom + 8;
-    if (y + ph > window.innerHeight) y = Math.max(8, anchorRect.top - ph - 8);
+    if (y + ph > availableHeight - 12) y = Math.max(12, anchorRect.top - ph - 8);
   } else {
-    x = Math.max(8, (window.innerWidth - pw) / 2 + 140);
-    y = Math.max(60, (window.innerHeight - ph) / 2);
+    x = (window.innerWidth - pw) / 2;
+    y = (availableHeight - ph) / 2;
   }
-  elPopover.style.left = Math.max(8, x) + "px";
-  elPopover.style.top = y + "px";
+  elPopover.style.left = Math.max(12, x) + "px";
+  elPopover.style.top = Math.max(12, Math.min(y, availableHeight - ph - 12)) + "px";
 }
 
 /* 关掉浮层（不加入生词本）。✕ 与拼写通过后共用 */
@@ -4845,6 +5058,7 @@ function showErrorBubble(msg, retryPayload) {
 
 /* ================= CONFIG → PLANNING：生成剧本大纲 ================= */
 function showPlanningLoading() {
+  $("planning-status").textContent = "正在编排角色与故事……";
   $("planning-loading").classList.remove("hidden");
   $("script-modal").classList.add("hidden");
   $("planning-fallback").classList.add("hidden");
@@ -4852,6 +5066,9 @@ function showPlanningLoading() {
 
 /* 把结构化剧本转成文本（注入游戏 system prompt；含 DM 专用的真相/结局/角色秘密，绝不展示给玩家） */
 function formatScriptPlan(d) {
+  if (!scriptInfo.dailyMode) {
+    return "【DM专用完整封存底稿，不得直接展示给玩家；公开信息仅为storyline、角色name/role和tasks。玩家只可知道自己的player_script。】\n" + JSON.stringify(d);
+  }
   const chars = (Array.isArray(d.characters) ? d.characters : [])
     .map(c => typeof c === "string"
       ? c
@@ -4899,6 +5116,7 @@ function buildScriptModal(d) {
   $("btn-back-config").textContent = isDaily ? "← 返回关卡选择" : "← 换个剧本";
   $("btn-start-game").textContent = isDaily ? "▶ 开始情境关卡" : "🎭 开始游戏";
   $("sm-storyline").textContent = d.storyline || "";
+  $("sm-reply-language").textContent = replyLanguageLabel() + "。进入游戏后，可随时回看角色本和任务完成条件。";
 
   /* 玩家角色本（剧本杀模式才展示，日常关卡隐藏） */
   const ps = d.player_script;
@@ -4937,9 +5155,11 @@ function buildScriptModal(d) {
 
   const tw = $("sm-tasks");
   tw.innerHTML = "";
-  for (const t of (Array.isArray(d.tasks) ? d.tasks : [])) {
+  for (const [i, t] of (Array.isArray(d.tasks) ? d.tasks : []).entries()) {
     const li = document.createElement("li");
     li.textContent = String(t);
+    const criterion = d.task_criteria && d.task_criteria.find(c => c.task_id === i + 1);
+    if (criterion) li.appendChild(document.createTextNode("；完成条件：" + criterion.condition));
     tw.appendChild(li);
   }
 }
@@ -4968,7 +5188,7 @@ async function generateDailyPlan(mode, level, opts) {
   hideBanner();
   const s = getSettings();
   if (!validateSettings(s)) {
-    showBanner("请先在「⚙️ 大模型接口设置」中填写 API Base URL 和 API Key。");
+    showBanner("学习助手暂时无法连接，请稍后重试或联系管理员。");
     return;
   }
   if (!DAILY_DATA.ready) {
@@ -4987,6 +5207,7 @@ async function generateDailyPlan(mode, level, opts) {
 
   scriptInfo = {
     genre: "日常交涉关卡",
+    replyLanguage: $(mode === "闯关模式" ? "sel-daily-reply-language" : "sel-random-reply-language").value,
     theme: ctx.sceneName,
     background: "",
     language: "英语",
@@ -5031,7 +5252,6 @@ async function generateDailyPlan(mode, level, opts) {
   } catch (err) {
     setState("CONFIG");
     showConfigStep(mode === "闯关模式" ? "step-daily-level" : "step-daily-random");
-    if (!backendMode) $("api-settings").classList.remove("hidden");
     showBanner("生成失败：" + err.message);
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = mode === "闯关模式" ? "开始这一关" : (randomAssessment ? "🎓 开始综合测评" : "🎲 随机生成剧本"); }
@@ -5042,22 +5262,21 @@ async function generatePlan() {
   hideBanner();
   const s = getSettings();
   if (!validateSettings(s)) {
-    showBanner("请先在「⚙️ 大模型接口设置」中填写 API Base URL 和 API Key。");
+    showBanner("学习助手暂时无法连接，请稍后重试或联系管理员。");
     return;
   }
 
   scriptInfo = {
     genre: $("sel-genre").value,
+    replyLanguage: $("sel-reply-language").value,
     theme: $("inp-theme").value.trim(),
     background: $("inp-background").value.trim(),
     language: "英语",
     level: $("sel-level").value,
     challenge: $("sel-challenge").value
   };
+  scriptInfo.playerRole = randomScriptRole();
 
-  /* 从真实考纲词库抽候选词池注入提示词：模型只能从词池里选 core_vocab */
-  const poolText = examCandidateText(scriptInfo.level, 480);
-  const poolCount = poolText ? String(poolText.split(",").length) : "0";
   const prompt = fillTemplate(PROMPT_GENERATE_PLAN, {
     genre: scriptInfo.genre,
     genreRule: genreRuleBrief(),
@@ -5068,10 +5287,10 @@ async function generatePlan() {
     challengeDesc: challengeDesc(),
     totalChars: totalChars(),
     npcCount: npcCount(),
+    playerRole: scriptInfo.playerRole,
+    structureRule: SCRIPT_STRUCTURE_RULES[scriptInfo.challenge],
     themeLine: scriptInfo.theme || "未指定",
-    bgLine: scriptInfo.background || "未指定",
-    vocabPool: poolText || "（考纲词库未加载，请按当前挑战模式对应的考纲范围自行选词，并优先使用该级别的高频核心词）",
-    vocabPoolCount: poolCount
+    bgLine: scriptInfo.background || "未指定"
   });
 
   setState("PLANNING");
@@ -5079,38 +5298,22 @@ async function generatePlan() {
   const btnGen = $("btn-generate");
   btnGen.disabled = true;
   btnGen.textContent = "生成中…";
+  scriptData = null;
+  scriptPlan = "";
 
   try {
-    const raw = await callLLM([{ role: "user", content: prompt }], null);
-    /* 尝试解析结构化剧本 JSON */
-    let data = null;
-    try { data = parseModelJson(raw); } catch (e) { data = null; }
-
-    $("planning-loading").classList.add("hidden");
-    if (data && data.storyline && Array.isArray(data.tasks) && data.tasks.length) {
-      /* 人数绑定难度：AI 角色数必须等于难度规定人数（多退少不补，少了由 DM 在游戏中控场） */
-      if (Array.isArray(data.characters) && data.characters.length > npcCount()) {
-        data.characters = data.characters.slice(0, npcCount());
-      }
-      /* 词汇表清洗：只保留该目标词表里真实存在的词，不足 120 时自动补齐，
-         保证整局大纲词汇全部可核验、可点击，不被模型自由发挥带偏。 */
-      if (isExamGoal(scriptInfo.level) && Array.isArray(data.core_vocab)) {
-        data.core_vocab = sanitizeCoreVocab(data.core_vocab, scriptInfo.level, 120);
-      }
-      scriptData = data;
-      scriptPlan = formatScriptPlan(data);
-      buildScriptModal(data);
-      $("script-modal").classList.remove("hidden");
-    } else {
-      /* 模型没按 JSON 返回：降级为纯文本大纲展示 */
-      scriptData = null;
-      scriptPlan = raw;
-      $("planning-body").textContent = raw;
-      $("planning-fallback").classList.remove("hidden");
+    const data = await generateValidatedScript(prompt);
+    /* 词汇表清洗沿用原逻辑，先清洗再封存。 */
+    if (isExamGoal(scriptInfo.level)) {
+      data.core_vocab = sanitizeCoreVocab(Array.isArray(data.core_vocab) ? data.core_vocab : [], scriptInfo.level, 120);
     }
+    scriptData = freezeScriptPlan(data);
+    scriptPlan = formatScriptPlan(data);
+    $("planning-loading").classList.add("hidden");
+    buildScriptModal(data);
+    $("script-modal").classList.remove("hidden");
   } catch (err) {
     setState("CONFIG");
-    if (!backendMode) $("api-settings").classList.remove("hidden");
     showBanner("生成失败：" + err.message);
     console.error("[剧本生成失败]", err);
   } finally {
@@ -5150,6 +5353,12 @@ function coreVocabText() {
 }
 
 async function startGame() {
+  if (!scriptInfo.dailyMode && (!scriptData || validateScriptPlan(scriptData).length)) {
+    showBanner("剧本底稿尚未完整锁定，请重新生成剧本。");
+    return;
+  }
+  deductionProgress = { questionId: "", wrongStreak: 0 };
+  storyPhases.clear();
   setState("PLAYING");
   elInpMsg.disabled = false;
   learningSessionId = "session-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
@@ -5169,7 +5378,6 @@ async function startGame() {
   currentPhraseHighlight = new Map();
   phraseRegistry.clear();
   appearedVocab.clear();
-  renderVocabProgress();
   $("sb-title-label").textContent = scriptInfo.dailyMode ? "📍 当前情境" : "🎭 当前剧本";
   $("sb-script-name").textContent = (scriptData && scriptData.script_name) || scriptInfo.theme || scriptInfo.genre;
   $("sb-script-meta").textContent = scriptInfo.dailyMode
@@ -5180,6 +5388,9 @@ async function startGame() {
         : "");
   $("sb-task-goal").textContent = "";
   renderScriptTasks();
+  renderPlayerScript();
+  updateReplyLanguageUI();
+  setGamePanelOpen(false, false);
 
   const daily = Boolean(scriptInfo.dailyMode);
   let systemPrompt;
@@ -5209,19 +5420,113 @@ async function startGame() {
       .replace("{coreVocab}", coreVocabText())
       .replace("{challengeDesc}", challengeDesc());
   }
-  messages = [{ role: "system", content: systemPrompt }];
+  messages = [{ role: "system", content: systemPrompt + "\n" + replyLanguageRule() }];
 
   /* 隐藏的启动消息：按固定流程开场——读本、介绍 AI 角色、引导自我介绍（不展示在聊天界面） */
   const boot = daily
     ? "（关卡开始。请用英语介绍生活情境、玩家身份和当前需要解决的问题，然后给出第一个清楚的交涉目标。若需要查看票据、菜单、路线或房间资料，可以使用 search；否则以 free 对话开始。speaker 必须填写出场 NPC 名字，重点练习词要自然出现。）"
-    : "（游戏开始。请严格按固定流程推进：先以 DM 身份用英语交代背景氛围（speaker 填 DM），并让登场的主要 AI 角色依次亮相互动一两句，营造群像感；然后自然地邀请玩家用英语做角色自我介绍。本轮 task_type 用 free，不给选项。本剧考纲词汇表中的词要开始分批融入台词。）";
+    : "（游戏开始。请严格按固定流程推进：先以 DM 身份用英语交代背景氛围（speaker 填 DM），并让登场的主要 AI 角色依次亮相互动一两句，营造群像感；然后邀请玩家按本局所选回答语言做角色自我介绍。本轮 task_type 用 free，不给选项。本剧考纲词汇表中的词要开始分批融入台词。）";
   messages.push({ role: "user", content: boot });
   await requestNpcReply(boot, true);
 }
 
 /* ================= PLAYING：发送消息（输入框或选项按钮） ================= */
+function containsChineseAnswer(text) {
+  return /\p{Script=Han}/u.test(String(text));
+}
+
+function replyLanguageLabel() {
+  return scriptInfo.replyLanguage === "zh" ? "中文回答模式：中文、英文均可" : "英文回答模式：仅限英文";
+}
+
+function replyLanguageRule() {
+  const mode = scriptInfo.replyLanguage === "zh"
+    ? "玩家选择中文回答模式：允许中文、英文和中英混合输入，覆盖其他要求玩家必须用英语回答的描述。按表达的意思判断行动和任务，不能要求改成英文后才推进。中文不做英语语法纠错；若含英文，仅检查英文部分，可自然给出对应英语表达但不强制重答。"
+    : "玩家选择英文回答模式：玩家的中文输入已由前端阻止发送，使用英文开展互动。";
+  return "【本局回答语言规则】" + mode + " NPC台词继续使用英语，translation继续提供完整中文翻译。主线任务完成与语言练习独立，不因语法小错阻止任务打勾。";
+}
+
+function showInputError(message) {
+  $("input-error").textContent = message;
+  $("input-error").classList.toggle("hidden", !message);
+  elInpMsg.setAttribute("aria-invalid", message ? "true" : "false");
+}
+
+function updateReplyLanguageUI() {
+  $("reply-language-note").textContent = replyLanguageLabel();
+  elInpMsg.placeholder = scriptInfo.replyLanguage === "zh" ? "用中文或英文回复 NPC…" : "用英语回复 NPC…";
+  showInputError("");
+  autoGrow();
+}
+
+function completedTaskIds(data, count) {
+  const checks = Array.isArray(data.task_checks) ? data.task_checks : [];
+  const ids = [data.completed_task, ...(Array.isArray(data.completed_tasks) ? data.completed_tasks : []),
+    ...checks.filter(c => c && c.status === "completed" && typeof c.evidence === "string" && c.evidence.trim()).map(c => c.task_id)];
+  return [...new Set(ids.filter(n => typeof n === "number" || typeof n === "string").map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= count))];
+}
+
+function gameRequestMessages() {
+  const request = messages.map(m => ({ role: m.role, content: m.content }));
+  if (!scriptInfo.dailyMode && scriptData) {
+    const progress = scriptData.tasks.map((task, i) => ({ task_id: i + 1, task,
+      condition: scriptData.task_criteria[i].condition, completed: completedTasks.has(i + 1) }));
+    request.push({ role: "system", content: "【当前任务记录】" + JSON.stringify(progress) + "\n每轮检查玩家本轮及历史行动，跨轮累计；达到条件立即用completed_tasks报告全部新完成项，不需要重复做。第三项提交判断即可打勾，结局复盘另行演绎。尚未完成的条件可在合适时用NPC语气简短说明，不暗中增加条件。" });
+  }
+  return request;
+}
+
+function renderPlayerScript() {
+  const box = $("sb-player-script");
+  const background = $("sb-story-background");
+  box.replaceChildren();
+  background.replaceChildren();
+  const d = scriptData || {};
+  const p = d.player_script || {};
+  const add = (parent, label, text) => {
+    const title = document.createElement("h4"); title.textContent = label;
+    const content = document.createElement("p"); content.textContent = text || "暂未提供";
+    parent.append(title, content);
+  };
+  if (scriptInfo.dailyMode) {
+    add(box, "本关情境", d.storyline || scriptInfo.theme);
+    add(box, "沟通目标", (scriptInfo.dailyCtx && scriptInfo.dailyCtx.taskGoal) || "按对话中的任务目标完成交涉。");
+  } else {
+    add(box, p.role_title || "你的角色", p.character_name);
+    add(box, "你的个人剧本", p.personal_script);
+    add(box, "只有你知道的秘密", p.secret);
+    add(box, "你的专属任务", p.personal_task);
+  }
+  add(background, "故事背景", d.storyline || scriptInfo.theme);
+  for (const c of (d.characters || [])) add(background, c.name || "角色", c.role);
+}
+
+function setGamePanelOpen(open, restoreFocus = true) {
+  const mobile = window.matchMedia("(max-width: 720px)").matches;
+  open = mobile && open;
+  document.body.classList.toggle("sidebar-open", open);
+  $("btn-game-panel").setAttribute("aria-expanded", String(open));
+  $("game-sidebar").inert = mobile && !open;
+  $("game-main").inert = open;
+  if (open) {
+    $("game-sidebar").setAttribute("role", "dialog");
+    $("game-sidebar").setAttribute("aria-modal", "true");
+    $("btn-close-game-panel").focus();
+  } else {
+    $("game-sidebar").removeAttribute("role");
+    $("game-sidebar").removeAttribute("aria-modal");
+    if (mobile && restoreFocus) $("btn-game-panel").focus();
+  }
+}
+
 async function sendMessage(text) {
   if (busy || gameEnded || gameOverPending || !text.trim()) return;
+  if (scriptInfo.replyLanguage !== "zh" && containsChineseAnswer(text)) {
+    showInputError("当前为英文回答模式，请改用英文。含中文的回答未发送。");
+    elInpMsg.focus();
+    return;
+  }
+  showInputError("");
   elOptionsArea.innerHTML = ""; // 发送后清空选项
   addUserBubble(text.trim());
   elInpMsg.value = "";
@@ -5229,72 +5534,69 @@ async function sendMessage(text) {
   await requestNpcReply(text.trim(), false);
 }
 
+/* 格式错误仅重试同一轮，不生成新剧本、不重复提交玩家行动。 */
+async function readNpcReply(getMsgs, ui) {
+  const request = getMsgs();
+  for (let attempt = 0; attempt < 2; attempt++) {
+    let accum = "";
+    const input = attempt === 0 ? request : [...request, { role: "system", content:
+      "上一轮回复格式未能读取，玩家行动尚未结算。请重新输出本轮的完整严格JSON，保持原剧本事实不变。只输出一个对象，所有字符串里的换行与引号正确转义；不要Markdown、前后说明或将整个对象再编码成字符串。可简化词汇例句，不省略npc_dialogue、speaker、translation、任务状态等必要字段。这不是玩家的新行动，不重复累计推理次数。" }];
+    const full = await callLLM(input, piece => {
+      accum += piece;
+      removeThinking();
+      const shown = extractStreamingDialogue(accum);
+      if (shown !== null) ui.text.textContent = shown;
+      scrollChatBottom();
+    });
+    removeThinking();
+    try { return parseNpcReply(full); } catch (_) {
+      console.warn("[回复格式校对]", attempt + 1);
+      ui.text.textContent = "正在整理本轮回复……";
+    }
+  }
+  throw new Error("本轮回复未能正常显示，请点击重试。你的回答已保留。");
+}
+
 async function requestNpcReply(userText, isBoot) {
   setBusy(true);
   if (!isBoot) {
     messages.push({ role: "user", content: userText });
   }
-  const lastMsgs = () => messages.map(m => ({ role: m.role, content: m.content }));
+  const lastMsgs = gameRequestMessages;
+  const historyLength = messages.length;
 
   addThinking();
   const ui = addNpcBubble();
-  let accum = "";
-
   try {
-    const full = await callLLM(lastMsgs(), (piece) => {
-      accum += piece;
-      removeThinking();
-      /* 增量提取 npc_dialogue 实现逐字观感 */
-      const shown = extractStreamingDialogue(accum);
-      if (shown !== null) ui.text.textContent = shown;
-      scrollChatBottom();
-    });
-    accum = full;
-    removeThinking();
-
-    messages.push({ role: "assistant", content: accum });
-    let data = null;
-    try {
-      data = parseModelJson(accum);
-    } catch (e) {
-      data = null; /* 解析失败 → 降级纯文本 */
-    }
-    if (!data || typeof data.npc_dialogue !== "string") data = null;
-    finalizeNpcBubble(ui, data, accum);
+    const data = await readNpcReply(lastMsgs, ui);
+    applyScriptTurnRules(data, isBoot);
+    messages.push({ role: "assistant", content: JSON.stringify(data) });
+    finalizeNpcBubble(ui, data, "");
   } catch (err) {
     removeThinking();
     ui.row.remove();
-    messages.pop(); // 弹出本轮失败的 assistant 占位
-    showErrorBubble(err.message, () => requestNpcRetry(lastMsgs, userText));
+    messages.length = historyLength; // 保留失败前的玩家问题，重试同一轮。
+    showErrorBubble(err.message, () => requestNpcRetry(lastMsgs, userText, isBoot));
   } finally {
     setBusy(false);
   }
 }
 
-async function requestNpcRetry(getMsgs, userText) {
+async function requestNpcRetry(getMsgs, userText, isBoot = false) {
   setBusy(true);
   addThinking();
   const ui = addNpcBubble();
-  let accum = "";
+  const historyLength = messages.length;
   try {
-    const full = await callLLM(getMsgs(), (piece) => {
-      accum += piece;
-      removeThinking();
-      const shown = extractStreamingDialogue(accum);
-      if (shown !== null) ui.text.textContent = shown;
-      scrollChatBottom();
-    });
-    accum = full;
-    removeThinking();
-    messages.push({ role: "assistant", content: accum });
-    let data = null;
-    try { data = parseModelJson(accum); } catch (e) { data = null; }
-    if (!data || typeof data.npc_dialogue !== "string") data = null;
-    finalizeNpcBubble(ui, data, accum);
+    const data = await readNpcReply(getMsgs, ui);
+    applyScriptTurnRules(data, isBoot);
+    messages.push({ role: "assistant", content: JSON.stringify(data) });
+    finalizeNpcBubble(ui, data, "");
   } catch (err) {
     removeThinking();
     ui.row.remove();
-    showErrorBubble(err.message, () => requestNpcRetry(getMsgs, userText));
+    messages.length = historyLength;
+    showErrorBubble(err.message, () => requestNpcRetry(getMsgs, userText, isBoot));
   } finally {
     setBusy(false);
   }
@@ -5306,13 +5608,44 @@ function autoGrow() {
   elInpMsg.style.height = Math.min(elInpMsg.scrollHeight, 120) + "px";
 }
 
-elInpMsg.addEventListener("input", autoGrow);
+elInpMsg.addEventListener("input", () => {
+  autoGrow();
+  showInputError(scriptInfo.replyLanguage !== "zh" && containsChineseAnswer(elInpMsg.value)
+    ? "当前为英文回答模式，请改用英文。含中文的回答不会发送。" : "");
+});
 elInpMsg.addEventListener("keydown", (e) => {
+  if (e.isComposing || e.keyCode === 229) return;
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     sendMessage(elInpMsg.value);
   }
 });
+
+$("btn-game-panel").addEventListener("click", () => setGamePanelOpen(true));
+$("btn-close-game-panel").addEventListener("click", () => setGamePanelOpen(false));
+$("sidebar-backdrop").addEventListener("click", () => setGamePanelOpen(false));
+document.addEventListener("keydown", e => {
+  if (!document.body.classList.contains("sidebar-open")) return;
+  if (e.key === "Escape") { e.preventDefault(); setGamePanelOpen(false); }
+  if (e.key === "Tab") {
+    const controls = [...$("game-sidebar").querySelectorAll("button, summary, a[href], input, select, textarea")].filter(el => el.getClientRects().length);
+    const first = controls[0], last = controls[controls.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+function syncGameViewport() {
+  const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  document.documentElement.style.setProperty("--app-height", height + "px");
+  if (elPopover.style.display === "block") {
+    elPopover.style.top = Math.max(12, Math.min(parseFloat(elPopover.style.top) || 12, height - elPopover.offsetHeight - 12)) + "px";
+  }
+  if (!window.matchMedia("(max-width: 720px)").matches) setGamePanelOpen(false, false);
+}
+window.addEventListener("resize", syncGameViewport);
+if (window.visualViewport) window.visualViewport.addEventListener("resize", syncGameViewport);
+syncGameViewport();
+setGamePanelOpen(false, false);
 
 /* ================= 账号（登录后闯关记录 / 生词本 / 复习队列跟着账号走） ================= */
 let authInfo = null;              /* {token, username} */
@@ -5759,19 +6092,9 @@ $("btn-skip-quiz").addEventListener("click", () => {
   $("em-quiz-section").classList.add("hidden");
 });
 $("btn-send").addEventListener("click", () => sendMessage(elInpMsg.value));
-$("api-settings-toggle").addEventListener("click", () => {
-  $("api-settings").classList.toggle("open");
-});
 $("inp-theme").addEventListener("input", () => $("inp-theme").classList.remove("error"));
-["inp-api-base", "inp-api-key", "inp-model"].forEach((id) => {
-  $(id).addEventListener("input", () => {
-    $(id).classList.remove("error");
-    $("api-error-tip").classList.remove("show");
-  });
-});
 
 /* ================= 初始化 ================= */
-loadSettings();
 loadVocabBook();          /* 恢复本地保存的生词本 */
 loadLearningVocab();      /* 恢复按目标/难度归档的学习词汇 */
 loadScriptHistory();      /* 恢复玩过的剧本档案 */
