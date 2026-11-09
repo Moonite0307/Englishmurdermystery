@@ -1,0 +1,1446 @@
+{
+  "schema_version": "daily_scene_catalog.v1",
+  "count": 72,
+  "scenes": [
+    {
+      "scene_id": "01-01",
+      "block_id": "01",
+      "block_name": "01-餐厅点餐",
+      "scene_name": "电话预订桌位",
+      "task_goal": "通过电话预订餐厅桌位并确认时间、人数与预订信息",
+      "typical_functions": [
+        "make_a_reservation",
+        "ask_for_information",
+        "confirm",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "01-02",
+      "block_id": "01",
+      "block_name": "01-餐厅点餐",
+      "scene_name": "到店入座",
+      "task_goal": "到店后说明预订并顺利入座",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "01-03",
+      "block_id": "01",
+      "block_name": "01-餐厅点餐",
+      "scene_name": "看菜单点菜",
+      "task_goal": "看懂菜单并完成点餐",
+      "typical_functions": [
+        "ask_for_information",
+        "request",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "01-04",
+      "block_id": "01",
+      "block_name": "01-餐厅点餐",
+      "scene_name": "特殊饮食要求",
+      "task_goal": "说明饮食禁忌并确认菜品是否安全",
+      "typical_functions": [
+        "describe_problem",
+        "ask_for_information",
+        "request",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "01-05",
+      "block_id": "01",
+      "block_name": "01-餐厅点餐",
+      "scene_name": "菜品出问题",
+      "task_goal": "反馈菜品问题并取得补救",
+      "typical_functions": [
+        "describe_problem",
+        "make_a_complaint",
+        "request",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "01-06",
+      "block_id": "01",
+      "block_name": "01-餐厅点餐",
+      "scene_name": "结账与小费",
+      "task_goal": "结账付款并处理账单与小费",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "make_a_payment",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "01-07",
+      "block_id": "01",
+      "block_name": "01-餐厅点餐",
+      "scene_name": "外带打包",
+      "task_goal": "要求把餐食打包外带并交代打包要求",
+      "typical_functions": [
+        "request",
+        "clarify",
+        "confirm",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "01-08",
+      "block_id": "01",
+      "block_name": "01-餐厅点餐",
+      "scene_name": "快餐柜台点单",
+      "task_goal": "在快餐柜台完成点单与付款",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "make_a_payment",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "02-01",
+      "block_id": "02",
+      "block_name": "02-购物消费",
+      "scene_name": "试穿衣服",
+      "task_goal": "试穿衣服并确定合适的尺码",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "02-02",
+      "block_id": "02",
+      "block_name": "02-购物消费",
+      "scene_name": "问价与折扣",
+      "task_goal": "询问商品价格并争取折扣",
+      "typical_functions": [
+        "ask_for_information",
+        "negotiate",
+        "request",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "02-03",
+      "block_id": "02",
+      "block_name": "02-购物消费",
+      "scene_name": "退换货",
+      "task_goal": "在商店说明商品问题并完成退货或换货",
+      "typical_functions": [
+        "describe_problem",
+        "ask_for_information",
+        "request",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "02-04",
+      "block_id": "02",
+      "block_name": "02-购物消费",
+      "scene_name": "结账付款",
+      "task_goal": "完成结账并向收银员确认付款方式",
+      "typical_functions": [
+        "request",
+        "make_a_payment",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "02-05",
+      "block_id": "02",
+      "block_name": "02-购物消费",
+      "scene_name": "缺货与调货",
+      "task_goal": "询问缺货商品并申请调货或预留",
+      "typical_functions": [
+        "ask_for_information",
+        "request",
+        "confirm",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "02-06",
+      "block_id": "02",
+      "block_name": "02-购物消费",
+      "scene_name": "网购客服",
+      "task_goal": "联系网店客服处理订单问题",
+      "typical_functions": [
+        "describe_problem",
+        "make_a_complaint",
+        "request",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "02-07",
+      "block_id": "02",
+      "block_name": "02-购物消费",
+      "scene_name": "超市找商品",
+      "task_goal": "在超市向店员询问并找到目标商品",
+      "typical_functions": [
+        "ask_for_information",
+        "ask_for_directions",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "02-08",
+      "block_id": "02",
+      "block_name": "02-购物消费",
+      "scene_name": "售后保修",
+      "task_goal": "申请售后维修或保修",
+      "typical_functions": [
+        "describe_problem",
+        "ask_for_information",
+        "request",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "03-01",
+      "block_id": "03",
+      "block_name": "03-交通出行",
+      "scene_name": "公交问路线",
+      "task_goal": "询问公交路线并确认乘车方式",
+      "typical_functions": [
+        "ask_for_information",
+        "ask_for_directions",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "03-02",
+      "block_id": "03",
+      "block_name": "03-交通出行",
+      "scene_name": "地铁买票与换乘",
+      "task_goal": "购买地铁票并完成换乘",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "ask_for_directions",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "03-03",
+      "block_id": "03",
+      "block_name": "03-交通出行",
+      "scene_name": "打车",
+      "task_goal": "打车并向司机说明目的地与要求",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "make_a_payment",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "03-04",
+      "block_id": "03",
+      "block_name": "03-交通出行",
+      "scene_name": "火车票购买与改签",
+      "task_goal": "购买火车票或办理改签",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "negotiate",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "03-05",
+      "block_id": "03",
+      "block_name": "03-交通出行",
+      "scene_name": "机场值机与安检",
+      "task_goal": "办理机场值机并通过安检",
+      "typical_functions": [
+        "ask_for_information",
+        "request",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "03-06",
+      "block_id": "03",
+      "block_name": "03-交通出行",
+      "scene_name": "租车",
+      "task_goal": "租车并确认租车条件",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "make_a_payment",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "03-07",
+      "block_id": "03",
+      "block_name": "03-交通出行",
+      "scene_name": "交通违章处理",
+      "task_goal": "处理交通违章并缴纳罚款",
+      "typical_functions": [
+        "describe_problem",
+        "ask_for_information",
+        "make_a_payment",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "03-08",
+      "block_id": "03",
+      "block_name": "03-交通出行",
+      "scene_name": "拼车/网约车",
+      "task_goal": "使用拼车或网约车出行",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "make_a_payment",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "04-01",
+      "block_id": "04",
+      "block_name": "04-酒店住宿",
+      "scene_name": "预订房间",
+      "task_goal": "预订酒店房间",
+      "typical_functions": [
+        "make_a_reservation",
+        "ask_for_information",
+        "negotiate",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "04-02",
+      "block_id": "04",
+      "block_name": "04-酒店住宿",
+      "scene_name": "入住登记",
+      "task_goal": "办理酒店入住登记",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "04-03",
+      "block_id": "04",
+      "block_name": "04-酒店住宿",
+      "scene_name": "房间问题",
+      "task_goal": "反馈房间问题并请求解决",
+      "typical_functions": [
+        "describe_problem",
+        "make_a_complaint",
+        "request",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "04-04",
+      "block_id": "04",
+      "block_name": "04-酒店住宿",
+      "scene_name": "客房服务与叫早",
+      "task_goal": "请求客房服务或叫早服务",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "confirm",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "04-05",
+      "block_id": "04",
+      "block_name": "04-酒店住宿",
+      "scene_name": "延住与换房",
+      "task_goal": "办理延住或换房",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "negotiate",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "04-06",
+      "block_id": "04",
+      "block_name": "04-酒店住宿",
+      "scene_name": "退房结账",
+      "task_goal": "办理退房并结清账单",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "make_a_payment",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "04-07",
+      "block_id": "04",
+      "block_name": "04-酒店住宿",
+      "scene_name": "行李寄存",
+      "task_goal": "在前台寄存或领取行李",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "confirm",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "04-08",
+      "block_id": "04",
+      "block_name": "04-酒店住宿",
+      "scene_name": "投诉与索赔",
+      "task_goal": "就酒店问题提出投诉并索赔",
+      "typical_functions": [
+        "make_a_complaint",
+        "describe_problem",
+        "negotiate",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "05-01",
+      "block_id": "05",
+      "block_name": "05-问路方向",
+      "scene_name": "街头问路",
+      "task_goal": "在街上询问前往目的地的路线",
+      "typical_functions": [
+        "ask_for_directions",
+        "ask_for_information",
+        "clarify",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "05-02",
+      "block_id": "05",
+      "block_name": "05-问路方向",
+      "scene_name": "问地铁/公交站位置",
+      "task_goal": "询问地铁或公交站的位置",
+      "typical_functions": [
+        "ask_for_directions",
+        "ask_for_information",
+        "confirm",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "05-03",
+      "block_id": "05",
+      "block_name": "05-问路方向",
+      "scene_name": "找地标",
+      "task_goal": "询问如何找到某地标",
+      "typical_functions": [
+        "ask_for_directions",
+        "ask_for_information",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "05-04",
+      "block_id": "05",
+      "block_name": "05-问路方向",
+      "scene_name": "给陌生人指路",
+      "task_goal": "为问路的陌生人指路",
+      "typical_functions": [
+        "ask_for_information",
+        "clarify",
+        "confirm",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "05-05",
+      "block_id": "05",
+      "block_name": "05-问路方向",
+      "scene_name": "迷路求助",
+      "task_goal": "迷路时向他人求助",
+      "typical_functions": [
+        "describe_problem",
+        "request",
+        "ask_for_directions",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "05-06",
+      "block_id": "05",
+      "block_name": "05-问路方向",
+      "scene_name": "问距离与步行时间",
+      "task_goal": "询问距离与步行所需时间",
+      "typical_functions": [
+        "ask_for_information",
+        "ask_for_directions",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "05-07",
+      "block_id": "05",
+      "block_name": "05-问路方向",
+      "scene_name": "问停车场位置与收费",
+      "task_goal": "询问停车场位置与收费",
+      "typical_functions": [
+        "ask_for_directions",
+        "ask_for_information",
+        "make_a_payment",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "05-08",
+      "block_id": "05",
+      "block_name": "05-问路方向",
+      "scene_name": "问路时的确认与致谢",
+      "task_goal": "复述并确认路线后向对方致谢",
+      "typical_functions": [
+        "clarify",
+        "confirm",
+        "ask_for_directions",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "06-01",
+      "block_id": "06",
+      "block_name": "06-就医健康",
+      "scene_name": "挂号与分诊",
+      "task_goal": "挂号并完成分诊",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "describe_symptoms",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "06-02",
+      "block_id": "06",
+      "block_name": "06-就医健康",
+      "scene_name": "描述症状",
+      "task_goal": "向医生描述症状",
+      "typical_functions": [
+        "describe_symptoms",
+        "ask_for_information",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "06-03",
+      "block_id": "06",
+      "block_name": "06-就医健康",
+      "scene_name": "医生问诊",
+      "task_goal": "配合医生问诊并了解病情",
+      "typical_functions": [
+        "ask_for_information",
+        "describe_symptoms",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "06-04",
+      "block_id": "06",
+      "block_name": "06-就医健康",
+      "scene_name": "开药与取药",
+      "task_goal": "拿到处方并取药",
+      "typical_functions": [
+        "ask_for_information",
+        "request",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "06-05",
+      "block_id": "06",
+      "block_name": "06-就医健康",
+      "scene_name": "复诊与复查",
+      "task_goal": "进行复诊或复查",
+      "typical_functions": [
+        "describe_symptoms",
+        "ask_for_information",
+        "confirm",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "06-06",
+      "block_id": "06",
+      "block_name": "06-就医健康",
+      "scene_name": "急诊",
+      "task_goal": "在急诊说明紧急情况并求助",
+      "typical_functions": [
+        "describe_symptoms",
+        "request",
+        "ask_for_information",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "06-07",
+      "block_id": "06",
+      "block_name": "06-就医健康",
+      "scene_name": "体检咨询",
+      "task_goal": "咨询体检项目与安排",
+      "typical_functions": [
+        "ask_for_information",
+        "request",
+        "make_a_reservation",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "06-08",
+      "block_id": "06",
+      "block_name": "06-就医健康",
+      "scene_name": "药店买药",
+      "task_goal": "在药店购买药品",
+      "typical_functions": [
+        "describe_symptoms",
+        "ask_for_information",
+        "request",
+        "make_a_payment"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "07-01",
+      "block_id": "07",
+      "block_name": "07-办事银行",
+      "scene_name": "开户",
+      "task_goal": "在银行开立账户",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "07-02",
+      "block_id": "07",
+      "block_name": "07-办事银行",
+      "scene_name": "存取款",
+      "task_goal": "办理存款或取款",
+      "typical_functions": [
+        "request",
+        "make_a_payment",
+        "ask_for_information",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "07-03",
+      "block_id": "07",
+      "block_name": "07-办事银行",
+      "scene_name": "转账汇款",
+      "task_goal": "办理转账或汇款",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "make_a_payment",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "07-04",
+      "block_id": "07",
+      "block_name": "07-办事银行",
+      "scene_name": "信用卡申请",
+      "task_goal": "申请信用卡",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "negotiate",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "07-05",
+      "block_id": "07",
+      "block_name": "07-办事银行",
+      "scene_name": "挂失与补卡",
+      "task_goal": "办理银行卡挂失并补卡",
+      "typical_functions": [
+        "describe_problem",
+        "request",
+        "ask_for_information",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "07-06",
+      "block_id": "07",
+      "block_name": "07-办事银行",
+      "scene_name": "外币兑换",
+      "task_goal": "办理外币兑换",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "make_a_payment",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "07-07",
+      "block_id": "07",
+      "block_name": "07-办事银行",
+      "scene_name": "办证",
+      "task_goal": "办理证件",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "07-08",
+      "block_id": "07",
+      "block_name": "07-办事银行",
+      "scene_name": "填表与签字",
+      "task_goal": "完成表格填写与签字",
+      "typical_functions": [
+        "ask_for_information",
+        "clarify",
+        "request",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "08-01",
+      "block_id": "08",
+      "block_name": "08-旅游观光",
+      "scene_name": "买景点门票",
+      "task_goal": "购买景点门票",
+      "typical_functions": [
+        "request",
+        "ask_for_information",
+        "make_a_payment",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "08-02",
+      "block_id": "08",
+      "block_name": "08-旅游观光",
+      "scene_name": "参加一日游",
+      "task_goal": "报名参加一日游",
+      "typical_functions": [
+        "make_a_reservation",
+        "ask_for_information",
+        "negotiate",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "08-03",
+      "block_id": "08",
+      "block_name": "08-旅游观光",
+      "scene_name": "景点讲解",
+      "task_goal": "听取景点讲解并询问相关信息",
+      "typical_functions": [
+        "ask_for_information",
+        "clarify",
+        "confirm",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "08-04",
+      "block_id": "08",
+      "block_name": "08-旅游观光",
+      "scene_name": "游客中心咨询",
+      "task_goal": "在游客中心咨询游览信息",
+      "typical_functions": [
+        "ask_for_information",
+        "ask_for_directions",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "08-05",
+      "block_id": "08",
+      "block_name": "08-旅游观光",
+      "scene_name": "请人帮忙拍照",
+      "task_goal": "请路人帮忙拍照",
+      "typical_functions": [
+        "request",
+        "clarify",
+        "confirm",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "08-06",
+      "block_id": "08",
+      "block_name": "08-旅游观光",
+      "scene_name": "买纪念品",
+      "task_goal": "购买纪念品",
+      "typical_functions": [
+        "ask_for_information",
+        "negotiate",
+        "make_a_payment",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "08-07",
+      "block_id": "08",
+      "block_name": "08-旅游观光",
+      "scene_name": "行程咨询",
+      "task_goal": "咨询行程安排",
+      "typical_functions": [
+        "ask_for_information",
+        "request",
+        "clarify",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "08-08",
+      "block_id": "08",
+      "block_name": "08-旅游观光",
+      "scene_name": "遇到问题",
+      "task_goal": "在旅途中遇到走散或丢东西等问题时求助",
+      "typical_functions": [
+        "describe_problem",
+        "request",
+        "ask_for_information",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "09-01",
+      "block_id": "09",
+      "block_name": "09-社交闲聊",
+      "scene_name": "初次见面与自我介绍",
+      "task_goal": "初次见面并作自我介绍",
+      "typical_functions": [
+        "ask_for_information",
+        "clarify",
+        "accept",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "09-02",
+      "block_id": "09",
+      "block_name": "09-社交闲聊",
+      "scene_name": "天气与季节闲聊",
+      "task_goal": "就天气与季节展开闲聊",
+      "typical_functions": [
+        "ask_for_information",
+        "clarify",
+        "accept",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "09-03",
+      "block_id": "09",
+      "block_name": "09-社交闲聊",
+      "scene_name": "周末与假期计划",
+      "task_goal": "聊周末与假期计划",
+      "typical_functions": [
+        "ask_for_information",
+        "accept",
+        "clarify",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "09-04",
+      "block_id": "09",
+      "block_name": "09-社交闲聊",
+      "scene_name": "兴趣爱好",
+      "task_goal": "聊兴趣爱好",
+      "typical_functions": [
+        "ask_for_information",
+        "clarify",
+        "accept",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "09-05",
+      "block_id": "09",
+      "block_name": "09-社交闲聊",
+      "scene_name": "工作与学习",
+      "task_goal": "聊工作与学习情况",
+      "typical_functions": [
+        "ask_for_information",
+        "clarify",
+        "accept",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "09-06",
+      "block_id": "09",
+      "block_name": "09-社交闲聊",
+      "scene_name": "家庭与朋友",
+      "task_goal": "聊家庭与朋友",
+      "typical_functions": [
+        "ask_for_information",
+        "clarify",
+        "accept",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "09-07",
+      "block_id": "09",
+      "block_name": "09-社交闲聊",
+      "scene_name": "邀请与赴约",
+      "task_goal": "发出或接受邀请并约定时间地点",
+      "typical_functions": [
+        "request",
+        "make_a_reservation",
+        "accept",
+        "confirm"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    },
+    {
+      "scene_id": "09-08",
+      "block_id": "09",
+      "block_name": "09-社交闲聊",
+      "scene_name": "告别与约定下次",
+      "task_goal": "告别并约定下次见面",
+      "typical_functions": [
+        "request",
+        "make_a_reservation",
+        "accept",
+        "end_a_conversation"
+      ],
+      "levels": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "dialogue_count": 3,
+      "status": "ready_for_review"
+    }
+  ]
+}

@@ -14,6 +14,7 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const { exec } = require("child_process");
 
 const IS_CLOUD = !!process.env.PORT;            // 云平台（Render/Railway 等）会注入 PORT
@@ -28,11 +29,25 @@ const MIME = {
   ".js": "text/javascript; charset=utf-8",
   ".css": "text/css; charset=utf-8",
   ".json": "application/json; charset=utf-8",
+  ".jsonl": "application/x-ndjson; charset=utf-8",
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".svg": "image/svg+xml",
   ".ico": "image/x-icon"
 };
+
+/* 前端需要读取的只读数据文件白名单（日常场景资料）。
+   只有列在这里的文件会被提供，其余一律 404：
+   包括 config.json / server.js / data/daily 下的审核与补丁文件等内部资料。 */
+const PUBLIC_FILES = new Set([
+  "/index.html",
+  "/data/daily/scenes.jsonl",
+  "/data/daily/scene_catalog.json",
+  "/data/daily/vocabulary.json",
+  "/data/daily/sources.json",
+  "/data/daily/exam_lexicon.json",
+  "/data/daily/cet_core.json"
+]);
 
 function loadConfig() {
   /* 每次请求实时读取，改完配置立即生效 */
@@ -65,30 +80,129 @@ function sendJson(res, status, obj) {
   res.end(body);
 }
 
-function readBody(req) {
+function readBody(req, limit = 2e6) {
   return new Promise((resolve, reject) => {
     let data = "";
-    req.on("data", (c) => { data += c; if (data.length > 2e6) req.destroy(); });
+    req.on("data", (c) => { data += c; if (data.length > limit) { reject(new Error("payload too large")); req.destroy(); } });
     req.on("end", () => resolve(data));
     req.on("error", reject);
   });
 }
 
+/* ================= 账号系统（零依赖：JSON 文件 + scrypt 哈希 + 随机 token） =================
+   存放位置 data/accounts/，该目录不在 PUBLIC_FILES 白名单内，外部无法直接下载。
+   密码只保存 scrypt 派生值，token 是 32 字节随机串，30 天有效。 */
+const ACCOUNTS_DIR = path.join(ROOT, "data", "accounts");
+const USERS_PATH = path.join(ACCOUNTS_DIR, "users.json");
+const TOKENS_PATH = path.join(ACCOUNTS_DIR, "tokens.json");
+const STATES_DIR = path.join(ACCOUNTS_DIR, "states");
+const TOKEN_TTL_MS = 30 * 24 * 3600 * 1000;
+const USERNAME_RE = /^[A-Za-z0-9_\u4e00-\u9fa5]{2,20}$/;
+
+function ensureDir(p) { try { fs.mkdirSync(p, { recursive: true }); } catch (_) {} }
+function readJson(p, fallback) {
+  try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch (_) { return fallback; }
+}
+function writeJson(p, obj) {
+  ensureDir(path.dirname(p));
+  fs.writeFileSync(p, JSON.stringify(obj), "utf8");
+}
+function userIdOf(username) {
+  return crypto.createHash("sha256").update(String(username).toLowerCase()).digest("hex").slice(0, 32);
+}
+function hashPassword(password, salt) {
+  return crypto.scryptSync(String(password), salt, 64, { N: 16384 }).toString("hex");
+}
+function safeEqual(a, b) {
+  const x = Buffer.from(String(a)), y = Buffer.from(String(b));
+  if (x.length !== y.length) return false;
+  return crypto.timingSafeEqual(x, y);
+}
+function issueToken(user) {
+  const tokens = readJson(TOKENS_PATH, {});
+  const now = Date.now();
+  for (const [t, info] of Object.entries(tokens)) {
+    if (!info || info.exp < now) delete tokens[t];
+  }
+  const token = crypto.randomBytes(32).toString("hex");
+  tokens[token] = { user: user, exp: now + TOKEN_TTL_MS };
+  writeJson(TOKENS_PATH, tokens);
+  return token;
+}
+function userFromToken(req) {
+  const h = String(req.headers["authorization"] || "");
+  const m = /^Bearer\s+([a-f0-9]{16,128})$/i.exec(h.trim());
+  if (!m) return null;
+  const tokens = readJson(TOKENS_PATH, {});
+  const info = tokens[m[1]];
+  if (!info || info.exp < Date.now()) return null;
+  const users = readJson(USERS_PATH, {});
+  if (!users[info.user]) return null;
+  return info.user;
+}
+function statePathOf(user) { return path.join(STATES_DIR, user + ".json"); }
+function readUserState(user) {
+  const raw = readJson(statePathOf(user), null);
+  if (!raw || typeof raw !== "object") return {};
+  /* 落盘格式是 {state, savedAt}，对外只返回里面的 state */
+  return (raw.state && typeof raw.state === "object") ? raw.state : raw;
+}
+
+async function handleRegister(req, res) {
+  let body;
+  try { body = JSON.parse(await readBody(req, 4e5)); } catch (_) { sendJson(res, 400, { error: "请求格式不正确" }); return; }
+  const username = String(body.username || "").trim();
+  const password = String(body.password || "");
+  if (!USERNAME_RE.test(username)) { sendJson(res, 400, { error: "用户名需 2–20 位，只能用中英文、数字或下划线" }); return; }
+  if (password.length < 6) { sendJson(res, 400, { error: "密码至少 6 位" }); return; }
+  const key = userIdOf(username);
+  const users = readJson(USERS_PATH, {});
+  if (users[key]) { sendJson(res, 409, { error: "这个用户名已经被注册了，换个名字或直接登录" }); return; }
+  const salt = crypto.randomBytes(16).toString("hex");
+  users[key] = { username, salt, hash: hashPassword(password, salt), createdAt: new Date().toISOString() };
+  writeJson(USERS_PATH, users);
+  sendJson(res, 200, { token: issueToken(key), username });
+}
+
+async function handleLogin(req, res) {
+  let body;
+  try { body = JSON.parse(await readBody(req, 4e5)); } catch (_) { sendJson(res, 400, { error: "请求格式不正确" }); return; }
+  const username = String(body.username || "").trim();
+  const password = String(body.password || "");
+  const users = readJson(USERS_PATH, {});
+  const user = users[userIdOf(username)];
+  if (!user || !safeEqual(hashPassword(password, user.salt), user.hash)) {
+    sendJson(res, 401, { error: "用户名或密码不正确" });
+    return;
+  }
+  sendJson(res, 200, { token: issueToken(userIdOf(username)), username: user.username });
+}
+
+async function handleSaveState(req, res) {
+  const user = userFromToken(req);
+  if (!user) { sendJson(res, 401, { error: "登录已失效，请重新登录" }); return; }
+  let body;
+  try { body = JSON.parse(await readBody(req, 8e6)); } catch (_) { sendJson(res, 400, { error: "请求体过大或格式不正确" }); return; }
+  const state = (body && typeof body.state === "object" && body.state) || {};
+  writeJson(statePathOf(user), { state, savedAt: new Date().toISOString() });
+  const users = readJson(USERS_PATH, {});
+  sendJson(res, 200, { ok: true, savedAt: new Date().toISOString(), username: (users[user] && users[user].username) || "" });
+}
+
 function serveStatic(req, res, urlPath) {
-  /* 安全：只对外提供 index.html。
-     config.json / server.js / .git / .workbuddy 等一律 404，
-     防止部署到公网后密钥文件被直接下载。 */
-  let filePath = urlPath === "/" ? "/index.html" : urlPath;
-  filePath = path.normalize(decodeURIComponent(filePath)).replace(/^(\.\.[/\\])+/, "");
-  const base = path.basename(filePath).toLowerCase();
-  const blocked =
-    base !== "index.html" ||                 /* 单文件应用，只放行 index.html */
-    filePath.includes("..");
-  if (blocked) { res.writeHead(404); res.end("Not Found"); return; }
-  const abs = path.join(ROOT, filePath);
+  /* 安全：只对外提供白名单内的文件。
+     config.json / server.js / .git / 审核补丁等一律 404，
+     防止部署到公网后密钥或内部资料被直接下载。 */
+  let filePath = urlPath === "/" ? "/index.html" : decodeURIComponent(urlPath);
+  filePath = path.posix.normalize(filePath.replace(/\\/g, "/"));
+  if (filePath.includes("..")) { res.writeHead(404); res.end("Not Found"); return; }
+  const rel = filePath.startsWith("/") ? filePath : "/" + filePath;
+  if (!PUBLIC_FILES.has(rel)) { res.writeHead(404); res.end("Not Found"); return; }
+  const abs = path.join(ROOT, rel);
+  const ext = path.extname(rel).toLowerCase();
   fs.readFile(abs, (err, buf) => {
     if (err) { res.writeHead(404); res.end("Not Found"); return; }
-    res.writeHead(200, { "Content-Type": MIME[".html"] });
+    res.writeHead(200, { "Content-Type": MIME[ext] || "application/octet-stream" });
     res.end(buf);
   });
 }
@@ -161,7 +275,7 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(204, {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type"
+      "Access-Control-Allow-Headers": "Content-Type,Authorization"
     });
     res.end();
     return;
@@ -179,6 +293,22 @@ const server = http.createServer(async (req, res) => {
 
   if (req.method === "POST" && urlPath === "/api/chat") {
     await handleChat(req, res);
+    return;
+  }
+
+  /* ===== 账号与云端学习数据 ===== */
+  if (req.method === "POST" && urlPath === "/api/auth/register") { await handleRegister(req, res); return; }
+  if (req.method === "POST" && urlPath === "/api/auth/login") { await handleLogin(req, res); return; }
+  if (urlPath === "/api/state") {
+    const user = userFromToken(req);
+    if (!user) { sendJson(res, 401, { error: "登录已失效，请重新登录" }); return; }
+    if (req.method === "GET") {
+      const users = readJson(USERS_PATH, {});
+      sendJson(res, 200, { username: (users[user] && users[user].username) || "", state: readUserState(user) });
+      return;
+    }
+    if (req.method === "POST") { await handleSaveState(req, res); return; }
+    res.writeHead(405); res.end("Method Not Allowed");
     return;
   }
 
