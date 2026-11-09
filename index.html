@@ -1230,6 +1230,7 @@
       <span>把本机已有的记录合并进这个账号</span>
     </label>
     <p class="auth-msg" id="auth-msg" aria-live="polite"></p>
+    <p class="auth-sub hidden" id="auth-local-help">原先在这台电脑注册的账号，请双击项目中的“启动.bat”，在打开的本地网页登录。线上账号服务接通前，本页仍可学习并在本浏览器保存记录。</p>
     <button class="btn auth-submit" id="auth-submit" type="button">登录</button>
     <button class="btn-ghost auth-switch" id="auth-switch" type="button">还没有账号？去注册</button>
   </div>
@@ -5651,8 +5652,106 @@ setGamePanelOpen(false, false);
 let authInfo = null;              /* {token, username} */
 let cloudSaveTimer = null;
 let authMode = "login";           /* login | register */
+let accountService = { status: "checking", base: "", message: "正在连接账号服务……" };
+let accountServiceProbe = null;
+let authSubmitting = false;
+let accountSyncReady = false;
 
-function cloudApiReady() { return location.protocol !== "file:"; }
+function cloudApiReady() { return accountService.status === "ready"; }
+
+function accountUnavailableMessage() {
+  return "此网页尚未连接账号服务，暂不能登录或注册。原账号仍保存在注册时使用的电脑上，本机学习记录也会保留。";
+}
+
+async function fetchAccountJson(url, options = {}) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal, redirect: "error", cache: "no-store" });
+    let data;
+    try { data = await response.json(); }
+    catch (_) { throw new Error("账号服务返回了网页或无效数据，请检查服务连接。你的本机记录未被修改。"); }
+    if (!data || typeof data !== "object" || Array.isArray(data)) throw new Error("账号服务返回的数据格式不正确。");
+    return { response, data };
+  } catch (error) {
+    if (error.name === "AbortError") throw new Error("账号服务连接超时，请稍后重试。本机学习记录会保留。");
+    if (error instanceof TypeError) throw new Error("无法连接账号服务，请检查网络或稍后重试。本机学习记录会保留。");
+    throw error;
+  } finally { clearTimeout(timeout); }
+}
+
+function refreshAccountAvailability() {
+  const button = $("auth-submit");
+  button.disabled = authSubmitting || !cloudApiReady();
+  $("auth-local-help").classList.toggle("hidden", cloudApiReady());
+  if (!$("auth-modal").classList.contains("hidden") && !authSubmitting) {
+    setAuthMsg(cloudApiReady() ? "" : accountService.message);
+  }
+}
+
+/* 先探测真实账号能力，再发用户名和密码；GitHub Pages 的 HTML/404 不算账号服务。 */
+async function ensureAccountService(force = false) {
+  if (accountServiceProbe) return accountServiceProbe;
+  if (!force && accountService.status !== "checking") return cloudApiReady();
+  accountService = { status: "checking", base: "", message: "正在连接账号服务……" };
+  refreshAccountAvailability();
+  accountServiceProbe = (async () => {
+    try {
+      if (location.protocol === "file:") throw new Error(accountUnavailableMessage());
+      let base = "";
+      let config;
+      try {
+        const result = await fetchAccountJson(new URL("site-config.json", location.href).href);
+        if (result.response.ok) config = result.data;
+      } catch (_) { /* 旧版同源服务没有公开配置文件，仍可探测同源账号接口。 */ }
+      if (config && config.accountApiBase) {
+        const url = new URL(config.accountApiBase);
+        if (url.protocol !== "https:" || url.username || url.password || url.search || url.hash) {
+          throw new Error("线上账号服务地址必须是 HTTPS 地址，请联系网站管理员修正配置。");
+        }
+        base = url.href.replace(/\/+$/, "");
+      }
+      // 没有外部服务时，仅探测当前源；绝不从公开网页自动连接用户的 localhost。
+      let confirmed = false;
+      try {
+        const { response, data } = await fetchAccountJson(base + "/api/health");
+        confirmed = response.ok && data.service === "englishmurdermystery" && data.accounts === true;
+      } catch (_) { /* 兼容仍在运行的旧版账号服务。 */ }
+      if (!confirmed) {
+        const { response, data } = await fetchAccountJson(base + "/api/state");
+        confirmed = response.status === 401 && data.error === "登录已失效，请重新登录";
+      }
+      if (!confirmed) throw new Error(accountUnavailableMessage());
+      accountService = { status: "ready", base, message: "" };
+      return true;
+    } catch (error) {
+      accountService = { status: "unavailable", base: "", message: error.message.includes("HTTPS") ? error.message : accountUnavailableMessage() };
+      return false;
+    } finally { refreshAccountAvailability(); }
+  })();
+  try { return await accountServiceProbe; }
+  finally { accountServiceProbe = null; }
+}
+
+async function accountRequest(path, options = {}) {
+  if (!await ensureAccountService()) throw new Error(accountService.message);
+  return fetchAccountJson(accountService.base + path, options);
+}
+
+function expireAccountSession() {
+  authInfo = null;
+  accountSyncReady = false;
+  localStorage.removeItem(LS_AUTH);
+  renderAccountBar();
+}
+
+function accountStateFromReply(data) {
+  if (!data || typeof data.username !== "string" || !data.username ||
+      !data.state || typeof data.state !== "object" || Array.isArray(data.state)) {
+    throw new Error("账号服务返回的学习记录不完整，暂未同步。本机记录会保留。");
+  }
+  return data.state;
+}
 
 function setAuthMsg(text, ok = false) {
   const el = $("auth-msg");
@@ -5755,38 +5854,38 @@ function applyStateToLocal(state) {
 }
 
 function scheduleCloudPush() {
-  if (!authInfo || !cloudApiReady()) return;
+  if (!authInfo || !cloudApiReady() || !accountSyncReady) return;
   clearTimeout(cloudSaveTimer);
   cloudSaveTimer = setTimeout(() => { pushCloudState(); }, 1200);
 }
 
 async function pushCloudState() {
-  if (!authInfo || !cloudApiReady()) return;
+  if (!authInfo || !cloudApiReady() || !accountSyncReady) return;
   try {
-    const res = await fetch("/api/state", {
+    const { response: res, data } = await accountRequest("/api/state", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": "Bearer " + authInfo.token },
       body: JSON.stringify({ state: snapshotLocalState() })
     });
     if (res.status === 401) {
-      authInfo = null;
-      localStorage.removeItem(LS_AUTH);
-      renderAccountBar();
+      expireAccountSession();
     }
-  } catch (_) { /* 后端暂时不可达，下次保存时再推 */ }
+    if (!res.ok) throw new Error(data.error || "学习记录暂未同步，本机记录已保留。");
+  } catch (error) { setAuthMsg(error.message); /* 下次保存时再推，保留本机数据。 */ }
 }
 
 async function pullCloudState(mergeLocal) {
-  const res = await fetch("/api/state", { headers: { "Authorization": "Bearer " + authInfo.token } });
-  const data = await res.json();
+  const { response: res, data } = await accountRequest("/api/state", { headers: { "Authorization": "Bearer " + authInfo.token } });
+  if (res.status === 401) expireAccountSession();
   if (!res.ok) throw new Error(data.error || "读取账号数据失败");
-  const remote = data.state || {};
-  const hasRemote = Boolean(remote.campaign || remote.vocabBook || remote.learningVocab);
+  const remote = accountStateFromReply(data);
+  const hasRemote = Boolean(remote.campaign || remote.vocabBook || remote.learningVocab || remote.scriptHistory);
   /* 两边都有数据或只有一边有时，一律取并集：既不丢账号里的旧记录，也不丢本机刚练的词 */
   const state = hasRemote ? mergeStateWithLocal(remote) : snapshotLocalState();
   applyStateToLocal(state);
   authInfo.username = data.username || authInfo.username;
   localStorage.setItem(LS_AUTH, JSON.stringify(authInfo));
+  accountSyncReady = true;
   await pushCloudState();
 }
 
@@ -5798,7 +5897,7 @@ function renderAccountBar() {
     const chip = document.createElement("span");
     chip.className = "account-chip";
     chip.textContent = "👤 " + (authInfo.username || "已登录");
-    chip.title = "学习记录会同步到该账号";
+    chip.title = accountSyncReady ? "学习记录会同步到该账号" : "账号暂未完成同步，本机学习记录会保留";
     const out = document.createElement("button");
     out.type = "button";
     out.className = "btn-ghost";
@@ -5827,7 +5926,8 @@ function openAuth(mode) {
   $("auth-switch").textContent = authMode === "login" ? "还没有账号？去注册" : "已有账号？去登录";
   $("auth-merge-row").classList.remove("hidden");
   $("auth-merge").checked = true;
-  setAuthMsg(cloudApiReady() ? "" : "账号功能需要后端支持：请用「启动.bat」打开 http://127.0.0.1:8787 再登录。");
+  refreshAccountAvailability();
+  ensureAccountService(!cloudApiReady());
   $("auth-username").value = "";
   $("auth-password").value = "";
   setTimeout(() => $("auth-username").focus(), 30);
@@ -5838,22 +5938,25 @@ function closeAuth() { $("auth-modal").classList.add("hidden"); }
 function toggleAuthMode() { openAuth(authMode === "login" ? "register" : "login"); }
 
 async function submitAuth() {
+  if (authSubmitting) return;
   const username = $("auth-username").value.trim();
   const password = $("auth-password").value;
-  if (!cloudApiReady()) { setAuthMsg("当前是本地文件打开模式，账号功能需要后端：先运行「启动.bat」，再访问 http://127.0.0.1:8787 登录。"); return; }
+  if (!await ensureAccountService()) { setAuthMsg(accountService.message); return; }
   if (!username || !password) { setAuthMsg("用户名和密码都要填。"); return; }
   const btn = $("auth-submit");
+  authSubmitting = true;
   btn.disabled = true;
   setAuthMsg("处理中……", true);
   try {
-    const res = await fetch("/api/auth/" + authMode, {
+    const { response: res, data } = await accountRequest("/api/auth/" + authMode, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password })
     });
-    const data = await res.json();
     if (!res.ok) throw new Error(data.error || "操作失败");
-    authInfo = { token: data.token, username: data.username || username };
+    if (typeof data.token !== "string" || !data.token) throw new Error("账号服务未返回有效登录凭据，请稍后重试。");
+    accountSyncReady = false;
+    authInfo = { token: data.token, username: data.username || username, service: accountService.base || location.origin };
     localStorage.setItem(LS_AUTH, JSON.stringify(authInfo));
     await pullCloudState($("auth-merge").checked);
     renderAccountBar();
@@ -5862,13 +5965,16 @@ async function submitAuth() {
   } catch (err) {
     setAuthMsg(err.message || "登录失败");
   } finally {
-    btn.disabled = false;
+    authSubmitting = false;
+    btn.disabled = !cloudApiReady();
   }
 }
 
 function signOut() {
   const name = (authInfo && authInfo.username) || "";
   authInfo = null;
+  accountSyncReady = false;
+  clearTimeout(cloudSaveTimer);
   localStorage.removeItem(LS_AUTH);
   /* 换账号时不能把上一个人的记录带过去：本机缓存清空，重新登录同一账号会自动拉回 */
   applyStateToLocal({ campaign: { completed: {}, usedWords: [] }, vocabBook: [], learningVocab: [] });
@@ -5882,24 +5988,18 @@ async function restoreAuth() {
   let saved = null;
   try { saved = JSON.parse(localStorage.getItem(LS_AUTH) || "null"); } catch (_) {}
   if (!saved || !saved.token) { renderAccountBar(); return; }
+  if (!await ensureAccountService()) { renderAccountBar(); return; }
+  if (saved.service && saved.service !== (accountService.base || location.origin)) { renderAccountBar(); return; }
   authInfo = saved;
-  if (!cloudApiReady()) { renderAccountBar(); return; }
   try {
-    const res = await fetch("/api/state", { headers: { "Authorization": "Bearer " + authInfo.token } });
-    if (res.status !== 200) {
-      authInfo = null;
-      localStorage.removeItem(LS_AUTH);
-      renderAccountBar();
-      return;
-    }
-    const data = await res.json();
+    const { response: res, data } = await accountRequest("/api/state", { headers: { "Authorization": "Bearer " + authInfo.token } });
+    if (res.status === 401) { expireAccountSession(); return; }
+    if (!res.ok) throw new Error(data.error || "账号服务暂时不可用");
+    const remote = accountStateFromReply(data);
     authInfo.username = data.username || authInfo.username;
-    const remote = data.state || {};
-    const hasRemote = Boolean(remote.campaign || remote.vocabBook || remote.learningVocab);
-    const localEmpty = !vocabBook.size
-      && !learningVocab.size
-      && !Object.keys(loadCampaignState().completed).length;
-    if (hasRemote && localEmpty) applyStateToLocal(mergeStateWithLocal(remote));
+    const hasRemote = Boolean(remote.campaign || remote.vocabBook || remote.learningVocab || remote.scriptHistory);
+    if (hasRemote) applyStateToLocal(mergeStateWithLocal(remote));
+    accountSyncReady = true;
   } catch (_) { /* 后端未启动：保留登录态展示，功能等后端可用后再生效 */ }
   renderAccountBar();
 }
@@ -6106,6 +6206,7 @@ renderReviewQueueCount();   /* 初始化「开始复习」按钮上的到期词�
 updateCampaignProgressUI();
 showConfigStep("step-goal");
 restoreAuth();            /* 恢复登录态：已登录则显示账号，账号里有本机没有的记录时自动拉回 */
+ensureAccountService();   /* 账号能力独立于大模型连接，静态站不冒充登录服务。 */
 setState("CONFIG");
 detectBackend();
 loadDailyData();          /* 读取 data/daily 的场景与词汇资料，建立索引 */

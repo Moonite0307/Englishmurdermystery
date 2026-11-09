@@ -41,6 +41,7 @@ const MIME = {
    包括 config.json / server.js / data/daily 下的审核与补丁文件等内部资料。 */
 const PUBLIC_FILES = new Set([
   "/index.html",
+  "/site-config.json",
   "/data/daily/scenes.jsonl",
   "/data/daily/scene_catalog.json",
   "/data/daily/vocabulary.json",
@@ -92,7 +93,9 @@ function readBody(req, limit = 2e6) {
 /* ================= 账号系统（零依赖：JSON 文件 + scrypt 哈希 + 随机 token） =================
    存放位置 data/accounts/，该目录不在 PUBLIC_FILES 白名单内，外部无法直接下载。
    密码只保存 scrypt 派生值，token 是 32 字节随机串，30 天有效。 */
-const ACCOUNTS_DIR = path.join(ROOT, "data", "accounts");
+const ACCOUNTS_DIR = process.env.ACCOUNT_DATA_DIR
+  ? path.resolve(process.env.ACCOUNT_DATA_DIR)
+  : path.join(ROOT, "data", "accounts");
 const USERS_PATH = path.join(ACCOUNTS_DIR, "users.json");
 const TOKENS_PATH = path.join(ACCOUNTS_DIR, "tokens.json");
 const STATES_DIR = path.join(ACCOUNTS_DIR, "states");
@@ -288,6 +291,12 @@ const server = http.createServer(async (req, res) => {
       model: cfg.model,
       apiBase: cfg.apiBase
     });
+    return;
+  }
+
+  // 不读取或返回任何账号资料；即使没有大模型密钥也可验证账号服务已上线。
+  if (req.method === "GET" && urlPath === "/api/health") {
+    sendJson(res, 200, { service: "englishmurdermystery", accounts: true });
     return;
   }
 
