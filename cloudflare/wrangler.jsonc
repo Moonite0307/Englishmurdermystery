@@ -1,0 +1,17 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "englishmurdermystery-accounts",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-11-09",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGINS": "https://moonite0307.github.io,http://127.0.0.1:8787,http://localhost:8787"
+  },
+  "triggers": { "crons": ["0 3 * * *"] },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "englishmurdermystery-accounts",
+    "database_id": "00000000-0000-0000-0000-000000000000"
+  }]
+}

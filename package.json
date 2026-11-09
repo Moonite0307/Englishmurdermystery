@@ -5,9 +5,14 @@
   "description": "沉浸式 AI 剧本杀语言学习助手（零依赖 Node 后端 + 单文件前端）",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "deploy:accounts": "node scripts/deploy-free-accounts.cjs",
+    "test:cloudflare": "node scripts/test-cloudflare-accounts.cjs"
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "wrangler": "4.158.0"
   }
 }

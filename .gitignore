@@ -24,3 +24,7 @@ node_modules/
 # Python 缓存
 __pycache__/
 *.py[cod]
+
+# Cloudflare 本地运行数据、部署配置及私密账号迁移文件
+.wrangler/
+.cloudflare-private/

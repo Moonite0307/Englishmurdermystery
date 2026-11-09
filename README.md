@@ -18,4 +18,4 @@
 
 GitHub Pages 不会运行账号后端。静态页面通过 `site-config.json` 的 `accountApiBase` 连接独立 HTTPS 账号服务；未接通服务时会显示说明，并保留本机记录。
 
-部署配置、持久化磁盘和原账号私密迁移步骤见 [ACCOUNT_DEPLOYMENT.md](ACCOUNT_DEPLOYMENT.md)。仓库提供的 Render 方案使用付费服务和持久化磁盘，需要在平台确认后创建。
+免费部署使用 Cloudflare Workers Free + D1。双击 `免费部署账号.bat`，按浏览器提示登录授权即可开始；不需要 Visa、购买域名或开通付费套餐。操作与迁移说明见 [ACCOUNT_DEPLOYMENT.md](ACCOUNT_DEPLOYMENT.md)。

@@ -1,58 +1,51 @@
-# GitHub Pages 账号服务部署
+# 免费上线账号：操作说明
 
-## 当前状态
+本版使用 **GitHub Pages + Cloudflare Workers Free + D1 免费数据库**。不需要 Visa、不购买域名、不使用 Render，不开通 Workers Paid。
 
-- GitHub Pages 只提供 HTML、JavaScript 和词库文件，不会运行 `server.js`。
-- 本机注册的账号、密码校验数据和学习记录仍在 `data/accounts/`，本次修改没有更改或上传它们。
-- 线上登录需要一台持续运行的 Node 服务和持久化存储。仅修改网页或重新发布 Pages 不能让本地账号自动上线。
-- 网页已支持单独连接账号服务，配置在 `site-config.json`。空地址表示仅探测同源账号服务；不会向 GitHub Pages 提交密码，也不会自动连接访问者的 localhost。
+## 你现在需要做的
 
-## 建议方案：Pages + Render 账号服务
+1. 双击项目中的 **免费部署账号.bat**。
+2. 浏览器打开 Cloudflare 页面后，注册或登录、验证邮箱，点击 **允许 / Allow**。
+3. 如果平台让你选择服务，选择 **Workers Free**。不要选择付费套餐，不要填写银行卡。
+4. 等窗口提示“免费账号服务已通过线上验收”。然后告诉我“部署完成”，我会把网页连接配置更新到 GitHub。
 
-仓库中的 `render.yaml` 已准备好 Node 服务、健康检查和持久化磁盘。
-它选择 Render 的 **starter 付费方案及 1 GB 磁盘**，费用以创建服务时平台展示为准。免费临时文件系统不能承担长期账号存储。
-当前尚未创建任何云服务，也没有产生部署费用。
+不需要手工创建数据库或拷贝密码文件。脚本会创建免费 D1 数据库、初始化表结构、私密迁移本机账号、发布服务，测试注册/登录/学习记录后才更新 `site-config.json`。
 
-1. 在 Render 登录后选择 **New → Blueprint**，连接本仓库 `Moonite0307/Englishmurdermystery` 的 `main` 分支。
-2. 检查 `render.yaml` 中的服务和磁盘费用，确认后创建。服务运行 `node server.js`，账号目录为 `/var/data/accounts`。
-3. 等待服务就绪，打开平台分配的网址的 `/api/health`。必须返回 `{"service":"englishmurdermystery","accounts":true}`。
-4. 暂时不要让真实用户在新服务注册；先按下节迁移原账号，避免同名账号冲突。
-5. 将 `site-config.json` 改为 `{"accountApiBase":"https://实际分配的服务域名"}`，提交到 GitHub。这里必须填写真实 HTTPS 地址，不含 `/api` 后缀，不含密钥。
-6. 等 Pages 发布后强制刷新，在 Pages 页面分别验证旧账号登录、新账号注册、学习记录同步、退出后再登录，以及手机访问。
-7. 在 Render 执行一次重新部署，再验证账号和学习记录仍在，确认服务确实使用持久化磁盘。
+如果提示尚未安装部署工具，在项目目录运行一次 `npm install`；开发电脑已安装。需要 Node.js 22 或更新版本。
+如果提示设置 workers.dev 子域名，在 Cloudflare 的 **Workers & Pages** 页面设置一个免费的子域名，然后再次双击部署文件；不需要购买域名。
+如果套餐检查被平台拒绝，需要你在控制台确认 Free 后告知我；我会继续部署，不需要账单密钥。免费额度不足、网络不通或线上验收失败时，脚本会停止，不会改成付费套餐，也不会把未验收的服务接到网页。
 
-账号服务独立于大模型接口，本方案不要求把模型密钥填进账号服务。剧本生成继续使用现有连接。
-若希望整个网站也由 Node 服务托管，可直接使用服务网址，同源账号接口同样可用。
+## 原账号和学习记录
 
-## 迁移原账号：只通过私密通道
+- 原账号仍在电脑的 `data/accounts/`，脚本不会删除或改写它。
+- 迁移保留原用户名、原密码校验和服务端已保存的学习记录。旧登录凭据不迁移，第一次访问线上站需重新登录。
+- 仅存在浏览器、尚未同步的记录，应先在本地网页登录原账号完成同步，再迁移。
+- 迁移文件只生成在 Git 忽略的 `.cloudflare-private/` 内，含敏感密码校验信息；不要截图、分享或提交。
+- 上传仅使用你登录授权的 Cloudflare 私密数据库接口，不会把账号资料上传 GitHub。
+- 已完成迁移后再次运行，会保留云端最新记录。若云端已有其他账号，脚本会停止，避免覆盖。
+- 正式使用线上服务后，避免同时在独立的旧本地服务里写入记录，以免记录分散。
 
-1. 关闭原本运行 `server.js` 的窗口，避免迁移期间仍在写入。
-2. 在电脑上另外复制一份完整的 `data/accounts/` 作为备份。不要删除原目录，不要上传 GitHub，也不要把内容粘贴到聊天或公开日志。
-3. 按 Render 控制台 **Connect / SSH** 提供的连接方式，通过 SSH/SCP 或私密文件传输把目录内容送入服务的 `/var/data/accounts/`。应保持以下结构：
+## 免费的范围
 
-   ```text
-   /var/data/accounts/users.json
-   /var/data/accounts/tokens.json
-   /var/data/accounts/states/<用户ID>.json
-   ```
+根据 2026-11-09 检查的官方文档：
 
-   不要多套一层 `accounts/accounts/`。如果目标已经有真实用户，先备份并合并两端数据，禁止直接覆盖；本站没有自动数据库合并工具。
+- Workers Free：每天 100,000 次请求，每次 10 ms CPU；密码校验使用运行环境的原生异步接口，实际是否满足线上限制还需部署验收。
+- D1 Free：每天 500 万行读取、10 万行写入；单库最多 500 MB，账户总存储最多 5 GB。
+- 免费额度超出会限制请求或数据库操作；脚本没有购买、订阅、升级或绑定银行卡操作。
+- 这是**账号注册、登录和记录同步**的免费方案。剧本生成继续使用现有模型接口，其供应商费用独立，不包含在 Cloudflare 免费额度内。
+- 网站访问速度和可达性取决于用户网络；workers.dev 在某些地区或网络可能不可达，必须在实际使用的电脑与手机上验收。
 
-4. 确认新服务中的目录只对运行服务的账号可读写，再使用原用户名和原密码登录。密码哈希格式保持不变，无需重设密码。
-5. 验证旧账号里的词汇、闯关记录、剧本档案。原网站和新网站的浏览器缓存彼此独立，迁移的是服务端已保存的数据；仅存在浏览器中的记录需要先登录原服务并完成同步。
-6. 验证成功后保留本机备份。正式切换后避免继续使用两台互不相连的服务写入同一账号，否则记录会分散。
+官方来源：[Workers 价格](https://developers.cloudflare.com/workers/platform/pricing/)、[D1 价格](https://developers.cloudflare.com/d1/platform/pricing/)、[运行限制](https://developers.cloudflare.com/workers/platform/limits/)。
 
-## 其他 Node 托管平台
+## 开发说明
 
-- Node.js 22，启动命令 `node server.js`。
-- 平台提供 `PORT` 环境变量；程序会监听 `0.0.0.0`。
-- `ACCOUNT_DATA_DIR` 必须指向持久化卷，例如 `/var/data/accounts`。默认不设置时仍使用原本的 `data/accounts/`。
-- 提供有效 HTTPS 网址，允许 Pages 域名的跨域 GET/POST/OPTIONS 及 `Content-Type, Authorization` 请求头；当前服务已支持这些请求。
-- 不把账号文件作为静态资源发布，不将私有账号文件或模型密钥加入 Git。
+- Worker：`cloudflare/worker.mjs`；表结构：`cloudflare/schema.sql`。
+- 开发配置：`cloudflare/wrangler.jsonc`。数据库 ID 是占位符，部署脚本会在私密目录写入真实配置。
+- 私密迁移工具：`scripts/export-cloudflare-accounts.cjs`。使用严格 INSERT，账号冲突不会覆盖密码或学习记录；大文本拆分为小 SQL 语句，保留引号、中文和 emoji。
+- 只允许 GitHub Pages 源、当前 Worker 源及配置中的本地开发源跨域连接。
+- 本机 `server.js` 继续使用原本文件账号库；免费 Worker 使用持久化 D1，不依赖易失文件系统。
+- 本地验证：`npm run test:cloudflare`，使用真实 workerd/D1 模拟环境测试原密码、迁移、账号隔离、会话失效、重启持久化、超大记录保护和登录限流，不触碰真实账号。
 
-## 发布后的故障排查
+## 当前发布状态
 
-- 页面提示“尚未连接账号服务”：检查 `site-config.json` 的服务地址、健康接口、HTTPS、网络和 CORS。
-- `Unexpected token '<'`：旧页面或错误服务返回了 HTML。新版先检测服务能力，并显示可读错误，不会清空本机记录。
-- 原账号密码不正确，但本地仍能登录：通常是账号文件未迁移到实际使用的持久化目录；检查目录结构，不要重复注册覆盖旧账号。
-- 重启后账号消失：账号目录没有挂载持久化磁盘。先纠正挂载并从私密备份恢复，再开放注册。
+本地准备与测试不代表服务已经上线。只有完成 Cloudflare 登录授权、成功部署、私密迁移、线上验收，并将真实地址更新到 GitHub 后，静态链接的账号功能才可使用。
