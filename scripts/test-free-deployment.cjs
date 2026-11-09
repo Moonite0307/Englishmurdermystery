@@ -32,7 +32,7 @@ async function scenario({ paid = false, quotaFailure = false, existing = false, 
       exportMigration: () => ({ count: 1, output: path.join(temp, '.cloudflare-private/accounts.sql') })
     } : require(name),
     process: { platform: 'linux', versions: process.versions, env: {}, execPath: process.execPath }, console: { log() {}, error() {} },
-    AbortSignal, fetch: async (url, options = {}) => {
+    AbortSignal, setTimeout, fetch: async (url, options = {}) => {
       urls.push(url);
       const endpoint = new URL(url).pathname;
       if (endpoint.endsWith('/subscriptions')) return new Response(JSON.stringify({ success: !permissionDenied, result: paid ? [{ rate_plan: { id: 'workers_paid', name: 'Workers Paid' } }] : [] }), { status: permissionDenied ? 403 : 200 });

@@ -55,7 +55,14 @@ async function verifyService(base) {
     return data;
   }
   try {
-    const health = await call('/api/health');
+    let health;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try { health = await call('/api/health'); break; }
+      catch (error) {
+        if (attempt === 2) throw error;
+        await new Promise(resolve => setTimeout(resolve, 3000));
+      }
+    }
     if (health.accounts !== true || health.service !== 'englishmurdermystery') throw new Error('账号服务健康检查未通过。');
     const signup = await call('/api/auth/register', 'POST', { username: testName, password });
     if (!signup.token) throw new Error('注册验收未通过。');
@@ -142,6 +149,7 @@ async function deploy({ freePlanConfirmed = false } = {}) {
   console.log('正在发布并验收线上注册、登录和记录同步……');
   cli(['deploy', '--config', configPath]);
   const base = 'https://' + config.name + '.' + subdomain.subdomain + '.workers.dev';
+  console.log('已发布，正在验证服务地址：' + base);
   await verifyService(base);
   fs.writeFileSync(path.join(root, 'site-config.json'), JSON.stringify({ accountApiBase: base }, null, 2) + '\n');
   console.log('免费账号服务已通过线上验收：' + base);
