@@ -1,0 +1,4238 @@
+{
+  "schema_version": "daily_review_queue.v1",
+  "count": 529,
+  "items": [
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-opening",
+      "word": "opening",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-discount",
+      "word": "discount",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-debt",
+      "word": "debt",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-charge",
+      "word": "charge",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-rent",
+      "word": "rent",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-double",
+      "word": "double",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-platform",
+      "word": "platform",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-license",
+      "word": "license",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-flight",
+      "word": "flight",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-reception",
+      "word": "reception",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-lobby",
+      "word": "lobby",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-grand",
+      "word": "grand",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-block",
+      "word": "block",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-turn",
+      "word": "turn",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-lost",
+      "word": "lost",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-fever",
+      "word": "fever",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-pneumonia",
+      "word": "pneumonia",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-clinical",
+      "word": "clinical",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-medical",
+      "word": "medical",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-treatment",
+      "word": "treatment",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-condition",
+      "word": "condition",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-deposit",
+      "word": "deposit",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-signature",
+      "word": "signature",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-identification",
+      "word": "identification",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-account",
+      "word": "account",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-application",
+      "word": "application",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-bond",
+      "word": "bond",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-currency",
+      "word": "currency",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-congress",
+      "word": "congress",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-contract",
+      "word": "contract",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-charter",
+      "word": "charter",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-government",
+      "word": "government",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-president",
+      "word": "president",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-control",
+      "word": "control",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-temple",
+      "word": "temple",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-natural",
+      "word": "natural",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-trade",
+      "word": "trade",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-island",
+      "word": "island",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-captain",
+      "word": "captain",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "phonetic_needs_spot_check",
+      "record_id": "vocab-colonel",
+      "word": "colonel",
+      "message": "音标取自托福词表的部分 IPA 字段；来源未注明英美口音，且原 PDF 抽取说明提示少量字段需抽查",
+      "severity": "low",
+      "suggested_action": "人工抽查音标并确认口音后再标作已核验"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-america",
+      "word": "america",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-american",
+      "word": "american",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-bastard",
+      "word": "bastard",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-bastard",
+      "word": "bastard",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-british",
+      "word": "british",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-buffet",
+      "word": "buffet",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-charlie",
+      "word": "charlie",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-charlie",
+      "word": "charlie",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-chinese",
+      "word": "chinese",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-colonel",
+      "word": "colonel",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-concierge",
+      "word": "concierge",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-concierge",
+      "word": "concierge",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-daddy",
+      "word": "daddy",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-deposition",
+      "word": "deposition",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-depository",
+      "word": "depository",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-depository",
+      "word": "depository",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-england",
+      "word": "england",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-fanfare",
+      "word": "fanfare",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-fanfare",
+      "word": "fanfare",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-feverish",
+      "word": "feverish",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-feverish",
+      "word": "feverish",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-french",
+      "word": "french",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-fuck",
+      "word": "fuck",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-fucking",
+      "word": "fucking",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-gentlemen",
+      "word": "gentlemen",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-gentlemen",
+      "word": "gentlemen",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-george",
+      "word": "george",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-george",
+      "word": "george",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-gonna",
+      "word": "gonna",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-gonna",
+      "word": "gonna",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-goodbye",
+      "word": "goodbye",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-goodbye",
+      "word": "goodbye",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-harry",
+      "word": "harry",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-harry",
+      "word": "harry",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-indian",
+      "word": "indian",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-itll",
+      "word": "it'll",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-itll",
+      "word": "it'll",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-italian",
+      "word": "italian",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-jackson",
+      "word": "jackson",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-jackson",
+      "word": "jackson",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-john",
+      "word": "john",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-john",
+      "word": "john",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-landmark",
+      "word": "landmark",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-landmark",
+      "word": "landmark",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-lord",
+      "word": "lord",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-louvre",
+      "word": "louvre",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-louvre",
+      "word": "louvre",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-maam",
+      "word": "ma'am",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-maam",
+      "word": "ma'am",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-madame",
+      "word": "madame",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-notary",
+      "word": "notary",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-notary",
+      "word": "notary",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-one-way",
+      "word": "one-way",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-one-way",
+      "word": "one-way",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-pancreatic",
+      "word": "pancreatic",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-paperwork",
+      "word": "paperwork",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-paris",
+      "word": "paris",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-paul",
+      "word": "paul",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-paul",
+      "word": "paul",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-plaza",
+      "word": "plaza",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-plaza",
+      "word": "plaza",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-prof",
+      "word": "prof",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_phonetic",
+      "record_id": "vocab-prof",
+      "word": "prof",
+      "message": "ipa-dict en_US 无该词条，现有词表亦无音标",
+      "severity": "low",
+      "suggested_action": "保留 null，不按拼写规则臆造音标"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-prof",
+      "word": "prof",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-rome",
+      "word": "rome",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-self-preservation",
+      "word": "self-preservation",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_phonetic",
+      "record_id": "vocab-self-preservation",
+      "word": "self-preservation",
+      "message": "ipa-dict en_US 无该词条，现有词表亦无音标",
+      "severity": "low",
+      "suggested_action": "保留 null，不按拼写规则臆造音标"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-self-preservation",
+      "word": "self-preservation",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-shit",
+      "word": "shit",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-shit",
+      "word": "shit",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-strychnine",
+      "word": "strychnine",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-strychnine",
+      "word": "strychnine",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-suite",
+      "word": "suite",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-taxicab",
+      "word": "taxicab",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-taxicab",
+      "word": "taxicab",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-thee",
+      "word": "thee",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-thee",
+      "word": "thee",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-theyre",
+      "word": "they're",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-theyre",
+      "word": "they're",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-theyve",
+      "word": "they've",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-theyve",
+      "word": "they've",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-tony",
+      "word": "tony",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-tony",
+      "word": "tony",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-vegas",
+      "word": "vegas",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-vegas",
+      "word": "vegas",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-wake-up",
+      "word": "wake-up",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-wake-up",
+      "word": "wake-up",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-warfare",
+      "word": "warfare",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-wed",
+      "word": "we'd",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-wed",
+      "word": "we'd",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-weve",
+      "word": "we've",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-weve",
+      "word": "we've",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-york",
+      "word": "york",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-york",
+      "word": "york",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "missing_cefr",
+      "record_id": "vocab-zaizen",
+      "word": "zaizen",
+      "message": "CEFR-J v1.6 与真题考频总表均未收录该词，无可靠 CEFR 来源",
+      "severity": "medium",
+      "suggested_action": "保留 null；如确认属核心词，需再引入带 CEFR 标注且有明确许可的词表"
+    },
+    {
+      "type": "missing_phonetic",
+      "record_id": "vocab-zaizen",
+      "word": "zaizen",
+      "message": "ipa-dict en_US 无该词条，现有词表亦无音标",
+      "severity": "low",
+      "suggested_action": "保留 null，不按拼写规则臆造音标"
+    },
+    {
+      "type": "missing_meaning",
+      "record_id": "vocab-zaizen",
+      "word": "zaizen",
+      "message": "现有四份词表与词形还原均未查到中文释义",
+      "severity": "medium",
+      "suggested_action": "保留 null，人工核对后再补"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-above",
+      "word": "above",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-accept",
+      "word": "accept",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-accident",
+      "word": "accident",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-across",
+      "word": "across",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-afraid",
+      "word": "afraid",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-airport",
+      "word": "airport",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-along",
+      "word": "along",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-ambulance",
+      "word": "ambulance",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-america",
+      "word": "america",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-american",
+      "word": "american",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-avenue",
+      "word": "avenue",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-bank",
+      "word": "bank",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-bank's",
+      "word": "bank's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-banking",
+      "word": "banking",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-bastard",
+      "word": "bastard",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-bathroom",
+      "word": "bathroom",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-beautiful",
+      "word": "beautiful",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-best",
+      "word": "best",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-bill",
+      "word": "bill",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-birthday",
+      "word": "birthday",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-blood",
+      "word": "blood",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-boarding",
+      "word": "boarding",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-booked",
+      "word": "booked",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-bought",
+      "word": "bought",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-brain",
+      "word": "brain",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-bridge",
+      "word": "bridge",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-bring",
+      "word": "bring",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-british",
+      "word": "british",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-brought",
+      "word": "brought",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-buffet",
+      "word": "buffet",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-building",
+      "word": "building",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-business",
+      "word": "business",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-call",
+      "word": "call",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-called",
+      "word": "called",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-cancer",
+      "word": "cancer",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-captain",
+      "word": "captain",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-card",
+      "word": "card",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-catch",
+      "word": "catch",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-cells",
+      "word": "cells",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-cents",
+      "word": "cents",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-charlie",
+      "word": "charlie",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-charter",
+      "word": "charter",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-cheap",
+      "word": "cheap",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-check",
+      "word": "check",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-checked",
+      "word": "checked",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-chicken",
+      "word": "chicken",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-chinese",
+      "word": "chinese",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-city",
+      "word": "city",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-clinic",
+      "word": "clinic",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-closed",
+      "word": "closed",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-clothes",
+      "word": "clothes",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-club",
+      "word": "club",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-cocktail",
+      "word": "cocktail",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-coffee",
+      "word": "coffee",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-colonel",
+      "word": "colonel",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-comfortable",
+      "word": "comfortable",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-company",
+      "word": "company",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-concierge",
+      "word": "concierge",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-condition",
+      "word": "condition",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-control",
+      "word": "control",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-cook",
+      "word": "cook",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-corner",
+      "word": "corner",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-cost",
+      "word": "cost",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-daddy",
+      "word": "daddy",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-darling",
+      "word": "darling",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-daughter",
+      "word": "daughter",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-deal",
+      "word": "deal",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-dear",
+      "word": "dear",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-deposited",
+      "word": "deposited",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-deposition",
+      "word": "deposition",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-depository",
+      "word": "depository",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-desk",
+      "word": "desk",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-dessert",
+      "word": "dessert",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-died",
+      "word": "died",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-dinner",
+      "word": "dinner",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-director",
+      "word": "director",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-doctor",
+      "word": "doctor",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-doctor's",
+      "word": "doctor's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-doing",
+      "word": "doing",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-dollars",
+      "word": "dollars",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-door",
+      "word": "door",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-double",
+      "word": "double",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-dress",
+      "word": "dress",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-drink",
+      "word": "drink",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-drive",
+      "word": "drive",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-driver",
+      "word": "driver",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-driver's",
+      "word": "driver's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-during",
+      "word": "during",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-early",
+      "word": "early",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-east",
+      "word": "east",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-england",
+      "word": "england",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-everyone",
+      "word": "everyone",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-everywhere",
+      "word": "everywhere",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-excuse",
+      "word": "excuse",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-expect",
+      "word": "expect",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-expensive",
+      "word": "expensive",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-face",
+      "word": "face",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-fair",
+      "word": "fair",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-family",
+      "word": "family",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-family's",
+      "word": "family's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-famous",
+      "word": "famous",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-fanfare",
+      "word": "fanfare",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-farewell",
+      "word": "farewell",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-father",
+      "word": "father",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-favorite",
+      "word": "favorite",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-feeling",
+      "word": "feeling",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-fever",
+      "word": "fever",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-feverish",
+      "word": "feverish",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-fill",
+      "word": "fill",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-filled",
+      "word": "filled",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-final",
+      "word": "final",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-fine",
+      "word": "fine",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-fire",
+      "word": "fire",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-fish",
+      "word": "fish",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-floor",
+      "word": "floor",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-follow",
+      "word": "follow",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-food",
+      "word": "food",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-form",
+      "word": "form",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-frank",
+      "word": "frank",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-french",
+      "word": "french",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-front",
+      "word": "front",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-fuck",
+      "word": "fuck",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-fucking",
+      "word": "fucking",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-funny",
+      "word": "funny",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-general",
+      "word": "general",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-gentlemen",
+      "word": "gentlemen",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-george",
+      "word": "george",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-gift",
+      "word": "gift",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-glad",
+      "word": "glad",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-gold",
+      "word": "gold",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-gonna",
+      "word": "gonna",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-goodbye",
+      "word": "goodbye",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-government",
+      "word": "government",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-guard",
+      "word": "guard",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-guest",
+      "word": "guest",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-guided",
+      "word": "guided",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-guys",
+      "word": "guys",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-half",
+      "word": "half",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-happy",
+      "word": "happy",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-harry",
+      "word": "harry",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-he's",
+      "word": "he's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-head",
+      "word": "head",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-headed",
+      "word": "headed",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-heading",
+      "word": "heading",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-hell",
+      "word": "hell",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-hello",
+      "word": "hello",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-here's",
+      "word": "here's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-high",
+      "word": "high",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-higher",
+      "word": "higher",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-history",
+      "word": "history",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-home",
+      "word": "home",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-honey",
+      "word": "honey",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-hope",
+      "word": "hope",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-hospital",
+      "word": "hospital",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-hospitality",
+      "word": "hospitality",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-hotel",
+      "word": "hotel",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-hotel's",
+      "word": "hotel's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-hour",
+      "word": "hour",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-how's",
+      "word": "how's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-hungry",
+      "word": "hungry",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-hurt",
+      "word": "hurt",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-identification",
+      "word": "identification",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-indian",
+      "word": "indian",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-injured",
+      "word": "injured",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-introduce",
+      "word": "introduce",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-invite",
+      "word": "invite",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-island",
+      "word": "island",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-it'll",
+      "word": "it'll",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-italian",
+      "word": "italian",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-jackson",
+      "word": "jackson",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-james",
+      "word": "james",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-john",
+      "word": "john",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-king",
+      "word": "king",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-kitchen",
+      "word": "kitchen",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-ladies",
+      "word": "ladies",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-landmark",
+      "word": "landmark",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-late",
+      "word": "late",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-lease",
+      "word": "lease",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-leaving",
+      "word": "leaving",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-left",
+      "word": "left",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-license",
+      "word": "license",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-light",
+      "word": "light",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-live",
+      "word": "live",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-lobby",
+      "word": "lobby",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-lord",
+      "word": "lord",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-lost",
+      "word": "lost",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-louvre",
+      "word": "louvre",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-love",
+      "word": "love",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-luck",
+      "word": "luck",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-luggage",
+      "word": "luggage",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-lunch",
+      "word": "lunch",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-lungs",
+      "word": "lungs",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-ma'am",
+      "word": "ma'am",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-madam",
+      "word": "madam",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-madame",
+      "word": "madame",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-mail",
+      "word": "mail",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-main",
+      "word": "main",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-manager",
+      "word": "manager",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-market",
+      "word": "market",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-master",
+      "word": "master",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-meal",
+      "word": "meal",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-medical",
+      "word": "medical",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-medicine",
+      "word": "medicine",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-meet",
+      "word": "meet",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-menu",
+      "word": "menu",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-menus",
+      "word": "menus",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-miles",
+      "word": "miles",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-minutes",
+      "word": "minutes",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-miss",
+      "word": "miss",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-money",
+      "word": "money",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-month",
+      "word": "month",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-mother",
+      "word": "mother",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-museum",
+      "word": "museum",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-music",
+      "word": "music",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-myself",
+      "word": "myself",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-name",
+      "word": "name",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-natural",
+      "word": "natural",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-near",
+      "word": "near",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-need",
+      "word": "need",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-nice",
+      "word": "nice",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-north",
+      "word": "north",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-notary",
+      "word": "notary",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-number",
+      "word": "number",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-nurse",
+      "word": "nurse",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-nursery",
+      "word": "nursery",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-offer",
+      "word": "offer",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-office",
+      "word": "office",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-one-way",
+      "word": "one-way",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-open",
+      "word": "open",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-operation",
+      "word": "operation",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-order",
+      "word": "order",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-ordered",
+      "word": "ordered",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-outside",
+      "word": "outside",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-owner",
+      "word": "owner",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-painting",
+      "word": "painting",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-pancreatic",
+      "word": "pancreatic",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-papers",
+      "word": "papers",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-paperwork",
+      "word": "paperwork",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-paris",
+      "word": "paris",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-park",
+      "word": "park",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-part",
+      "word": "part",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-pass",
+      "word": "pass",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-passed",
+      "word": "passed",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-passport",
+      "word": "passport",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-patient",
+      "word": "patient",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-patient's",
+      "word": "patient's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-paul",
+      "word": "paul",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-paying",
+      "word": "paying",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-pharmacy",
+      "word": "pharmacy",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-phone",
+      "word": "phone",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-pick",
+      "word": "pick",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-picked",
+      "word": "picked",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-plane",
+      "word": "plane",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-play",
+      "word": "play",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-plaza",
+      "word": "plaza",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-pleased",
+      "word": "pleased",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-pleasure",
+      "word": "pleasure",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-pneumonia",
+      "word": "pneumonia",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-pocket",
+      "word": "pocket",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-point",
+      "word": "point",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-president",
+      "word": "president",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-price",
+      "word": "price",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-problem",
+      "word": "problem",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-prof",
+      "word": "prof",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-receipt",
+      "word": "receipt",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-reception",
+      "word": "reception",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-receptionist",
+      "word": "receptionist",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-refund",
+      "word": "refund",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-reservation",
+      "word": "reservation",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-restaurant",
+      "word": "restaurant",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-rice",
+      "word": "rice",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-ride",
+      "word": "ride",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-road",
+      "word": "road",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-robbed",
+      "word": "robbed",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-robbery",
+      "word": "robbery",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-rome",
+      "word": "rome",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-room",
+      "word": "room",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-round",
+      "word": "round",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-safe",
+      "word": "safe",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-sale",
+      "word": "sale",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-says",
+      "word": "says",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-school",
+      "word": "school",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-secret",
+      "word": "secret",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-seems",
+      "word": "seems",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-self-preservation",
+      "word": "self-preservation",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-sell",
+      "word": "sell",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-send",
+      "word": "send",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-serious",
+      "word": "serious",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-service",
+      "word": "service",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-she's",
+      "word": "she's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-shit",
+      "word": "shit",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-shoes",
+      "word": "shoes",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-shop",
+      "word": "shop",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-show",
+      "word": "show",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-shut",
+      "word": "shut",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-sick",
+      "word": "sick",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-sight",
+      "word": "sight",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-sightseeing",
+      "word": "sightseeing",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-signature",
+      "word": "signature",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-sister",
+      "word": "sister",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-sitting",
+      "word": "sitting",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-sleep",
+      "word": "sleep",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-social",
+      "word": "social",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-sold",
+      "word": "sold",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-soon",
+      "word": "soon",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-soup",
+      "word": "soup",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-south",
+      "word": "south",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-souvenir",
+      "word": "souvenir",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-spend",
+      "word": "spend",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-spread",
+      "word": "spread",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-stairs",
+      "word": "stairs",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-stand",
+      "word": "stand",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-standing",
+      "word": "standing",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-station",
+      "word": "station",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-stay",
+      "word": "stay",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-stayed",
+      "word": "stayed",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-staying",
+      "word": "staying",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-stop",
+      "word": "stop",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-store",
+      "word": "store",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-story",
+      "word": "story",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-straight",
+      "word": "straight",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-street",
+      "word": "street",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-strychnine",
+      "word": "strychnine",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-suite",
+      "word": "suite",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-summer",
+      "word": "summer",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-symptoms",
+      "word": "symptoms",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-table",
+      "word": "table",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-taking",
+      "word": "taking",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-taxi",
+      "word": "taxi",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-taxi's",
+      "word": "taxi's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-taxicab",
+      "word": "taxicab",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-taxing",
+      "word": "taxing",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-taxis",
+      "word": "taxis",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-team",
+      "word": "team",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-temple",
+      "word": "temple",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-thee",
+      "word": "thee",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-they're",
+      "word": "they're",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-they've",
+      "word": "they've",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-thought",
+      "word": "thought",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-ticket",
+      "word": "ticket",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-tired",
+      "word": "tired",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-tony",
+      "word": "tony",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-tour",
+      "word": "tour",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-tourist",
+      "word": "tourist",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-town",
+      "word": "town",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-trade",
+      "word": "trade",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-traffic",
+      "word": "traffic",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-train",
+      "word": "train",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-treatment",
+      "word": "treatment",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-trip",
+      "word": "trip",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-troops",
+      "word": "troops",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-turn",
+      "word": "turn",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-uncle",
+      "word": "uncle",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-university",
+      "word": "university",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-upon",
+      "word": "upon",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-vacancy",
+      "word": "vacancy",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-vacation",
+      "word": "vacation",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-vegas",
+      "word": "vegas",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-visit",
+      "word": "visit",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-waiting",
+      "word": "waiting",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-waitress",
+      "word": "waitress",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-wake",
+      "word": "wake",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-wake-up",
+      "word": "wake-up",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-walk",
+      "word": "walk",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-warfare",
+      "word": "warfare",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-water",
+      "word": "water",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-we'd",
+      "word": "we'd",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-we've",
+      "word": "we've",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-weather",
+      "word": "weather",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-weather's",
+      "word": "weather's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-week",
+      "word": "week",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-welcome",
+      "word": "welcome",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-west",
+      "word": "west",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-what's",
+      "word": "what's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-where's",
+      "word": "where's",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-while",
+      "word": "while",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-wind",
+      "word": "wind",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-window",
+      "word": "window",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-wine",
+      "word": "wine",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-wish",
+      "word": "wish",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-withdraw",
+      "word": "withdraw",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-withdrawal",
+      "word": "withdrawal",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-withdrawing",
+      "word": "withdrawing",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-withdrawn",
+      "word": "withdrawn",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-work",
+      "word": "work",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-world",
+      "word": "world",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-worth",
+      "word": "worth",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-wound",
+      "word": "wound",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-wounded",
+      "word": "wounded",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-years",
+      "word": "years",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-york",
+      "word": "york",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    },
+    {
+      "type": "exam_not_in_list",
+      "record_id": "vocab-zaizen",
+      "word": "zaizen",
+      "message": "该词未被四六级/考研真题榜单收录，属非榜单词，不存在真题考频可填",
+      "severity": "info",
+      "suggested_action": "按非榜单词处理：保留 exam_frequency 为空，使用 general_frequency（wordfreq）作为词频参考，不得用任何榜单名次冒充真题频率"
+    }
+  ]
+}

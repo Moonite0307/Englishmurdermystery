@@ -1,0 +1,123 @@
+{
+  "schema_version": "daily_sources.v1",
+  "count": 13,
+  "sources": [
+    {
+      "source_id": "daily-dialogues",
+      "name": "九板块标准场景对话",
+      "path": "训练资料/日常场景交涉",
+      "usage": "作为日常交涉闯关模式的基础对话和任务参考",
+      "license": "unknown_until_verified",
+      "attribution": "待确认",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "daily-keywords",
+      "name": "九板块重点词表",
+      "path": "训练资料/日常场景交涉/九板块重点词表.csv",
+      "usage": "作为九个板块的候选重点词，用于对话 target_words 匹配",
+      "license": "unknown_until_verified",
+      "attribution": "待确认",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "exam-frequency",
+      "name": "CET4 / CET6 / 考研 真题考频总表",
+      "path": "训练资料/cet- 四六级词表 + 真题 + 考频/真题考频总表.csv",
+      "usage": "为词汇补充真实存在的真题名次与句频",
+      "license": "unknown_until_verified",
+      "attribution": "懒笔记「真题单词」 english-exam.lazynote.cn（据来源与说明.txt）",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "zhongkao-freq",
+      "name": "中考开放词频（wordfreq 参考）",
+      "path": "训练资料/中高考/开放词频参考/secondary_open_frequency_1600.csv",
+      "usage": "单独记录一般英语语料词频参考，不视为中考官方词表或真题考频",
+      "license": "Apache-2.0 / CC BY-SA 4.0（wordfreq 3.1.1，见来源许可说明）",
+      "attribution": "wordfreq 3.1.1 英语词频数据",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "gaokao-freq",
+      "name": "高考开放词频（wordfreq 参考）",
+      "path": "训练资料/中高考/开放词频参考/gaokao_open_frequency_3500.csv",
+      "usage": "单独记录一般英语语料词频参考，不视为高考官方词表或真题考频",
+      "license": "Apache-2.0 / CC BY-SA 4.0（wordfreq 3.1.1，见来源许可说明）",
+      "attribution": "wordfreq 3.1.1 英语词频数据",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "cet4-open-freq",
+      "name": "四级开放词频（wordfreq 参考）",
+      "path": "训练资料/cet- 四六级词表 + 真题 + 考频/开放词频参考/cet4_open_frequency_4500.csv",
+      "usage": "单独记录一般英语语料词频参考，不视为四级官方词表或真题考频",
+      "license": "Apache-2.0 / CC BY-SA 4.0（wordfreq 3.1.1）",
+      "attribution": "wordfreq 3.1.1（非官方 CET4 考纲，不得当作真题频率）",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "cet6-open-freq",
+      "name": "六级开放词频（wordfreq 参考）",
+      "path": "训练资料/cet- 四六级词表 + 真题 + 考频/开放词频参考/cet6_open_frequency_5500.csv",
+      "usage": "单独记录一般英语语料词频参考，不视为六级官方词表或真题考频",
+      "license": "Apache-2.0 / CC BY-SA 4.0（wordfreq 3.1.1）",
+      "attribution": "wordfreq 3.1.1（非官方 CET6 考纲，不得当作真题频率）",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "ielts-vocab",
+      "name": "雅思 8000 词（净版）",
+      "path": "训练资料/雅思托福/雅思8000词_净版.csv",
+      "usage": "按精确词形补充可用词性的词条及缺失中文释义；不用于推导 CEFR 或考试频率",
+      "license": "unknown_until_verified",
+      "attribution": "待确认（由用户提供的 PDF 提取）",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "toefl-vocab",
+      "name": "托福 7000 词（净版）",
+      "path": "训练资料/雅思托福/托福7000词_净版.csv",
+      "usage": "按精确词形补充可用词性的词条、缺失中文释义及原表中存在的 IPA；音标口音未标且抽取质量需抽查",
+      "license": "unknown_until_verified",
+      "attribution": "待确认（由用户提供的 PDF 提取）",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "sgd",
+      "name": "Schema-Guided Dialogue (SGD)",
+      "path": "训练资料/日常场景交涉/SGD-CC-BY-SA-4.0",
+      "usage": "暂未接入",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Google Research, Schema-Guided Dialogue Dataset",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "multiwoz",
+      "name": "MultiWOZ 2.2",
+      "path": "训练资料/日常场景交涉/multiwoz",
+      "usage": "暂未接入",
+      "license": "MIT",
+      "attribution": "MultiWOZ authors; see multiwoz/SOURCE_LICENSE",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "subtitles",
+      "name": "影视字幕（OpenSubtitles v2018）",
+      "path": "训练资料/opensubtitles-影视对话",
+      "usage": "暂未接入",
+      "license": "unknown_until_verified（OpenSubtitles 各影片许可不一）",
+      "attribution": "待确认",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "tatoeba",
+      "name": "Tatoeba 英语句对",
+      "path": "训练资料/tatoeba-英语句对",
+      "usage": "暂未接入",
+      "license": "CC BY 2.0 FR（Tatoeba 开放许可数据）",
+      "attribution": "Tatoeba contributors",
+      "raw_data_copied_to_repo": false
+    }
+  ]
+}

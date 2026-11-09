@@ -1,0 +1,511 @@
+﻿word,vocab_origin,cefr,cefr_via,cefr_source,phonetic,phonetic_via,phonetic_source,phonetic_accent,phonetic_status,meanings_zh,meaning_via,meaning_source,exam_cet4_rank,exam_cet6_rank,exam_kaoyan_rank,fill_status
+above,block_keywords,A1,above,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/əˈbəv/,above,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,上述的ad. 在上面prep. 在…之上，高于,,,,,,complete
+accept,block_keywords,A2,accept,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ækˈsɛpt/, /əkˈsɛpt/",accept,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,接受，领受；认可，同意vi. 同意，认可,,,,,,complete
+accident,block_keywords,A2,accident,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈæksədənt/,accident,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,意外遭遇，事故；意外(因素)；意外事件，事故,,,,,,complete
+account,block_keywords,A2,,,əˈkaʊnt,,toefl,unspecified,needs_spot_check,n. 账户； 叙述；描述；报告； 账目；账单； 重要性；价值；v. 解释；说明（accou…；账目;账户;计算;vt./vi. 说明；解释；描述；账户,,,93,82,92,complete
+across,block_keywords,A2,across,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/əˈkɹɔs/,across,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,横过，越过；在的对面ad. 横过，穿过,,,,,,complete
+afraid,block_keywords,A1,afraid,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/əˈfɹeɪd/,afraid,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,害怕的，恐惧的；犯愁的，不乐意的,,,,,,complete
+ahead,block_keywords,A2,,,/əˈhɛd/,ahead,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,adv. 在前面；向前； 领先；占优势； 提前；预先；在前面(头)；向(朝)前；提前,,,308,532,768,complete
+airport,block_keywords,A1,airport,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɛɹˌpɔɹt/,airport,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,机场，航空站，航空港,,,,,,complete
+aisle,scene_target_extension,B2,,,"/ˈaɪəɫ/, /ˈaɪɫ/",aisle,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. （建筑物内的）过道，通道； （教堂的）侧廊；通道,,,1348,,,complete
+along,block_keywords,A1,along,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/əˈɫɔŋ/,along,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,向前；和…一起，一同prep. 沿着，顺着,,,,,,complete
+ambulance,block_keywords,B1,ambulance,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈæmbjəɫəns/,ambulance,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,救护车,,,,,,complete
+america,block_keywords,,,,"/əˈmɛɹəkə/, /əˈmɛɹɪkə/",america,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,美洲；美国,,,,,,missing_source
+american,block_keywords,,,,"/əˈmɛɹəkən/, /əˈmɛɹɪkən/",american,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,美洲的 n.美国人,,,,,,missing_source
+amount,block_keywords,A2,,,/əˈmaʊnt/,amount,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"n. 数量；金额；v. 总计；等同于；/n. 等于,总数,数量；量",,,50,95,198,complete
+application,block_keywords,B1,,,ˌæplɪˈkeɪʃn,,toefl,unspecified,needs_spot_check,n. 申请；申请书； 应用程序；APP； 应用；运用； 涂抹；敷用； 专心；勤奋；申请，请求，申请书；应用，实施，实用性；请求，申请（书、表）；应用，运,,,332,619,327,complete
+appointment,scene_target_extension,A2,appointment,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/əˈpɔɪntmənt/,appointment,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,约会;职位；任命,,,,,,complete
+approach,scene_target_extension,B1,,,əˈproʊtʃ,,toefl,unspecified,needs_spot_check,v. 靠近，接近（在空间或时间上）； 接洽，与…打交道（为了某个目的）； 着手处…；接近;着手处理;n. 接近;方法;途径；方法v. 接近,,,144,174,65,complete
+arrive,scene_target_extension,A1,arrive,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ɝˈaɪv/,arrive,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,到达；(时间、事件)到来，发生；达到,,,,,,complete
+attraction,block_keywords,B1,,,/əˈtɹækʃən/,attraction,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 吸引力；有吸引力的事物； （人与人之间的）吸引；爱慕； （物理学）引力；…；吸引；吸引力；引力；吸引，诱惑,,,817,1654,,complete
+avenue,block_keywords,B1,avenue,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈævəˌnu/,avenue,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,林荫路，大街；(比喻)途径，渠道，方法,,,,,,complete
+badly,block_keywords,A2,,,/ˈbædɫi/,badly,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,adv. 严重地；非常； 拙劣地；差劲地； 不利地；糟糕地；非常，严重地；坏地，差地，拙劣地,,,1035,,,complete
+bank,block_keywords,A1,bank,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbæŋk/,bank,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,银行；岸，堤vi. 存入(经营)银行；信赖,,,,,,complete
+bank's,block_keywords,A1,bank,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbæŋks/,bank's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,银行；岸，堤vi. 存入(经营)银行；信赖,bank,雅思8000词_净版,,,,complete
+banker,block_keywords,B1,,,/ˈbæŋkɝ/,banker,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 银行家；银行业者； 庄家（赌博中负责发牌和管理赌资的人）； 修筑堤坝或河…；银行家,,,,,970,complete
+banking,block_keywords,A2,banking,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbæŋkɪŋ/,banking,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,银行业务、金融业,,,,,,complete
+bastard,block_keywords,,,,/ˈbæstɝd/,bastard,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+bathroom,block_keywords,A1,bathroom,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbæˌθɹum/,bathroom,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,浴室；盥洗室，卫生间,,,,,,complete
+beautiful,block_keywords,A1,beautiful,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbjutəfəɫ/,beautiful,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,美的，美丽的；出色的，完美的；美丽,,,,,,complete
+best,block_keywords,A1,best,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbɛst/,best,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,最好的(good和well的最高级)ad. 最好地；最,,,,,,complete
+better,block_keywords,A1,,,/ˈbɛtɝ/,better,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,adj. 更好的（good 的比较级）；adv. 更好地（well 的比较级）；aux. 最好（用于 ha…；较好的ad. 更好(地)v. 改良n. 较佳者,,,14,8,33,complete
+bill,block_keywords,A2,bill,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbɪɫ/,bill,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"账单,招贴,议案,钞票,证明书 vt. 用招贴宣传",,,,,,complete
+birthday,block_keywords,A1,birthday,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbɝθˌdeɪ/,birthday,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,生日；(成方)纪念日,,,,,,complete
+block,block_keywords,A2,,,blɑːk,,toefl,unspecified,needs_spot_check,"n. 街区； 大楼；大厦； 障碍物；阻塞； 块；立方体； 一批；一组；v. 阻挡；堵塞…；大块木料,街区,事物的聚集,障碍物 vt. 阻碍,破坏；（四面临街的）建筑群；大厦；障碍物",,,449,1519,,complete
+blood,block_keywords,A2,blood,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbɫəd/,blood,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,血液，血；血统，血亲；血气；group/type 血型,,,,,,complete
+boarding,block_keywords,A1,board,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbɔɹdɪŋ/,boarding,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,伙食,,,,,,complete
+bond,block_keywords,B2,,,bɑːnd,,toefl,unspecified,needs_spot_check,n. 纽带；联系； 债券；公债； 约束；束缚； 保释金；保证金； 化学键；v. （使）…；契约;结合;债券；契约v. （使）黏合“绑,,,1037,1204,,complete
+booked,block_keywords,A1,book,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbʊkt/,booked,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,书，书籍vt. 订(票，座位，房间等)，预定,book,雅思8000词_净版,,,,complete
+bought,block_keywords,A1,buy,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈbɑt/, /ˈbɔt/",bought,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,买，买得；向…行贿，收买vi. 购买东西,buy,雅思8000词_净版,,,,complete
+brain,block_keywords,A1,brain,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbɹeɪn/,brain,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(大)脑，骨髓；(pl.)脑力，智能,,,,,,complete
+bridge,block_keywords,A1,bridge,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbɹɪdʒ/,bridge,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,桥；桥牌；鼻梁vt. 架桥；渡过,,,,,,complete
+bring,block_keywords,A1,bring,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbɹɪŋ/,bring,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,拿来，带来；产生，引起；使处于某种状态,,,,,,complete
+british,block_keywords,,,,/ˈbɹɪtɪʃ/,british,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,不列颠的，英联邦的,,,,,,missing_source
+brought,block_keywords,A1,bring,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbɹɔt/,brought,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,拿来，带来；产生，引起；使处于某种状态,bring,雅思8000词_净版,,,,complete
+buffet,block_keywords,,,,"/ˈbəfət/, /bəˈfeɪ/",buffet,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"(火车内)餐室,冷餐桌",,,,,,missing_source
+building,block_keywords,A1,building,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈbɪɫdɪŋ/,building,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,建筑(物)，房屋，大楼；是由and连接的并列结构，一起作work的状语,,,,,,complete
+business,block_keywords,A1,business,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈbɪznəs/, /ˈbɪznɪs/",business,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,商业，生意；事务，业务，职责,,,,,,complete
+call,block_keywords,A1,call,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkɔɫ/,call,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,叫，喊；打电话vi. 叫；访问n. 叫；号召；a spade a spade 有啥说啥；直言不讳,,,,,,complete
+called,block_keywords,A1,call,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkɔɫd/,called,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,a spade a spade 有啥说啥；直言不讳,call,托福7000词_净版,,,,complete
+cancer,block_keywords,B1,cancer,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkænsɝ/,cancer,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,癌；膀胱癌,,,,,,complete
+captain,block_keywords,A2,captain,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈkæptɪn,,toefl,unspecified,needs_spot_check,首领，队长；船长；上尉v. 做…的首领，指挥；舰长；（英）陆军上尉,,,,,,complete
+card,block_keywords,A1,card,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkɑɹd/,card,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,卡片，名片；纸牌；纸片,,,,,,complete
+cash,block_keywords,A2,,,/ˈkæʃ/,cash,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 现金； 资金；财力；v. 兑现（支票等）；现金，现款v. 兑现，付(或收)现款,,,255,931,,complete
+castle,block_keywords,A2,,,/ˈkæsəɫ/,castle,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 城堡； （国际象棋中的）车；v. （国际象棋中）王车易位；城堡；(国际象棋中的)车,,,1499,,,complete
+catch,block_keywords,A1,catch,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkætʃ/,catch,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,捕捉，捕获；赶上；感染；理解，听到,,,,,,complete
+cells,block_keywords,B1,cell,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsɛɫz/,cells,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 细胞； 牢房；单人囚室； 电池； （组织或网络中的）小组；基层组织； 单元格…,cell,真题考频总表,,,,complete
+central,block_keywords,B1,,,/ˈsɛntɹəɫ/,central,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,adj. 主要的；核心的；最重要的； 中心的；中央的； 中央的；中心管理的； 中枢…；中心的，中央的，中枢的；主要的；nervous system 中枢神经系统,,,451,390,975,complete
+cents,block_keywords,A2,cent,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈsɛns/, /ˈsɛnts/",cents,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"(货币单位)分,分币",cent,雅思8000词_净版,,,,complete
+charge,block_keywords,B1,,,tʃɑːrdʒ,,toefl,unspecified,needs_spot_check,"v. 收费；要价； 充电； 指控；控告； 猛冲；冲锋； 把...记在账上；n. 费用；价钱…；要价;控告,指控;冲锋;充电；主管；照管；责任",,,202,293,328,complete
+charlie,block_keywords,,,,/ˈtʃɑɹɫi/,charlie,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+charter,block_keywords,A2,chart,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈtʃɑːrtər,,toefl,unspecified,needs_spot_check,"/v. 宪章;特许状;租赁;vt. 特许,发执照；宪章；宣言",,,,,,complete
+cheap,block_keywords,A2,cheap,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtʃip/,cheap,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,便宜的；低劣的，不值钱的；and fine 物美价廉,,,,,,complete
+check,block_keywords,A1,check,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtʃɛk/,check,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,支票，空白支票；总收入vt. 检查；核对；制止,,,,,,complete
+checked,block_keywords,A1,check,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtʃɛkt/,checked,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,支票，空白支票；总收入vt. 检查；核对；制止,check,雅思8000词_净版,,,,complete
+chef,block_keywords,B1,,,/ˈʃɛf/,chef,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 厨师长；主厨； 烹饪大师；名厨,,,726,1048,,complete
+chicken,block_keywords,A1,chicken,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtʃɪkən/,chicken,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,鸡肉；鸡，小鸡，小鸟,,,,,,complete
+chinese,block_keywords,,,,/tʃaɪˈniz/,chinese,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,中国的 n.中国人,,,,,,missing_source
+city,block_keywords,A1,city,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsɪti/,city,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n．城市；都市；市,,,,,,complete
+client,scene_target_extension,B1,,,ˈklaɪənt,,toefl,unspecified,needs_spot_check,"n. 客户；委托人； （计算机网络中的）客户端； （社会福利机构的）受助者；顾客,客户委托人；顾客",,,958,392,858,complete
+clinic,block_keywords,B1,clinic,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkɫɪnɪk/,clinic,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"诊所,门诊所",,,,,,complete
+clinical,block_keywords,B2,,,ˈklɪnɪkl,,toefl,unspecified,needs_spot_check,adj. 临床的；诊所的； 冷静客观的；不带感情的； 简朴的；没有装饰的；临床的；诊所,,,1232,1120,,complete
+closed,block_keywords,A1,closed,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkɫoʊzd/,closed,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,关闭的，停业的,,,,,,complete
+clothes,block_keywords,A1,clothes,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈkɫoʊðz/, /ˈkɫoʊz/",clothes,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,衣服(虽为复数，亦不可数),,,,,,complete
+club,block_keywords,A1,club,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkɫəb/,club,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,俱乐部，夜总会；社团；棍棒，球棒,,,,,,complete
+coat,scene_target_extension,A1,coat,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkoʊt/,coat,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,上衣，外套；表皮；层，覆盖物v. 涂(盖)上,,,,,,complete
+cocktail,block_keywords,B2,cocktail,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkɑkˌteɪɫ/,cocktail,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,鸡尾酒,,,,,,complete
+coffee,block_keywords,A1,coffee,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈkɑfi/, /ˈkɔfi/",coffee,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,咖啡(色),,,,,,complete
+colonel,block_keywords,,,,ˈkɜːrnl,,toefl,unspecified,needs_spot_check,(陆军)上校；陆军上校，团长,,,,,,missing_source
+comfortable,block_keywords,A2,comfortable,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkəmfɝtəbəɫ/,comfortable,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,舒适的，舒服的；感到舒适的，安逸的；舒服,,,,,,complete
+communication,scene_target_extension,A2,communication,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/kəmˌjunəˈkeɪʃən/,communication,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"通讯,交往,交流,传达的消息,交通；交流；通信",,,,,,complete
+community,scene_target_extension,B1,,,kəˈmjuːnəti,,toefl,unspecified,needs_spot_check,n. 社区；社会； 群体；团体； 共性；共同点； 公有；共享； 生物群落；同一地区的全体居民，社会，社区；共同体；社会，社区；（动植物的）群落,,,57,23,31,complete
+company,block_keywords,A2,company,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkəmpəˌni/,company,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,公司；陪伴；宾客；连(队)，(一)群，队，伙,,,,,,complete
+concierge,block_keywords,,,,/ˌkɑnsiˈɛɹʒ/,concierge,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+condition,block_keywords,A2,condition,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",kənˈdɪʃn,,toefl,unspecified,needs_spot_check,条件，状况，环境vt. 决定；支配；训练；状况；[pl.]环境，形势,,,,,,complete
+congress,block_keywords,B2,,,ˈkɑːŋɡrəs,,toefl,unspecified,needs_spot_check,"n. 国会；议会； 代表大会；会议； 聚会；集会；代表会议,(C-)(美国等)议会；国会；代表大会",,,,993,260,complete
+contact,scene_target_extension,B1,,,ˈkɑːntækt,,toefl,unspecified,needs_spot_check,n. 联系；接触； 触碰；接触； 联系人；熟人； 隐形眼镜 | v. 联系；联络；接触;联络;会晤的人;(电)接点;vt. 接触；联系；接触；交往,,,195,414,222,complete
+contract,block_keywords,B2,,,ˈkɑːntrækt,,toefl,unspecified,needs_spot_check,"n. 合同；契约；合约； （固定期限或特定工作的）工作合同；服务合约；v. 签订合…；合同,契约;v. 缔结;负(债); 感染(疾病);使皱缩；收缩；订合同",,,888,511,,complete
+control,block_keywords,A2,control,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",kənˈtroʊl,,toefl,unspecified,needs_spot_check,控制，支配v. 控制，支配；控制；管理；抑制,,,,,,complete
+cook,block_keywords,A1,cook,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkʊk/,cook,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,厨师v. 烹调，烧煮；纂改(账目)，捏造,,,,,,complete
+corner,block_keywords,A1,corner,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkɔɹnɝ/,corner,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,角落，拐角,,,,,,complete
+cost,block_keywords,A2,cost,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈkɑst/, /ˈkɔst/",cost,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,成本，费用v.花费,,,,,,complete
+course,scene_target_extension,A1,course,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkɔɹs/,course,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,过程，路线，课程；必修课elective /ɪ,,,,,,complete
+credit,block_keywords,B1,,,"/ˈkɹɛdət/, /ˈkɹɛdɪt/",credit,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 赊购，赊账；信用； 赞扬，称赞；荣誉； 学分； 存款，贷方余额；v. 把…记入贷…；信誉，信用v.相信；and led to new developments in finance。名词短语“a device that ...,,,266,205,784,complete
+currency,block_keywords,B2,,,ˈkɜːrənsi,,toefl,unspecified,needs_spot_check,n. 货币；通货； 流通；流行；通用； 通用性；时效性；通货，货币；货币,,,,831,,complete
+daddy,block_keywords,A1,daddy,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdædi/,daddy,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+darling,block_keywords,B2,darling,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdɑɹɫɪŋ/,darling,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,心爱的人，亲爱的,,,,,,complete
+daughter,block_keywords,A1,daughter,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdɔtɝ/,daughter,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,女儿,,,,,,complete
+deal,block_keywords,A2,deal,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdiɫ/,deal,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,处理；做买卖，经营；分配；对待n. 交易,,,,,,complete
+dear,block_keywords,A1,dear,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdɪɹ/,dear,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,昂贵的；亲爱的；珍贵的int. 呵！哎呀！,,,,,,complete
+debt,block_keywords,B1,,,det,,toefl,unspecified,needs_spot_check,n. 欠款；债务； 人情债；恩情；债，债务；债务,,,826,294,535,complete
+department,block_keywords,A2,,,/dɪˈpɑɹtmənt/,department,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 部门；系； （法国等国的）省； 专长；职责范围；部，局，处，科，部门；系，学部,,,79,337,147,complete
+deposit,block_keywords,B2,,,dɪˈpɑːzɪt,,toefl,unspecified,needs_spot_check,"n. 存款；定金； 沉积物；矿床； 保证金；押瓶费；v. 存放；储蓄； 使沉积；放置；/vt. 存款;定金;沉淀,沉积；使沉淀deposition n. 沉",,,,938,,complete
+deposited,block_keywords,B1,deposit,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/dəˈpɑzɪtɪd/, /dɪˈpɑzətəd/",deposited,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 存款；定金； 沉积物；矿床； 保证金；押瓶费；v. 存放；储蓄； 使沉积；放置,deposit,九板块重点词表,,,,complete
+deposition,block_keywords,,,,/ˌdɛpəˈzɪʃən/,deposition,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,免职，罢免；口供；海积marsh /mɑːrʃ,,,,,,missing_source
+depository,block_keywords,,,,/dɪˈpɑzəˌtɔɹi/,depository,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+description,scene_target_extension,B1,,,/dɪsˈkɹɪpʃən/,description,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"n. 描述；描写；叙述； 类型；种类；描写,描绘,叙述",,,1142,623,,complete
+desk,block_keywords,A1,desk,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdɛsk/,desk,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,书桌，办公桌，服务台,,,,,,complete
+dessert,block_keywords,A2,dessert,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/dɪˈzɝt/,dessert,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,正餐后的水果或甜食,,,,,,complete
+diagnosis,block_keywords,B2,,,/ˌdaɪəɡˈnoʊsəs/,diagnosis,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 诊断（疾病的判定）； 判断；分析（问题的根源）；诊断,,,,1994,,complete
+died,block_keywords,A2,die,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdaɪd/,died,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,死，死亡；(草木)枯萎，凋谢；渴望,die,雅思8000词_净版,,,,complete
+dining,block_keywords,A2,,,/ˈdaɪnɪŋ/,dining,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 进餐；用餐；v. 进餐；用餐（dine 的现在分词）,,,1249,,,complete
+dinner,block_keywords,A1,dinner,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdɪnɝ/,dinner,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,正餐，宴会,,,,,,complete
+director,block_keywords,A2,director,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/daɪˈɹɛktɝ/, /dɝˈɛktɝ/, /diˈɹɛktɝ/, /dɪˈɹɛktɝ/",director,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,指导者，主任，导演；财务经理financial a. 财,,,,,,complete
+discount,block_keywords,B1,,,ˈdɪskaʊnt,,toefl,unspecified,needs_spot_check,"n. 折扣;减价；v. 打折出售;降低价格； 不重视;低估;忽视； 贴现（票据）;预扣利息；折扣 vt. 不全信,低估,漠视；折扣v. 打折",,,553,1426,,complete
+doctor,block_keywords,A1,doctor,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈdɑktɝ/, /ˈdɔktɝ/",doctor,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,医生；博士vt. 授以博士学位；诊断；修改；in charge 主治医师,,,,,,complete
+doctor's,block_keywords,A1,doctor,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdɑktɝz/,doctor's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,in charge 主治医师,doctor,托福7000词_净版,,,,complete
+doing,block_keywords,A1,doing,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈduɪŋ/,doing,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,/v./vt. 做，干，办，从事；引起vi. 行动,do,雅思8000词_净版,,,,complete
+dollars,block_keywords,A1,dollar,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈdɑɫɝz/, /ˈdɔɫɝz/",dollars,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(美国，加拿大等国货币单位)美元，加元,dollar,雅思8000词_净版,,,,complete
+door,block_keywords,A1,door,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdɔɹ/,door,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,门；门口，出入口；门状物；家；通道,,,,,,complete
+double,block_keywords,A2,double,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈdʌbl,,toefl,unspecified,needs_spot_check,两倍adj. 两倍的，双重的vt. 使加倍vi. 加倍；加倍；是…的两倍a. 两倍,,,,,,complete
+dress,block_keywords,A1,dress,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdɹɛs/,dress,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,服装，童装，女装v. 穿衣，打扮,,,,,,complete
+drink,block_keywords,A1,drink,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdɹɪŋk/,drink,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(drank，drunk)喝，饮n. 饮料；喝酒,,,,,,complete
+drive,block_keywords,A1,drive,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdɹaɪv/,drive,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,开(车)；驱；驱动，把(钉，桩)打入n. 驾驶,,,,,,complete
+driver,block_keywords,A1,driver,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdɹaɪvɝ/,driver,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,驾驶员,,,,,,complete
+driver's,block_keywords,A1,driver,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdɹaɪvɝz/,driver's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,驾驶员,driver,雅思8000词_净版,,,,complete
+driving,block_keywords,A2,,,/ˈdɹaɪvɪŋ/,driving,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 驾驶；开车；adj. 驱动的；推动的；起推动作用的； 猛烈的；强劲的（指雨、风…,,,362,655,992,complete
+during,block_keywords,A2,during,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈdɝɪŋ/, /ˈdjʊɹɪŋ/, /ˈdʊɹɪŋ/",during,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,在…期间,,,,,,complete
+early,block_keywords,A1,early,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɝɫi/,early,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,早的，早期的，及早的ad. 早，在初期,,,,,,complete
+east,block_keywords,A2,east,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈist/,east,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,东，东方，东部a. 东方的，东部的,,,,,,complete
+eating,block_keywords,A1,,,/ˈitɪŋ/,eating,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 吃；进食；v. 吃（eat 的现在分词）；adj. 食用的；供食用的,,,457,753,,complete
+economy,block_keywords,B1,,,"/iˈkɑnəmi/, /ɪˈkɑnəmi/",economy,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 经济；经济体系； 节约；节省；adj. 经济舱的；廉价的；节约；经济；市场经济,,,105,67,27,complete
+engagement,scene_target_extension,B2,,,/ɛnˈɡeɪdʒmənt/,engagement,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 约定；约会； 订婚； 参与；投入； 交战；战斗； 雇用；聘用；约会，约定；婚约，订婚,,,1520,1136,873,complete
+england,block_keywords,,,,/ˈɪŋɡɫənd/,england,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,英格兰；英国,,,,,,missing_source
+enjoy,scene_target_extension,A1,enjoy,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˌɛnˈdʒɔɪ/, /ɪnˈdʒɔɪ/",enjoy,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,享受…的乐趣；欣赏；喜爱,,,,,,complete
+entrance,scene_target_extension,A2,entrance,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɛntɹəns/,entrance,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"入口，门口；进入；入学，入会vt. 使某人(着魔般)狂喜,",,,,,,complete
+escape,block_keywords,A2,,,/ɪˈskeɪp/,escape,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,v. 逃跑;逃脱； 避免;躲避（不愉快的事）； （气体、液体等）泄漏;渗出； 被忘记;…；逃跑，逃脱v. 逃跑；避开，避免,,,971,685,643,complete
+everyone,block_keywords,A1,everyone,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɛvɹiˌwən/,everyone,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(everybody)每人，人人，各人,,,,,,complete
+everywhere,block_keywords,A1,everywhere,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈɛvɹiˌwɛɹ/, /ˈɛvɹihˌwɛɹ/",everywhere,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,到处，各处，无论何处,,,,,,complete
+exchange,block_keywords,B1,,,/ɪksˈtʃeɪndʒ/,exchange,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"n. 交换；互换； 交易所；交易市场； 交流；对话； 兑换；汇率； 交换生项目；交…；/n. 交换,兑换；外汇forward rate 远期利",,,1260,792,544,complete
+excuse,block_keywords,A1,excuse,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ɪkˈskjus/, /ɪkˈskjuz/",excuse,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,原谅，宽恕，免除n. 借口，辩解,,,,,,complete
+exit,block_keywords,A2,,,"/ˈɛɡzɪt/, /ˈɛksət/",exit,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 出口；太平门； 离开；退出； （演员的）退场；v. 离开；退出；出口，通道,,,,2008,,complete
+expect,block_keywords,A2,expect,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ɪkˈspɛkt/,expect,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,预期；期望，指望,,,,,,complete
+expensive,block_keywords,A1,expensive,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ɪkˈspɛnsɪv/,expensive,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,花费的，昂贵的,,,,,,complete
+face,block_keywords,A1,face,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfeɪs/,face,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,脸，面貌；表情；正面v. 面对着；朝，面向,,,,,,complete
+fair,block_keywords,A1,fair,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɛɹ/,fair,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,公平的，合理的；相当的n. 集市，交易会,,,,,,complete
+family,block_keywords,A1,family,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈfæməɫi/, /ˈfæmɫi/",family,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,家，家庭成员；氏族，家庭；族，科,,,,,,complete
+family's,block_keywords,A1,family,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈfæməɫiz/, /ˈfæmɫiz/",family's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,家，家庭成员；氏族，家庭；族，科,family,雅思8000词_净版,,,,complete
+famous,block_keywords,A1,famous,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfeɪməs/,famous,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,著名的,,,,,,complete
+fancy,block_keywords,B1,,,/ˈfænsi/,fancy,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"v. 想要；喜欢； 喜欢（某人）；对（某人）有好感； 想象；设想；adj. 花哨的；精…；颜色鲜艳的;奇特的;n./v. 想象力,设想,爱好,认为",,,833,1552,,complete
+fanfare,block_keywords,,,,/ˈfænˌfɛɹ/,fanfare,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+fare,block_keywords,B1,,,/ˈfɛɹ/,fare,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"n. 车费；票价； 饭菜；食物； 乘客；v. 进展；过得；车费,船费",,,1392,,,complete
+farewell,block_keywords,B1,farewell,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˌfɛɹˈwɛɫ/,farewell,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"/n./a. 再见;临别的,告别的",,,,,,complete
+fast,scene_target_extension,A1,fast,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfæst/,fast,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,快的，迅速的；坚固的ad. 紧紧地；迅速地,,,,,,complete
+father,block_keywords,A1,father,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɑðɝ/,father,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,父亲；创始人，发明者；(Father)神父,,,,,,complete
+favorite,block_keywords,A1,favorite,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈfeɪvɝɪt/, /ˈfeɪvɹət/",favorite,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,最喜欢的人或物a. 喜爱的,,,,,,complete
+feeling,block_keywords,A1,feeling,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfiɫɪŋ/,feeling,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,感情；心情；知觉；同情,,,,,,complete
+fever,block_keywords,A1,fever,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈfiːvər,,toefl,unspecified,needs_spot_check,发热，狂热；发烧get,,,,,,complete
+feverish,block_keywords,,,,/ˈfivɝɪʃ/,feverish,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+fill,block_keywords,A1,fill,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɪɫ/,fill,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(with)填满，充满,,,,,,complete
+filled,block_keywords,A1,fill,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɪɫd/,filled,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(with)填满，充满,fill,雅思8000词_净版,,,,complete
+final,block_keywords,A2,final,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfaɪnəɫ/,final,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,最终的，决定性的n. 结局；决赛；期末考试,,,,,,complete
+fine,block_keywords,A1,fine,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfaɪn/,fine,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,晴朗的，美好的，细致的v./n. 罚金，罚款,,,,,,complete
+fire,block_keywords,A1,fire,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈfaɪɝ/, /ˈfaɪɹ/",fire,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,火；火灾，失火；炉火vi. 开火vt. 放(枪)；停火,,,,,,complete
+fish,block_keywords,A1,fish,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɪʃ/,fish,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,鱼；鱼肉v. 捕鱼；钓鱼,,,,,,complete
+fit,scene_target_extension,A2,fit,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɪt/,fit,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(病的)发作，痉挛v./a. n. 合适，试穿，安装,,,,,,complete
+fitting,scene_target_extension,A2,fit,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɪtɪŋ/,fitting,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"适合的,恰当的;n. 试衣;建筑物中的装置",,,,,,complete
+flight,block_keywords,A2,,,flaɪt,,toefl,unspecified,needs_spot_check,n. 航班；飞行； 飞行能力；飞翔； 楼梯的一段； 逃跑；逃离； （想象力的）驰骋…；飞翔，飞行；航班；航程；逃跑；楼梯的一段；航程；班机；飞行；逃避,,,269,488,456,complete
+floor,block_keywords,A1,floor,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɫɔɹ/,floor,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,地板，(楼房)的层,,,,,,complete
+flour,scene_target_extension,A2,flour,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈfɫaʊɝ/, /ˈfɫaʊɹ/",flour,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,面粉,,,,,,complete
+flying,block_keywords,A2,,,/ˈfɫaɪɪŋ/,flying,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 飞行；adj. 飞行的;会飞的； 快速的;匆忙的；v. 飞;飞行（fly 的现在分词）,,,1528,,,complete
+follow,block_keywords,A2,follow,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɑɫoʊ/,follow,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,跟随，接着；领会；沿着…前进，遵循；结果是,,,,,,complete
+food,block_keywords,A1,food,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfud/,food,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,食物，粮食，养料；begging behavior 乞食行为,,,,,,complete
+form,block_keywords,A1,form,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɔɹm/,form,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,形状，形式；表格v. 组成，构成；形成；（形式）,,,,,,complete
+fountain,scene_target_extension,B1,,,ˈfaʊntn,,toefl,unspecified,needs_spot_check,"n. 喷泉；喷水池； 饮水器；直饮水龙头； 源泉；根源； 喷射；涌出；泉水,喷泉,源泉；喷泉",,,,627,,complete
+frank,block_keywords,A2,frank,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɹæŋk/,frank,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,坦白的，直率的,,,,,,complete
+fraud,block_keywords,C1,,,/ˈfɹɔd/,fraud,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 欺诈；诈骗； 骗子；欺诈者； 假货；赝品,,,1531,,,complete
+french,block_keywords,,,,/ˈfɹɛntʃ/,french,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,法国的 n.法国人；法语；法国人a. 法国,,,,,,missing_source
+front,block_keywords,A1,front,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɹənt/,front,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,前面的，前部的n. 正面；前线，战线v. 面对,,,,,,complete
+fuck,block_keywords,,,,/ˈfək/,fuck,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,浑蛋，辱?,,,,,,missing_source
+fucking,block_keywords,,,,/ˈfəkɪŋ/,fucking,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,浑蛋，辱?,fuck,雅思8000词_净版,,,,missing_source
+funny,block_keywords,A1,funny,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfəni/,funny,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,滑稽的，可笑的,,,,,,complete
+gallery,scene_target_extension,B1,,,ˈɡæləri,,toefl,unspecified,needs_spot_check,"n. 美术馆；画廊； （剧院等的）楼座；顶层楼座； 长廊；走廊； （矿井等的）坑…；画廊,美术品陈列室,剧场顶层；画廊，美术馆",,,,1328,,complete
+gate,scene_target_extension,A2,gate,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɡeɪt/,gate,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,大门；入口；观众人数，门票收入,,,,,,complete
+general,block_keywords,B1,general,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈdʒɛnɝəɫ/, /ˈdʒɛnɹəɫ/",general,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,一般的，普通的；总的，大体的n. 将军,,,,,,complete
+gentlemen,block_keywords,,,,"/ˈdʒɛnəɫmɪn/, /ˈdʒɛntəɫmɪn/",gentlemen,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+george,block_keywords,,,,/ˈdʒɔɹdʒ/,george,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+gift,block_keywords,A1,gift,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɡɪft/,gift,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,礼品，赠品；天赋，才能,,,,,,complete
+glad,block_keywords,A1,glad,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɡɫæd/,glad,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,高兴的，快活的；乐意的，情愿的,,,,,,complete
+gold,block_keywords,A1,gold,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɡoʊɫd/,gold,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,金，黄金；金币；金黄色a. 金的，金制的；Coast 黄金海岸,,,,,,complete
+gonna,block_keywords,,,,/ˈɡɑnə/,gonna,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+goodbye,block_keywords,,,,/ˌɡʊdˈbaɪ/,goodbye,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+government,block_keywords,A2,government,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈɡʌvərnmənt,,toefl,unspecified,needs_spot_check,政府，内阁；管理，支配；政治，政体；政府；管理,,,,,,complete
+grab,block_keywords,B1,,,/ˈɡɹæb/,grab,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"v. 抓住；夺取； 匆忙取得；赶紧吃（喝）； 吸引（注意力）；n. 抓取；攫取； 可…；/n. 攫取,抓取,掠夺",,,1535,,,complete
+grand,block_keywords,B1,,,ɡrænd,,toefl,unspecified,needs_spot_check,"adj. 宏伟的；壮丽的； （总计）总的； 重要的；显赫的； 极好的；出色的；n. 一千…；最重大的,豪华的;傲慢的;美妙的;全部的；雄伟的；壮观",,,496,880,,complete
+guard,block_keywords,A2,guard,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɡɑɹd/,guard,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,/n. 保卫，守卫，提防n. 哨兵，警卫，看守,,,,,,complete
+guest,block_keywords,A1,guest,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɡɛst/,guest,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,客人，宾客，旅客,,,,,,complete
+guide,block_keywords,A2,,,/ˈɡaɪd/,guide,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 指南;手册； 导游;向导； 指导原则;准则；v. 指导;引导;带领； 影响;支配（决定、…；领路人；指南，导游v. 领路；指导；支配；管理,,,497,1071,645,complete
+guided,block_keywords,B1,guide,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈɡaɪdəd/, /ˈɡaɪdɪd/",guided,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 指南;手册； 导游;向导； 指导原则;准则；v. 指导;引导;带领； 影响;支配（决定、…,guide,九板块重点词表,,,,complete
+guitar,scene_target_extension,A1,guitar,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ɡɪˈtɑːr,,toefl,unspecified,needs_spot_check,吉他vi. 弹吉他；吉他,,,,,,complete
+guys,block_keywords,A1,guy,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɡaɪz/,guys,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 男人；家伙； （guys）各位；大家； （Guy）盖伊节人像；盖伊·福克斯像； 拉…,guy,真题考频总表,,,,complete
+half,block_keywords,A1,half,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhæf/,half,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,半，一半a. 一半的，不完全的ad. 一半地；a century 半个世纪,,,,,,complete
+happy,block_keywords,A1,happy,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhæpi/,happy,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,快乐的，幸福的；乐意的；令人满意的,,,,,,complete
+harry,block_keywords,,,,/ˈhɛɹi/,harry,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+he's,block_keywords,A1,he,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhiz/,he's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,他；(不论性别的)一个人,he,雅思8000词_净版,,,,complete
+head,block_keywords,A1,head,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhɛd/,head,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,头；顶部；领导，首脑v. 主管；位于…顶部,,,,,,complete
+headed,block_keywords,A1,head,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈhɛdəd/, /ˈhɛdɪd/",headed,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,头；顶部；领导，首脑v. 主管；位于…顶部,head,雅思8000词_净版,,,,complete
+heading,block_keywords,A1,head,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhɛdɪŋ/,heading,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,标题,,,,,,complete
+health,scene_target_extension,A1,health,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈsʌbhelθ,,toefl,unspecified,needs_spot_check,健康，健康状况；卫生；亚健康,,,,,,complete
+hell,block_keywords,B2,hell,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhɛɫ/,hell,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"地狱,阴间,苦境",,,,,,complete
+hello,block_keywords,A1,hello,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/həˈɫoʊ/, /hɛˈɫoʊ/",hello,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,英(美)喂，你好(用来打招呼或引起注意),,,,,,complete
+here's,block_keywords,A1,here,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhɪɹz/,here's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,在(到，向)这里；这时；在这一点上,here,雅思8000词_净版,,,,complete
+high,block_keywords,A1,high,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhaɪ/,high,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,高的，高度的，高级的，高尚的ad. 高高地；speed photography 高速摄影,,,,,,complete
+higher,block_keywords,A1,high,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhaɪɝ/,higher,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,speed photography 高速摄影,high,托福7000词_净版,,,,complete
+history,block_keywords,A1,history,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈhɪstɝi/, /ˈhɪstɹi/",history,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,历史，历史学；来历，经历,,,,,,complete
+home,block_keywords,A1,home,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhoʊm/,home,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,回家，在家n. 家；家乡a. 家庭的；家乡的；疗养院；养老院,,,,,,complete
+honey,block_keywords,A2,honey,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhəni/,honey,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,蜜，蜂蜜,,,,,,complete
+honor,block_keywords,B2,,,/ˈɑnɝ/,honor,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 荣誉；名誉； 荣幸；光荣； 荣誉称号；奖励；v. 尊敬；给予荣誉； 履行；兑现；尊敬，敬意；荣誉，光荣v. 尊敬,,,688,1236,,complete
+hope,block_keywords,A1,hope,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhoʊp/,hope,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,希望，期望；希望的人或事v. 希望，期望,,,,,,complete
+hospital,block_keywords,A1,hospital,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhɑˌspɪtəɫ/,hospital,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,医院,,,,,,complete
+hospitality,block_keywords,B2,hospitality,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˌhɑspəˈtæɫəti/,hospitality,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"好客,殷勤",,,,,,complete
+hotel,block_keywords,A1,hotel,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/hoʊˈtɛɫ/,hotel,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,旅馆,,,,,,complete
+hotel's,block_keywords,A1,hotel,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/hoʊˈtɛɫz/,hotel's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,旅馆,hotel,雅思8000词_净版,,,,complete
+hour,block_keywords,A1,hour,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈaʊɝ/, /ˈaʊɹ/",hour,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,小时，钟点；时刻；课时，工作时间,,,,,,complete
+how's,block_keywords,A1,how,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhaʊz/,how's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,1. (表示方法、手段、状态)怎样；如何,how,雅思8000词_净版,,,,complete
+hungry,block_keywords,A1,hungry,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhəŋɡɹi/,hungry,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,饥饿的，渴望的,,,,,,complete
+hurt,block_keywords,A1,hurt,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈhɝt/,hurt,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,伤痛，伤害v. 刺痛，伤害；伤…的感情,,,,,,complete
+identification,block_keywords,B2,identification,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",aɪˌdentɪfɪˈkeɪʃn,,toefl,unspecified,needs_spot_check,识别，鉴别；证件；认同；辨认，鉴定；认同,,,,,,complete
+indian,block_keywords,,,,/ˈɪndiən/,indian,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,印度的 n.印度人；印度人；印第安语a. 印度,,,,,,missing_source
+injured,block_keywords,B2,injured,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɪndʒɝd/,injured,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,v. 使受伤； 损害（名誉、感情等）,injure,真题考频总表,,,,complete
+instrument,scene_target_extension,A2,instrument,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈɪnstrəmənt,,toefl,unspecified,needs_spot_check,工具，仪器，器械；乐器；乐器；器械,,,,,,complete
+insurance,block_keywords,B1,,,/ˌɪnˈʃʊɹəns/,insurance,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 保险； 保险费；保险金； 预防措施；保障手段；保险；年金保险,,,,246,227,complete
+introduce,block_keywords,A1,introduce,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˌɪntɹəˈdus/, /ˌɪntɹoʊˈdus/",introduce,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,介绍；引进，传入；提出(议案等),,,,,,complete
+invite,block_keywords,A2,invite,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˌɪnˈvaɪt/,invite,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,邀请，招待,,,,,,complete
+island,block_keywords,A1,island,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈaɪlənd,,toefl,unspecified,needs_spot_check,岛，岛屿；(道路上的)交通安全岛；岛屿,,,,,,complete
+it'll,block_keywords,,,,"/ˈɪtəɫ/, /ˈɪtɫ/",it'll,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+italian,block_keywords,,,,/ˌɪˈtæɫjən/,italian,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,意大利的n.意大利人；意大利语；意大利人a. 意大利,,,,,,missing_source
+jacket,scene_target_extension,A1,jacket,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈdʒækət/, /ˈdʒækɪt/",jacket,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,短上衣，茄克衫,,,,,,complete
+jackson,block_keywords,,,,/ˈdʒæksən/,jackson,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+james,block_keywords,A2,jam,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈdʒeɪmz/,james,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 果酱； 交通堵塞； 困境；v. 塞进；挤进； 卡住；使堵塞； 即兴演奏,jam,真题考频总表,,,,complete
+job,scene_target_extension,A1,job,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈdʒɑb/, /ˈdʒoʊb/",job,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,工作，职位；零活，一件工作；任务，职责,,,,,,complete
+john,block_keywords,,,,/ˈdʒɑn/,john,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+king,block_keywords,A1,king,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkɪŋ/,king,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,君主，国王,,,,,,complete
+kitchen,block_keywords,A1,kitchen,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈkɪtʃən/,kitchen,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,厨房,,,,,,complete
+ladies,block_keywords,A1,lady,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɫeɪdiz/,ladies,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,女士，夫人,lady,雅思8000词_净版,,,,complete
+landmark,block_keywords,,,,/ˈɫændˌmɑɹk/,landmark,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+late,block_keywords,A1,late,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɫeɪt/,late,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,迟的，晚的，晚期的；已故的ad. 迟，晚,,,,,,complete
+lease,block_keywords,B2,lease,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɫis/,lease,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,租约;vt. 出租,,,,,,complete
+leaving,block_keywords,A1,leave,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɫivɪŋ/,leaving,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,离开；留下，忘带；让，听任；交付n. 许可；假期,leave,雅思8000词_净版,,,,complete
+left,block_keywords,A1,left,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɫɛft/,left,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,左面，左方a. 左边的，左面的；在左方的,,,,,,complete
+license,block_keywords,A2,license,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈlaɪsns,,toefl,unspecified,needs_spot_check,许可证，执照v. 准许，认可；许可证,,,,,,complete
+light,block_keywords,A1,light,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɫaɪt/,light,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"明亮的,轻的,不重要的 n. 光,光线,光源；（灯光）",,,,,,complete
+live,block_keywords,A1,live,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈɫaɪv/, /ˈɫɪv/",live,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"活,生活 a. 有生命的,实况的；in misery and want 过贫苦匮乏的生活",,,,,,complete
+loan,block_keywords,B1,,,/ˈɫoʊn/,loan,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"n. 贷款；借款； 借出（物）；出借； 借用球员；租借球员；v. 借出；贷与；借出物,贷款,借出;v. 借；interest rate 贷款利率",,,779,382,,complete
+lobby,block_keywords,B2,lobby,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈlɑːbi,,toefl,unspecified,needs_spot_check,"门廊,门厅;院外活动集团;v. 对(议员等)游说活动；向（议员等）进行游说（或疏通）n. 休息室，大",,,,,,complete
+lord,block_keywords,,,,/ˈɫɔɹd/,lord,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(Lord)上帝，主；主人，长官，君主，贵族,,,,,,missing_source
+lost,block_keywords,A2,lost,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",lɑːst,,toefl,unspecified,needs_spot_check,失去的；迷路的；迷失,,,,,,complete
+louvre,block_keywords,,,,/ˈɫuvɹə/,louvre,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+love,block_keywords,A1,love,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɫəv/,love,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,爱，爱情，喜欢vt. 爱，热爱；爱好，喜欢,,,,,,complete
+luck,block_keywords,A1,luck,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɫək/,luck,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,运气；好运，侥幸,,,,,,complete
+luggage,block_keywords,B1,luggage,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈɫəɡədʒ/, /ˈɫəɡɪdʒ/",luggage,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,行李，皮箱,,,,,,complete
+lunch,block_keywords,A1,lunch,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɫəntʃ/,lunch,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,午餐，(美)便餐,,,,,,complete
+lungs,block_keywords,B1,lung,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɫəŋz/,lungs,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 肺,lung,真题考频总表,,,,complete
+ma'am,block_keywords,,,,/ˈmæm/,ma'am,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+madam,block_keywords,B2,madam,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmædəm/,madam,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,夫人，太太，女士,,,,,,complete
+madame,block_keywords,B2,madame,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈmædəm/, /məˈdæm/",madame,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+mail,block_keywords,A1,mail,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmeɪɫ/,mail,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,邮件v. 邮寄,,,,,,complete
+main,block_keywords,B1,main,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmeɪn/,main,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,主要的，总的n. 总管道；干线,,,,,,complete
+manager,block_keywords,A2,manager,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈmænədʒɝ/, /ˈmænɪdʒɝ/",manager,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,经理，管理人,,,,,,complete
+market,block_keywords,A2,market,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈmɑɹkət/, /ˈmɑɹkɪt/",market,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,集市，市场；销路，需求(量)v. 销售,,,,,,complete
+married,block_keywords,A1,,,/ˈmɛɹid/,married,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,adj. 已婚的； 全身心投入的；专注于……的；v. marry 的过去式和过去分词；已婚的，夫妇的；(to)与…结婚的,,,781,,,complete
+master,block_keywords,B2,master,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmæstɝ/,master,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,男主人；师傅；硕士v. 精通，控制a. 主要的,,,,,,complete
+meal,block_keywords,A1,meal,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmiɫ/,meal,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,膳食，一餐,,,,,,complete
+medical,block_keywords,A2,medical,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈmedɪkl,,toefl,unspecified,needs_spot_check,医学的，医疗的，医药的；内科的；医疗的；疾病的；内科,,,,,,complete
+medicine,block_keywords,A1,medicine,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmɛdəsən/,medicine,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,内服药，医药；医术；医学，内科学,,,,,,complete
+meet,block_keywords,A1,meet,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmit/,meet,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,会，集会v. 遇见；会谈；迎接；满足；符合；the deadline 按期限完成,,,,,,complete
+meeting,scene_target_extension,A1,meeting,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmitɪŋ/,meeting,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,会议，集合，汇合，会见，接见，汇合点,,,,,,complete
+menu,block_keywords,A2,menu,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmɛnju/,menu,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,菜单,,,,,,complete
+menus,block_keywords,A2,menu,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmɛnjuz/,menus,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,菜单,menu,雅思8000词_净版,,,,complete
+miles,block_keywords,B1,mile,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈmaɪəɫz/, /ˈmaɪɫz/",miles,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,英里，哩，海里,mile,雅思8000词_净版,,,,complete
+million,block_keywords,A2,,,/ˈmɪɫjən/,million,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,num. 一百万；百万；n. 百万（钱）；一百万英镑/美元等； 数百万；极多；/n. 百万，百万个,,,21,38,51,complete
+minutes,block_keywords,A1,minute,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmɪnəts/,minutes,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,分钟，片刻；(pl.)会议记录a. 微小的,minute,雅思8000词_净版,,,,complete
+miss,block_keywords,A1,miss,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmɪs/,miss,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,小姐v. 思念，未击中，错过，漏掉，逃脱,,,,,,complete
+money,block_keywords,A1,money,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈməni/,money,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,货币，钱,,,,,,complete
+month,block_keywords,A1,month,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmənθ/,month,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,月，月份,,,,,,complete
+mother,block_keywords,A1,mother,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈməðɝ/,mother,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,母亲,,,,,,complete
+moving,block_keywords,A2,,,/ˈmuvɪŋ/,moving,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,adj. 令人感动的； 移动的；活动的；n. 搬家；迁移；v. move 的现在分词,,,,2058,,complete
+museum,block_keywords,A2,museum,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈmjuziəm/, /mjuˈziəm/",museum,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,博物馆，展览馆,,,,,,complete
+music,block_keywords,A1,music,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈmjuzɪk/,music,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,音乐，乐曲，乐谱,,,,,,complete
+myself,block_keywords,A2,myself,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˌmaɪˈsɛɫf/,myself,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,我自己；我亲自,,,,,,complete
+name,block_keywords,A1,name,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈneɪm/,name,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,名字(称/声/义)vt. 给…取名；列举；提名,,,,,,complete
+natural,block_keywords,A2,natural,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈnætʃrəl,,toefl,unspecified,needs_spot_check,正常的；自然界的，天然的，天赋的，固有的；自然的；天然,,,,,,complete
+near,block_keywords,A1,near,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈnɪɹ/,near,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,近的，接近的；亲近的prep. 靠近ad. 接近,,,,,,complete
+need,block_keywords,A1,need,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈnid/,need,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,v./v. 需要；必须n. 需要；贫困，困窘,,,,,,complete
+nice,block_keywords,A1,nice,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈnaɪs/, /ˈnis/",nice,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,美好的，令人愉快的；友好的，亲切的,,,,,,complete
+north,block_keywords,A2,north,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈnɔɹθ/,north,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,北，北方a. 北方的，北部ad. 向北方，在北方；Korea 朝鲜,,,,,,complete
+notary,block_keywords,,,,/ˈnoʊtɝi/,notary,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+number,block_keywords,A1,number,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈnəmbɝ/,number,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,数，数字，数量，号码，一群v. 共计，编号,,,,,,complete
+nurse,block_keywords,A1,nurse,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈnɝs/,nurse,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,护士，保姆v. 护理，看护,,,,,,complete
+nursery,block_keywords,B2,nursery,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈnɝsɝi/,nursery,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"托儿所,保育室;苗圃",,,,,,complete
+offer,block_keywords,A2,offer,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɔfɝ/,offer,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,提出;表示;n. 提供;提议,,,,,,complete
+office,block_keywords,A1,office,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɔfɪs/,office,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,办公室，办事处；职务，公职；部，局，处；内阁办公室,,,,,,complete
+one-way,block_keywords,,,,/ˈwənˈweɪ/,one-way,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+open,block_keywords,A1,open,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈoʊpən/,open,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,公开，户外a. 开的，开放的v. 开；an account 开户,,,,,,complete
+opening,block_keywords,B1,,,ˈoʊpnɪŋ,,toefl,unspecified,needs_spot_check,"n. 开口;洞;缺口； 开始;开端;开场； 职位空缺;空缺； 机会;良机；adj. 开始的;开场的;…；口,孔;开始,张开;职位空缺；空缺，缺额",,,1179,1593,,complete
+operation,block_keywords,B1,operation,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˌɑpɝˈeɪʃən/,operation,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,运转，开动，操作，手术，运算，经营；运行,,,,,,complete
+order,block_keywords,A1,order,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɔɹdɝ/,order,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,命令；次序；整齐；定货单；等级v. 定制，订购,,,,,,complete
+ordered,block_keywords,A1,order,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɔɹdɝd/,ordered,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,命令；次序；整齐；定货单；等级v. 定制，订购,order,雅思8000词_净版,,,,complete
+outside,block_keywords,A1,outside,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈaʊtˈsaɪd/,outside,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,向外面n. 外部a. 外部的prep. 在…外,,,,,,complete
+owner,block_keywords,A1,owner,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈoʊnɝ/,owner,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,物主，所有者,,,,,,complete
+paid,block_keywords,A2,,,/ˈpeɪd/,paid,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,v. 付款；支付（pay 的过去式和过去分词）；adj. 有报酬的；付费的； 已付清的；…,,,1425,,1136,complete
+pain,block_keywords,A2,,,/ˈpeɪn/,pain,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 疼痛；痛苦； 精神痛苦；悲痛； 讨厌的人或事；麻烦；v. 使痛苦；使烦恼；痛，痛苦；(pl.)努力，劳苦vt. 使痛苦,,,432,1255,380,complete
+painting,block_keywords,A1,painting,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpeɪntɪŋ/,painting,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,上油漆，着色；绘画；油画；画法；现实主义绘画,,,,,,complete
+pancreatic,block_keywords,,,,/ˌpænkɹiˈætɪk/,pancreatic,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,胰腺,,,,,,missing_source
+papers,block_keywords,A1,paper,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpeɪpɝz/,papers,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,文件，证书,,,,,,complete
+paperwork,block_keywords,B2,paperwork,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpeɪpɝˌwɝk/,paperwork,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+paris,block_keywords,,,,"/ˈpæɹɪs/, /ˈpɛɹɪs/",paris,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,巴黎,,,,,,missing_source
+park,block_keywords,A1,park,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɑɹk/,park,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,公园，停车场，运动场v. 停放(汽车等)，寄放,,,,,,complete
+part,block_keywords,A2,part,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɑɹt/,part,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,部分，角色，一方，零件，地区，部，篇v. 使分开；（部分）,,,,,,complete
+pass,block_keywords,A2,pass,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpæs/,pass,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,经/通/穿/度过；传递n. 通行证；考试及格,,,,,,complete
+passed,block_keywords,A2,pass,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpæst/,passed,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,经/通/穿/度过；传递n. 通行证；考试及格,pass,雅思8000词_净版,,,,complete
+passport,block_keywords,B1,passport,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpæsˌpɔɹt/,passport,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"护照,保障,手段",,,,,,complete
+patient,block_keywords,A2,patient,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpeɪʃənt/,patient,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,有耐心的，能忍耐的n. 病人，患者,,,,,,complete
+patient's,block_keywords,A2,patient,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpeɪʃənts/,patient's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,有耐心的，能忍耐的n. 病人，患者,patient,雅思8000词_净版,,,,complete
+paul,block_keywords,,,,/ˈpɔɫ/,paul,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+paying,block_keywords,A1,pay,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpeɪɪŋ/,paying,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,attention to 注意；重视,pay,托福7000词_净版,,,,complete
+payment,block_keywords,B1,,,/ˈpeɪmənt/,payment,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 支付；付款； 报酬；酬金； 报答；回报；支付，付款额,,,384,692,320,complete
+pharmacy,block_keywords,B1,pharmacy,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfɑɹməsi/,pharmacy,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,药房；药剂学,,,,,,complete
+phone,block_keywords,A1,phone,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfoʊn/,phone,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(telephone)电话，电话机，耳机v. 打电话,,,,,,complete
+photo,scene_target_extension,A1,photo,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈfoʊˌtoʊ/,photo,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,照片；（照片）,,,,,,complete
+pick,block_keywords,A1,pick,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɪk/,pick,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,拾，采，摘；挑选，选择n. 镐，鹤嘴锄,,,,,,complete
+picked,block_keywords,A1,pick,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɪkt/,picked,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,拾，采，摘；挑选，选择n. 镐，鹤嘴锄,pick,雅思8000词_净版,,,,complete
+picture,scene_target_extension,A1,picture,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɪktʃɝ/,picture,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,画，图片；影片；美景v. 画，描述，想象,,,,,,complete
+plane,block_keywords,A1,plane,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɫeɪn/,plane,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,飞机；平面，水平面,,,,,,complete
+platform,block_keywords,B1,,,ˈplætfɔːrm,,toefl,unspecified,needs_spot_check,"n. 平台；站台； （计算机、网络）平台； （政治）纲领；政纲； 机会；场合（表…；月台,站台,讲台,(政党的)政纲,党纲；平台；站台",,,464,1090,740,complete
+play,block_keywords,A1,play,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɫeɪ/,play,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,玩，做游戏；参加比赛n. 游戏；玩耍；剧本,,,,,,complete
+plaza,block_keywords,,,,"/ˈpɫæzə/, /ˈpɫɑzə/",plaza,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+pleased,block_keywords,A2,pleased,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɫizd/,pleased,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,高兴的，乐意的,,,,,,complete
+pleasure,block_keywords,A1,pleasure,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɫɛʒɝ/,pleasure,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,愉快，快乐；乐事，乐趣,,,,,,complete
+pneumonia,block_keywords,B2,pneumonia,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",nuːˈmoʊniə,,toefl,unspecified,needs_spot_check,肺炎,,,,,,complete
+pocket,block_keywords,A1,pocket,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɑkət/,pocket,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,衣袋a. 袖珍的，小型的v. 把…装入袋内,,,,,,complete
+point,block_keywords,A1,point,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɔɪnt/,point,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,尖；点；条款；分数，得分；论点v. (at，to)指,,,,,,complete
+policy,block_keywords,B1,,,/ˈpɑɫəsi/,policy,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 政策；方针； 保险单；保单； 明智；策略；精明的做法；政策;保险单,,,95,64,34,complete
+practice,scene_target_extension,A1,practice,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈpɹæktəs/, /ˈpɹæktɪs/",practice,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,练习，实践，实际，业务，惯例，习惯；训练,,,,,,complete
+prescription,block_keywords,B2,,,/pɹəsˈkɹɪpʃən/,prescription,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 处方；药方； 处方药； （解决问题的）方法；建议； （法律）时效取得；诉讼…；药方，处方,,,,2084,,complete
+preservation,block_keywords,B2,,,/ˌpɹɛzɝˈveɪʃən/,preservation,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 保护；维护； 保存状态；完好状态； （食品）腌制；保鲜；保存，储藏；保持；保护，保存,,,,1607,1151,complete
+president,block_keywords,B1,president,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈprezɪdənt,,toefl,unspecified,needs_spot_check,总统，校长，会长，主席；总统,,,,,,complete
+price,block_keywords,A1,price,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɹaɪs/,price,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,价格，价钱；代价v. 标价；不合理价格,,,,,,complete
+problem,block_keywords,A1,problem,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈpɹɑbɫəm/,problem,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,问题，疑难问题；思考题，讨论题,,,,,,complete
+prof,block_keywords,,,,,,,,,,,,,,,missing_source
+professor,block_keywords,B1,,,/pɹəˈfɛsɝ/,professor,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 教授（大学教师的最高职称）； 教师；先生（非正式用法，泛指教课的人）；教授,,,32,55,125,complete
+project,scene_target_extension,A2,,,"/ˈpɹɑdʒɛkt/, /pɹəˈdʒɛkt/",project,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 项目；工程； 专题作业；课题 | v. 预测；推断； 投射；放映； 展现；表现； 突…；方案;计划;v. 设计;投影;抛,,,43,50,110,complete
+receipt,block_keywords,A2,receipt,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ɹiˈsit/, /ɹɪˈsit/",receipt,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"收到,收据",,,,,,complete
+reception,block_keywords,B1,reception,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",rɪˈsepʃn,,toefl,unspecified,needs_spot_check,"招待会,接收,接待处；接纳",,,,,,complete
+receptionist,block_keywords,A2,receptionist,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ɹiˈsɛpʃənɪst/, /ɹɪˈsɛpʃənɪst/",receptionist,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,接待员,,,,,,complete
+refund,block_keywords,B1,refund,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈɹiˌfənd/, /ɹɪˈfənd/",refund,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,归还;归还额;vt. 归还,,,,,,complete
+register,block_keywords,B1,,,/ˈɹɛdʒɪstɝ/,register,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,v. 登记，注册； 显示，表明（数字或测量结果）； 意识到，注意到； 表达，流露…；/v. 登记，注册v. (仪表等)指示，(邮件)挂号；登记，为…编目录,,,795,1916,923,complete
+rent,block_keywords,A2,,,rent,,toefl,unspecified,needs_spot_check,v. 租用；租借（房屋、物品等）； 撕裂；裂开（rend 的过去式和过去分词）；n. 租…；租，租赁n. 租金；房租v. 租房,,,467,1918,,complete
+reservation,block_keywords,B1,reservation,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˌɹɛzɝˈveɪʃən/,reservation,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,保留，保留意见；预定，预订,,,,,,complete
+resident,scene_target_extension,B2,,,ˈrezɪdənt,,toefl,unspecified,needs_spot_check,n. 居民； 住院医生 | adj. 居住的；常驻的； 定居的；栖息的（指动物）；居民，常住者a. 居住的；居民a. 居住的；定居,,,96,249,1161,complete
+restaurant,block_keywords,A1,restaurant,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈɹɛsˌtɹɑnt/, /ˈɹɛstɝˌɑnt/",restaurant,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,餐馆，饭店,,,,,,complete
+return,scene_target_extension,A2,return,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ɹiˈtɝn/, /ɹɪˈtɝn/",return,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,/n. 返回，回来；归还，送还；回答,,,,,,complete
+rice,block_keywords,A1,rice,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɹaɪs/,rice,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,稻，米,,,,,,complete
+ride,block_keywords,A1,ride,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɹaɪd/,ride,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,/n. 骑，乘,,,,,,complete
+road,block_keywords,A2,road,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɹoʊd/,road,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,路，道路，途径,,,,,,complete
+robbed,block_keywords,A2,rob,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɹɑbd/,robbed,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,v. 抢劫；盗窃（某人）； 剥夺；使丧失（机会、权利等）,rob,真题考频总表,,,,complete
+robbery,block_keywords,A2,robbery,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɹɑbɝi/,robbery,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,抢劫，劫掠，盗取,,,,,,complete
+rome,block_keywords,,,,/ˈɹoʊm/,rome,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,罗马,,,,,,missing_source
+room,block_keywords,A1,room,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɹum/,room,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,房间，室，空间，地方；余地,,,,,,complete
+round,block_keywords,A2,round,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈɹaʊnd/,round,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,圆的prep. 围绕ad. 在周围v. 绕行n. (一)回合,,,,,,complete
+route,block_keywords,B1,,,"/ˈɹaʊt/, /ˈɹut/",route,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 路线；路径； 途径；方法；v. 按特定路线发送；为...规划路线；路线，路程,,,1007,730,516,complete
+royal,block_keywords,B1,,,/ˈɹɔɪəɫ/,royal,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,adj. 王室的；皇家的； 盛大的；极好的； （用于机构名称）皇家的；n. 王室成员；王室的，皇家的；第一流的，高贵的,,,924,,475,complete
+running,block_keywords,A2,,,/ˈɹənɪŋ/,running,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"n. 跑步（运动）； 运转，运行；管理；adj. 连续的，接连的； 流动的，流淌的； 运…；连续的,滚开,走开,流动的n.经营,走私",,,925,,,complete
+safe,block_keywords,A2,safe,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈseɪf/,safe,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,安全的，牢靠的；谨慎的，可靠的n. 保险箱,,,,,,complete
+sale,block_keywords,A1,sale,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈseɪɫ/,sale,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,出售，上市；贱卖，廉价出售；销售额,,,,,,complete
+says,block_keywords,A1,say,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈsɛz/, /ˈsɪz/",says,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,说，讲；说明；比如说vi. 说，发表意见,say,雅思8000词_净版,,,,complete
+school,block_keywords,A1,school,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈskuɫ/,school,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,学校，(大学里的)学院；上学，学业；学派,,,,,,complete
+secret,block_keywords,A2,secret,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈsikɹət/, /ˈsikɹɪt/",secret,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,秘密的，机密的n. 秘密,,,,,,complete
+security,block_keywords,B1,,,/sɪkˈjʊɹəti/,security,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 安全；保护措施； 保安人员；安保部门； 抵押品；担保物； 安全感；无忧无虑…；安全(感)，防御(物)，保证(人)，(pl.)证券；安全，保障,,,92,499,127,complete
+seems,block_keywords,A2,seem,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsimz/,seems,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,好像，似乎,seem,雅思8000词_净版,,,,complete
+self-preservation,block_keywords,,,,,,,,,,,,,,,missing_source
+sell,block_keywords,A1,sell,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsɛɫ/,sell,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,卖，出售,,,,,,complete
+send,block_keywords,A2,send,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsɛnd/,send,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(sent，sent)1. 打发；派遣；2. 送；寄出,,,,,,complete
+serious,block_keywords,B1,serious,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsɪɹiəs/,serious,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,严肃的；主要的；严重的，危急的；认真的,,,,,,complete
+service,block_keywords,B1,service,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈsɝvəs/, /ˈsɝvɪs/",service,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,服务；公共设施；维修保养；行政部门v. 维修；〈英〉（与陆军相对的）海军,,,,,,complete
+she's,block_keywords,A1,she,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈʃiz/,she's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(主格)她,she,雅思8000词_净版,,,,complete
+shelf,scene_target_extension,A1,shelf,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈʃɛɫf/,shelf,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,架子，搁板,,,,,,complete
+shit,block_keywords,,,,/ˈʃɪt/,shit,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+shock,block_keywords,B1,,,/ˈʃɑk/,shock,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 震惊；震撼； 休克； 电击；触电； 冲击；撞击； 蓬乱的头发；乱发；v. 使震惊…；/vt. (使)震惊,,,751,,935,complete
+shoes,block_keywords,A1,shoe,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈʃuz/,shoes,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,鞋,shoe,雅思8000词_净版,,,,complete
+shop,block_keywords,A1,shop,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈʃɑp/,shop,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,商店，店铺；工厂，车间v. 买东西,,,,,,complete
+shoulder,scene_target_extension,A1,shoulder,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈʃoʊɫdɝ/,shoulder,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,肩，肩部v. 肩负，承担,,,,,,complete
+show,block_keywords,A1,show,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈʃoʊ/,show,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,节目，表演v. 上演(戏剧等)，放映(电影)；显示,,,,,,complete
+shut,block_keywords,A2,shut,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈʃət/,shut,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,关，关闭,,,,,,complete
+sick,block_keywords,A1,sick,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsɪk/,sick,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,有病的，患病的；恶心的，想吐的,,,,,,complete
+sight,block_keywords,A1,sight,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsaɪt/,sight,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,视力；望见，瞥见；视域；眼界；情景，奇观,,,,,,complete
+sightseeing,block_keywords,A2,sightseeing,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsaɪtˈsiɪŋ/,sightseeing,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,观光;游览,,,,,,complete
+sign,block_keywords,A1,,,/ˈsaɪn/,sign,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"n. 标志；指示牌； 迹象；征兆； 手势；示意动作； 星座；v. 签名；签署； 示意；…；记号,标志,征兆,v. 签名；（记号）",,,64,253,100,complete
+signature,block_keywords,B1,signature,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈsɪɡnətʃər,,toefl,unspecified,needs_spot_check,签名；签字,,,,,,complete
+sister,block_keywords,A1,sister,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsɪstɝ/,sister,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,姐，妹；护士长；修女，女教士,,,,,,complete
+sitting,block_keywords,A1,sit,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsɪtɪŋ/,sitting,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,坐，坐下；位于；栖息；孵卵vt. 使就坐,sit,雅思8000词_净版,,,,complete
+size,scene_target_extension,A1,size,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsaɪz/,size,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,大小，尺寸，规模；尺码；图像大小,,,,,,complete
+sleep,block_keywords,A1,sleep,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsɫip/,sleep,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(slept，slept)睡n. 睡眠；like a log 熟睡,,,,,,complete
+sleeve,scene_target_extension,B1,sleeve,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsɫiv/,sleeve,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,袖子,,,,,,complete
+social,block_keywords,A1,social,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsoʊʃəɫ/,social,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,社会的；交际的,,,,,,complete
+sold,block_keywords,A1,sell,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsoʊɫd/,sold,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,卖，出售,sell,雅思8000词_净版,,,,complete
+soon,block_keywords,A1,soon,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsun/,soon,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,不久，即刻；快，早,,,,,,complete
+soup,block_keywords,A1,soup,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsup/,soup,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,汤,,,,,,complete
+south,block_keywords,A2,south,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsaʊθ/,south,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,南，南方，南部a. 南方的，南部的；Korea 韩国,,,,,,complete
+souvenir,block_keywords,B1,souvenir,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˌsuvəˈnɪɹ/,souvenir,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,纪念品,,,,,,complete
+spend,block_keywords,A1,spend,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈspɛnd/,spend,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,花费；消耗，用尽；度过，消磨,,,,,,complete
+spread,block_keywords,A2,spread,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈspɹɛd/,spread,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,/n. 伸开，伸展；散布，传播,,,,,,complete
+staff,scene_target_extension,B1,,,stæf,,toefl,unspecified,needs_spot_check,"n. 全体员工；全体职员； 拐杖；手杖； 五线谱； 权杖；杖（权力的象征）； 参谋…；木棍,杆,工作人员；全体职工，工作人员",,,199,302,356,complete
+stairs,block_keywords,A2,stair,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈstɛɹz/,stairs,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(pl.)楼梯,stair,雅思8000词_净版,,,,complete
+stand,block_keywords,A1,stand,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈstænd/,stand,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,站立；位于；经受n. 台，座；货摊；立场,,,,,,complete
+standing,block_keywords,A1,stand,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈstændɪŋ/,standing,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"持续,期间;身分,地位,名望;a. 永存的,常务的；Committee 常务委员会",,,,,,complete
+station,block_keywords,A1,station,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsteɪʃən/,station,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,车站；所，站，局；身份，地位v. 安置，驻扎；（位置）,,,,,,complete
+stay,block_keywords,A1,stay,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsteɪ/,stay,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,逗留；保持vt. 停止，延缓n. 逗留，停留,,,,,,complete
+stayed,block_keywords,A1,stay,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsteɪd/,stayed,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,逗留；保持vt. 停止，延缓n. 逗留，停留,stay,雅思8000词_净版,,,,complete
+staying,block_keywords,A1,stay,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsteɪɪŋ/,staying,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,逗留；保持vt. 停止，延缓n. 逗留，停留,stay,雅思8000词_净版,,,,complete
+stock,scene_target_extension,B1,,,/ˈstɑk/,stock,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"n. 库存；存货； 股票；股份； 高汤；原汤； 血统；家族； （枪的）枪托； 戏剧剧…；存货,供给,股票 v. 供应；market crash 股市崩盘",,,866,471,338,complete
+stop,block_keywords,A1,stop,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈstɑp/,stop,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,停止；塞住；阻止，阻挠；逗留n. 停车站；停止,,,,,,complete
+store,block_keywords,A1,store,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈstɔɹ/,store,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,商店，店铺；贮藏，贮备品v. 贮藏，贮备,,,,,,complete
+story,block_keywords,A1,story,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈstɔɹi/,story,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,故事，传说，小说；(=storey)楼层,,,,,,complete
+straight,block_keywords,A1,straight,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈstɹeɪt/,straight,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,直的；整齐的，端正的ad. 直接；正直，直率,,,,,,complete
+street,block_keywords,A1,street,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈstɹit/,street,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,街，街道；行车道,,,,,,complete
+strychnine,block_keywords,,,,/ˈstɹɪkˌnaɪn/,strychnine,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+subway,block_keywords,A2,,,/ˈsəbˌweɪ/,subway,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 地铁； 地下通道； 赛百味（快餐连锁店）；地铁；地下行人隧道,,,1598,1181,,complete
+suit,block_keywords,A2,,,/ˈsut/,suit,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 套装；西装； 诉讼；起诉； （扑克牌的）花色；v. 适合；相配； 使满意；使中意；合适，适合；相配，适应n. 一套西服；诉讼,,,753,1182,943,complete
+suitable,block_keywords,B1,,,/ˈsutəbəɫ/,suitable,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,adj. 合适的；适宜的； 相配的；般配的；(for)合适的，适宜的,,,,1183,944,complete
+suite,block_keywords,,,,/ˈswit/,suite,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,套间；一套家具；套，组，系列,,,,,,missing_source
+summer,block_keywords,A1,summer,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsəmɝ/,summer,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,夏天，夏季a. 夏季的,,,,,,complete
+surgery,block_keywords,B1,,,/ˈsɝdʒɝi/,surgery,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"n. 外科手术； 诊所；诊室； 外科学； （议员的）接待时间；会见时间；外科,外科手术；外科手术；门诊室",,,1209,2119,,complete
+symptoms,block_keywords,B1,symptom,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈsɪmptəmz/,symptoms,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 症状；征兆； 征兆；迹象（指问题或不良情况的表现）,symptom,真题考频总表,,,,complete
+table,block_keywords,A1,table,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈteɪbəɫ/,table,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,桌子；餐桌；工作台；表格vt. 搁置；提交讨论；（桌子）,,,,,,complete
+taking,block_keywords,A1,take,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈteɪkɪŋ/,taking,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,one’s preoccupation with 全神贯注于，专心致志,take,托福7000词_净版,,,,complete
+taxi,block_keywords,A1,taxi,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtæksi/,taxi,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,出租汽车v.(使)滑行,,,,,,complete
+taxi's,block_keywords,A1,taxi,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtæksiz/,taxi's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,出租汽车v.(使)滑行,taxi,雅思8000词_净版,,,,complete
+taxicab,block_keywords,,,,/ˈtæksiˌkæb/,taxicab,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+taxing,block_keywords,B1,tax,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtæksɪŋ/,taxing,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 税；税款；v. 对…征税；课税； 使负重担；使疲惫； 责备；指责,tax,真题考频总表,,,,complete
+taxis,block_keywords,A1,taxi,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtæksiz/,taxis,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,出租汽车v.(使)滑行,taxi,雅思8000词_净版,,,,complete
+team,block_keywords,A1,team,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtim/,team,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,小队，小组v. 协同工作,,,,,,complete
+temple,block_keywords,A1,temple,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈtempl,,toefl,unspecified,needs_spot_check,庙宇，神殿，寺；太阳穴；寺院；庙宇,,,,,,complete
+test,scene_target_extension,A1,test,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtɛst/,test,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,/vt. 试验；检验；测验,,,,,,complete
+thee,block_keywords,,,,/ˈði/,thee,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+they're,block_keywords,,,,/ˈðɛɹ/,they're,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+they've,block_keywords,,,,/ˈðeɪv/,they've,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+thought,block_keywords,A2,thought,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈθɔt/,thought,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,思想，思考，思维；意图，打算；想法,,,,,,complete
+ticket,block_keywords,A1,ticket,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈtɪkət/, /ˈtɪkɪt/",ticket,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,票，入场券；票签；(交通违章)罚款传票,,,,,,complete
+tired,block_keywords,A1,tired,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtaɪɝd/,tired,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,疲劳的；厌倦的,,,,,,complete
+tony,block_keywords,,,,/ˈtoʊni/,tony,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+tour,block_keywords,A2,tour,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtʊɹ/,tour,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,旅游，旅行；巡回演出/比赛v. 旅游,,,,,,complete
+tourist,block_keywords,A2,tourist,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈtʊɹəst/, /ˈtʊɹɪst/",tourist,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,旅游者，观光客；巡回比赛的运动员,,,,,,complete
+town,block_keywords,A1,town,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtaʊn/,town,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,市镇；市民；城市商业区，闹市区,,,,,,complete
+trade,block_keywords,A2,trade,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",treɪd,,toefl,unspecified,needs_spot_check,贸易，商业；职业，行业v. 经商，交易；贸易；交易v. 交易，买卖,,,,,,complete
+traffic,block_keywords,A2,traffic,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtɹæfɪk/,traffic,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,交通，交通量,,,,,,complete
+train,block_keywords,A1,train,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtɹeɪn/,train,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,列车；行列，系列，一串v. 训练，培养,,,,,,complete
+training,scene_target_extension,A2,training,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtɹeɪnɪŋ/,training,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,训练，培养,,,,,,complete
+treatment,block_keywords,B1,treatment,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",ˈtriːtmənt,,toefl,unspecified,needs_spot_check,待遇；治疗，疗法；治疗，疗法,,,,,,complete
+trip,block_keywords,A1,trip,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtɹɪp/,trip,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,旅行，远足v. 绊倒；失足；犯错；（n. 旅行）一起记,,,,,,complete
+troops,block_keywords,B2,troop,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtɹups/,troops,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,军队vi. 结队,troop,托福7000词_净版,,,,complete
+try,scene_target_extension,A1,try,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈtɹaɪ/,try,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,尝试，试图；试验，试用；审讯n. 尝试,,,,,,complete
+turn,block_keywords,A1,turn,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",tɜːrn,,toefl,unspecified,needs_spot_check,/n. (使)转动；(使)旋转；(使)转变n. 机会；转动；转变,,,,,,complete
+uncle,block_keywords,A1,uncle,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈəŋkəɫ/,uncle,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,伯父，叔父，舅父，姑父，姨父,,,,,,complete
+united,block_keywords,B1,,,/juˈnaɪtɪd/,united,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,adj. 联合的；统一的； 和谐的；意见一致的；v. unite 的过去式和过去分词；联合的；States 美国,,,100,75,63,complete
+university,block_keywords,A2,university,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˌjunəˈvɝsəti/,university,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(综合)大学,,,,,,complete
+upon,block_keywords,A2,upon,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/əˈpɑn/,upon,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,在…上；在…旁[=on,,,,,,complete
+urban,scene_target_extension,B2,,,ˈɜːrbən,,toefl,unspecified,needs_spot_check,adj. 城市的，都市的； 城市文化的，街头风格的；城市的，市内的；城市的，都市的，城镇,,,662,504,522,complete
+vacancy,block_keywords,B1,vacancy,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈveɪkənsi/,vacancy,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,空缺，空位,,,,,,complete
+vacation,block_keywords,A1,vacation,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/veɪˈkeɪʃən/,vacation,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,假期,,,,,,complete
+vegas,block_keywords,,,,/ˈveɪɡəs/,vegas,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+visit,block_keywords,A1,visit,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈvɪzɪt/,visit,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,访问，参观v. 访问，参观；视察；降临；闲谈；a prisoner 探监,,,,,,complete
+wait,scene_target_extension,A1,wait,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈweɪt/,wait,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(for)等待；(on)侍候n. 等候，等待时间,,,,,,complete
+waiter,block_keywords,A2,,,/ˈweɪtɝ/,waiter,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. （餐厅的）服务员，侍者；侍者，服务员,,,719,,,complete
+waiting,block_keywords,A1,wait,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈweɪtɪŋ/,waiting,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,(for)等待；(on)侍候n. 等候，等待时间,wait,雅思8000词_净版,,,,complete
+waitress,block_keywords,A1,waitress,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈweɪtɹəs/,waitress,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,女侍者，女服务员,,,,,,complete
+wake,block_keywords,A1,wake,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈweɪk/,wake,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,醒来，唤醒；使觉醒，激发，引起,,,,,,complete
+wake-up,block_keywords,,,,/ˈweɪˌkəp/,wake-up,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+walk,block_keywords,A1,walk,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈwɑk/, /ˈwɔk/",walk,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,走，步行，散步；走遍n. 走，步行，散步,,,,,,complete
+walking,block_keywords,A1,,,/ˈwɔkɪŋ/,walking,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 步行；散步；adj. 活动的;能走路的； 活生生的;十足的（用于强调）；v. 行走;步行…,,,1112,,,complete
+wallet,block_keywords,A2,,,/ˈwɔɫət/,wallet,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 钱包；皮夹； （数字货币）钱包；电子钱包；皮夹，钱包,,,574,,,complete
+warfare,block_keywords,,,,/ˈwɔɹˌfɛɹ/,warfare,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,战争(状态)；斗争；冲突；宗族冲突,,,,,,missing_source
+water,block_keywords,A1,water,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwɔtɝ/,water,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,水vt. 浇灌；给…饮水vi. 流泪，加水；自来水,,,,,,complete
+we'd,block_keywords,,,,/ˈwid/,we'd,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+we've,block_keywords,,,,/ˈwiv/,we've,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+weather,block_keywords,A1,weather,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwɛðɝ/,weather,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,天气，气象；极端天气glacier,,,,,,complete
+weather's,block_keywords,A1,weather,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwɛðɝz/,weather's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,极端天气glacier,weather,托福7000词_净版,,,,complete
+wedding,block_keywords,A2,,,/ˈwɛdɪŋ/,wedding,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,n. 婚礼；结婚典礼； 结婚纪念日；婚礼,,,,1033,,complete
+week,block_keywords,A1,week,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwik/,week,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,星期，周,,,,,,complete
+welcome,block_keywords,A1,welcome,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwɛɫkəm/,welcome,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,欢迎a. 受欢迎的vt./n. 欢迎；迎接,,,,,,complete
+welfare,block_keywords,B2,,,/ˈwɛɫˌfɛɹ/,welfare,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"n. 福利；幸福； 社会福利；救济金； 福利事业；福利工作；幸福,福利,社会保障",,,1221,737,,complete
+west,block_keywords,A2,west,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwɛst/,west,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,/a. 西，西方(的)，西部(的)ad. 向西,,,,,,complete
+what's,block_keywords,A1,what,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈhwəts/, /ˈwəts/",what's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,什么a. 多么，何等；什么；尽可能多的,what,雅思8000词_净版,,,,complete
+where's,block_keywords,A1,where,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈhwɛɹz/, /ˈwɛɹz/",where's,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,在哪/那里conj./pron. 哪里conj. 然而,where,雅思8000词_净版,,,,complete
+while,block_keywords,A2,while,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈhwaɪɫ/, /ˈwaɪɫ/",while,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,当…的时候；而；虽然；尽管n. 一会儿,,,,,,complete
+wind,block_keywords,A1,wind,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈwaɪnd/, /ˈwɪnd/",wind,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,风；气息v. 转动；缠绕；上发条，；蜿蜒而行；power generation 风力发电,,,,,,complete
+window,block_keywords,A1,window,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwɪndoʊ/,window,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,窗，窗口,,,,,,complete
+wine,block_keywords,A2,wine,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwaɪn/,wine,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,葡萄酒，果酒,,,,,,complete
+wish,block_keywords,A1,wish,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwɪʃ/,wish,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,希望；但愿；祝n. 愿望，希望；[pl.,,,,,,complete
+withdraw,block_keywords,B2,withdraw,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/wɪðˈdɹɔ/, /wɪθˈdɹɔ/",withdraw,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,"收回,取回;撤回;撤退；the troop 撤回军队",,,,,,complete
+withdrawal,block_keywords,B2,withdrawal,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/wɪðˈdɹɔəɫ/, /wɪθˈdɹɔəɫ/",withdrawal,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,撤退，取款,,,,,,complete
+withdrawing,block_keywords,B2,withdraw,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/wɪðˈdɹɔɪŋ/, /wɪθˈdɹɔɪŋ/",withdrawing,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,the troop 撤回军队,withdraw,托福7000词_净版,,,,complete
+withdrawn,block_keywords,B2,withdraw,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/wɪðˈdɹɔn/, /wɪθˈdɹɔn/",withdrawn,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,the troop 撤回军队,withdraw,托福7000词_净版,,,,complete
+work,block_keywords,A1,work,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwɝk/,work,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,工作(量)；作品；[pl.,,,,,,complete
+working,block_keywords,A2,,,/ˈwɝkɪŋ/,working,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,adj. 有工作的；就业的； 工作中使用的；工作时的； 运转的；可使用的；n. 工作方…,,,238,557,481,complete
+world,block_keywords,A1,world,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwɝɫd/,world,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,世界，地球；…界，领域；世间；全世界,,,,,,complete
+worth,block_keywords,B1,worth,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwɝθ/,worth,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,价值a. 值…的，价值…的，值得…的,,,,,,complete
+wound,block_keywords,B1,wound,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈwaʊnd/, /ˈwund/",wound,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,创伤，伤口v. 伤，伤害,,,,,,complete
+wounded,block_keywords,B1,wound,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)",/ˈwundɪd/,wounded,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,受伤的n.伤员,,,,,,complete
+years,block_keywords,A1,year,"CEFR-J Wordlist v1.6 (TUFS Tono Lab, 使用需署名)","/ˈjɪɹz/, /jɝz/",years,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,（n. 年；一年）,year,托福7000词_净版,,,,complete
+york,block_keywords,,,,/ˈjɔɹk/,york,"ipa-dict en_US (MIT, 基于 cmudict-ipa)",en-US,auto_matched,,,,,,,missing_source
+zaizen,block_keywords,,,,,,,,,,,,,,,missing_source

@@ -4,6 +4,9 @@ config.json
 # WorkBuddy 工作区数据
 .workbuddy/
 
+# 账号数据（用户密码哈希与个人学习记录，严禁上传）
+data/accounts/
+
 # 系统/编辑器临时文件
 Thumbs.db
 .DS_Store

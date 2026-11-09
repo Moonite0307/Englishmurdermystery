@@ -1,0 +1,538 @@
+{
+  "schema_version": "daily_patch_log.v1",
+  "reviewer": "doubao-review-batch",
+  "review_files": [
+    "review-batch-01.jsonl",
+    "review-batch-02.jsonl",
+    "review-batch-03.jsonl",
+    "review-batch-04.jsonl",
+    "review-batch-05.jsonl",
+    "review-batch-06.jsonl",
+    "review-batch-07.jsonl",
+    "review-batch-08.jsonl",
+    "review-batch-09.jsonl"
+  ],
+  "count": 65,
+  "entries": [
+    {
+      "record_id": "daily-01-01-A2-001",
+      "field": "turns[7].text",
+      "before": "What name is the booking under?",
+      "after": "What name and phone number is the booking under?",
+      "reason": "补齐达成标准要求的联系方式确认",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-01-01-A2-001",
+      "field": "turns[8].text",
+      "before": "My name is Emma Reed.",
+      "after": "My name is Emma Reed, and my number is 202-555-0142.",
+      "reason": "回应上句新增的电话询问",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-01-01-A2-001",
+      "field": "dialogue_text",
+      "before": "A: Hello, this is Maple Cafe.\nB: Can I book a table for two on Saturday?\nA: What time would you like?\nB: At six thirty, please.\nA: We have a table by the window at six thirty.\nB: That sounds good.\nA: What name is the booking under?\nB: My name is Emma Reed.\nA: Your table for two is booked for Saturday at six thirty, Emma.\nB: Thank you for your help.",
+      "after": "A: Hello, this is Maple Cafe.\nB: Can I book a table for two on Saturday?\nA: What time would you like?\nB: At six thirty, please.\nA: We have a table by the window at six thirty.\nB: That sounds good.\nA: What name and phone number is the booking under?\nB: My name is Emma Reed, and my number is 202-555-0142.\nA: Your table for two is booked for Saturday at six thirty, Emma.\nB: Thank you for your help.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-01-01-B2-003",
+      "field": "turns[13].text",
+      "before": "That's correct, and I've just paid the eighty-dollar deposit through the link.",
+      "after": "That's correct. I've just received the link and paid the eighty-dollar deposit.",
+      "reason": "补上“刚收到链接”这一步，让付款动作有来由",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-01-01-B2-003",
+      "field": "dialogue_text",
+      "before": "A: You've reached Harbor Table reservations.\nB: I'm arranging a birthday dinner for eight next Thursday and wondered whether you had a quieter table around eight.\nA: Our main dining room is fairly lively, but the side room is available at eight thirty.\nB: That could work, provided there's no separate room charge.\nA: There's no room charge, although parties of eight require a deposit of ten dollars per person.\nB: Is the deposit deducted from the final bill?\nA: Yes, the full eighty dollars comes off your bill on the night.\nB: What happens if someone drops out at the last minute?\nA: We refund deposits for canceled places with at least twenty-four hours' notice, but retain them after that.\nB: That's clear, and could we bring a small birthday cake?\nA: You're welcome to bring one, with a two-dollar cake service charge for each of the eight guests.\nB: That's fine, so please reserve the side room under Maya Patel.\nA: I'll send the payment link to maya.patel@example.com if that's the best address for you.\nB: That's correct, and I've just paid the eighty-dollar deposit through the link.\nA: Payment is confirmed, and your side-room table for eight is booked for next Thursday at eight thirty.\nB: Perfect, I'll let you know at least twenty-four hours ahead if our numbers change.",
+      "after": "A: You've reached Harbor Table reservations.\nB: I'm arranging a birthday dinner for eight next Thursday and wondered whether you had a quieter table around eight.\nA: Our main dining room is fairly lively, but the side room is available at eight thirty.\nB: That could work, provided there's no separate room charge.\nA: There's no room charge, although parties of eight require a deposit of ten dollars per person.\nB: Is the deposit deducted from the final bill?\nA: Yes, the full eighty dollars comes off your bill on the night.\nB: What happens if someone drops out at the last minute?\nA: We refund deposits for canceled places with at least twenty-four hours' notice, but retain them after that.\nB: That's clear, and could we bring a small birthday cake?\nA: You're welcome to bring one, with a two-dollar cake service charge for each of the eight guests.\nB: That's fine, so please reserve the side room under Maya Patel.\nA: I'll send the payment link to maya.patel@example.com if that's the best address for you.\nB: That's correct. I've just received the link and paid the eighty-dollar deposit.\nA: Payment is confirmed, and your side-room table for eight is booked for next Thursday at eight thirty.\nB: Perfect, I'll let you know at least twenty-four hours ahead if our numbers change.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-01-02-A2-004",
+      "field": "task_goal",
+      "before": "到店后说明预订并顺利入座",
+      "after": "无预订到店等位并顺利入座",
+      "reason": "对话实际是无预订等位，改目标比改对话更省，也更贴近真实到店场景",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-01-02-A2-004",
+      "field": "success_criteria[0]",
+      "before": "说明预订信息",
+      "after": "说明人数与是否有预订",
+      "reason": "与无预订等位的情节对齐",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-01-04-B1-011",
+      "field": "turns[7].text",
+      "before": "The chef can prepare our thirteen-dollar baked potato with cheese using separate clean equipment and checked ingredients.",
+      "after": "The chef can make the baked potato with cheese separately, using clean equipment and checked ingredients.",
+      "reason": "拆掉价格前置与过长定语，回到 B1 应有的句长",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-01-04-B1-011",
+      "field": "dialogue_text",
+      "before": "A: Do you have any dietary requirements before you order at Olive Lane?\nB: I have a peanut allergy, so could you check the vegetable curry for me?\nA: I'll check both the ingredients and how it's prepared with our kitchen.\nB: Please ask whether they use the same pans for dishes with peanuts.\nA: The chef says the sauce contains peanuts, so we can't offer you that curry.\nB: Is there another main dish the kitchen can prepare separately?\nA: The chef can prepare our thirteen-dollar baked potato with cheese using separate clean equipment and checked ingredients.\nB: Does that include the side salad and its dressing?\nA: The dressing contains peanuts, so the chef recommends leaving the salad and dressing off.\nB: Then please order just the baked potato with cheese and mark my peanut allergy clearly.\nA: I've marked it on your order and spoken directly to the chef about the separate preparation.\nB: Thank you for checking the details before I ordered.",
+      "after": "A: Do you have any dietary requirements before you order at Olive Lane?\nB: I have a peanut allergy, so could you check the vegetable curry for me?\nA: I'll check both the ingredients and how it's prepared with our kitchen.\nB: Please ask whether they use the same pans for dishes with peanuts.\nA: The chef says the sauce contains peanuts, so we can't offer you that curry.\nB: Is there another main dish the kitchen can prepare separately?\nA: The chef can make the baked potato with cheese separately, using clean equipment and checked ingredients.\nB: Does that include the side salad and its dressing?\nA: The dressing contains peanuts, so the chef recommends leaving the salad and dressing off.\nB: Then please order just the baked potato with cheese and mark my peanut allergy clearly.\nA: I've marked it on your order and spoken directly to the chef about the separate preparation.\nB: Thank you for checking the details before I ordered.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-02-02-A2-004",
+      "field": "turns[7].text",
+      "before": "I am a member. Here is my card.",
+      "after": "I am a member. Here is my card. So the final price is forty-seven dollars and fifty cents, right?",
+      "reason": "在不增加轮次的前提下补上最终价格确认，闭合第三条达成标准",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-02-02-A2-004",
+      "field": "dialogue_text",
+      "before": "A: Can I help you at City Shoe Shop?\nB: How much are these black shoes?\nA: They are sixty dollars.\nB: Are they on sale?\nA: Yes, they are ten dollars off today.\nB: Do members get another discount?\nA: Members get five percent off the sale price.\nB: I am a member. Here is my card.",
+      "after": "A: Can I help you at City Shoe Shop?\nB: How much are these black shoes?\nA: They are sixty dollars.\nB: Are they on sale?\nA: Yes, they are ten dollars off today.\nB: Do members get another discount?\nA: Members get five percent off the sale price.\nB: I am a member. Here is my card. So the final price is forty-seven dollars and fifty cents, right?",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-02-05-A2-013",
+      "field": "turns[*].speaker",
+      "before": "A 为顾客、B 为店员",
+      "after": "A 为店员、B 为顾客",
+      "reason": "与全板块 A 为服务方的说话人约定统一，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-02-05-A2-013",
+      "field": "dialogue_text",
+      "before": "A: Do you have this red backpack at Parkside Store?\nB: Sorry, that color is out of stock today.\nA: Can you get one from another store?\nB: Yes, we can bring one here in three days.\nA: Could you call me when it arrives?\nB: Sure, may I have your phone number?\nA: It's 202-555-0138.\nB: Thank you; I'll call you on Thursday.",
+      "after": "B: Do you have this red backpack at Parkside Store?\nA: Sorry, that color is out of stock today.\nB: Can you get one from another store?\nA: Yes, we can bring one here in three days.\nB: Could you call me when it arrives?\nA: Sure, may I have your phone number?\nB: It's 202-555-0138.\nA: Thank you; I'll call you on Thursday.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-02-07-A2-019",
+      "field": "turns[*].speaker",
+      "before": "A 为顾客、B 为店员",
+      "after": "A 为店员、B 为顾客",
+      "reason": "与全板块说话人约定统一，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-02-07-A2-019",
+      "field": "dialogue_text",
+      "before": "A: Excuse me, where can I find the rice at Family Market?\nB: It is in aisle four.\nA: Is there a sale on rice today?\nB: Yes, the two-kilo bags are five dollars.\nA: Where are the small bags?\nB: They are on the lower shelf next to the flour.\nA: Thank you; I'll take a small bag.\nB: You're welcome.",
+      "after": "B: Excuse me, where can I find the rice at Family Market?\nA: It is in aisle four.\nB: Is there a sale on rice today?\nA: Yes, the two-kilo bags are five dollars.\nB: Where are the small bags?\nA: They are on the lower shelf next to the flour.\nB: Thank you; I'll take a small bag.\nA: You're welcome.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-02-07-B1-020",
+      "field": "turns[0].speaker",
+      "before": "A",
+      "after": "B",
+      "reason": "让“请帮我找燕麦奶”由顾客说出",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-02-07-B1-020",
+      "field": "turns[1].speaker",
+      "before": "B",
+      "after": "A",
+      "reason": "让货架说明由店员回答",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-02-07-B1-020",
+      "field": "turns[1].text",
+      "before": "It's usually in the dairy aisle, but I can't see it there.",
+      "after": "It's usually in the dairy aisle, though we've rearranged that shelf this week.",
+      "reason": "店员不宜说“我也看不到”，改为说明货架调整",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-02-07-B1-020",
+      "field": "dialogue_text",
+      "before": "A: Could you help me find oat milk at Lakeside Grocers?\nB: It's usually in the dairy aisle, but I can't see it there.\nA: The chilled oat milk is in aisle six, beside the soy milk.\nB: I'm looking for the long-life kind, not the refrigerated cartons.\nA: Those are on the top shelf in aisle three, near the tea.\nB: Is the three-for-eight-dollar offer still running?\nA: Yes, as long as you choose the same brand.\nB: Great, I'll take three unsweetened cartons.",
+      "after": "B: Could you help me find oat milk at Lakeside Grocers?\nA: It's usually in the dairy aisle, though we've rearranged that shelf this week.\nA: The chilled oat milk is in aisle six, beside the soy milk.\nB: I'm looking for the long-life kind, not the refrigerated cartons.\nA: Those are on the top shelf in aisle three, near the tea.\nB: Is the three-for-eight-dollar offer still running?\nA: Yes, as long as you choose the same brand.\nB: Great, I'll take three unsweetened cartons.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-01-A2-001",
+      "field": "turns[*].speaker",
+      "before": "A 为乘客、B 为公交员工",
+      "after": "A 为公交员工、B 为乘客",
+      "reason": "与全批 A 为服务方的约定统一，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-01-A2-001",
+      "field": "dialogue_text",
+      "before": "A: Excuse me, does bus 14 go to the City Museum?\nB: Yes, take bus 14 from this stop.\nA: Where should I get off?\nB: Get off at Museum Street.\nA: How many stops is that?\nB: It is four stops from here.\nA: Thank you; I'll wait for the bus.\nB: You're welcome.",
+      "after": "B: Excuse me, does bus 14 go to the City Museum?\nA: Yes, take bus 14 from this stop.\nB: Where should I get off?\nA: Get off at Museum Street.\nB: How many stops is that?\nA: It is four stops from here.\nB: Thank you; I'll wait for the bus.\nA: You're welcome.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-01-B1-002",
+      "field": "turns[*].speaker",
+      "before": "A 为乘客、B 为公交员工",
+      "after": "A 为公交员工、B 为乘客",
+      "reason": "与全批约定统一，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-01-B1-002",
+      "field": "dialogue_text",
+      "before": "A: Does the number 22 bus stop near Oak Street Library?\nB: Yes, get off at Pine Avenue and walk two blocks north.\nA: Is that the stop after the shopping center?\nB: That's right; the library is across from the park.\nA: How often does the bus run on Sunday?\nB: About every twenty minutes, but check the display for delays.\nA: Can I pay on board with a contactless card?\nB: Yes, tap it once when you get on.\nA: Great, I'll take the next one.\nB: It's due in five minutes.",
+      "after": "B: Does the number 22 bus stop near Oak Street Library?\nA: Yes, get off at Pine Avenue and walk two blocks north.\nB: Is that the stop after the shopping center?\nA: That's right; the library is across from the park.\nB: How often does the bus run on Sunday?\nA: About every twenty minutes, but check the display for delays.\nB: Can I pay on board with a contactless card?\nA: Yes, tap it once when you get on.\nB: Great, I'll take the next one.\nA: It's due in five minutes.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-01-B2-003",
+      "field": "turns[*].speaker",
+      "before": "A 为乘客、B 为公交员工",
+      "after": "A 为公交员工、B 为乘客",
+      "reason": "与全批约定统一，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-01-B2-003",
+      "field": "dialogue_text",
+      "before": "A: I'm trying to reach the university hospital by bus; is route 8 the best option?\nB: Route 8 goes there, but the express bus 18 is quicker from this stop.\nA: Does the express service run after six this evening?\nB: It runs every half hour until 8:30, though the last bus leaves at 8:15.\nA: I need to arrive by seven; where should I get off?\nB: Take it to Hospital East, then follow the covered walkway for about five minutes.\nA: Is there a fare difference between the regular and express bus?\nB: The express fare is three dollars, while route 8 costs two-fifty.\nA: Can I use the same travel card for either one?\nB: Yes, just tap when boarding, and the reader will charge the correct fare.\nA: Thanks, I'll take the express and get off at Hospital East.\nB: You're welcome; the live board shows it arriving in four minutes.",
+      "after": "B: I'm trying to reach the university hospital by bus; is route 8 the best option?\nA: Route 8 goes there, but the express bus 18 is quicker from this stop.\nB: Does the express service run after six this evening?\nA: It runs every half hour until 8:30, though the last bus leaves at 8:15.\nB: I need to arrive by seven; where should I get off?\nA: Take it to Hospital East, then follow the covered walkway for about five minutes.\nB: Is there a fare difference between the regular and express bus?\nA: The express fare is three dollars, while route 8 costs two-fifty.\nB: Can I use the same travel card for either one?\nA: Yes, just tap when boarding, and the reader will charge the correct fare.\nB: Thanks, I'll take the express and get off at Hospital East.\nA: You're welcome; the live board shows it arriving in four minutes.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-02-A2-004",
+      "field": "turns[*].speaker",
+      "before": "A 为乘客、B 为地铁员工",
+      "after": "A 为地铁员工、B 为乘客",
+      "reason": "与全批约定统一，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-02-A2-004",
+      "field": "dialogue_text",
+      "before": "A: Hello, I need a ticket to Central Park.\nB: A single ticket is three dollars.\nA: Do I need to change trains?\nB: Yes, change at City Hall.\nA: Which line should I take next?\nB: Take the blue line to Central Park.\nA: Can I buy the ticket here?\nB: Yes, tap your card at the machine.",
+      "after": "B: Hello, I need a ticket to Central Park.\nA: A single ticket is three dollars.\nB: Do I need to change trains?\nA: Yes, change at City Hall.\nB: Which line should I take next?\nA: Take the blue line to Central Park.\nB: Can I buy the ticket here?\nA: Yes, tap your card at the machine.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-02-B1-005",
+      "field": "turns[*].speaker",
+      "before": "A 为乘客、B 为地铁员工",
+      "after": "A 为地铁员工、B 为乘客",
+      "reason": "与全批约定统一，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-02-B1-005",
+      "field": "dialogue_text",
+      "before": "A: How do I get to the airport from Market Square Station?\nB: Take the red line to Union, then change to the airport line.\nA: Do I need a separate ticket for the second train?\nB: No, one thirty-minute ticket covers both trains.\nA: How much does that ticket cost?\nB: It's three dollars and twenty cents.\nA: Is there an elevator at Union for my suitcase?\nB: Yes, follow the blue signs after you leave the red platform.\nA: I'll buy the ticket at the kiosk; thanks for the directions.\nB: You're welcome; the next red train arrives in two minutes.",
+      "after": "B: How do I get to the airport from Market Square Station?\nA: Take the red line to Union, then change to the airport line.\nB: Do I need a separate ticket for the second train?\nA: No, one thirty-minute ticket covers both trains.\nB: How much does that ticket cost?\nA: It's three dollars and twenty cents.\nB: Is there an elevator at Union for my suitcase?\nA: Yes, follow the blue signs after you leave the red platform.\nB: I'll buy the ticket at the kiosk; thanks for the directions.\nA: You're welcome; the next red train arrives in two minutes.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-02-B2-006",
+      "field": "turns[*].speaker",
+      "before": "A 为乘客、B 为地铁员工",
+      "after": "A 为地铁员工、B 为乘客",
+      "reason": "与全批约定统一，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-02-B2-006",
+      "field": "dialogue_text",
+      "before": "A: I need to travel from Harbor Station to the convention center this afternoon.\nB: Take the green line three stops to Grand Avenue and change to the orange line.\nA: Is that transfer inside the paid area, or will I need to exit and enter again?\nB: It's an indoor transfer, so keep your ticket and follow the orange signs.\nA: Would a single ticket cover the whole trip?\nB: Yes, the two-dollar-fifty fare allows one transfer within forty-five minutes.\nA: My meeting finishes after midnight; do trains still run then?\nB: The last train from Grand Avenue leaves at 12:18, and the next service is at 5:10.\nA: I'll purchase a day pass instead; does it cover both lines?\nB: It does, and it also covers local buses until 2 a.m.\nA: That works for me; I'll get the day pass from the machine.\nB: Choose the all-day option and tap your card to complete the purchase.",
+      "after": "B: I need to travel from Harbor Station to the convention center this afternoon.\nA: Take the green line three stops to Grand Avenue and change to the orange line.\nB: Is that transfer inside the paid area, or will I need to exit and enter again?\nA: It's an indoor transfer, so keep your ticket and follow the orange signs.\nB: Would a single ticket cover the whole trip?\nA: Yes, the two-dollar-fifty fare allows one transfer within forty-five minutes.\nB: My meeting finishes after midnight; do trains still run then?\nA: The last train from Grand Avenue leaves at 12:18, and the next service is at 5:10.\nB: I'll purchase a day pass instead; does it cover both lines?\nA: It does, and it also covers local buses until 2 a.m.\nB: That works for me; I'll get the day pass from the machine.\nA: Choose the all-day option and tap your card to complete the purchase.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-03-A2-007",
+      "field": "turns[7].text",
+      "before": "Please drop me at the front door.",
+      "after": "Please drop me at the front door, and I'll pay by card.",
+      "reason": "补上付款确认，闭合达成标准第三条",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-03-A2-007",
+      "field": "dialogue_text",
+      "before": "A: Where would you like to go?\nB: Please take me to 25 Lake Street.\nA: Do you want the fastest route?\nB: Yes, please; I am in a hurry.\nA: There is some traffic near the bridge.\nB: That's okay; how much will the ride cost?\nA: About twenty dollars.\nB: Please drop me at the front door.",
+      "after": "A: Where would you like to go?\nB: Please take me to 25 Lake Street.\nA: Do you want the fastest route?\nB: Yes, please; I am in a hurry.\nA: There is some traffic near the bridge.\nB: That's okay; how much will the ride cost?\nA: About twenty dollars.\nB: Please drop me at the front door, and I'll pay by card.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-04-B1-011",
+      "field": "turns[*].speaker",
+      "before": "A 为乘客、B 为售票员",
+      "after": "A 为售票员、B 为乘客",
+      "reason": "与全批约定统一，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-04-B1-011",
+      "field": "dialogue_text",
+      "before": "A: Hello, I'd like to change my ticket to Lakeside.\nB: What time is your current train?\nA: The 10:40 train, but I'd like the 11:30 instead.\nB: There's space; the change fee is six dollars.\nA: Will I keep the same seat?\nB: No, you'll get a new seat in coach B, number twelve.\nA: That's fine; can I pay the fee with the card I used before?\nB: Yes, I'll charge it now and print your new ticket.\nA: Thank you; I'll check the platform number on the screen.\nB: It leaves from platform four.",
+      "after": "B: Hello, I'd like to change my ticket to Lakeside.\nA: What time is your current train?\nB: The 10:40 train, but I'd like the 11:30 instead.\nA: There's space; the change fee is six dollars.\nB: Will I keep the same seat?\nA: No, you'll get a new seat in coach B, number twelve.\nB: That's fine; can I pay the fee with the card I used before?\nA: Yes, I'll charge it now and print your new ticket.\nB: Thank you; I'll check the platform number on the screen.\nA: It leaves from platform four.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-04-B2-012",
+      "field": "turns[*].speaker",
+      "before": "A 为乘客、B 为售票员",
+      "after": "A 为售票员、B 为乘客",
+      "reason": "与全批约定统一，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-04-B2-012",
+      "field": "dialogue_text",
+      "before": "A: I'm hoping to change my ticket from Westport to Milltown.\nB: Your ticket is for the 4:10 departure; which train would you prefer?\nA: The 5:05 would give me time to finish a meeting.\nB: I can move you to that service, but the advance fare difference is twelve dollars.\nA: Is there also a change fee?\nB: Not on this ticket, so you'd only pay the fare difference.\nA: Please make the change; I'd like to keep a window seat if one is available.\nB: There's a window seat in coach C, seat 18, and I've reserved it.\nA: If my meeting ends early, can I travel on the 4:10 instead?\nB: You'd need to change the booking again before departure, and the fare could differ.\nA: Understood; please charge the twelve dollars and email the revised ticket.\nB: Done; your new ticket and receipt have been sent to your email.",
+      "after": "B: I'm hoping to change my ticket from Westport to Milltown.\nA: Your ticket is for the 4:10 departure; which train would you prefer?\nB: The 5:05 would give me time to finish a meeting.\nA: I can move you to that service, but the advance fare difference is twelve dollars.\nB: Is there also a change fee?\nA: Not on this ticket, so you'd only pay the fare difference.\nB: Please make the change; I'd like to keep a window seat if one is available.\nA: There's a window seat in coach C, seat 18, and I've reserved it.\nB: If my meeting ends early, can I travel on the 4:10 instead?\nA: You'd need to change the booking again before departure, and the fare could differ.\nB: Understood; please charge the twelve dollars and email the revised ticket.\nA: Done; your new ticket and receipt have been sent to your email.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-08-A2-022",
+      "field": "turns[*].speaker",
+      "before": "A 为乘客、B 为司机",
+      "after": "A 为司机、B 为乘客",
+      "reason": "与全批约定统一，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-03-08-A2-022",
+      "field": "dialogue_text",
+      "before": "A: Hello, is this the pickup point for ride 583?\nB: Yes, I'm waiting outside the library.\nA: I'm in a blue car by the south entrance.\nB: I can see you; is the trip to 8 Pine Road?\nA: Yes, that's right.\nB: Could you share the trip with my sister?\nA: Sure, I sent her the trip link.\nB: Thanks; I'll get in now.",
+      "after": "B: Hello, is this the pickup point for ride 583?\nA: Yes, I'm waiting outside the library.\nB: I'm in a blue car by the south entrance.\nA: I can see you; is the trip to 8 Pine Road?\nB: Yes, that's right.\nA: Could you share the trip with my sister?\nB: Sure, I sent her the trip link.\nA: Thanks; I'll get in now.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-04-08-A2-022",
+      "field": "task_goal",
+      "before": "就酒店问题提出投诉并索赔",
+      "after": "退房后发现遗留物品并申请寄回",
+      "reason": "对话实际是失物招领与寄送，改目标比改台词更贴合情节",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-04-08-A2-022",
+      "field": "success_criteria[0]",
+      "before": "说明问题与损失",
+      "after": "说明遗留物品与退房时间",
+      "reason": "与失物寄回情节对齐",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-04-08-A2-022",
+      "field": "success_criteria[1]",
+      "before": "要求赔偿或补救",
+      "after": "要求寄回并确认收件地址",
+      "reason": "与失物寄回情节对齐",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-04-08-A2-022",
+      "field": "success_criteria[2]",
+      "before": "确认处理结果",
+      "after": "确认寄送安排与通知方式",
+      "reason": "与失物寄回情节对齐",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-05-04-A2-010",
+      "field": "turns[*].speaker",
+      "before": "A 为问路者、B 为指路者",
+      "after": "A 为指路者、B 为问路者",
+      "reason": "让 A 站在指路一方，与 task_goal 及同场景 B2 一致，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-05-04-A2-010",
+      "field": "dialogue_text",
+      "before": "A: Excuse me, how do I get to the train station?\nB: Go straight along this street.\nA: Do I turn at the park?\nB: Yes, turn right at the park.\nA: Is the station far from there?\nB: No, it is across from the library.\nA: Thanks for your help.\nB: You're welcome.",
+      "after": "B: Excuse me, how do I get to the train station?\nA: Go straight along this street.\nB: Do I turn at the park?\nA: Yes, turn right at the park.\nB: Is the station far from there?\nA: No, it is across from the library.\nB: Thanks for your help.\nA: You're welcome.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-05-04-B1-011",
+      "field": "turns[*].speaker",
+      "before": "A 为问路者、B 为指路者",
+      "after": "A 为指路者、B 为问路者",
+      "reason": "让 A 站在指路一方，与 task_goal 一致，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-05-04-B1-011",
+      "field": "dialogue_text",
+      "before": "A: Excuse me, is the city hall near here?\nB: Yes; walk along this street until you reach the traffic lights.\nA: Should I turn left or right there?\nB: Turn left, then keep walking until you see the stone fountain.\nA: Is the entrance in front of the fountain?\nB: The main entrance is around the corner on the right.\nA: I'm carrying a stroller; is there a ramp?\nB: Yes, there's a ramp beside the steps at the side entrance.\nA: That's clear; thank you for explaining it.\nB: No problem; the walk takes about seven minutes.",
+      "after": "B: Excuse me, is the city hall near here?\nA: Yes; walk along this street until you reach the traffic lights.\nB: Should I turn left or right there?\nA: Turn left, then keep walking until you see the stone fountain.\nB: Is the entrance in front of the fountain?\nA: The main entrance is around the corner on the right.\nB: I'm carrying a stroller; is there a ramp?\nA: Yes, there's a ramp beside the steps at the side entrance.\nB: That's clear; thank you for explaining it.\nA: No problem; the walk takes about seven minutes.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-05-05-A2-013",
+      "field": "turns[*].speaker",
+      "before": "A 为帮助者、B 为迷路者",
+      "after": "A 为迷路者、B 为帮助者",
+      "reason": "让 A 站在求助一方，与 task_goal 一致，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-05-05-A2-013",
+      "field": "dialogue_text",
+      "before": "A: Are you okay? You look lost.\nB: Yes; my phone battery is dead.\nA: Where are you trying to go?\nB: I need to find the bus station.\nA: It is straight ahead, past the big clock.\nB: Can you show me on this paper map?\nA: Sure; we are here, and the station is here.\nB: Thank you; I can follow that.",
+      "after": "B: Are you okay? You look lost.\nA: Yes; my phone battery is dead.\nB: Where are you trying to go?\nA: I need to find the bus station.\nB: It is straight ahead, past the big clock.\nA: Can you show me on this paper map?\nB: Sure; we are here, and the station is here.\nA: Thank you; I can follow that.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-05-05-B1-014",
+      "field": "turns[*].speaker",
+      "before": "A 为帮助者、B 为迷路者",
+      "after": "A 为迷路者、B 为帮助者",
+      "reason": "让 A 站在求助一方，与 task_goal 一致，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-05-05-B1-014",
+      "field": "dialogue_text",
+      "before": "A: Do you need some help?\nB: I think I took the wrong turn, and my map isn't loading.\nA: Where are you trying to get to?\nB: The community center on Birch Road.\nA: You're on the right street, but you need to go back to the red post box.\nB: Should I turn left there?\nA: Yes, cross the small bridge and follow the signs for the sports hall.\nB: Is the community center beside the sports hall?\nA: It's in the same building, with its own entrance on the side.\nB: Thanks; I'll go back to the post box and follow your directions.",
+      "after": "B: Do you need some help?\nA: I think I took the wrong turn, and my map isn't loading.\nB: Where are you trying to get to?\nA: The community center on Birch Road.\nB: You're on the right street, but you need to go back to the red post box.\nA: Should I turn left there?\nB: Yes, cross the small bridge and follow the signs for the sports hall.\nA: Is the community center beside the sports hall?\nB: It's in the same building, with its own entrance on the side.\nA: Thanks; I'll go back to the post box and follow your directions.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-05-05-B2-015",
+      "field": "turns[*].speaker",
+      "before": "A 为帮助者、B 为迷路者",
+      "after": "A 为迷路者、B 为帮助者",
+      "reason": "让 A 站在求助一方，与 task_goal 一致，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-05-05-B2-015",
+      "field": "dialogue_text",
+      "before": "A: You look unsure of where you are; can I help?\nB: I got off the bus too early, and my phone battery died before I could check the route.\nA: Where are you headed?\nB: The Lakeside Conference Hotel on North Road; I thought it was near the park.\nA: There are two parks nearby, so the stop you need is one block past the library.\nB: Could you show me on the paper map? I can't read the street signs very well.\nA: Certainly; we're here at the library, and the hotel is the blue square across the footbridge.\nB: Is the bridge open? There were roadworks near the river.\nA: The north bridge is closed, but the lower footpath remains open and has clear signs.\nB: Could I take a taxi from this corner instead?\nA: Yes, the hotel is about a five-minute drive; there's a taxi stand beside the library.\nB: Thank you; I'll use the taxi stand and show the driver the map.",
+      "after": "B: You look unsure of where you are; can I help?\nA: I got off the bus too early, and my phone battery died before I could check the route.\nB: Where are you headed?\nA: The Lakeside Conference Hotel on North Road; I thought it was near the park.\nB: There are two parks nearby, so the stop you need is one block past the library.\nA: Could you show me on the paper map? I can't read the street signs very well.\nB: Certainly; we're here at the library, and the hotel is the blue square across the footbridge.\nA: Is the bridge open? There were roadworks near the river.\nB: The north bridge is closed, but the lower footpath remains open and has clear signs.\nA: Could I take a taxi from this corner instead?\nB: Yes, the hotel is about a five-minute drive; there's a taxi stand beside the library.\nA: Thank you; I'll use the taxi stand and show the driver the map.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-06-07-A2-019",
+      "field": "turns[*].speaker",
+      "before": "A 为客户、B 为诊所前台",
+      "after": "A 为诊所前台、B 为客户",
+      "reason": "与全板块 A 为服务方的约定统一，台词内容不动",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-06-07-A2-019",
+      "field": "dialogue_text",
+      "before": "A: I'd like to book a health check.\nB: We have an appointment on Friday at 8 a.m.\nA: Do I need to fast?\nB: Yes, please do not eat for eight hours before the test.\nA: Can I drink water?\nB: Yes, plain water is fine.\nA: Should I bring my health card?\nB: Yes, bring your card and photo ID.\nA: Thank you; I'll come on Friday.",
+      "after": "B: I'd like to book a health check.\nA: We have an appointment on Friday at 8 a.m.\nB: Do I need to fast?\nA: Yes, please do not eat for eight hours before the test.\nB: Can I drink water?\nA: Yes, plain water is fine.\nB: Should I bring my health card?\nA: Yes, bring your card and photo ID.\nB: Thank you; I'll come on Friday.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-06-08-A2-022",
+      "field": "turns[8].text",
+      "before": "Thank you; I also have a medicine allergy.",
+      "after": "Thank you; I also have a medicine allergy, and I'll buy these tablets after I speak to the pharmacist.",
+      "reason": "补上购买确认，闭合达成标准第三条",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-06-08-A2-022",
+      "field": "dialogue_text",
+      "before": "A: How can I help you at Oak Pharmacy?\nB: I have a headache; do you have pain medicine?\nA: We have tablets for adults.\nB: How many should I take?\nA: Please read the label, or I can ask the pharmacist to explain it.\nB: Could I speak to the pharmacist?\nA: Of course; I'll ask them to come over.\nB: Thank you; I also have a medicine allergy.\nA: Please tell the pharmacist about it before you choose.",
+      "after": "A: How can I help you at Oak Pharmacy?\nB: I have a headache; do you have pain medicine?\nA: We have tablets for adults.\nB: How many should I take?\nA: Please read the label, or I can ask the pharmacist to explain it.\nB: Could I speak to the pharmacist?\nA: Of course; I'll ask them to come over.\nB: Thank you; I also have a medicine allergy, and I'll buy these tablets after I speak to the pharmacist.\nA: Please tell the pharmacist about it before you choose.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-06-08-B1-023",
+      "field": "turns[9].text",
+      "before": "Thanks; I'll wait here for their advice.",
+      "after": "Thanks; I'll wait here for their advice, then buy a small pack if it's suitable.",
+      "reason": "补上购买确认，闭合达成标准第三条，同时保留先咨询药师的合理顺序",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-06-08-B1-023",
+      "field": "dialogue_text",
+      "before": "A: What can I help you find at River Pharmacy?\nB: I have a cold and a stuffy nose; is there something I can buy without a prescription?\nA: We have a few options, but first, are you taking any other medicine?\nB: I take tablets for high blood pressure.\nA: Please speak with the pharmacist before choosing a decongestant.\nB: Could you ask them to check which products are suitable?\nA: Certainly; I'll show them your medicine list.\nB: I also want to know how long I can use a nasal spray.\nA: The pharmacist can explain the label and how many days it's meant to be used.\nB: Thanks; I'll wait here for their advice.",
+      "after": "A: What can I help you find at River Pharmacy?\nB: I have a cold and a stuffy nose; is there something I can buy without a prescription?\nA: We have a few options, but first, are you taking any other medicine?\nB: I take tablets for high blood pressure.\nA: Please speak with the pharmacist before choosing a decongestant.\nB: Could you ask them to check which products are suitable?\nA: Certainly; I'll show them your medicine list.\nB: I also want to know how long I can use a nasal spray.\nA: The pharmacist can explain the label and how many days it's meant to be used.\nB: Thanks; I'll wait here for their advice, then buy a small pack if it's suitable.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-07-06-B1-017",
+      "field": "turns[7].text",
+      "before": "Here are forty-four thousand five hundred yen and your receipt.",
+      "after": "Here are forty-four thousand five hundred and fifty yen and your receipt.",
+      "reason": "按三百美元扣三美元手续费后折算，297×150=44550；若手续费另收则应写 45000，需与服务费口径统一",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-07-06-B1-017",
+      "field": "dialogue_text",
+      "before": "A: How much would you like to exchange into Japanese yen?\nB: Three hundred dollars, please.\nA: Today's rate is 150 yen to the dollar, with a three-dollar service fee.\nB: Will I receive the rate shown on this screen?\nA: Yes, if you confirm the exchange now.\nB: Is there a better rate for a larger amount?\nA: The rate is the same today, but the fee stays three dollars.\nB: All right; please exchange the three hundred dollars.\nA: Here are forty-four thousand five hundred yen and your receipt.\nB: Thanks; I'll count it before I leave.",
+      "after": "A: How much would you like to exchange into Japanese yen?\nB: Three hundred dollars, please.\nA: Today's rate is 150 yen to the dollar, with a three-dollar service fee.\nB: Will I receive the rate shown on this screen?\nA: Yes, if you confirm the exchange now.\nB: Is there a better rate for a larger amount?\nA: The rate is the same today, but the fee stays three dollars.\nB: All right; please exchange the three hundred dollars.\nA: Here are forty-four thousand five hundred and fifty yen and your receipt.\nB: Thanks; I'll count it before I leave.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-08-08-A2-022",
+      "field": "turns[7].text",
+      "before": "Thank you; I'll wait here.",
+      "after": "Thank you; I'll wait at the information desk until you come back.",
+      "reason": "把解决方案确认落地，闭合达成标准第三条，且不改动原有剧情",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-08-08-A2-022",
+      "field": "dialogue_text",
+      "before": "A: Can I help you?\nB: I can't find my sister; we got separated.\nA: What is she wearing?\nB: A yellow jacket and a red hat.\nA: Where did you last see her?\nB: Near the ticket gate.\nA: I'll contact the staff at the gate.\nB: Thank you; I'll wait here.\nA: Please stay by the information desk.",
+      "after": "A: Can I help you?\nB: I can't find my sister; we got separated.\nA: What is she wearing?\nB: A yellow jacket and a red hat.\nA: Where did you last see her?\nB: Near the ticket gate.\nA: I'll contact the staff at the gate.\nB: Thank you; I'll wait at the information desk until you come back.\nA: Please stay by the information desk.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-09-01-B2-003",
+      "field": "turns[9].text",
+      "before": "You're welcome; we usually meet on the first Saturday of the month.",
+      "after": "You'd be very welcome; we usually meet on the first Saturday of the month.",
+      "reason": "回应的是对方表达参加意愿，不是致谢，需换成表示欢迎的说法",
+      "reviewer": "doubao-review-batch"
+    },
+    {
+      "record_id": "daily-09-01-B2-003",
+      "field": "dialogue_text",
+      "before": "A: Hi, I'm Elena; I don't think we've met, though we have several friends in common.\nB: You're right; I'm Marcus, and I recently joined the neighborhood photography group.\nA: What drew you to the group?\nB: I've been taking pictures for years, but I wanted to get out and explore the city with other people.\nA: What kind of photography do you enjoy most?\nB: Street scenes, especially the small details people tend to walk past.\nA: That's a lovely perspective; do you have a favorite place to shoot nearby?\nB: The old market at dawn, before the stalls get busy.\nA: I've never been there that early; perhaps I'll join one of your walks sometime.\nB: You're welcome; we usually meet on the first Saturday of the month.\nA: I'll keep an eye out for the next one; it's been good talking with you.\nB: Likewise; I hope to see you at the group soon.",
+      "after": "A: Hi, I'm Elena; I don't think we've met, though we have several friends in common.\nB: You're right; I'm Marcus, and I recently joined the neighborhood photography group.\nA: What drew you to the group?\nB: I've been taking pictures for years, but I wanted to get out and explore the city with other people.\nA: What kind of photography do you enjoy most?\nB: Street scenes, especially the small details people tend to walk past.\nA: That's a lovely perspective; do you have a favorite place to shoot nearby?\nB: The old market at dawn, before the stalls get busy.\nA: I've never been there that early; perhaps I'll join one of your walks sometime.\nB: You'd be very welcome; we usually meet on the first Saturday of the month.\nA: I'll keep an eye out for the next one; it's been good talking with you.\nB: Likewise; I hope to see you at the group soon.",
+      "reason": "turns 修改后同步 dialogue_text，保证与 turns 一致",
+      "reviewer": "doubao-review-batch"
+    }
+  ]
+}

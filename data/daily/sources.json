@@ -1,0 +1,163 @@
+{
+  "schema_version": "daily_sources.v1",
+  "count": 15,
+  "sources": [
+    {
+      "source_id": "daily-dialogues",
+      "name": "九板块标准场景对话",
+      "path": "训练资料/日常场景交涉",
+      "usage": "作为日常交涉闯关模式的基础对话和任务参考",
+      "license": "项目自有（AI 按《生成任务单-v2》产出，未复制第三方原文）",
+      "attribution": "待确认",
+      "raw_data_copied_to_repo": false,
+      "license_status": "self_owned",
+      "redistributable": true,
+      "license_note": "可随项目一同发布，保留署名"
+    },
+    {
+      "source_id": "daily-keywords",
+      "name": "九板块重点词表",
+      "path": "训练资料/日常场景交涉/九板块重点词表.csv",
+      "usage": "作为九个板块的候选重点词，用于对话 target_words 匹配",
+      "license": "混合来源：SGD（CC BY-SA 4.0）+ 影视字幕（许可不明）+ AI 生成对话派生",
+      "attribution": "待确认",
+      "raw_data_copied_to_repo": false,
+      "license_status": "mixed_restricted",
+      "redistributable": false,
+      "license_note": "仅限项目内部使用；如需公开再分发须先取得授权或替换来源"
+    },
+    {
+      "source_id": "exam-frequency",
+      "name": "CET4 / CET6 / 考研 真题考频总表",
+      "path": "训练资料/cet- 四六级词表 + 真题 + 考频/真题考频总表.csv",
+      "usage": "为词汇补充真实存在的真题名次与句频",
+      "license": "第三方网站内容（懒笔记），未获书面授权",
+      "attribution": "懒笔记「真题单词」 english-exam.lazynote.cn（据来源与说明.txt）",
+      "raw_data_copied_to_repo": false,
+      "license_status": "internal_only",
+      "redistributable": false,
+      "license_note": "仅限项目内部使用；如需公开再分发须先取得授权或替换来源"
+    },
+    {
+      "source_id": "zhongkao-freq",
+      "name": "中考开放词频（wordfreq 参考）",
+      "path": "训练资料/中高考/开放词频参考/secondary_open_frequency_1600.csv",
+      "usage": "单独记录一般英语语料词频参考，不视为中考官方词表或真题考频",
+      "license": "Apache-2.0 / CC BY-SA 4.0（wordfreq 3.1.1，见来源许可说明）",
+      "attribution": "wordfreq 3.1.1 英语词频数据",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "gaokao-freq",
+      "name": "高考开放词频（wordfreq 参考）",
+      "path": "训练资料/中高考/开放词频参考/gaokao_open_frequency_3500.csv",
+      "usage": "单独记录一般英语语料词频参考，不视为高考官方词表或真题考频",
+      "license": "Apache-2.0 / CC BY-SA 4.0（wordfreq 3.1.1，见来源许可说明）",
+      "attribution": "wordfreq 3.1.1 英语词频数据",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "cet4-open-freq",
+      "name": "四级开放词频（wordfreq 参考）",
+      "path": "训练资料/cet- 四六级词表 + 真题 + 考频/开放词频参考/cet4_open_frequency_4500.csv",
+      "usage": "单独记录一般英语语料词频参考，不视为四级官方词表或真题考频",
+      "license": "Apache-2.0 / CC BY-SA 4.0（wordfreq 3.1.1）",
+      "attribution": "wordfreq 3.1.1（非官方 CET4 考纲，不得当作真题频率）",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "cet6-open-freq",
+      "name": "六级开放词频（wordfreq 参考）",
+      "path": "训练资料/cet- 四六级词表 + 真题 + 考频/开放词频参考/cet6_open_frequency_5500.csv",
+      "usage": "单独记录一般英语语料词频参考，不视为六级官方词表或真题考频",
+      "license": "Apache-2.0 / CC BY-SA 4.0（wordfreq 3.1.1）",
+      "attribution": "wordfreq 3.1.1（非官方 CET6 考纲，不得当作真题频率）",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "ielts-vocab",
+      "name": "雅思 8000 词（净版）",
+      "path": "训练资料/雅思托福/雅思8000词_净版.csv",
+      "usage": "按精确词形补充可用词性的词条及缺失中文释义；不用于推导 CEFR 或考试频率",
+      "license": "用户提供的出版物 PDF 提取，版权归原出版方",
+      "attribution": "待确认（由用户提供的 PDF 提取）",
+      "raw_data_copied_to_repo": false,
+      "license_status": "internal_only",
+      "redistributable": false,
+      "license_note": "仅限项目内部使用；如需公开再分发须先取得授权或替换来源"
+    },
+    {
+      "source_id": "toefl-vocab",
+      "name": "托福 7000 词（净版）",
+      "path": "训练资料/雅思托福/托福7000词_净版.csv",
+      "usage": "按精确词形补充可用词性的词条、缺失中文释义及原表中存在的 IPA；音标口音未标且抽取质量需抽查",
+      "license": "用户提供的出版物 PDF 提取，版权归原出版方",
+      "attribution": "待确认（由用户提供的 PDF 提取）",
+      "raw_data_copied_to_repo": false,
+      "license_status": "internal_only",
+      "redistributable": false,
+      "license_note": "仅限项目内部使用；如需公开再分发须先取得授权或替换来源"
+    },
+    {
+      "source_id": "sgd",
+      "name": "Schema-Guided Dialogue (SGD)",
+      "path": "训练资料/日常场景交涉/SGD-CC-BY-SA-4.0",
+      "usage": "暂未接入",
+      "license": "CC BY-SA 4.0",
+      "attribution": "Google Research, Schema-Guided Dialogue Dataset",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "multiwoz",
+      "name": "MultiWOZ 2.2",
+      "path": "训练资料/日常场景交涉/multiwoz",
+      "usage": "暂未接入",
+      "license": "MIT",
+      "attribution": "MultiWOZ authors; see multiwoz/SOURCE_LICENSE",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "subtitles",
+      "name": "影视字幕（OpenSubtitles v2018）",
+      "path": "训练资料/opensubtitles-影视对话",
+      "usage": "暂未接入",
+      "license": "OpenSubtitles v2018，各影片版权不一，整体无法再分发",
+      "attribution": "待确认",
+      "raw_data_copied_to_repo": false,
+      "license_status": "internal_only",
+      "redistributable": false,
+      "license_note": "仅限项目内部使用；如需公开再分发须先取得授权或替换来源"
+    },
+    {
+      "source_id": "tatoeba",
+      "name": "Tatoeba 英语句对",
+      "path": "训练资料/tatoeba-英语句对",
+      "usage": "暂未接入",
+      "license": "CC BY 2.0 FR（Tatoeba 开放许可数据）",
+      "attribution": "Tatoeba contributors",
+      "raw_data_copied_to_repo": false
+    },
+    {
+      "source_id": "cefr-j",
+      "name": "CEFR-J Wordlist Version 1.6",
+      "path": "训练资料/CEFR与音标/CEFRJ_wordlist_ver1.6.zip",
+      "usage": "为词汇补 CEFR 等级（A1-B2）；仅使用 ALL/ALL_sep 表的 headword-pos-CEFR 三列",
+      "license": "版权归东京外国语大学投野（Tono）研究室；研究与教育及商业用途均可免费使用，须署名；商用含监修需另行协商",
+      "license_status": "permitted_use_with_attribution",
+      "redistributable": true,
+      "attribution": "The CEFR-J Wordlist Version 1.6. Compiled by Yukio Tono, Tokyo University of Foreign Studies.",
+      "raw_data_copied_to_repo": true
+    },
+    {
+      "source_id": "ipa-dict",
+      "name": "ipa-dict（en_US / General American）",
+      "path": "训练资料/CEFR与音标/ipa-dict_en_US.txt",
+      "usage": "为词汇补美式 IPA 音标；只取 en_US，en_GB 为 GPL 3.0 不采用",
+      "license": "MIT（数据基于 cmudict-ipa，MIT；含 stress markers 由 syllabify 生成，MIT）",
+      "license_status": "clear",
+      "redistributable": true,
+      "attribution": "ipa-dict by dohliam (MIT); English (US) IPA based on lingz/cmudict-ipa and kylebgorman/syllabify",
+      "raw_data_copied_to_repo": true
+    }
+  ]
+}
