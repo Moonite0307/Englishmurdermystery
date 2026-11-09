@@ -7,8 +7,20 @@ config.json
 # 账号数据（用户密码哈希与个人学习记录，严禁上传）
 data/accounts/
 
+# data/daily 里非运行必需的构建中间产物（体积大、会被重新生成）
+data/daily/*.bak
+data/daily/review-batch-*.jsonl
+data/daily/review_queue*.json
+data/daily/patch_log.json
+data/daily/validation_report*
+data/daily/vocab_field_completion.csv
+
 # 系统/编辑器临时文件
 Thumbs.db
 .DS_Store
 *.log
 node_modules/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
