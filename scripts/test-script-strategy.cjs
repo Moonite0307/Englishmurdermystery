@@ -28,6 +28,8 @@ function environment(genre = '欢乐本', challenge = '简单模式') {
   vm.runInContext(section('const PROMPT_GENERATE_PLAN', '/* ================= 全局状态'), ctx);
   vm.runInContext(`let scriptInfo = ${JSON.stringify({ genre, challenge })};
     let scriptData = null;
+    const completedTasks = new Set();
+    let taskProgressState = createTaskProgressState();
     let deductionProgress = { questionId: '', wrongStreak: 0 };
     const storyPhases = new Set();`, ctx);
   vm.runInContext(section('function repairJsonSyntax', '/* 流式过程中'), ctx);
@@ -122,19 +124,19 @@ test('hints require three wrong guesses on the same question; chat and language 
   turn('right'); assert.equal(turn('wrong').deduction_hint, '');
   assert.equal(turn('wrong', 'UNKNOWN').deduction_hint, '');
 });
-test('tasks can tick before review while ballot, ending, and review still require separate turns', () => {
+test('unverified task flags are ignored while ballot, ending, and review still require separate turns', () => {
   const { ctx, run } = environment(); ctx.plan = fixture(); run('scriptData = plan');
   const step = story_phase => {
     ctx.turn = { story_phase, completed_task: 3, game_over: true };
     run('applyScriptTurnRules(turn)'); return ctx.turn;
   };
   assert.equal(step('review').game_over, false);
-  assert.equal(step('ending').completed_task, 3);
+  assert.equal(step('ending').completed_task, 0);
   assert.equal(step('ballot').game_over, false);
   assert.equal(step('review').game_over, false);
   assert.equal(step('ending').game_over, false);
   assert.equal(step('review').game_over, true);
-  assert.equal(ctx.turn.completed_task, 3);
+  assert.equal(ctx.turn.completed_task, 0);
 });
 test('locked draft is immutable and all private design reaches DM without appearing in the public modal', () => {
   const { ctx, run, elements } = environment(); ctx.plan = fixture();

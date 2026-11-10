@@ -17,6 +17,9 @@ function reply(overrides = {}) {
     option_translations: [], grammar_task: '', completed_task: 0, completed_tasks: [], game_over: false,
     story_phase: 'discussion', deduction_assessment: { question_id: '', verdict: 'none' }, vocab: [], ...overrides };
 }
+function actionEvent(task, index, text, target = '', response = '') {
+  return { task_id: task, requirement_index: index, player_quote: text, target_id: target, response_quote: response };
+}
 async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false, generation = {}) {
   const browser = await playwright.chromium.launch({ headless: true, channel: 'msedge' });
   const context = await browser.newContext({ viewport, isMobile: viewport.width <= 720, hasTouch: viewport.width <= 720 });
@@ -162,11 +165,27 @@ test('desktop: language blocking, private role book, task ticks and optional voc
     responses.push(reply({ completed_tasks: [1, 2], task_checks: [{ task_id: 1, status: 'completed', evidence: 'Compared records' }] }));
     await input.fill('I compared the two records and asked both guests.');
     await page.locator('#btn-send').click();
-    await page.waitForFunction(() => completedTasks.size === 2 && !busy);
+    await page.waitForFunction(() => !busy);
+    assert.equal(await page.locator('.task-item.done').count(), 0);
+    const delivered = 'Please compare the gift and the record.';
+    for (const [text, task, index, target, speaker] of [
+      ['Please show me record one.', 1, 1, 'C1', 'Alice'],
+      ['Please show me record two.', 1, 1, 'C2', 'Alice'],
+      ['Ask Alice what she saw.', 2, 1, 'Alice', 'Alice'],
+      ['Ask Bob what he saw.', 2, 1, 'Bob', 'Bob'],
+      ['I think the gift was taken by mistake.', 2, 2, '', 'Bob']
+    ]) {
+      responses.push(reply({ speaker, task_events: [actionEvent(task, index, text, target, target ? delivered : '')] }));
+      await input.fill(text);
+      await page.locator('#btn-send').click();
+      await page.waitForFunction(() => !busy);
+    }
     assert.equal(await page.locator('.task-item.done').count(), 2);
     assert.equal(await page.locator('#options-area').innerText(), '');
-    responses.push(reply({ completed_tasks: [3], story_phase: 'ballot', game_over: true }));
-    await input.fill('My final answer is a misplaced gift because the records disagree.');
+    const final = 'My final answer is a misplaced gift because the records disagree.';
+    responses.push(reply({ completed_tasks: [3], story_phase: 'ballot', game_over: true,
+      task_events: [actionEvent(3, 1, final), actionEvent(3, 2, 'because the records disagree.')] }));
+    await input.fill(final);
     await input.press('Enter');
     await page.waitForFunction(() => completedTasks.size === 3 && !busy);
     assert.equal(await page.locator('.task-item.done').count(), 3);
@@ -207,6 +226,50 @@ test('Chinese mode accepts Chinese and mixed answers while NPC dialogue stays En
     }
     assert.match(requests.at(-1).messages[0].content, /允许中文、英文和中英混合/);
     assert.match(await page.locator('#reply-language-note').innerText(), /中文.*英文均可/);
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('screenshot regression: Lazy alone cannot complete the two-person task or supply the player explanation', async () => {
+  const plan = JSON.parse(JSON.stringify(fixture('推理本')).replaceAll('Alice', 'Lazy').replaceAll('Bob', 'Pleasant'));
+  const targets = plan.task_criteria[1].requirements[0].targets;
+  targets[0].label = '懒羊羊'; targets[0].aliases = ['Lazy', '懒羊羊', '懒洋洋'];
+  targets[1].label = '喜羊羊'; targets[1].aliases = ['Pleasant', '喜羊羊'];
+  const { browser, page, errors, responses, requests } = await setup({ width: 1280, height: 900 }, 'zh', true, false,
+    { genre: '推理本', theme: '喜羊羊大战灰太狼', background: '王者峡谷', replies: [{ data: plan }] });
+  try {
+    const speech = 'I saw Beauty by the pit. She buried something in the soil.';
+    async function send(text, speaker, events) {
+      responses.push(reply({ speaker, npc_dialogue: speech, completed_task: 2, completed_tasks: [2],
+        task_checks: [{ task_id: 2, status: 'completed', evidence: 'Both sheep talked.' }], task_events: events }));
+      await page.locator('#inp-msg').fill(text);
+      await page.locator('#btn-send').click();
+      await page.waitForFunction(() => !busy);
+    }
+    const ask = 'Ask Lazy what he saw nearby';
+    await send(ask, 'Lazy', [actionEvent(2, 1, ask, 'Lazy', speech), actionEvent(2, 1, ask, 'Pleasant', speech),
+      actionEvent(2, 2, speech)]);
+    assert.equal(await page.locator('.task-item.done').count(), 0);
+    assert.match(await page.locator('.task-progress').nth(1).innerText(), /1\/2人.*喜羊羊.*尚未提出/);
+    assert.equal(await page.locator('.task-toast').count(), 0);
+    await page.evaluate(() => markTaskCompleted(2, 'fake completion'));
+    assert.equal(await page.locator('.task-item.done').count(), 0);
+    await send('我想问懒洋洋，what did you see?', 'Lazy', [actionEvent(2, 1, '我想问懒洋洋，what did you see?', 'Lazy', speech)]);
+    assert.match(await page.locator('.task-progress').nth(1).innerText(), /1\/2人/);
+    await send('问问喜羊羊，他看到了什么？', 'Pleasant', [actionEvent(2, 1, '问问喜羊羊，他看到了什么？', 'Pleasant', speech)]);
+    assert.match(await page.locator('.task-progress').nth(1).innerText(), /2\/2人.*尚未提出/);
+    assert.equal(await page.locator('.task-item.done').count(), 0);
+    const explanation = '我觉得美羊羊可能把东西藏起来了。';
+    await send(explanation, 'Pleasant', [actionEvent(2, 2, explanation)]);
+    assert.equal(await page.locator('.task-item.done').count(), 1);
+    assert.equal(await page.locator('.task-toast').count(), 1);
+    assert.equal(await page.evaluate(() => completedTasks.has(2)), true);
+    await send('谢谢。', 'Pleasant', []);
+    assert.equal(await page.locator('.task-toast').count(), 1);
+    assert.match(requests.at(-1).messages.at(-1).content, /verified.*懒洋洋/);
+    if (artifacts) await page.screenshot({ path: path.join(artifacts, 'verified-task-progress.png') });
+    await page.locator('#btn-reset').click();
+    assert.equal(await page.evaluate(() => taskProgressState.records.size), 0);
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
 });
@@ -282,7 +345,7 @@ test('malformed replies recover dialogue, retry safely and never display raw int
     responses.push('{"npc_dialogue":"cut off', reply({ completed_tasks: [1] }));
     await send('I compared the records.');
     assert.equal(requests.length, before + 2);
-    assert.equal(await page.locator('.task-item.done').count(), 1);
+    assert.equal(await page.locator('.task-item.done').count(), 0);
     assert.equal(await page.locator('.msg-row.user').count(), 2);
     assert.match(requests.at(-1).messages.at(-1).content, /不是玩家的新行动/);
 
@@ -292,13 +355,14 @@ test('malformed replies recover dialogue, retry safely and never display raw int
     assert.equal(requests.length, before + 2);
     assert.match(await page.locator('.error-box').innerText(), /回答已保留/);
     assert.equal(await page.locator('.msg-row.user').count(), 3);
-    assert.equal(await page.locator('.task-item.done').count(), 1);
-    responses.push(reply({ completed_tasks: [2] }));
+    assert.equal(await page.locator('.task-item.done').count(), 0);
+    responses.push(reply({ completed_tasks: [2], task_events: [actionEvent(2, 1, 'Please ask Alice.', 'Alice', 'Please compare the gift and the record.')] }));
     await page.locator('.retry-link').click();
     await page.waitForFunction(() => !busy);
     assert.equal(await page.locator('.error-box').count(), 0);
     assert.equal(await page.locator('.msg-row.user').count(), 3);
-    assert.equal(await page.locator('.task-item.done').count(), 2);
+    assert.equal(await page.locator('.task-item.done').count(), 0);
+    assert.equal(await page.evaluate(() => taskRequirementRecords(2, 1).size), 1);
     assert.equal(await page.evaluate(() => messages.filter(m => m.role === 'user' && m.content === 'Please ask Alice.').length), 1);
     assert.equal(await page.evaluate(() => messages.filter(m => m.role === 'assistant').every(m => {
       try { return typeof JSON.parse(m.content).npc_dialogue === 'string'; } catch (_) { return false; }

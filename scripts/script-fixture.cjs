@@ -15,7 +15,19 @@ function fixture(genre = '欢乐本', challenge = '简单模式') {
     characters: names.slice(1).map(name => ({ name, role: 'Guest', secret: 'HIDDEN_SECRET', agenda: 'HIDDEN_AGENDA',
       personality: 'Shy', voice: 'Soft', known_facts: ['HIDDEN_KNOWLEDGE'], lie_logic: 'HIDDEN_LIE', reveal_condition: 'HIDDEN_TRIGGER', arc: 'HIDDEN_ARC' })),
     tasks: ['Meet the guests', 'Compare the evidence', 'Explain what happened'],
-    task_criteria: [{ task_id: 1, condition: '查看两处资料' }, { task_id: 2, condition: '向两位角色提问' }, { task_id: 3, condition: '提交判断及理由' }],
+    task_criteria: [
+      { task_id: 1, condition: '查看两处资料', requirements: [{ kind: 'inspect', required: 2, targets: [
+        { id: 'C1', label: '记录一', aliases: ['record one', 'source0', '记录一'] },
+        { id: 'C2', label: '记录二', aliases: ['record two', 'source1', '记录二'] }
+      ] }] },
+      { task_id: 2, condition: '向两位角色提问并提出解释', requirements: [{ kind: 'inquire', required: 2, targets: [
+        { id: 'Alice', label: '爱丽丝', aliases: ['Alice', '爱丽丝'] },
+        { id: 'Bob', label: '鲍勃', aliases: ['Bob', '鲍勃'] }
+      ] }, { kind: 'explain', required: 1, targets: [] }] },
+      { task_id: 3, condition: '提交判断及理由', requirements: [
+        { kind: 'judge', required: 1, targets: [] }, { kind: 'reason', required: 1, targets: [] }
+      ] }
+    ],
     timeline: [1, 2, 3].map(i => ({ time: '' + i, actor: names[0], event: 'HIDDEN_EVENT', cause: 'HIDDEN_CAUSE', effect: 'HIDDEN_EFFECT' })),
     relationships: names.map((from, i) => ({ from, to: names[(i + 1) % count], public_relation: 'Guests', hidden_relation: 'HIDDEN_RELATION' })),
     acts: [1, 2, 3].map(act => ({ act, title: 'Act ' + act, trigger: 'HIDDEN_TRIGGER', event: 'HIDDEN_EVENT',
