@@ -241,7 +241,9 @@ async function handleChat(req, res) {
         model: cfg.model,
         messages: payload.messages,
         stream: true,
-        temperature: typeof payload.temperature === "number" ? payload.temperature : 0.8
+        temperature: typeof payload.temperature === "number" ? payload.temperature : 0.8,
+        ...(Number.isInteger(payload.max_tokens) && payload.max_tokens > 0
+          ? { max_tokens: Math.min(payload.max_tokens, 8192) } : {})
       })
     });
   } catch (err) {

@@ -17,7 +17,7 @@ function reply(overrides = {}) {
     option_translations: [], grammar_task: '', completed_task: 0, completed_tasks: [], game_over: false,
     story_phase: 'discussion', deduction_assessment: { question_id: '', verdict: 'none' }, vocab: [], ...overrides };
 }
-async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false) {
+async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false, generation = {}) {
   const browser = await playwright.chromium.launch({ headless: true, channel: 'msedge' });
   const context = await browser.newContext({ viewport, isMobile: viewport.width <= 720, hasTouch: viewport.width <= 720 });
   const page = await context.newPage();
@@ -31,9 +31,11 @@ async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false)
   const handleChat = async route => {
     const req = route.request().postDataJSON(); requests.push(req);
     const isPlan = req.messages[0].content.includes('资深剧本杀编剧');
-    const result = isPlan ? fixture() : (responses.shift() || reply());
+    const planned = isPlan && generation.replies && generation.replies.shift();
+    const result = isPlan ? (planned ? planned.data : fixture()) : (responses.shift() || reply());
     const content = typeof result === 'string' ? result : JSON.stringify(result);
-    await route.fulfill({ contentType: 'text/event-stream', body: 'data: ' + JSON.stringify({ choices: [{ delta: { content } }] }) + (eofOnly ? '' : '\n\ndata: [DONE]\n\n') });
+    const finish = planned && planned.finishReason ? '\n\ndata: ' + JSON.stringify({ choices: [{ delta: {}, finish_reason: planned.finishReason }] }) : '';
+    await route.fulfill({ contentType: 'text/event-stream', body: 'data: ' + JSON.stringify({ choices: [{ delta: { content } }] }) + finish + (eofOnly ? '' : '\n\ndata: [DONE]\n\n') });
   };
   await page.route('**/api/chat', handleChat);
   await page.route('https://mock.invalid/v1/chat/completions', handleChat);
@@ -41,12 +43,18 @@ async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false)
   await page.goto(pageUrl);
   await page.waitForFunction(wantStatic => (wantStatic ? !backendMode : backendMode) && EXAM_LEXICON.ready, staticMode);
   assert.equal(await page.locator('#api-settings, #backend-badge, #direct-mode-hint, #inp-api-base, #inp-api-key, #inp-model').count(), 0);
-  await page.locator('[data-goal="高考"]').click();
+  await page.locator('[data-goal="' + (generation.goal || '高考') + '"]').click();
   await page.locator('#btn-goal-next').click();
   assert.ok(!/大模型接口设置|API Base URL|API Key|server\.js|config\.json/.test(await page.locator('#panel-config').innerText()));
-  await page.locator('#sel-genre').selectOption('欢乐本');
+  await page.locator('#sel-genre').selectOption(generation.genre || '欢乐本');
   await page.locator('#sel-reply-language').selectOption(mode);
+  if (generation.theme) await page.locator('#inp-theme').fill(generation.theme);
+  if (generation.background) await page.locator('#inp-background').fill(generation.background);
   await page.locator('#btn-generate').click();
+  if (generation.expectFailure) {
+    await page.locator('#error-banner').waitFor({ state: 'visible' });
+    return { browser, page, errors, requests, responses };
+  }
   await page.locator('#btn-start-game').waitFor({ state: 'visible' });
   assert.match(await page.locator('#sm-tasks').innerText(), /完成条件/);
   assert.match(await page.locator('#sm-reading-guide').innerText(), /任意.*单词.*生词本/);
@@ -54,6 +62,67 @@ async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false)
   await page.waitForFunction(() => state === 'PLAYING' && !busy);
   return { browser, page, errors, requests, responses };
 }
+
+test('phone generation: screenshot configuration accepts normalized hints and equivalent character fields', async () => {
+  const plan = fixture();
+  plan.core_questions[0].direction_hint = '比较 Alice 的说法与两份记录。';
+  plan.characters[0].agenda = { short_term: 'Find the gift', long_term: 'Make friends' };
+  plan.relationships[0].to = 'alice';
+  const { browser, page, errors, requests } = await setup({ width: 390, height: 844 }, 'zh', true, false,
+    { goal: '中考', background: '王者峡谷', replies: [{ data: plan }] });
+  try {
+    const plans = requests.filter(r => r.messages[0].content.includes('资深剧本杀编剧'));
+    assert.equal(plans.length, 1);
+    assert.equal(plans[0].max_tokens, 8192);
+    assert.equal(plans[0].temperature, 0.4);
+    assert.ok(plans[0].messages[0].content.includes('王者峡谷'));
+    assert.equal(await page.evaluate(() => validateScriptPlan(scriptData).length), 0);
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('generation retries a length-limited draft and reaches a playable script', async () => {
+  const { browser, page, errors, requests } = await setup({ width: 1280, height: 800 }, 'en', false, false,
+    { replies: [{ data: '{"script_name":"partial', finishReason: 'length' }, { data: fixture() }] });
+  try {
+    const plans = requests.filter(r => r.messages[0].content.includes('资深剧本杀编剧'));
+    assert.equal(plans.length, 2);
+    assert.match(plans[1].messages[2].content, /精简|完整JSON/);
+    assert.equal(await page.evaluate(() => state), 'PLAYING');
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('generation repairs missing character links without rewriting the script', async () => {
+  const plan = fixture('推理本');
+  plan.relationships = plan.relationships.filter(r => r.from !== 'Alice' && r.to !== 'Alice');
+  const { browser, page, errors, requests } = await setup({ width: 1280, height: 800 }, 'zh', true, false,
+    { goal: '高考', genre: '推理本', theme: '喜羊羊大战灰太狼', background: '王者峡谷',
+      replies: [{ data: plan }, { data: { updates: { relationships: fixture('推理本').relationships } } }] });
+  try {
+    const plans = requests.filter(r => r.messages[0].content.includes('资深剧本杀编剧'));
+    assert.equal(plans.length, 2);
+    assert.match(plans[1].messages[2].content, /只返回JSON补丁/);
+    assert.match(plans[1].messages[2].content, /relationships/);
+    assert.equal(await page.evaluate(() => validateScriptPlan(scriptData).length), 0);
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('persistent generation failure shows a specific safe explanation and leaves controls usable', async () => {
+  const plan = fixture(); delete plan.truth;
+  const { browser, page, errors, requests } = await setup({ width: 390, height: 844 }, 'zh', true, false,
+    { replies: [{ data: plan }, { data: plan }, { data: plan }], expectFailure: true });
+  try {
+    assert.equal(requests.length, 3);
+    const text = await page.locator('#error-banner').innerText();
+    assert.match(text, /故事背景或结局信息不完整/);
+    assert.doesNotMatch(text, /HIDDEN_|truth|locked_ending/);
+    assert.equal(await page.locator('#btn-generate').isEnabled(), true);
+    assert.equal(await page.locator('#panel-config').isVisible(), true);
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
 async function noOverflow(page) {
   // Viewport resize events update the app height on the following browser frame.
   await page.waitForFunction(() => document.getElementById('btn-send').getBoundingClientRect().bottom <= visualViewport.height + 1);

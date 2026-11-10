@@ -1299,7 +1299,7 @@ characters 数组恰好包含 {npcCount} 名 AI 角色，不能把玩家重复�
 2. 因果时间线：timeline 按真实发生顺序写明时间、行动者、行为、原因和后果。每个转折都由先前事件或关系变化推动；人物情感变化服务于既定事件，不能让玩家的临场选择改写事实。
 3. 关系网：relationships 写明人物双方、公开关系与隐藏关系；每名角色至少连到两名其他角色，玩家也在网中。每条人物线都要通过具体事件或证据与主线交汇。
 4. 线索图：clues 必须预先写全。每条有唯一 id、act（1/2/3）、source（可搜索的地点/物件或具名角色）、discovery（玩家能实际观察到的内容，不能直接写出答案）、meaning（DM 专用的真实含义）、links（关联的线索 ID）、kind（evidence/red_herring）、resolution（误导如何由其他证据排除；普通证据填其可验证方式）。线性线索带动探索，网状线索交叉验证；关键结论至少有两条独立来源的evidence，并且都须在第一或第二幕、表决之前可以获得；第三幕只回收伏笔，不新增解题必需信息。不能靠 NPC 自白、未提供的专业知识或复盘突然新增物证才能解出。每条误导都可公平排除；简单模式最多一条误导，其他模式一至两条。
-5. 核心问题：core_questions 用唯一 id 标识需推理的问题，写清 question、answer、supporting_clue_ids（至少两条证据）、direction_hint（中文，只引导比较证据或检查方向，绝不含答案、凶手姓名或核心秘密）。问题适配类型：推凶、往事拼接、恐怖成因、误会成因、情感动机或阵营目标。复盘必须逐题对应证据，不以主观情感态度判错。
+5. 核心问题：core_questions 用唯一 id 标识需推理的问题，写清 question、answer、supporting_clue_ids（至少两条证据）、direction_hint（中文，只引导比较证据或检查方向，绝不含答案、凶手姓名或核心秘密）。先写完线索，再为每个问题从已有线索中选至少两条kind=evidence且act为1或2、source不同的证据ID；red_herring和第3幕线索不能凑入这两条证据。必须用discovery中玩家能看到的事实支持answer，不能只靠DM专用meaning解释。某个问题凑不齐有效证据时，补足证据或合并问题，不输出无证据的次要问题。问题适配类型：推凶、往事拼接、恐怖成因、误会成因、情感动机或阵营目标。复盘必须逐题对应证据，不以主观情感态度判错。
 6. 结局：locked_ending 写完整且唯一的既定结局，ending_style 选择 resolved/open/bittersweet；开放式只允许未来余韵留白，核心真相与本次事件结局必须明确。情感遗憾可以来自错过、离别与未说出口的话，不靠强行死亡煽情；欢乐本无沉重悲剧。表决影响玩家理解的评价，不改变结局；角色最终去向写入底稿。
 7. 机制阵营本专用 mechanics：预先确定全部角色的阵营、技能的代价/次数、起始筹码、公开回合规则、胜负条件和 fixed_result。固定阵营结局必须能按公开规则与既定事件推导；玩家可选的协商与行动只影响个人信息/任务表现，不能暗改筹码、临时改判或用隐藏新规则硬凑结局。其他类型 mechanics 填 null，不强塞阵营玩法。
 8. event_kind 为 murder 或 nonlethal；欢乐本和情感本必须 nonlethal，当前事件无人死亡，不设凶手、不安排投凶。其他类型按需要选择，不能把所有悬念都写成命案。所有公开内容（含标题、任务、身份公开介绍）不泄露 DM 底稿；玩家专属秘密仅含该角色有理由知道的信息，若玩家是凶手，应告知其本人真实所为。
@@ -1313,7 +1313,7 @@ characters 数组恰好包含 {npcCount} 名 AI 角色，不能把玩家重复�
 你必须且只能输出严格的 JSON，格式为：
 {"script_name":"符合类型的剧本名","event_kind":"murder/nonlethal","storyline":"公开背景，中文3-5句，不剧透","player_script":{"role_title":"抽定的身份方向与具体身份","character_name":"唯一英文名","personal_script":"个人背景与核心事件的关系","secret":"玩家已知秘密","personal_task":"专属任务"},"characters":[{"name":"NPC英文名","role":"公开人设","secret":"秘密","agenda":"短期和长期目标","personality":"性格与行为","voice":"语气特征","known_facts":["亲历信息"],"lie_logic":"隐瞒和辩解逻辑","reveal_condition":"揭示条件","arc":"预设成长与最终去向"}],"tasks":["调查目标","核对目标","提交判断"],"task_criteria":[{"task_id":1,"condition":"查看任意两处资料"},{"task_id":2,"condition":"向两位角色核实信息并提出一次解释"},{"task_id":3,"condition":"提交最终判断及一条理由"}],"truth":"完整真相、因果、诡计或误会机制、证据解释与误导排除","timeline":[{"time":"时点","actor":"行动者","event":"行动","cause":"原因","effect":"后果"}],"relationships":[{"from":"角色名","to":"角色名","public_relation":"公开关系","hidden_relation":"隐情"}],"acts":[{"act":1,"title":"开端","trigger":"固定触发条件","event":"本幕固定事件","clue_ids":["C1"],"character_beats":"角色互动与转折"},{"act":2,"title":"发展","trigger":"固定触发条件","event":"冲突升级","clue_ids":["C2"],"character_beats":"转折"},{"act":3,"title":"收束","trigger":"表决后","event":"既定揭示","clue_ids":["C3"],"character_beats":"去向"}],"clues":[{"id":"C1","act":1,"source":"搜索地点/物件/角色","discovery":"可观察内容","meaning":"真实含义","links":["C2"],"kind":"evidence/red_herring","resolution":"验证或排除方法"}],"core_questions":[{"id":"Q1","question":"核心问题","answer":"锁定答案","supporting_clue_ids":["C1","C2"],"direction_hint":"不揭晓答案的方向提示"}],"ending_style":"resolved/open/bittersweet","locked_ending":"唯一既定结局全文","mechanics":null,"core_vocab":[]}
 机制阵营本用以下对象替换 mechanics 的 null：{"factions":[{"id":"F1","name":"阵营名","members":["角色名"],"goal":"固定目标"}],"skills":[{"owner":"角色名","effect":"效果","cost":"代价","limit":"次数上限"}],"resources":[{"owner":"角色名","amount":3}],"round_rules":"公开行动顺序、结算方法和固定事件","win_conditions":"公开胜负条件","fixed_result":"与locked_ending一致且可按规则复算的阵营结果"}。
-示例数组仅示意结构，必须按本局人数、三幕和复杂度扩展，不得只照抄一条。输出前检查人数、名称引用、时间线、证据可解性、类型与结局一致性。
+示例数组仅示意结构，必须按本局人数、三幕和复杂度扩展，不得只照抄一条。角色的agenda、personality、voice、lie_logic、reveal_condition、arc全部写成短字符串，不另套对象；known_facts是字符串数组。关系名称必须逐字使用character_name或name，线索引用必须逐字使用id。direction_hint只写比较线索的方法，不出现角色姓名或答案。输出前检查人数、名称引用、时间线、证据可解性、类型与结局一致性。
 绝对不要输出 JSON 之外的任何文字。`;
 
 const PROMPT_GENERATE_DAILY_PLAN = `你是英语生活场景关卡设计师。请根据玩家选择的模式「{dailyMode}」、学习目标「日常场景交涉」、语言等级「{dailyLevel}」、学习板块「{blockName}」、场景「{sceneName}」和故事氛围「{dailyMood}」，设计一个可互动的英语情境关卡。
@@ -1563,7 +1563,7 @@ const SCRIPT_ROLE_POOLS = {
   "机制阵营本": ["阵营领袖", "卧底", "中立博弈者", "任务执行者"]
 };
 const SCRIPT_STRUCTURE_RULES = {
-  "简单模式": "短篇单主线，4条线索，1-2个核心问题，最多1条误导；不依赖生僻专业知识。",
+  "简单模式": "短篇单主线，4条线索，1个核心问题（可综合谁、原因与经过），最多1条误导；至少两条不同来源的证据在前两幕可获得，不依赖生僻专业知识。",
   "困难模式": "主线与2条短支线交叉，6条线索，2-3个核心问题，1-2条可排除误导。",
   "地狱模式": "精简多线汇入同一真相，8条线索，3-4个核心问题，1-2条可排除误导；增加交叉验证，不靠拖长篇幅增加难度。"
 };
@@ -1575,13 +1575,68 @@ function randomScriptRole() {
 /* 仅在开局前规范格式、重建冗余索引；不改变线索内容、实际幕次或真相。 */
 function normalizeScriptPlanReferences(d) {
   if (!d || typeof d !== "object" || Array.isArray(d)) return d;
+  // 仅转换已有信息的表达格式，不补写人物、证据或剧情事实。
+  const asText = value => {
+    if (typeof value === "string") return value.trim();
+    if (Array.isArray(value) && value.every(v => typeof v === "string")) return value.map(v => v.trim()).filter(Boolean).join("；");
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      const entries = Object.entries(value);
+      if (entries.length && entries.every(([, v]) => typeof v === "string")) return entries.map(([k, v]) => k + "：" + v.trim()).filter(v => !v.endsWith("：")).join("；");
+    }
+    return value;
+  };
+  const textFields = (item, fields) => {
+    if (item && typeof item === "object") for (const key of fields) if (key in item) item[key] = asText(item[key]);
+  };
+  textFields(d.player_script, ["role_title", "character_name", "personal_script", "secret", "personal_task"]);
+  const chars = Array.isArray(d.characters) ? d.characters : [];
+  for (const c of chars) {
+    textFields(c, ["name", "role", "secret", "agenda", "personality", "voice", "lie_logic", "reveal_condition", "arc"]);
+    if (c && typeof c.known_facts === "string" && c.known_facts.trim()) c.known_facts = [c.known_facts.trim()];
+  }
+  const names = [d.player_script && d.player_script.character_name, ...chars.map(c => c && c.name)].filter(n => typeof n === "string" && n.trim());
+  const nameMap = new Map();
+  for (const name of names) {
+    const key = name.trim().toLowerCase();
+    nameMap.set(key, nameMap.has(key) ? null : name);
+  }
+  const nameRef = value => typeof value === "string" ? nameMap.get(value.trim().toLowerCase()) || value.trim() : value;
+  for (const r of (Array.isArray(d.relationships) ? d.relationships : [])) {
+    if (!r || typeof r !== "object") continue;
+    r.from = nameRef(r.from); r.to = nameRef(r.to);
+  }
+  if (d.mechanics && typeof d.mechanics === "object") {
+    for (const f of (Array.isArray(d.mechanics.factions) ? d.mechanics.factions : [])) if (f && Array.isArray(f.members)) f.members = f.members.map(nameRef);
+    for (const key of ["skills", "resources"]) for (const r of (Array.isArray(d.mechanics[key]) ? d.mechanics[key] : [])) if (r && typeof r === "object") r.owner = nameRef(r.owner);
+  } else if (scriptInfo.genre !== "机制阵营本" && d.mechanics === undefined) d.mechanics = null;
+  // 提示不是剧情事实：存在剧透风险时用不含答案、人物身份的比较提示替换。
+  for (const q of (Array.isArray(d.core_questions) ? d.core_questions : [])) {
+    if (!q || typeof q.direction_hint !== "string") continue;
+    const hint = q.direction_hint.toLowerCase();
+    if ((typeof q.answer === "string" && q.answer.trim() && hint.includes(q.answer.trim().toLowerCase())) || names.some(n => hint.includes(n.toLowerCase()))) {
+      q.direction_hint = "比较已经取得的线索，核对时间顺序、内容差异和相互印证之处。";
+    }
+  }
   if (Array.isArray(d.task_criteria)) {
     for (const c of d.task_criteria) if (c && typeof c.task_id === "string" && /^[123]$/.test(c.task_id.trim())) c.task_id = Number(c.task_id.trim());
   }
   const normalizeAct = item => {
     if (item && typeof item.act === "string" && /^[123]$/.test(item.act.trim())) item.act = Number(item.act.trim());
   };
-  if (Array.isArray(d.clues)) d.clues.forEach(normalizeAct);
+  if (Array.isArray(d.clues)) {
+    d.clues.forEach(normalizeAct);
+    const ids = new Map();
+    for (const c of d.clues) {
+      if (!c || typeof c.id !== "string") continue;
+      c.id = c.id.trim();
+      const key = c.id.toLowerCase();
+      ids.set(key, ids.has(key) ? null : c.id);
+      if (typeof c.kind === "string") c.kind = c.kind.trim().toLowerCase();
+    }
+    const normalizeIds = refs => Array.isArray(refs) ? refs.map(id => typeof id === "string" ? ids.get(id.trim().toLowerCase()) || id.trim() : id) : refs;
+    for (const c of d.clues) if (c && typeof c === "object") c.links = normalizeIds(c.links);
+    for (const q of (Array.isArray(d.core_questions) ? d.core_questions : [])) if (q && typeof q === "object") q.supporting_clue_ids = normalizeIds(q.supporting_clue_ids);
+  }
   if (!Array.isArray(d.acts)) return d;
   d.acts.forEach(normalizeAct);
   // 无明确所属幕的线索必须由编剧修复，不能由前端猜测或提前发放。
@@ -1609,8 +1664,8 @@ function validateScriptPlan(d) {
   need(d.player_script, ["role_title", "character_name", "personal_script", "secret", "personal_task"], "玩家角色本");
   const chars = Array.isArray(d.characters) ? d.characters : [];
   if (chars.length !== npcCount()) errors.push("AI角色必须恰好" + npcCount() + "人，不含玩家与DM");
-  for (const c of chars) {
-    need(c, ["name", "role", "secret", "agenda", "personality", "voice", "lie_logic", "reveal_condition", "arc"], "AI角色");
+  for (const [i, c] of chars.entries()) {
+    need(c, ["name", "role", "secret", "agenda", "personality", "voice", "lie_logic", "reveal_condition", "arc"], "AI角色第" + (i + 1) + "项");
     if (!Array.isArray(c && c.known_facts) || !c.known_facts.length || !c.known_facts.every(textOK)) errors.push("角色缺少known_facts");
   }
   const names = [d.player_script && d.player_script.character_name, ...chars.map(c => c && c.name)].filter(textOK);
@@ -1622,8 +1677,8 @@ function validateScriptPlan(d) {
   if (clues.length < minClues) errors.push("至少需要" + minClues + "条预写线索");
   const clueIds = new Set(clues.map(c => c && c.id).filter(textOK));
   if (clueIds.size !== clues.length) errors.push("线索ID缺失或重复");
-  for (const c of clues) {
-    need(c, ["id", "source", "discovery", "meaning", "resolution"], "线索");
+  for (const [i, c] of clues.entries()) {
+    need(c, ["id", "source", "discovery", "meaning", "resolution"], "线索第" + (i + 1) + "项");
     if (![1, 2, 3].includes(c && c.act) || !["evidence", "red_herring"].includes(c && c.kind)) errors.push("线索幕次或类型无效");
     if (!Array.isArray(c && c.links) || c.links.some(id => !clueIds.has(id) || id === c.id)) errors.push("线索links引用无效");
   }
@@ -1631,8 +1686,8 @@ function validateScriptPlan(d) {
   if (redCount > (scriptInfo.challenge === "简单模式" ? 1 : 2) || (scriptInfo.challenge !== "简单模式" && redCount < 1)) errors.push("误导线索数量不符合难度");
   const acts = Array.isArray(d.acts) ? d.acts : [];
   if (acts.length !== 3 || acts.some((a, i) => !a || a.act !== i + 1)) errors.push("必须按顺序预写三幕");
-  for (const a of acts) {
-    need(a, ["title", "trigger", "event", "character_beats"], "分幕");
+  for (const [i, a] of acts.entries()) {
+    need(a, ["title", "trigger", "event", "character_beats"], "分幕第" + (i + 1) + "项");
     if (!Array.isArray(a && a.clue_ids) || a.clue_ids.some(id => !clueIds.has(id) || !clues.some(c => c && c.id === id && c.act === a.act))) errors.push("分幕线索引用缺失或幕次不一致");
   }
   if (clues.some(c => c && !acts.some(a => a && a.act === c.act && Array.isArray(a.clue_ids) && a.clue_ids.includes(c.id)))) errors.push("每条线索都必须分配到对应幕");
@@ -1640,11 +1695,20 @@ function validateScriptPlan(d) {
   const minQuestions = { "简单模式": 1, "困难模式": 2, "地狱模式": 3 }[scriptInfo.challenge] || 1;
   if (questions.length < minQuestions || questions.length > minQuestions + 1) errors.push("核心问题数量不符合难度");
   if (new Set(questions.map(q => q && q.id).filter(textOK)).size !== questions.length) errors.push("核心问题ID缺失或重复");
-  for (const q of questions) {
-    need(q, ["id", "question", "answer", "direction_hint"], "核心问题");
+  for (const [i, q] of questions.entries()) {
+    need(q, ["id", "question", "answer", "direction_hint"], "核心问题第" + (i + 1) + "项");
     const ids = q && q.supporting_clue_ids;
-    const evidence = Array.isArray(ids) ? clues.filter(c => c && ids.includes(c.id) && c.kind === "evidence" && c.act < 3) : [];
-    if (!Array.isArray(ids) || ids.some(id => !clueIds.has(id)) || evidence.length < 2 || new Set(evidence.map(c => c.source)).size < 2) errors.push("核心问题须有至少两条表决前可得、独立来源的有效证据");
+    const label = "核心问题第" + (i + 1) + "项(" + (q && q.id || "无ID") + ")";
+    const evidence = Array.isArray(ids) ? clues.filter(c => c && ids.includes(c.id) && c.kind === "evidence" && [1, 2].includes(c.act)) : [];
+    if (!Array.isArray(ids)) errors.push(label + "缺少支持证据ID数组supporting_clue_ids");
+    else {
+      const unknown = ids.filter(id => !clueIds.has(id));
+      if (unknown.length) errors.push(label + "支持证据引用不存在：" + unknown.join("、"));
+      const unavailable = clues.filter(c => c && ids.includes(c.id) && (c.kind !== "evidence" || ![1, 2].includes(c.act)));
+      if (evidence.length < 2) errors.push(label + "只有" + evidence.length + "条有效表决前证据，需要至少2条不同来源的kind=evidence且act=1或2的线索" +
+        (unavailable.length ? "；不可充数的引用：" + unavailable.map(c => c.id + "(kind=" + c.kind + ",act=" + c.act + ")").join("、") : ""));
+      if (evidence.length >= 2 && new Set(evidence.map(c => String(c.source || "").trim().toLowerCase())).size < 2) errors.push(label + "支持证据来源相同，需要两个独立来源");
+    }
     if (textOK(q && q.direction_hint) && (q.direction_hint.includes(q.answer) || chars.some(c => textOK(c && c.name) && q.direction_hint.toLowerCase().includes(c.name.toLowerCase())))) errors.push("方向提示不能包含答案或NPC姓名");
   }
   if (!Array.isArray(d.timeline) || d.timeline.length < 3) errors.push("缺少完整因果时间线");
@@ -1656,7 +1720,7 @@ function validateScriptPlan(d) {
     if (!r || !hasName(r.from) || !hasName(r.to) || r.from === r.to) errors.push("关系必须引用不同的本局角色");
     else { neighbors.get(r.from).add(r.to); neighbors.get(r.to).add(r.from); }
   }
-  if (names.some(n => neighbors.get(n).size < 2)) errors.push("每名角色（含玩家）须关联至少两人");
+  for (const n of names) if (neighbors.get(n).size < 2) errors.push("每名角色（含玩家）须关联至少两人：" + n + "目前只关联" + neighbors.get(n).size + "人，请补全已有设定中的直接关系");
   if (scriptInfo.genre === "机制阵营本") {
     const m = d.mechanics;
     need(m, ["round_rules", "win_conditions", "fixed_result"], "机制规则");
@@ -1687,20 +1751,110 @@ function freezeScriptPlan(value) {
   return value;
 }
 
-/* 只在开局前修复一次；未通过校验则停在配置页，绝不带病开局。 */
+function scriptPlanFailureSummary(errors) {
+  const labels = [];
+  const add = label => { if (!labels.includes(label)) labels.push(label); };
+  for (const error of errors) {
+    if (/JSON/.test(error)) add("模型返回格式不完整");
+    else if (/核心问题|证据/.test(error)) add("关键问题的证据链不完整");
+    else if (/方向提示/.test(error)) add("提示内容需要重新整理");
+    else if (/线索|误导/.test(error)) add("线索数量或关联不完整");
+    else if (/关系|关联/.test(error)) add("人物关系未连接完整");
+    else if (/角色|NPC|名称/.test(error)) add("角色信息或人数不完整");
+    else if (/任务/.test(error)) add("任务完成条件不完整");
+    else if (/三幕|分幕|时间线/.test(error)) add("剧情阶段或时间线不完整");
+    else if (/mechanics|阵营|机制|筹码|技能/.test(error)) add("玩法规则不完整");
+    else add("故事背景或结局信息不完整");
+  }
+  return labels.slice(0, 3).join("；");
+}
+
+/* 对有完整底稿的局部校验错误，只允许模型补写对应顶层字段。 */
+function scriptPlanRepairFields(errors, d) {
+  if (!Array.isArray(errors) || !errors.length || !d) return null;
+  const fields = new Set();
+  for (const error of errors) {
+    if (/^每名角色（含玩家）须关联|^关系/.test(error)) fields.add("relationships");
+    else if (/^核心问题|^方向提示/.test(error)) fields.add("core_questions");
+    else if (/线索|误导/.test(error)) fields.add("clues");
+    else return null;
+  }
+  if (!fields.size) return null;
+  // 问题引用的现有线索不足时，允许同时重写线索与问题；否则只修问题索引。
+  if (fields.has("core_questions")) {
+    const eligible = (Array.isArray(d.clues) ? d.clues : []).filter(c => c && c.kind === "evidence" && [1, 2].includes(c.act));
+    const independentSources = new Set(eligible.map(c => String(c.source || "").trim().toLowerCase()).filter(Boolean));
+    if (independentSources.size < 2) fields.add("clues");
+  }
+  return [...fields];
+}
+
+function applyScriptPlanRepair(base, raw, allowedFields) {
+  let patch;
+  try { patch = parseModelJson(raw); } catch (_) { return null; }
+  if (!patch || typeof patch !== "object" || Array.isArray(patch) || Object.keys(patch).length !== 1 || !patch.updates || typeof patch.updates !== "object" || Array.isArray(patch.updates)) return null;
+  const updates = patch.updates;
+  const keys = Object.keys(updates);
+  if (!keys.length || keys.some(key => !allowedFields.includes(key))) return null;
+  for (const key of keys) if (!Array.isArray(updates[key])) return null;
+  const merged = JSON.parse(JSON.stringify(base));
+  for (const key of keys) merged[key] = updates[key];
+  return normalizeScriptPlanReferences(merged);
+}
+
+/* 开局前最多校对两次；格式问题本地处理，只有缺少剧情信息才请编剧修复。 */
 async function generateValidatedScript(prompt) {
-  const request = [{ role: "user", content: prompt }];
-  for (let attempt = 0; attempt < 2; attempt++) {
-    const raw = await callLLM(request, null);
+  let request = [{ role: "user", content: prompt }];
+  let currentData = null;
+  let repairFields = null;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    let raw = "", incomplete = false;
+    try {
+      raw = await callLLM(request, null, { temperature: 0.4, maxTokens: 8192 });
+    } catch (error) {
+      if (error.code !== "MODEL_OUTPUT_LENGTH") throw error;
+      incomplete = true;
+      raw = error.partialText || "";
+    }
     let data = null;
-    try { data = normalizeScriptPlanReferences(parseModelJson(raw)); } catch (_) {}
-    const errors = validateScriptPlan(data);
+    if (!incomplete) {
+      if (repairFields && currentData) data = applyScriptPlanRepair(currentData, raw, repairFields);
+      else try { data = normalizeScriptPlanReferences(parseModelJson(raw)); } catch (_) {}
+    }
+    if (!data && repairFields && currentData && !incomplete) data = currentData;
+    const errors = incomplete ? ["模型输出达到长度上限，JSON底稿被截断"] : validateScriptPlan(data);
     if (!errors.length) return data;
     console.warn("[剧本校对]", errors);
-    if (attempt === 1) throw new Error("剧本自动校对后仍有信息缺漏，请再次点击「生成剧本」。");
-    if ($("planning-status")) $("planning-status").textContent = "正在校对线索与任务，请稍候……";
-    request.push({ role: "assistant", content: raw });
-    request.push({ role: "user", content: "尚未开局。请修复以下问题，返回完整JSON底稿，保留原设定并同步所有引用；不得省略字段：" + errors.join("；") });
+    if (attempt === 2) {
+      const failure = new Error(incomplete
+        ? "模型多次输出到一半达到长度上限，精简重写后仍未完成。请稍后重试。"
+        : "剧本自动校对后仍未通过：" + scriptPlanFailureSummary(errors) + "。请重新生成。");
+      failure.validationErrors = errors;
+      throw failure;
+    }
+    currentData = data;
+    repairFields = scriptPlanRepairFields(errors, data);
+    if ($("planning-status")) $("planning-status").textContent = incomplete
+      ? "故事输出过长，正在精简重写……"
+      : repairFields
+        ? "正在补全人物关系与证据链（" + (attempt + 1) + "/2）……"
+        : "正在校对角色、线索与任务（" + (attempt + 1) + "/2）……";
+    // 只携带最近一稿，避免每次修复都叠加整份长底稿。
+    const contextDraft = data ? JSON.stringify(data) : raw;
+    const repairInstruction = repairFields
+      ? "尚未开局。只返回JSON补丁，格式为{\"updates\":{\"字段名\": [...]}}，updates只允许包含这些顶层字段：" + repairFields.join("、") +
+        "。仅修复这些字段并保留其他全部内容，尤其不得改动truth、locked_ending、人物设定和线索真实内容；不要输出完整剧本、解释或Markdown。具体问题：" + errors.join("；") +
+        (repairFields.includes("relationships") ? "。关系须引用现有角色，补上真实、符合各自secret/agenda的直接关系，使每人至少关联两人，不要用虚构角色凑数。" : "") +
+        (repairFields.includes("core_questions") ? "。每个问题须关联至少两条现有的表决前evidence线索，来源不同；direction_hint不得透露答案或角色姓名。" : "") +
+        (repairFields.includes("clues") ? "。只补足证据链所必需的线索，保持与固定真相和剧情一致，维护有效ID、幕次、来源及交叉引用。" : "")
+      : "尚未开局。请修复以下问题，返回完整JSON底稿，保留原设定并同步所有引用；不得省略字段：" + errors.join("；") +
+        "。每个叙述字段只写必要短句，core_vocab保持[]，不要预演对话或输出解释。提示只比较已获得的线索，不写答案和角色姓名。" +
+        (incomplete || !data ? "上一稿格式未完成，请从头输出一份更精简的完整JSON，不要接着残片续写。" : "");
+    request = [
+      { role: "user", content: prompt },
+      { role: "assistant", content: contextDraft },
+      { role: "user", content: repairInstruction }
+    ];
   }
 }
 
@@ -2828,7 +2982,7 @@ async function detectBackend() {
  * onChunk(partial)：增量文本回调（流式为真实增量；非流式为前端逐字动画）。
  * 返回完整文本。
  */
-async function callLLM(msgs, onChunk) {
+async function callLLM(msgs, onChunk, options = {}) {
   let url, headers, payload;
   if (backendMode) {
     /* 后端代理模式：密钥在服务器端 config.json，前端零 Key */
@@ -2842,6 +2996,8 @@ async function callLLM(msgs, onChunk) {
     headers = { "Content-Type": "application/json", "Authorization": "Bearer " + apiKey };
     payload = { model, messages: msgs, stream: true, temperature: 0.8 };
   }
+  if (Number.isFinite(options.temperature)) payload.temperature = options.temperature;
+  if (Number.isInteger(options.maxTokens) && options.maxTokens > 0) payload.max_tokens = options.maxTokens;
 
   let res;
   try {
@@ -2857,7 +3013,7 @@ async function callLLM(msgs, onChunk) {
   }
 
   const contentType = res.headers.get("content-type") || "";
-  let full = "";
+  let full = "", finishReason = "";
 
   if (contentType.includes("event-stream") && res.body && res.body.getReader) {
     /* --- 真实 SSE 流式 --- */
@@ -2871,7 +3027,10 @@ async function callLLM(msgs, onChunk) {
       if (payload === "[DONE]") return;
       let j;
       try { j = JSON.parse(payload); } catch (_) { return; }
-      const delta = j.choices && j.choices[0] && (j.choices[0].delta || j.choices[0].message);
+      if (j.error) throw new Error("模型生成中断，请稍后重试。");
+      const choice = j.choices && j.choices[0];
+      if (choice && choice.finish_reason) finishReason = choice.finish_reason;
+      const delta = choice && (choice.delta || choice.message);
       const piece = delta && delta.content;
       if (typeof piece === "string") { full += piece; onChunk && onChunk(piece); }
     };
@@ -2889,9 +3048,17 @@ async function callLLM(msgs, onChunk) {
   } else {
     /* --- 非流式：前端逐字动画兜底 --- */
     const data = await res.json();
+    finishReason = data.choices && data.choices[0] && data.choices[0].finish_reason || "";
     full = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "";
     if (full && onChunk) await typewriter(full, onChunk, 18);
   }
+  if (finishReason === "length") {
+    const error = new Error("模型输出达到长度上限，内容尚未生成完整，请重试。");
+    error.code = "MODEL_OUTPUT_LENGTH";
+    error.partialText = full;
+    throw error;
+  }
+  if (finishReason === "content_filter") throw new Error("模型未能完成这次内容生成，请调整主题或背景后重试。");
   if (!full) throw new Error("模型未返回任何内容，请检查模型名称是否正确。");
   return full;
 }

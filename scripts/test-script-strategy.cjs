@@ -146,14 +146,150 @@ test('locked draft is immutable and all private design reaches DM without appear
   assert.ok(publicText.includes('PLAYER_SECRET'));
   assert.ok(!publicText.includes('HIDDEN_'), publicText);
 });
-test('bad JSON repairs once before lock; a repeated invalid draft fails instead of exposing raw text', async () => {
+test('bad JSON repairs before lock; repeated invalid drafts fail with a safe explanation', async () => {
   const { ctx, run } = environment(); const calls = [];
   ctx.callLLM = async request => { calls.push(structuredClone(request)); return calls.length === 1 ? 'not JSON' : JSON.stringify(fixture()); };
   const result = await run('generateValidatedScript("Create a plan")');
   assert.equal(result.truth, 'HIDDEN_TRUTH'); assert.equal(calls.length, 2);
   assert.equal(calls[1][2].role, 'user'); assert.match(calls[1][2].content, /尚未开局/);
-  ctx.callLLM = async () => '{}';
-  await assert.rejects(run('generateValidatedScript("Create a plan")'), /自动校对后仍有信息缺漏/);
+  let failedCalls = 0;
+  ctx.callLLM = async () => { failedCalls++; return '{}'; };
+  await assert.rejects(run('generateValidatedScript("Create a plan")'), error => {
+    assert.match(error.message, /剧本自动校对后仍未通过/);
+    assert.ok(error.validationErrors.length);
+    assert.doesNotMatch(error.message, /HIDDEN_|truth|locked_ending/);
+    return true;
+  });
+  assert.equal(failedCalls, 3);
+});
+
+test('equivalent field formats and name capitalization normalize without losing story facts', () => {
+  const { ctx, run } = environment(); ctx.plan = fixture();
+  ctx.plan.characters[0].agenda = { short_term: 'Recover the gift', long_term: 'Repair a friendship' };
+  ctx.plan.characters[0].known_facts = 'Saw the gift on the table';
+  ctx.plan.characters[1].personality = ['Quiet', 'Observant'];
+  ctx.plan.relationships[0].to = ' alice ';
+  delete ctx.plan.mechanics;
+  run('normalizeScriptPlanReferences(plan)');
+  assert.equal(run('validateScriptPlan(plan).join(";")'), '');
+  assert.match(ctx.plan.characters[0].agenda, /Recover the gift/);
+  assert.match(ctx.plan.characters[0].agenda, /Repair a friendship/);
+  assert.equal(ctx.plan.characters[0].known_facts[0], 'Saw the gift on the table');
+  assert.equal(ctx.plan.relationships[0].to, 'Alice');
+  assert.equal(ctx.plan.truth, 'HIDDEN_TRUTH');
+  assert.equal(ctx.plan.locked_ending, 'HIDDEN_ENDING');
+});
+
+test('hints mentioning a witness or answer receive a safe comparison hint without paid retries', async () => {
+  const { ctx, run } = environment();
+  for (const hint of ['比较 Alice 的说法与两份记录。', '答案是 HIDDEN_ANSWER。']) {
+    const plan = fixture(); plan.core_questions[0].direction_hint = hint;
+    let calls = 0;
+    ctx.callLLM = async () => { calls++; return JSON.stringify(plan); };
+    const result = await run('generateValidatedScript("Create a plan")');
+    assert.equal(calls, 1);
+    assert.doesNotMatch(result.core_questions[0].direction_hint, /Alice|HIDDEN_ANSWER/);
+    assert.equal(result.truth, plan.truth);
+    assert.deepEqual(JSON.parse(JSON.stringify(result.clues)), plan.clues);
+  }
+});
+
+test('normalization never invents missing facts or accepts ambiguous names and invalid evidence', () => {
+  const { ctx, run } = environment();
+  for (const damage of [p => delete p.truth, p => delete p.characters[0].secret,
+    p => p.characters[1].name = 'alice', p => p.core_questions[0].supporting_clue_ids = ['UNKNOWN'],
+    p => p.relationships[0].to = 'NotInCast', p => p.characters[0].agenda = { nested: { value: 'unknown' } }]) {
+    ctx.plan = fixture(); damage(ctx.plan);
+    run('normalizeScriptPlanReferences(plan)');
+    assert.ok(run('validateScriptPlan(plan).length') > 0, damage.toString());
+  }
+});
+
+test('two repairs are bounded and use only the latest draft with generation-specific options', async () => {
+  const { ctx, run } = environment(); const calls = [];
+  ctx.callLLM = async (request, chunk, options) => {
+    calls.push({ request: structuredClone(request), options });
+    const plan = fixture();
+    if (calls.length < 3) delete plan.truth;
+    return JSON.stringify(plan);
+  };
+  const result = await run('generateValidatedScript("Create a plan")');
+  assert.equal(calls.length, 3);
+  assert.equal(calls[2].request.length, 3);
+  assert.equal(calls[0].options.maxTokens, 8192);
+  assert.equal(calls[0].options.temperature, 0.4);
+  assert.equal(result.truth, 'HIDDEN_TRUTH');
+});
+
+test('focused relationship repair patches only missing edges and preserves the locked story', async () => {
+  const { ctx, run } = environment(); const calls = [];
+  const original = fixture();
+  original.relationships = original.relationships.filter(r => r.from !== 'Alice' && r.to !== 'Alice');
+  const snapshot = JSON.stringify({ truth: original.truth, ending: original.locked_ending, clues: original.clues, characters: original.characters });
+  ctx.callLLM = async request => {
+    calls.push(structuredClone(request));
+    if (calls.length === 1) return JSON.stringify(original);
+    return JSON.stringify({ updates: { relationships: fixture().relationships } });
+  };
+  const result = await run('generateValidatedScript("Create a plan")');
+  assert.equal(calls.length, 2);
+  assert.match(calls[1][2].content, /只返回JSON补丁/);
+  assert.match(calls[1][2].content, /relationships/);
+  assert.equal(JSON.stringify({ truth: result.truth, ending: result.locked_ending, clues: result.clues, characters: result.characters }), snapshot);
+  ctx.scriptResult = result;
+  assert.equal(run('validateScriptPlan(scriptResult).length'), 0);
+});
+
+test('focused evidence repair updates question references only when independent clues already exist', async () => {
+  const { ctx, run } = environment(); const calls = [];
+  const original = fixture(); original.core_questions[0].supporting_clue_ids = ['C1', 'UNKNOWN'];
+  ctx.callLLM = async request => {
+    calls.push(structuredClone(request));
+    if (calls.length === 1) return JSON.stringify(original);
+    return JSON.stringify({ updates: { core_questions: fixture().core_questions } });
+  };
+  const result = await run('generateValidatedScript("Create a plan")');
+  assert.equal(calls.length, 2);
+  assert.match(calls[1][2].content, /core_questions/);
+  assert.doesNotMatch(calls[1][2].content, /字段名.*clues/);
+  assert.deepEqual(JSON.parse(JSON.stringify(result.clues)), original.clues);
+  ctx.scriptResult = result;
+  assert.equal(run('validateScriptPlan(scriptResult).length'), 0);
+});
+
+test('focused patches reject unknown or malformed fields and still enforce full validation', async () => {
+  const { ctx, run } = environment(); let calls = 0;
+  const original = fixture(); original.relationships = [];
+  ctx.callLLM = async () => {
+    calls++;
+    if (calls === 1) return JSON.stringify(original);
+    return JSON.stringify({ updates: { truth: 'CHANGED', relationships: fixture().relationships } });
+  };
+  await assert.rejects(run('generateValidatedScript("Create a plan")'), error => {
+    assert.ok(error.validationErrors.some(e => /关系/.test(e)));
+    return true;
+  });
+  assert.equal(calls, 3);
+});
+
+test('length-limited drafts retry as compact full JSON; authentication errors do not retry', async () => {
+  const { ctx, run, elements } = environment(); let calls = 0;
+  ctx.callLLM = async request => {
+    calls++;
+    if (calls === 1) {
+      const error = new Error('limit'); error.code = 'MODEL_OUTPUT_LENGTH'; error.partialText = '{"script_name":"draft';
+      throw error;
+    }
+    assert.match(request[2].content, /从头输出.*完整JSON/);
+    return JSON.stringify(fixture());
+  };
+  const result = await run('generateValidatedScript("Create a plan")');
+  assert.equal(result.truth, 'HIDDEN_TRUTH'); assert.equal(calls, 2);
+  assert.match(elements.get('planning-status').textContent, /精简重写/);
+  calls = 0;
+  ctx.callLLM = async () => { calls++; throw new Error('接口返回错误 401'); };
+  await assert.rejects(run('generateValidatedScript("Create a plan")'), /401/);
+  assert.equal(calls, 1);
 });
 test('stale, missing and repeated act indexes are rebuilt without changing story facts or clue release times', async () => {
   const { ctx, run } = environment();
