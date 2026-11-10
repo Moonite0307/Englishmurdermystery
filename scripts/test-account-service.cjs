@@ -35,9 +35,11 @@ async function api(base, endpoint, method = 'GET', body, token) {
     ...(body ? { body: JSON.stringify(body) } : {}) });
   return { status: res.status, data: await res.json() };
 }
-async function browserPage({ service = '', server, legacy = false, brokenState = false, brokenLogin = false, saved = null } = {}) {
+async function browserPage({ service = '', server, legacy = false, brokenState = false, brokenLogin = false, saved = null,
+  configOverride = null, apiGate = null, mobile = false, blockedStorage = false } = {}) {
   const browser = await playwright.chromium.launch({ headless: true, channel: 'msedge' });
-  const page = await browser.newPage();
+  const page = await browser.newPage(mobile ? { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true,
+    userAgent: 'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/130.0.0.0 Mobile Safari/537.36 MicroMessenger/8.0' } : {});
   const requests = [], errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.route('**/*', async route => {
@@ -45,6 +47,7 @@ async function browserPage({ service = '', server, legacy = false, brokenState =
     requests.push({ url: url.href, method: req.method() });
     const isService = url.origin === service || (!service && server && url.origin === 'https://learner.example');
     if (isService && url.pathname.startsWith('/api/')) {
+      if (apiGate && !apiGate.ready) return route.abort();
       if (legacy && url.pathname === '/api/health') return route.fulfill({ status: 404, contentType: 'text/html', body: '<html>Not Found</html>' });
       if (brokenState && url.pathname === '/api/state' && req.headers().authorization) {
         return route.fulfill({ status: 502, contentType: 'text/html', body: '<html>Service unavailable</html>' });
@@ -61,7 +64,7 @@ async function browserPage({ service = '', server, legacy = false, brokenState =
     if (url.origin === 'https://learner.example' && url.pathname === '/Englishmurdermystery/index.html') {
       return route.fulfill({ contentType: 'text/html', body: html });
     }
-    if (url.pathname === '/Englishmurdermystery/site-config.json') return route.fulfill({ json: { accountApiBase: service } });
+    if (url.pathname === '/Englishmurdermystery/site-config.json') return route.fulfill({ json: configOverride || { accountApiBase: service } });
     const data = '/Englishmurdermystery/data/daily/';
     if (url.pathname.startsWith(data) && /^[A-Za-z0-9_.-]+$/.test(url.pathname.slice(data.length))) {
       const file = path.join(root, 'data/daily', url.pathname.slice(data.length));
@@ -73,6 +76,7 @@ async function browserPage({ service = '', server, legacy = false, brokenState =
     localStorage.setItem('wp_account_v1', JSON.stringify(saved));
     localStorage.setItem('account-test-sentinel', 'keep');
   }, saved);
+  if (blockedStorage) await page.addInitScript(() => Object.defineProperty(window, 'localStorage', { get() { throw new DOMException('Storage unavailable', 'SecurityError'); } }));
   await page.goto('https://learner.example/Englishmurdermystery/index.html');
   await page.waitForFunction(() => accountService.status !== 'checking' && EXAM_LEXICON.ready);
   return { browser, page, requests, errors };
@@ -120,7 +124,7 @@ test('Pages without backend: explains unavailability, never posts credentials, p
     await page.locator('#auth-password').fill('test-pass-123');
     await page.locator('#auth-password').press('Enter');
     assert.equal(await page.locator('#auth-submit').isDisabled(), true);
-    assert.match(await page.locator('#auth-msg').innerText(), /尚未连接账号服务/);
+    assert.match(await page.locator('#auth-msg').innerText(), /无法连接账号服务/);
     assert.match(await page.locator('#auth-local-help').innerText(), /启动.bat/);
     assert.ok(!requests.some(r => r.method === 'POST'));
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('wp_account_v1')).token), saved.token);
@@ -220,5 +224,64 @@ test('HTML from the login endpoint produces a readable message and does not crea
     await browser.close(); await server.stop();
     assert.equal(path.dirname(temp), os.tmpdir());
     fs.rmSync(temp, { recursive: true, force: true });
+  }
+});
+
+test('direct mobile link uses reachable fallback without referrer, and shared-database sessions survive endpoint changes', async () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'english-accounts-fallback-'));
+  const server = await startServer(temp);
+  const signup = await api(server.base, '/api/auth/register', 'POST', { username: 'mobile_user', password: 'test-pass-123' });
+  const saved = { token: signup.data.token, username: 'mobile_user', service: 'https://unreachable.example' };
+  const { browser, page, requests, errors } = await browserPage({ server, service: 'https://accounts.example', saved, mobile: true,
+    configOverride: { accountApiBase: 'https://unreachable.example', accountApiFallbacks: ['https://accounts.example'] } });
+  try {
+    await page.waitForFunction(() => authInfo && accountSyncReady && document.getElementById('account-bar').textContent.includes('mobile_user'));
+    assert.equal(await page.evaluate(() => document.referrer), '');
+    assert.equal(await page.evaluate(() => accountService.base), 'https://accounts.example');
+    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('wp_account_v1')).service), 'https://accounts.example');
+    assert.ok(!requests.some(r => r.method === 'POST' && r.url.startsWith('https://unreachable.example')));
+    assert.deepEqual(errors, []);
+  } finally {
+    await browser.close(); await server.stop(); assert.equal(path.dirname(temp), os.tmpdir()); fs.rmSync(temp, { recursive: true, force: true });
+  }
+});
+
+test('mobile embedded browser can register when persistent storage is unavailable', async () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'english-accounts-storage-'));
+  const server = await startServer(temp);
+  const { browser, page, errors } = await browserPage({ server, service: 'https://accounts.example', mobile: true, blockedStorage: true });
+  try {
+    await page.locator('#account-bar button').click();
+    await page.locator('#auth-switch').click();
+    await page.locator('#auth-username').fill('private_mobile');
+    await page.locator('#auth-password').fill('test-pass-123');
+    await page.locator('#auth-submit').click();
+    await page.waitForFunction(() => authInfo && accountSyncReady && document.getElementById('account-bar').textContent.includes('private_mobile'));
+    assert.deepEqual(errors, []);
+  } finally {
+    await browser.close(); await server.stop(); assert.equal(path.dirname(temp), os.tmpdir()); fs.rmSync(temp, { recursive: true, force: true });
+  }
+});
+
+test('same-origin mobile site reconnects after network recovery without refreshing or losing input', async () => {
+  const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'english-accounts-reconnect-'));
+  const server = await startServer(temp), gate = { ready: false };
+  const { browser, page, errors } = await browserPage({ server, mobile: true, apiGate: gate, configOverride: { sameOriginAccounts: true } });
+  try {
+    await page.locator('#account-bar button').click();
+    await page.waitForFunction(() => accountService.status === 'unavailable');
+    await page.locator('#auth-username').fill('keep_my_input');
+    await page.locator('#auth-password').fill('test-pass-123');
+    await page.locator('#auth-reconnect').waitFor({ state: 'visible' });
+    gate.ready = true;
+    await page.evaluate(() => window.dispatchEvent(new Event('online')));
+    await page.waitForFunction(() => cloudApiReady());
+    assert.equal(await page.locator('#auth-submit').isEnabled(), true);
+    assert.equal(await page.locator('#auth-username').inputValue(), 'keep_my_input');
+    assert.equal(await page.locator('#auth-password').inputValue(), 'test-pass-123');
+    assert.equal(await page.evaluate(() => accountService.base), '');
+    assert.deepEqual(errors, []);
+  } finally {
+    await browser.close(); await server.stop(); assert.equal(path.dirname(temp), os.tmpdir()); fs.rmSync(temp, { recursive: true, force: true });
   }
 });

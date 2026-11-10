@@ -4,6 +4,10 @@
 
 ## 已上线的网站
 
+手机优先使用 [直接学习入口](https://englishmurdermystery-mobile.pages.dev/)，不需要先打开 GitHub。该入口的网页和账号 API 同源，直接绑定现有 D1 数据库，不会创建另一套账号。
+GitHub 网页也优先连接这个 Pages 地址，保留旧 Worker 作为备用；并行探测可避免等待不可达线路的超时。
+网络恢复时自动重连，也可在登录窗口点击“重新连接账号服务”。无法写入浏览器持久存储时仍可完成本次登录，但关闭网页后可能需要重新登录。
+
 本仓库已配置免费账号服务，普通玩家直接打开 [GitHub Pages 网页](https://moonite0307.github.io/Englishmurdermystery/) 即可登录或注册，不需要自行部署。
 2026-11-09 已在真实免费服务上验收注册、登录和学习记录同步，并核对原账号的密码校验值与学习记录迁移一致。
 页面和账号服务都需要可访问对应域名的网络；本次线上验收使用代理连接，无法保证所有地区的直连网络均可访问。
@@ -45,6 +49,10 @@
 
 ## 开发说明
 
+- 手机入口构建：`node scripts/build-mobile-site.cjs`，只复制 HTML 与六个运行词库文件，账号文件、私密配置及部署凭据不会进入发布目录。
+- 手机入口部署：`npm run deploy:mobile`（先登录 Cloudflare，必要时在环境变量中配置代理）。发布到免费的 Pages 项目，复用原 D1 绑定。
+- 协作者更新网页后，除了推送 GitHub，还应执行手机入口部署，保持两个网页版本一致。账号服务不依赖浏览器的来源页面、第三方 Cookie 或先访问 GitHub。
+- 手机域名直连的实际可用性需在使用者网络验证；本次修复验证了当前网络无代理连接 Pages 账号接口，不能据此保证所有运营商与地区永远可达。
 - Worker：`cloudflare/worker.mjs`；表结构：`cloudflare/schema.sql`。
 - 开发配置：`cloudflare/wrangler.jsonc`。数据库 ID 是占位符，部署脚本会在私密目录写入真实配置。
 - 私密迁移工具：`scripts/export-cloudflare-accounts.cjs`。使用严格 INSERT，账号冲突不会覆盖密码或学习记录；大文本拆分为小 SQL 语句，保留引号、中文和 emoji。

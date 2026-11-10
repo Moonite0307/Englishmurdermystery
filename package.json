@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "deploy:accounts": "node scripts/deploy-free-accounts.cjs",
+    "deploy:mobile": "node scripts/deploy-mobile-site.cjs",
     "test:cloudflare": "node scripts/test-cloudflare-accounts.cjs"
   },
   "engines": {
