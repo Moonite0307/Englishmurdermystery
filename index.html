@@ -6,17 +6,22 @@
 <title>沉浸式 AI 剧本杀语言学习助手</title>
 <style>
   :root {
-    --bg: #0f1117;
-    --bg-panel: #161a23;
-    --bg-sidebar: #11141c;
-    --bg-bubble-npc: #1e2430;
+    --bg: #0d1118;
+    --bg-panel: #151b24;
+    --bg-sidebar: #10161f;
+    --bg-bubble-npc: #1b2430;
     --bg-bubble-user: #2f6fed;
-    --bg-input: #1c212c;
-    --border: #2a3040;
-    --text: #e8eaf0;
-    --text-dim: #9aa3b5;
+    --bg-input: #1a222d;
+    --border: #2c3542;
+    --text: #edf1f5;
+    --text-dim: #a3adbc;
     --accent: #4f8cff;
     --accent-soft: rgba(79, 140, 255, 0.12);
+    --case-gold: #d1ad68;
+    --case-on-accent: #171b22;
+    --case-gold-soft: rgba(209, 173, 104, 0.12);
+    --panel-shadow: 0 22px 70px rgba(0, 0, 0, 0.38);
+    --focus-ring: rgba(209, 173, 104, 0.72);
     --tip-yellow: #f0c948;
     --danger: #ef5350;
     --radius: 12px;
@@ -105,6 +110,9 @@
   @media (min-width: 720px) { .review-rate { font-size: 16px; padding: 17px 8px 13px; } }
   button { font-family: inherit; cursor: pointer; border: none; }
   input, select, textarea { font-family: inherit; }
+  button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--focus-ring); outline-offset: 3px;
+  }
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     padding: 12px 22px; border-radius: var(--radius);
@@ -126,25 +134,45 @@
     height: 100%; width: 100%;
     display: flex; align-items: center; justify-content: center;
     padding: 24px;
+    background: radial-gradient(ellipse at 50% 12%, rgba(209, 173, 104, 0.055), transparent 62%);
   }
   .config-card {
-    width: 100%; max-width: 760px; max-height: 92vh; overflow-y: auto;
+    width: 100%; max-width: 800px; max-height: 92vh; overflow-y: auto;
     background: var(--bg-panel); border: 1px solid var(--border);
-    border-radius: 20px; padding: 36px 34px;
-    box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+    border-radius: 20px; padding: 24px 36px;
+    box-shadow: var(--panel-shadow);
   }
   .config-step { animation: fadeIn .22s ease-out; }
   .wizard-kicker { color: var(--accent); text-transform: uppercase; font-size: 11px; letter-spacing: 2px; margin-bottom: 8px; }
   .wizard-title { text-align: center; margin-bottom: 8px; font-size: 25px; }
   .wizard-sub { text-align: center; color: var(--text-dim); font-size: 13px; line-height: 1.7; margin: 0 auto 24px; max-width: 580px; }
-  .wizard-progress { display: flex; justify-content: center; gap: 8px; margin: 0 auto 22px; }
+  .wizard-progress { display: flex; justify-content: center; gap: 8px; margin: 0 auto 16px; }
   .wizard-progress span { width: 30px; height: 4px; border-radius: 4px; background: var(--border); }
-  .wizard-progress span.active { background: var(--accent); }
-  .config-shortcuts { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
-  .config-top-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .wizard-progress span.active { background: var(--case-gold); }
+  .home-heading { margin: 0 auto 14px; }
+  .home-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; }
+  .home-brand-name { color: var(--case-gold); font-size: 14px; font-weight: 700; letter-spacing: 2px; }
+  .home-brand-divider { width: 1px; height: 15px; background: var(--border); }
+  .home-brand-note { color: var(--text-dim); font-size: 12px; letter-spacing: .3px; }
+  .home-heading .wizard-title { margin-bottom: 7px; font-size: clamp(24px, 3vw, 30px); line-height: 1.25; letter-spacing: .4px; }
+  .home-heading .wizard-sub { margin-bottom: 0; font-size: 14px; line-height: 1.65; text-wrap: balance; }
+  .config-shortcuts { display: flex; flex-direction: column; gap: 10px; margin: 0 0 18px; }
+  .home-account-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .home-account-label { color: var(--text-dim); font-size: 12px; }
+  .config-top-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .shortcut-link {
+    position: relative; min-width: 0; min-height: 48px; display: flex; align-items: center; justify-content: center; gap: 7px;
+    padding: 9px 14px; border: 1px solid var(--border); border-radius: 12px; background: rgba(255, 255, 255, 0.025);
+    color: var(--text-dim); font-size: 13px; transition: color .18s, border-color .18s, background .18s, transform .18s;
+  }
+  .shortcut-link:hover { color: var(--text); border-color: var(--case-gold); background: var(--case-gold-soft); transform: translateY(-1px); }
+  .shortcut-icon { flex: 0 0 auto; width: 20px; height: 20px; display: grid; place-items: center; border-radius: 6px; background: var(--case-gold-soft); color: var(--case-gold); font-size: 10px; line-height: 1; font-weight: 700; }
+  .shortcut-count { position: absolute; top: 5px; right: 6px; min-width: 18px; height: 18px; padding: 0 5px; display: grid; place-items: center; border-radius: 999px; background: var(--case-gold-soft); color: var(--case-gold); font-size: 10px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .shortcut-count[hidden] { display: none; }
   /* ===== 账号栏 ===== */
   .account-bar { display: flex; align-items: center; gap: 8px; }
-  .account-chip { font-size: 12px; color: var(--text-dim); padding: 4px 10px; border: 1px solid var(--border); border-radius: 20px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .account-bar .btn-ghost { min-height: 34px; padding: 6px 11px; background: transparent; }
+  .account-chip { font-size: 12px; color: var(--text-dim); padding: 5px 10px; border: 1px solid var(--border); border-radius: 20px; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .auth-modal { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; background: rgba(6, 10, 18, 0.72); padding: 20px; }
   .auth-modal.hidden { display: none; }
   .auth-frame { position: relative; width: 100%; max-width: 360px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; padding: 22px 22px 18px; box-shadow: 0 18px 50px rgba(0,0,0,.45); }
@@ -175,7 +203,17 @@
   .vocab-book-item .vbi-pos { color: var(--tip-yellow); font-size: 11px; font-style: italic; margin-left: 6px; }
   .vocab-book-item .vbi-mean { color: var(--text-dim); font-size: 12px; line-height: 1.55; margin-top: 2px; word-break: break-word; }
   .vocab-book-item .vbi-act { flex: 0 0 auto; color: var(--text-dim); font-size: 12px; }
-  .learning-review-tools { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+  .learning-review-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; margin: 0 0 14px; }
+  .learning-review-tools .btn-start-review { min-height: 44px; padding: 10px 20px; }
+  .learning-review-tools .btn-review-pdf { min-height: 42px; padding: 9px 14px; color: var(--text); }
+  .review-more { position: relative; margin-left: auto; }
+  .review-more-trigger { min-height: 42px; display: flex; align-items: center; gap: 9px; padding: 8px 13px; color: var(--text); list-style: none; cursor: pointer; }
+  .review-more-trigger::-webkit-details-marker { display: none; }
+  .review-more-trigger span { color: var(--text-dim); transition: transform .18s; }
+  .review-more[open] .review-more-trigger span { transform: rotate(180deg); }
+  .review-more-menu { position: absolute; top: calc(100% + 7px); right: 0; z-index: 30; min-width: 190px; display: grid; gap: 3px; padding: 6px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--panel-shadow); }
+  .review-more-menu button { min-height: 42px; padding: 8px 11px; border-radius: 8px; background: transparent; color: var(--text); text-align: left; font-size: 13px; }
+  .review-more-menu button:hover { background: var(--bg-input); }
   .learning-review-filters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
   .learning-review-filters .field { margin-bottom: 12px; }
   .learning-vocab-list { max-height: 48vh; overflow-y: auto; padding-right: 4px; }
@@ -186,7 +224,7 @@
   .learning-word-main .learning-pos { color: var(--tip-yellow); font-size: 11px; font-style: italic; margin-left: 6px; }
   .learning-word-main .learning-meaning, .learning-word-main .learning-meta { display: block; color: var(--text-dim); font-size: 12px; line-height: 1.55; margin-top: 3px; overflow-wrap: anywhere; }
   .learning-status { flex: 0 0 auto; white-space: nowrap; }
-  .learning-review-note { color: var(--text-dim); font-size: 11px; line-height: 1.6; margin: 0 0 12px; }
+  .learning-review-note { color: var(--text-dim); font-size: 13px; line-height: 1.65; margin: 0 0 14px; }
   .learning-status-sum { color: var(--text); font-size: 12.5px; font-weight: 600; line-height: 1.6; margin: 0 0 10px; }
   .learning-feedback { display: none; color: #69db7c; font-size: 12px; line-height: 1.5; margin: 0 0 12px; }
   .learning-feedback.show { display: block; }
@@ -241,25 +279,55 @@
     text-align: left; color: var(--text); background: var(--bg-input); border: 1px solid var(--border);
     border-radius: 13px; padding: 16px; transition: border-color .15s, background .15s, transform .15s;
   }
-  .choice-card:hover, .choice-card.selected { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
+  .choice-card:hover, .choice-card.selected { border-color: var(--case-gold); background: var(--case-gold-soft); transform: translateY(-1px); }
   .choice-card strong { display: block; font-size: 15px; margin-bottom: 6px; }
   .choice-card small { display: block; color: var(--text-dim); font-size: 12px; line-height: 1.6; }
   .choice-card .choice-icon { font-size: 22px; margin-bottom: 8px; }
   .choice-grid.compact { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .choice-grid.blocks { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #goal-options { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  #goal-options .choice-card { position: relative; min-height: 104px; display: flex; flex-direction: column; align-items: flex-start; padding: 11px 14px; border-radius: 14px; }
+  #goal-options .choice-card strong { padding-right: 24px; font-size: 15px; }
+  #goal-options .choice-card small { line-height: 1.45; }
+  #goal-options .choice-card .choice-icon { width: 30px; height: 20px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 2px; border: 1px solid var(--case-gold-soft); border-radius: 6px; background: var(--case-gold-soft); color: var(--case-gold); font: 700 10px/1 Consolas, monospace; letter-spacing: .08em; }
+  #goal-options .choice-card.selected { box-shadow: inset 0 0 0 1px var(--case-gold); }
+  #goal-options .choice-card.selected::after { content: "✓"; position: absolute; top: 11px; right: 12px; width: 19px; height: 19px; display: grid; place-items: center; border-radius: 50%; background: var(--case-gold); color: #151b24; font-size: 12px; font-weight: 800; }
   .scene-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
   .scene-choice { text-align: left; color: var(--text); background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
   .scene-choice:hover, .scene-choice.selected { border-color: var(--accent); background: var(--accent-soft); }
-  .wizard-actions { display: flex; align-items: center; gap: 10px; margin-top: 20px; }
+  .wizard-actions { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
   .wizard-actions .btn { margin-left: auto; }
+  .home-actions { position: sticky; bottom: -22px; z-index: 5; padding: 12px 0 2px; margin: 8px 0 -20px; background: linear-gradient(0deg, var(--bg-panel) 76%, transparent); }
+  .home-actions .btn { min-height: 46px; color: var(--case-on-accent); background: var(--case-gold); box-shadow: 0 8px 20px rgba(209, 173, 104, 0.2); }
   .wizard-note { color: var(--text-dim); font-size: 12px; line-height: 1.6; margin-top: 14px; }
   .target-pill { text-align: center; color: var(--text-dim); margin: 0 auto 16px; font-size: 12px; }
   @media (max-width: 620px) {
-    .config-card { padding: 25px 18px; }
+    .config-card { padding: 44px 18px 22px; }
     .choice-grid, .choice-grid.blocks { grid-template-columns: 1fr 1fr; }
     .choice-grid.compact, .scene-list { grid-template-columns: 1fr; }
     .learning-review-filters { grid-template-columns: 1fr; gap: 0; }
     .wizard-title { font-size: 21px; }
+    .config-shortcuts { gap: 8px; margin-bottom: 20px; }
+    .home-account-row { padding-right: 42px; padding-bottom: 8px; }
+    .config-top-actions { gap: 6px; }
+    .shortcut-link { min-height: 60px; flex-direction: column; gap: 4px; padding: 7px 5px; font-size: 11.5px; line-height: 1.25; }
+    .shortcut-icon { font-size: 10px; }
+    .shortcut-count { top: 4px; right: 4px; }
+    #goal-options .choice-card { min-height: 98px; padding: 10px 11px; }
+    #goal-options .choice-card strong { font-size: 14px; }
+    #goal-options .choice-card small { font-size: 12px; }
+    .home-heading { margin-bottom: 16px; }
+    .home-heading .wizard-title { font-size: 23px; }
+    .home-heading .wizard-sub { font-size: 13px; }
+    .learning-review-tools { display: flex; gap: 8px; }
+    .learning-review-tools .btn-start-review { flex: 1 0 100%; }
+    .review-more { margin-left: auto; }
+  }
+  @media (max-width: 360px) {
+    #goal-options { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .config-step, .choice-card, .shortcut-link, .review-more-trigger span { animation-duration: .01ms !important; transition-duration: .01ms !important; }
   }
   .app-title { text-align: center; margin-bottom: 6px; font-size: 26px; font-weight: 700; }
   .app-title .icon { margin-right: 6px; }
@@ -397,7 +465,7 @@
   }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: none;} }
   .vocab-list { flex: 1; overflow-y: auto; min-height: 0; }
-  .vocab-empty { font-size: 12px; color: var(--text-dim); padding: 8px 2px; }
+  .vocab-empty { font-size: 13px; line-height: 1.65; color: var(--text-dim); padding: 8px 2px; }
   .vocab-progress {
     height: 8px; border-radius: 4px; overflow: hidden;
     background: var(--bg-input); border: 1px solid var(--border);
@@ -682,12 +750,12 @@
   .theme-toggle {
     position: fixed; top: 16px; right: 16px; z-index: 120;
     width: 42px; height: 42px; border-radius: 50%;
-    background: var(--bg-panel); border: 1px solid var(--border);
-    font-size: 19px; cursor: pointer;
+    background: var(--bg-panel); border: 1px solid var(--case-gold); color: var(--case-gold);
+    font-family: Georgia, serif; font-size: 25px; line-height: 1; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    transition: filter .15s, border-color .15s;
+    transition: transform .18s, border-color .18s, background .18s;
   }
-  .theme-toggle:hover { border-color: var(--accent); filter: brightness(1.2); }
+  .theme-toggle:hover { border-color: var(--case-gold); background: var(--bg-panel); transform: rotate(-8deg); }
 
   /* NPC 说话人标签 & 头像 */
   .speaker-label { font-size: 12px; color: var(--text-dim); margin-bottom: 4px; letter-spacing: .5px; }
@@ -726,19 +794,25 @@
 
   /* ===== 浅色（白天）主题 ===== */
   body.light {
-    --bg: #eef1f5;
-    --bg-panel: #ffffff;
-    --bg-sidebar: #f4f6fa;
-    --bg-bubble-npc: #eaeef5;
+    --bg: #f2f0ea;
+    --bg-panel: #fffdf8;
+    --bg-sidebar: #f7f5ef;
+    --bg-bubble-npc: #e9ecf0;
     --bg-bubble-user: #2f6fed;
-    --bg-input: #f3f5f8;
-    --border: #d9dfe9;
-    --text: #1d2430;
-    --text-dim: #5b6575;
+    --bg-input: #f5f3ed;
+    --border: #ddd8cb;
+    --text: #252a31;
+    --text-dim: #59616d;
     --accent: #2f6fed;
     --accent-soft: rgba(47, 111, 237, 0.1);
+    --case-gold: #806126;
+    --case-on-accent: #ffffff;
+    --case-gold-soft: rgba(128, 97, 38, 0.11);
+    --panel-shadow: 0 18px 54px rgba(40, 40, 32, 0.12);
+    --focus-ring: rgba(47, 111, 237, 0.76);
   }
-  body.light .config-card, body.light .planning-card { box-shadow: 0 12px 40px rgba(30, 40, 70, 0.12); }
+  body.light .center-screen { background: radial-gradient(ellipse at 50% 12%, rgba(128, 97, 38, 0.045), transparent 62%); }
+  body.light .config-card, body.light .planning-card { box-shadow: var(--panel-shadow); }
   body.light .grammar-tip { color: #8a6a00; background: rgba(240, 201, 72, 0.14); }
   body.light .translation-box { color: #5b6575; background: rgba(0, 0, 0, 0.04); }
   body.light .task-goal-box { color: #5b6575; }
@@ -798,7 +872,7 @@
     .loading-title { letter-spacing: 0; text-align: center; padding: 0 12px; }
     .task-toast { margin-left: 0; }
     .vocab-popover { width: calc(100vw - 24px); }
-    .theme-toggle { top: 10px; right: 10px; width: 36px; height: 36px; font-size: 16px; }
+    .theme-toggle { top: 32px; right: 24px; width: 36px; height: 36px; font-size: 22px; }
   }
 
   /* ===== 结算画面 ===== */
@@ -851,33 +925,36 @@
 <body>
 
 <!-- 昼夜主题切换（全局） -->
-<button id="theme-toggle" class="theme-toggle" title="切换白天/黑夜模式">☀️</button>
+  <button id="theme-toggle" class="theme-toggle" title="切换白天/黑夜模式" aria-label="切换白天/黑夜模式">☼</button>
 
 <!-- ============ 状态一：CONFIG 配置面板 ============ -->
 <div id="panel-config" class="center-screen">
   <div class="config-card">
     <div class="wizard-progress" aria-label="学习流程"><span class="active"></span><span></span><span></span></div>
     <div class="config-shortcuts">
-      <div class="account-bar" id="account-bar"></div>
-      <div class="config-top-actions">
-        <button class="btn-ghost" id="btn-open-vocab-book">📗 生词本 <span id="vocab-book-count">0</span></button>
-        <button class="btn-ghost" id="btn-open-vocab-review">📚 我的词汇复习 <span id="learning-vocab-count">0</span></button>
-        <button class="btn-ghost" id="btn-open-script-history">📜 玩过的剧本 <span id="script-history-count">0</span></button>
-      </div>
+      <div class="home-account-row"><span class="home-account-label">账号</span><div class="account-bar" id="account-bar"></div></div>
+      <nav class="config-top-actions" aria-label="个人学习记录">
+        <button type="button" class="shortcut-link" id="btn-open-vocab-book"><span class="shortcut-icon" aria-hidden="true">生</span><span>生词本</span><span class="shortcut-count" id="vocab-book-count" hidden></span></button>
+        <button type="button" class="shortcut-link" id="btn-open-vocab-review"><span class="shortcut-icon" aria-hidden="true">复</span><span>我的词汇复习</span><span class="shortcut-count" id="learning-vocab-count" hidden></span></button>
+        <button type="button" class="shortcut-link" id="btn-open-script-history"><span class="shortcut-icon" aria-hidden="true">档</span><span>玩过的剧本</span><span class="shortcut-count" id="script-history-count" hidden></span></button>
+      </nav>
     </div>
     <section class="config-step" id="step-goal">
-      <h1 class="wizard-title">🎭 词狱英语学习</h1>
-      <p class="wizard-sub">先选本次学习目标，我们会据此安排关卡、对话难度和重点词汇。</p>
+      <header class="home-heading">
+        <div class="home-brand"><span class="home-brand-name">词狱</span><span class="home-brand-divider" aria-hidden="true"></span><span class="home-brand-note">沉浸式英语学习</span></div>
+        <h1 class="wizard-title">你今天想练什么？</h1>
+        <p class="wizard-sub">选择目标后，剧本难度与重点词汇会自动匹配。</p>
+      </header>
       <div class="choice-grid blocks" id="goal-options">
-        <button class="choice-card" data-goal="场景交涉"><span class="choice-icon">🌍</span><strong>日常场景交涉</strong><small>练习旅行、购物、就医、社交等真实生活沟通</small></button>
-        <button class="choice-card" data-goal="中考"><span class="choice-icon">📘</span><strong>中考英语</strong><small>围绕初中核心词汇与常见交际任务</small></button>
-        <button class="choice-card" data-goal="高考"><span class="choice-icon">🎓</span><strong>高考英语</strong><small>结合高中词汇和考试高频表达</small></button>
-        <button class="choice-card" data-goal="四级"><span class="choice-icon">📝</span><strong>大学英语四级</strong><small>练习四级常见词汇与沟通语境</small></button>
-        <button class="choice-card" data-goal="六级"><span class="choice-icon">📚</span><strong>大学英语六级</strong><small>拓展更复杂的表达和词汇</small></button>
-        <button class="choice-card" data-goal="考研"><span class="choice-icon">🔎</span><strong>考研英语</strong><small>结合阅读、论述和学术表达</small></button>
-        <button class="choice-card" data-goal="雅思/托福"><span class="choice-icon">✈️</span><strong>雅思 / 托福</strong><small>练习生活交流与学术场景表达</small></button>
+        <button class="choice-card" data-goal="场景交涉" aria-pressed="false"><span class="choice-icon">01</span><strong>日常场景交涉</strong><small>旅行、购物、就医与社交沟通</small></button>
+        <button class="choice-card" data-goal="中考" aria-pressed="false"><span class="choice-icon">02</span><strong>中考英语</strong><small>初中核心词汇与常见交际</small></button>
+        <button class="choice-card" data-goal="高考" aria-pressed="false"><span class="choice-icon">03</span><strong>高考英语</strong><small>高中词汇与考试高频表达</small></button>
+        <button class="choice-card" data-goal="四级" aria-pressed="false"><span class="choice-icon">04</span><strong>大学英语四级</strong><small>四级高频词汇与日常沟通</small></button>
+        <button class="choice-card" data-goal="六级" aria-pressed="false"><span class="choice-icon">05</span><strong>大学英语六级</strong><small>进阶词汇与复杂表达</small></button>
+        <button class="choice-card" data-goal="考研" aria-pressed="false"><span class="choice-icon">06</span><strong>考研英语</strong><small>阅读、论述与学术表达</small></button>
+        <button class="choice-card" data-goal="雅思/托福" aria-pressed="false"><span class="choice-icon">07</span><strong>雅思 / 托福</strong><small>生活交流与学术表达</small></button>
       </div>
-      <div class="wizard-actions"><button id="btn-goal-next" class="btn btn-start" disabled>下一步</button></div>
+      <div class="wizard-actions home-actions"><button id="btn-goal-next" class="btn btn-start" disabled>下一步</button></div>
     </section>
 
     <section class="config-step hidden" id="step-vocab-review">
@@ -892,10 +969,15 @@
       </div>
       <p class="learning-status-sum" id="learning-status-sum"></p>
       <div class="learning-review-tools">
-        <button class="btn-ghost" id="btn-start-review">开始复习</button>
-        <button class="btn-ghost" id="btn-export-learning">导出 PDF</button>
-        <button class="btn-ghost" id="btn-export-learning-json">导出备份</button>
-        <button class="btn-ghost" id="btn-import-learning">导入备份</button>
+        <button type="button" class="btn btn-start-review" id="btn-start-review">开始复习</button>
+        <button type="button" class="btn-ghost btn-review-pdf" id="btn-export-learning">导出 PDF</button>
+        <details class="review-more">
+          <summary class="btn-ghost review-more-trigger">更多 <span aria-hidden="true">⌄</span></summary>
+          <div class="review-more-menu">
+            <button type="button" id="btn-export-learning-json">导出备份</button>
+            <button type="button" id="btn-import-learning">导入备份</button>
+          </div>
+        </details>
         <input class="hidden" type="file" id="inp-import-learning" accept="application/json,.json">
       </div>
       <p class="learning-feedback" id="learning-feedback" aria-live="polite"></p>
@@ -3330,7 +3412,7 @@ if ("speechSynthesis" in window) speechSynthesis.getVoices();
 
 /* ================= 昼夜主题切换 ================= */
 function updateThemeIcon() {
-  $("theme-toggle").textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
+  $("theme-toggle").textContent = document.body.classList.contains("light") ? "☾" : "☼";
 }
 if (localStorage.getItem("script-kill-theme") === "light") document.body.classList.add("light");
 updateThemeIcon();
@@ -3978,8 +4060,15 @@ function renderVocabList() {
 
 /* 首页生词本入口：把局内收集的生词整表搬到开始页，点词直接看释义 */
 function renderVocabBookCount() {
-  const box = $("vocab-book-count");
-  if (box) box.textContent = "(" + vocabBook.size + ")";
+  renderShortcutCount("vocab-book-count", vocabBook.size);
+}
+
+function renderShortcutCount(id, value) {
+  const badge = $(id);
+  if (!badge) return;
+  const count = Math.max(0, Number(value) || 0);
+  badge.textContent = String(count);
+  badge.hidden = count === 0;
 }
 
 /* ================= 玩过的剧本：本地档案 ================= */
@@ -4014,8 +4103,7 @@ function saveScriptHistory() {
 }
 
 function renderScriptHistoryShortcut() {
-  const el = $("script-history-count");
-  if (el) el.textContent = "(" + scriptHistory.length + ")";
+  renderShortcutCount("script-history-count", scriptHistory.length);
 }
 
 function runKindLabel(info) {
@@ -4377,8 +4465,7 @@ function renderVocabBookPage() {
 }
 
 function renderLearningReviewShortcut() {
-  const count = $("learning-vocab-count");
-  if (count) count.textContent = "(" + learningVocab.size + ")";
+  renderShortcutCount("learning-vocab-count", learningVocab.size);
 }
 function setLearningFeedback(message, isError = false) {
   const notice = $("learning-feedback");
@@ -6399,6 +6486,17 @@ $("btn-open-vocab-review").addEventListener("click", () => {
   renderReviewQueueCount();
   showConfigStep("step-vocab-review");
 });
+document.querySelector(".review-more").addEventListener("toggle", event => {
+  const details = event.currentTarget;
+  if (!details.open) return;
+  requestAnimationFrame(() => {
+    const card = document.querySelector(".config-card");
+    const menu = details.querySelector(".review-more-menu");
+    if (!card || !menu) return;
+    const overflow = menu.getBoundingClientRect().bottom - card.getBoundingClientRect().bottom;
+    if (overflow > 0) card.scrollTop += overflow + 14;
+  });
+});
 $("btn-close-vocab-review").addEventListener("click", () => showConfigStep("step-goal"));
 /* 玩过的剧本 */
 $("btn-open-script-history").addEventListener("click", () => {
@@ -6456,7 +6554,11 @@ $("inp-import-learning").addEventListener("change", async event => {
 document.querySelectorAll("#goal-options .choice-card").forEach(button => {
   button.addEventListener("click", () => {
     selectedGoal = button.dataset.goal;
-    document.querySelectorAll("#goal-options .choice-card").forEach(el => el.classList.toggle("selected", el === button));
+    document.querySelectorAll("#goal-options .choice-card").forEach(el => {
+      const active = el === button;
+      el.classList.toggle("selected", active);
+      el.setAttribute("aria-pressed", String(active));
+    });
     $("btn-goal-next").disabled = false;
   });
 });
