@@ -1312,7 +1312,8 @@
       <span>把本机已有的记录合并进这个账号</span>
     </label>
     <p class="auth-msg" id="auth-msg" aria-live="polite"></p>
-    <p class="auth-sub hidden" id="auth-local-help">原先在这台电脑注册的账号，请双击项目中的“启动.bat”，在打开的本地网页登录。线上账号服务接通前，本页仍可学习并在本浏览器保存记录。</p>
+    <p class="auth-sub hidden" id="auth-local-help">网络暂时不可用时可稍后重连。原先在这台电脑注册的本地账号，也可双击“启动.bat”打开本地网页登录。</p>
+    <button class="btn-ghost auth-switch hidden" id="auth-reconnect" type="button">重新连接账号服务</button>
     <button class="btn auth-submit" id="auth-submit" type="button">登录</button>
     <button class="btn-ghost auth-switch" id="auth-switch" type="button">还没有账号？去注册</button>
   </div>
@@ -3414,11 +3415,11 @@ if ("speechSynthesis" in window) speechSynthesis.getVoices();
 function updateThemeIcon() {
   $("theme-toggle").textContent = document.body.classList.contains("light") ? "☾" : "☼";
 }
-if (localStorage.getItem("script-kill-theme") === "light") document.body.classList.add("light");
+try { if (localStorage.getItem("script-kill-theme") === "light") document.body.classList.add("light"); } catch (_) {}
 updateThemeIcon();
 $("theme-toggle").addEventListener("click", () => {
   document.body.classList.toggle("light");
-  localStorage.setItem("script-kill-theme", document.body.classList.contains("light") ? "light" : "dark");
+  try { localStorage.setItem("script-kill-theme", document.body.classList.contains("light") ? "light" : "dark"); } catch (_) {}
   updateThemeIcon();
 });
 /* 部分浏览器语音列表异步加载 */
@@ -6111,11 +6112,19 @@ let accountService = { status: "checking", base: "", message: "正在连接账�
 let accountServiceProbe = null;
 let authSubmitting = false;
 let accountSyncReady = false;
+let accountServiceCandidates = [];
 
 function cloudApiReady() { return accountService.status === "ready"; }
 
 function accountUnavailableMessage() {
-  return "此网页尚未连接账号服务，暂不能登录或注册。原账号仍保存在注册时使用的电脑上，本机学习记录也会保留。";
+  return "暂时无法连接账号服务，请检查网络后点击重新连接。你的账号和已保存的学习记录不会因此丢失。";
+}
+
+function cacheAuthInfo() {
+  try {
+    if (authInfo) localStorage.setItem(LS_AUTH, JSON.stringify(authInfo));
+    else localStorage.removeItem(LS_AUTH);
+  } catch (_) { /* 某些手机内置浏览器禁用持久存储，本次登录仍可在内存中使用。 */ }
 }
 
 async function fetchAccountJson(url, options = {}) {
@@ -6139,6 +6148,7 @@ function refreshAccountAvailability() {
   const button = $("auth-submit");
   button.disabled = authSubmitting || !cloudApiReady();
   $("auth-local-help").classList.toggle("hidden", cloudApiReady());
+  $("auth-reconnect").classList.toggle("hidden", accountService.status !== "unavailable");
   if (!$("auth-modal").classList.contains("hidden") && !authSubmitting) {
     setAuthMsg(cloudApiReady() ? "" : accountService.message);
   }
@@ -6153,30 +6163,37 @@ async function ensureAccountService(force = false) {
   accountServiceProbe = (async () => {
     try {
       if (location.protocol === "file:") throw new Error(accountUnavailableMessage());
-      let base = "";
       let config;
       try {
         const result = await fetchAccountJson(new URL("site-config.json", location.href).href);
         if (result.response.ok) config = result.data;
       } catch (_) { /* 旧版同源服务没有公开配置文件，仍可探测同源账号接口。 */ }
-      if (config && config.accountApiBase) {
-        const url = new URL(config.accountApiBase);
+      const addresses = config ? [config.accountApiBase, ...(Array.isArray(config.accountApiFallbacks) ? config.accountApiFallbacks : [])].filter(Boolean) : [];
+      const bases = addresses.map(address => {
+        const url = new URL(address);
         if (url.protocol !== "https:" || url.username || url.password || url.search || url.hash) {
           throw new Error("线上账号服务地址必须是 HTTPS 地址，请联系网站管理员修正配置。");
         }
-        base = url.href.replace(/\/+$/, "");
-      }
-      // 没有外部服务时，仅探测当前源；绝不从公开网页自动连接用户的 localhost。
-      let confirmed = false;
-      try {
-        const { response, data } = await fetchAccountJson(base + "/api/health");
-        confirmed = response.ok && data.service === "englishmurdermystery" && data.accounts === true;
-      } catch (_) { /* 兼容仍在运行的旧版账号服务。 */ }
-      if (!confirmed) {
+        return url.href.replace(/\/+$/, "");
+      });
+      // Pages 手机入口优先同源；外部线路并行探测，不等待不可达的 workers.dev 超时。
+      if (!bases.length || config.sameOriginAccounts) bases.unshift("");
+      accountServiceCandidates = [...new Set(bases)];
+      const probe = async base => {
+        try {
+          const { response, data } = await fetchAccountJson(base + "/api/health");
+          if (response.ok && data.service === "englishmurdermystery" && data.accounts === true) return base;
+        } catch (_) {}
         const { response, data } = await fetchAccountJson(base + "/api/state");
-        confirmed = response.status === 401 && data.error === "登录已失效，请重新登录";
-      }
-      if (!confirmed) throw new Error(accountUnavailableMessage());
+        if (response.status === 401 && data.error === "登录已失效，请重新登录") return base;
+        throw new Error(accountUnavailableMessage());
+      };
+      const base = await new Promise((resolve, reject) => {
+        let pending = accountServiceCandidates.length;
+        for (const candidate of accountServiceCandidates) probe(candidate).then(resolve, () => {
+          if (--pending === 0) reject(new Error(accountUnavailableMessage()));
+        });
+      });
       accountService = { status: "ready", base, message: "" };
       return true;
     } catch (error) {
@@ -6196,7 +6213,7 @@ async function accountRequest(path, options = {}) {
 function expireAccountSession() {
   authInfo = null;
   accountSyncReady = false;
-  localStorage.removeItem(LS_AUTH);
+  cacheAuthInfo();
   renderAccountBar();
 }
 
@@ -6339,7 +6356,7 @@ async function pullCloudState(mergeLocal) {
   const state = hasRemote ? mergeStateWithLocal(remote) : snapshotLocalState();
   applyStateToLocal(state);
   authInfo.username = data.username || authInfo.username;
-  localStorage.setItem(LS_AUTH, JSON.stringify(authInfo));
+  cacheAuthInfo();
   accountSyncReady = true;
   await pushCloudState();
 }
@@ -6412,7 +6429,7 @@ async function submitAuth() {
     if (typeof data.token !== "string" || !data.token) throw new Error("账号服务未返回有效登录凭据，请稍后重试。");
     accountSyncReady = false;
     authInfo = { token: data.token, username: data.username || username, service: accountService.base || location.origin };
-    localStorage.setItem(LS_AUTH, JSON.stringify(authInfo));
+    cacheAuthInfo();
     await pullCloudState($("auth-merge").checked);
     renderAccountBar();
     setAuthMsg("已登录：" + authInfo.username, true);
@@ -6430,7 +6447,7 @@ function signOut() {
   authInfo = null;
   accountSyncReady = false;
   clearTimeout(cloudSaveTimer);
-  localStorage.removeItem(LS_AUTH);
+  cacheAuthInfo();
   /* 换账号时不能把上一个人的记录带过去：本机缓存清空，重新登录同一账号会自动拉回 */
   applyStateToLocal({ campaign: { completed: {}, usedWords: [] }, vocabBook: [], learningVocab: [] });
   renderAccountBar();
@@ -6444,7 +6461,8 @@ async function restoreAuth() {
   try { saved = JSON.parse(localStorage.getItem(LS_AUTH) || "null"); } catch (_) {}
   if (!saved || !saved.token) { renderAccountBar(); return; }
   if (!await ensureAccountService()) { renderAccountBar(); return; }
-  if (saved.service && saved.service !== (accountService.base || location.origin)) { renderAccountBar(); return; }
+  const trustedServices = accountServiceCandidates.map(base => base || location.origin);
+  if (saved.service && !trustedServices.includes(saved.service)) { renderAccountBar(); return; }
   authInfo = saved;
   try {
     const { response: res, data } = await accountRequest("/api/state", { headers: { "Authorization": "Bearer " + authInfo.token } });
@@ -6455,6 +6473,8 @@ async function restoreAuth() {
     const hasRemote = Boolean(remote.campaign || remote.vocabBook || remote.learningVocab || remote.scriptHistory);
     if (hasRemote) applyStateToLocal(mergeStateWithLocal(remote));
     accountSyncReady = true;
+    authInfo.service = accountService.base || location.origin;
+    cacheAuthInfo();
   } catch (_) { /* 后端未启动：保留登录态展示，功能等后端可用后再生效 */ }
   renderAccountBar();
 }
@@ -6462,6 +6482,12 @@ async function restoreAuth() {
 $("auth-close").addEventListener("click", closeAuth);
 $("auth-switch").addEventListener("click", toggleAuthMode);
 $("auth-submit").addEventListener("click", submitAuth);
+$("auth-reconnect").addEventListener("click", async () => {
+  if (await ensureAccountService(true)) await restoreAuth();
+});
+window.addEventListener("online", () => {
+  if (accountService.status === "unavailable") ensureAccountService(true).then(ready => { if (ready) restoreAuth(); });
+});
 $("auth-modal").addEventListener("click", (e) => { if (e.target === $("auth-modal")) closeAuth(); });
 ["auth-username", "auth-password"].forEach((id) => {
   $(id).addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); submitAuth(); } });
