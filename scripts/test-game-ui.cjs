@@ -17,6 +17,15 @@ function reply(overrides = {}) {
     option_translations: [], grammar_task: '', completed_task: 0, completed_tasks: [], game_over: false,
     story_phase: 'discussion', deduction_assessment: { question_id: '', verdict: 'none' }, vocab: [], ...overrides };
 }
+function contrastRatio(foreground, background) {
+  const luminance = color => {
+    const values = color.match(/[\d.]+/g).slice(0, 3).map(Number).map(value => value / 255)
+      .map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4);
+    return .2126 * values[0] + .7152 * values[1] + .0722 * values[2];
+  };
+  const a = luminance(foreground), b = luminance(background);
+  return (Math.max(a, b) + .05) / (Math.min(a, b) + .05);
+}
 function actionEvent(task, index, text, target = '', response = '') {
   return { task_id: task, requirement_index: index, player_quote: text, target_id: target, response_quote: response };
 }
@@ -79,6 +88,28 @@ test('home paths open a full guide or exploration; return navigation preserves t
       await page.route('https://**', route => route.abort());
       await page.goto(pageUrl);
       await page.locator('#btn-explore-learning').waitFor();
+      if (width === 1440) {
+        if (artifacts) await page.screenshot({ path: path.join(artifacts, 'home-night.png') });
+        const nightPalette = await page.locator('body').evaluate(el => getComputedStyle(el).getPropertyValue('--bg').trim());
+        await page.locator('#theme-toggle').click();
+        await page.waitForFunction(() => getComputedStyle(document.querySelector('#theme-toggle')).backgroundColor === 'rgb(255, 250, 240)');
+        const dayPalette = await page.locator('body').evaluate(el => ({
+          className: el.className,
+          bg: getComputedStyle(el).getPropertyValue('--bg').trim(),
+          panel: getComputedStyle(el).getPropertyValue('--bg-panel').trim(),
+          ink: getComputedStyle(el).getPropertyValue('--text').trim(),
+          gold: getComputedStyle(el).getPropertyValue('--case-gold').trim(),
+          toggle: getComputedStyle(document.querySelector('#theme-toggle')).backgroundColor
+        }));
+        assert.equal(dayPalette.className.includes('light'), true);
+        assert.notEqual(dayPalette.bg, nightPalette);
+        assert.equal(dayPalette.bg, '#f4efe4');
+        assert.equal(dayPalette.panel, '#fffaf0');
+        assert.equal(dayPalette.ink, '#352c23');
+        assert.equal(dayPalette.toggle, 'rgb(255, 250, 240)');
+        if (artifacts) await page.screenshot({ path: path.join(artifacts, 'home-day.png') });
+        await page.locator('#theme-toggle').click();
+      }
       assert.equal(await page.locator('#step-guide').isVisible(), false);
       assert.equal(await page.locator('#btn-open-guide').isVisible(), true);
       assert.equal(await page.locator('#step-goal').isVisible(), false);
@@ -112,6 +143,8 @@ test('home paths open a full guide or exploration; return navigation preserves t
       assert.equal(await page.locator('[data-goal=高考]').getAttribute('aria-pressed'), 'true');
       await page.locator('#btn-goal-next').click();
       assert.equal(await page.locator('#step-exam-script').isVisible(), true);
+      assert.equal(await page.locator('#sel-reply-mode').inputValue(), 'options');
+      assert.equal(await page.locator('#reply-language-exam').evaluate(el => el.classList.contains('hidden')), true);
       await page.locator('#btn-back-exam-goal').click();
       await page.locator('#btn-home').click();
       assert.equal(await page.locator('#step-home').isVisible(), true);
@@ -384,12 +417,35 @@ test('exit waits for the current reply; warm conversation colors and review cont
   try {
     async function preview(name) {
       const style = await page.locator('.msg-row.npc .bubble').last().evaluate(el => ({
-        background: getComputedStyle(el).backgroundColor, expected: getComputedStyle(el).getPropertyValue('--dialogue-surface').trim() }));
+        background: getComputedStyle(el).backgroundColor,
+        text: getComputedStyle(el).color,
+        expected: getComputedStyle(el).getPropertyValue('--dialogue-surface').trim(),
+        light: document.body.classList.contains('light'),
+        speaker: el.closest('.msg-row').querySelector('.speaker-label').textContent,
+        icon: el.closest('.msg-row').querySelectorAll('.avatar-icon').length,
+        role: el.closest('.msg-row').querySelector('.avatar').getAttribute('aria-hidden') }));
       assert.ok(style.background && style.expected);
+      assert.equal(style.background, (() => {
+        const m = style.expected.match(/^#([\da-f]{6})$/i);
+        if (!m) return style.background;
+        const n = m[1]; return `rgb(${parseInt(n.slice(0,2),16)}, ${parseInt(n.slice(2,4),16)}, ${parseInt(n.slice(4,6),16)})`;
+      })());
+      assert.ok(contrastRatio(style.text, style.background) >= 4.5);
+      assert.equal(style.speaker, 'Alice'); assert.equal(style.icon, 1); assert.equal(style.role, 'true');
+      const player = await page.locator('.msg-row.user').last().evaluate(row => {
+        const bubble = row.querySelector('.bubble'), avatar = row.querySelector('.avatar');
+        return { background: getComputedStyle(bubble).backgroundColor, text: getComputedStyle(bubble).color,
+          name: avatar.textContent.trim(), aria: avatar.getAttribute('aria-hidden'), alignment: getComputedStyle(row).justifyContent,
+          x: bubble.getBoundingClientRect().x + bubble.getBoundingClientRect().width };
+      });
+      assert.equal(player.name, '我'); assert.equal(player.aria, 'true'); assert.equal(player.alignment, 'flex-end');
+      assert.ok(contrastRatio(player.text, player.background) >= 4.5);
+      assert.ok(player.x <= 390);
       await noOverflow(page);
       if (artifacts) await page.screenshot({ path: path.join(artifacts, name) });
       return style.background;
     }
+    await page.evaluate(() => addUserBubble('Where were you at that moment?'));
     const dark = await preview('warm-chat-dark.png');
     await page.locator('#theme-toggle').click();
     const light = await preview('warm-chat-light.png'); assert.notEqual(dark, light);
@@ -460,12 +516,57 @@ test('English option mode completes every story stage by selection, blocks typed
     await choose(final, ending, { story_phase: 'ballot', task_events: [actionEvent(3, 1, final), actionEvent(3, 2, 'because the accounts disagree.')], game_over: true });
     assert.equal(await page.evaluate(() => completedTasks.size), 3);
     assert.equal(await page.evaluate(() => gameOverPending), false);
-    await choose(ending, review, { story_phase: 'ending', game_over: true });
-    assert.equal(await page.evaluate(() => gameOverPending), false);
-    await choose(review, 'I understand the story now.', { story_phase: 'review', game_over: true });
+    await choose(ending, review, { story_phase: 'discussion', game_over: false,
+      npc_dialogue: 'The case is closed, and your report is done.',
+      translation: '案件已经结束，你的报告也完成了。' });
     assert.equal(await page.evaluate(() => gameOverPending), true);
-    assert.equal(await page.locator('.review-entry-btn').isVisible(), true);
+    assert.equal(await page.locator('.review-entry-btn').innerText(), '查看学习结算');
+    await page.locator('.review-entry-btn').click();
+    await page.locator('#end-modal').waitFor({ state: 'visible' });
+    assert.equal(await page.evaluate(() => gameEnded), true);
+    assert.equal(await page.evaluate(() => gameOverPending), true);
+    assert.equal(await page.locator('.review-entry-btn').count(), 0);
     if (artifacts) await page.screenshot({ path: path.join(artifacts, 'option-mode-phone-complete.png') });
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('option mode keeps a missed earlier task action visible after a later task is completed', async () => {
+  const { browser, page, errors } = await setup({ width: 390, height: 844 }, 'en', true, false, { replyMode: 'options' });
+  try {
+    const state = await page.evaluate(() => {
+      let turnId = 100;
+      function submit(text, speaker, dialogue, taskEvents) {
+        const data = { npc_dialogue: dialogue, translation: '', speaker, story_phase: 'discussion', task_events: taskEvents };
+        applyScriptTurnRules(data, false, text, turnId++);
+        return data;
+      }
+      const first = "I'd like to inspect record one.";
+      const second = "I'd like to inspect record two.";
+      const firstReply = 'public observation 0.';
+      submit(first, 'DM', firstReply, [{ task_id: 1, requirement_index: 1, target_id: 'C1', player_quote: first, response_quote: firstReply }]);
+      searchedItems.add(first.toLowerCase());
+      searchedItems.add(second.toLowerCase()); // 模拟录音笔选项已点过，但当轮证据漏记
+
+      const aliceAsk = 'Alice, what did you notice?';
+      const aliceReply = 'I saw a gift by the door.';
+      submit(aliceAsk, 'Alice', aliceReply, [{ task_id: 2, requirement_index: 1, target_id: 'Alice', player_quote: aliceAsk, response_quote: aliceReply }]);
+      const bobAsk = 'Bob, what did you notice?';
+      const bobReply = 'I saw the record beside the gift.';
+      submit(bobAsk, 'Bob', bobReply, [{ task_id: 2, requirement_index: 1, target_id: 'Bob', player_quote: bobAsk, response_quote: bobReply }]);
+      const explanation = 'I think the two accounts describe the same event because their times agree.';
+      submit(explanation, 'DM', 'Thank you for explaining.', [{ task_id: 2, requirement_index: 2, target_id: '', player_quote: explanation, response_quote: '' }]);
+
+      const data = { task_type: 'search', options: [second, 'Inspect another clue.'], option_translations: ['查看记录二。', '查看另一条线索。'] };
+      ensureOptionModeReply(data);
+      renderOptions(data.options, data.task_type, data.option_translations);
+      return { options: [...currentOptions], taskOneDone: taskEvidenceComplete(1), taskTwoDone: taskEvidenceComplete(2), progress: taskProgressDescription(1) };
+    });
+    assert.equal(state.taskOneDone, false);
+    assert.equal(state.taskTwoDone, true);
+    assert.match(state.progress, /1\/2.*记录一.*记录二/);
+    assert.ok(state.options.includes("I'd like to inspect record two."), 'the missing recorder action must reappear even after it was selected once');
+    assert.equal(await page.locator('.option-btn').filter({ hasText: 'inspect record two' }).count(), 1);
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
 });
@@ -475,6 +576,11 @@ test('answer mode fields and dual pronunciation cards work on desktop and phones
   try {
     await page.locator('#btn-reset').click(); await page.locator('#btn-exit-switch').click();
     await page.locator('[data-goal=高考]').click(); await page.locator('#btn-goal-next').click();
+    for (const [select, field] of [['sel-reply-mode', 'reply-language-exam'], ['sel-daily-reply-mode', 'reply-language-daily'], ['sel-random-reply-mode', 'reply-language-random']]) {
+      await page.evaluate(({ select }) => { const el = document.getElementById(select); el.value = 'options'; el.dispatchEvent(new Event('change')); }, { select });
+      assert.equal(await page.locator('#' + select).inputValue(), 'options');
+      assert.equal(await page.locator('#' + field).evaluate(el => el.classList.contains('hidden')), true);
+    }
     for (const width of [1280, 390, 320]) {
       await page.setViewportSize({ width, height: width === 1280 ? 800 : 720 });
       for (const [select, field] of [['sel-reply-mode', 'reply-language-exam'], ['sel-daily-reply-mode', 'reply-language-daily'], ['sel-random-reply-mode', 'reply-language-random']]) {
@@ -483,6 +589,10 @@ test('answer mode fields and dual pronunciation cards work on desktop and phones
         await page.evaluate(({ select, mode }) => { const el = document.getElementById(select); el.value = mode; el.dispatchEvent(new Event('change')); }, { select, mode: 'free' });
         assert.equal(await page.locator('#' + field).evaluate(el => el.classList.contains('hidden')), false);
       }
+      const challengeBox = await page.locator('#sel-challenge').boundingBox();
+      const replyModeBox = await page.locator('#sel-reply-mode').boundingBox();
+      const languageBox = await page.locator('#reply-language-exam').boundingBox();
+      assert.ok(Math.abs(languageBox.x - challengeBox.x) <= 1 && Math.abs(languageBox.width - (replyModeBox.x + replyModeBox.width - challengeBox.x)) <= 1, 'reply language control must span both upper controls');
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
       await page.locator('#sel-reply-mode').scrollIntoViewIfNeeded();
       if (artifacts) await page.screenshot({ path: path.join(artifacts, 'reply-config-' + width + '.png') });

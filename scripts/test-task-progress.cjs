@@ -129,6 +129,16 @@ test('inspections require the requested source and actual delivered content, cou
   assert.equal(refusal.count(1, 1), 0);
 });
 
+test('an inspected clue is not rejected because quoted dialogue mentions a later event or says will not', () => {
+  const e = environment();
+  e.run("taskProgressState.phase='search'; plan.task_criteria[0].requirements[0].targets[1].aliases.push('corridor recorder')");
+  const request = 'Check the corridor recorder';
+  const dialogue = "You play the corridor recorder. The woman says, 'I won't let you destroy the competition.' Someone else came later.";
+  const result = e.turn(request, [event(1, 1, request, 'C2', dialogue)], { npc_dialogue: dialogue });
+  assert.equal(e.count(1, 1), 1);
+  assert.equal(result.task_events.length, 1);
+});
+
 test('a final judgment and its reason are separate requirements, neither demands correctness', () => {
   const e = environment();
   let result = e.turn('My final answer is that Bob took the gift.', [event(3, 1, 'My final answer is that Bob took the gift.')]);
