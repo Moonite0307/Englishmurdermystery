@@ -30,6 +30,7 @@ const MIME = {
   ".css": "text/css; charset=utf-8",
   ".json": "application/json; charset=utf-8",
   ".jsonl": "application/x-ndjson; charset=utf-8",
+  ".txt": "text/plain; charset=utf-8",
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".svg": "image/svg+xml",
@@ -47,7 +48,9 @@ const PUBLIC_FILES = new Set([
   "/data/daily/vocabulary.json",
   "/data/daily/sources.json",
   "/data/daily/exam_lexicon.json",
-  "/data/daily/cet_core.json"
+  "/data/daily/cet_core.json",
+  "/data/daily/pronunciations.json",
+  "/data/daily/pronunciation-LICENSE.txt"
 ]);
 
 function loadConfig() {

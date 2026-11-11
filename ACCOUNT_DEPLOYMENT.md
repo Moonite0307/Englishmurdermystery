@@ -49,7 +49,7 @@ GitHub 网页也优先连接这个 Pages 地址，保留旧 Worker 作为备用�
 
 ## 开发说明
 
-- 手机入口构建：`node scripts/build-mobile-site.cjs`，只复制 HTML 与六个运行词库文件，账号文件、私密配置及部署凭据不会进入发布目录。
+- 手机入口构建：`node scripts/build-mobile-site.cjs`，按白名单复制 HTML、运行词库、双音标数据及许可，账号文件、私密配置及部署凭据不会进入发布目录。
 - 手机入口部署：`npm run deploy:mobile`（先登录 Cloudflare，必要时在环境变量中配置代理）。发布到免费的 Pages 项目，复用原 D1 绑定。
 - 协作者更新网页后，除了推送 GitHub，还应执行手机入口部署，保持两个网页版本一致。账号服务不依赖浏览器的来源页面、第三方 Cookie 或先访问 GitHub。
 - 手机域名直连的实际可用性需在使用者网络验证；本次修复验证了当前网络无代理连接 Pages 账号接口，不能据此保证所有运营商与地区永远可达。

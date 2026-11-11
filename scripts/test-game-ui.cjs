@@ -27,6 +27,7 @@ async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false,
   const errors = [];
   const requests = [];
   const responses = [];
+  if (generation.openingReply) responses.push(generation.openingReply);
   page.on('pageerror', e => errors.push(e.message));
   await page.route('**/api/config', r => staticMode ? r.fulfill({ status: 404, body: 'Static site' }) : r.fulfill({ json: { configured: true, model: 'mock' } }));
   // No external requests, including any fallback model or dictionary API.
@@ -35,7 +36,9 @@ async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false,
     const req = route.request().postDataJSON(); requests.push(req);
     const isPlan = req.messages[0].content.includes('资深剧本杀编剧');
     const planned = isPlan && generation.replies && generation.replies.shift();
-    const result = isPlan ? (planned ? planned.data : fixture()) : (responses.shift() || reply());
+    const result = isPlan ? (planned ? planned.data : fixture()) : (responses.shift() || (generation.replyMode === 'options' ? reply({
+      task_type: 'choice', options: ["I'd like to inspect record one.", 'Alice, what did you notice?'], option_translations: ['我想查看记录一。', '爱丽丝，你注意到了什么？']
+    }) : reply()));
     const content = typeof result === 'string' ? result : JSON.stringify(result);
     const finish = planned && planned.finishReason ? '\n\ndata: ' + JSON.stringify({ choices: [{ delta: {}, finish_reason: planned.finishReason }] }) : '';
     await route.fulfill({ contentType: 'text/event-stream', body: 'data: ' + JSON.stringify({ choices: [{ delta: { content } }] }) + finish + (eofOnly ? '' : '\n\ndata: [DONE]\n\n') });
@@ -46,11 +49,13 @@ async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false,
   await page.goto(pageUrl);
   await page.waitForFunction(wantStatic => (wantStatic ? !backendMode : backendMode) && EXAM_LEXICON.ready, staticMode);
   assert.equal(await page.locator('#api-settings, #backend-badge, #direct-mode-hint, #inp-api-base, #inp-api-key, #inp-model').count(), 0);
+  await page.locator('#btn-explore-learning').click();
   await page.locator('[data-goal="' + (generation.goal || '高考') + '"]').click();
   await page.locator('#btn-goal-next').click();
   assert.ok(!/大模型接口设置|API Base URL|API Key|server\.js|config\.json/.test(await page.locator('#panel-config').innerText()));
   await page.locator('#sel-genre').selectOption(generation.genre || '欢乐本');
-  await page.locator('#sel-reply-language').selectOption(mode);
+  await page.locator('#sel-reply-mode').selectOption(generation.replyMode || 'free');
+  if (generation.replyMode !== 'options') await page.locator('#sel-reply-language').selectOption(mode);
   if (generation.theme) await page.locator('#inp-theme').fill(generation.theme);
   if (generation.background) await page.locator('#inp-background').fill(generation.background);
   await page.locator('#btn-generate').click();
@@ -65,6 +70,55 @@ async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false,
   await page.waitForFunction(() => state === 'PLAYING' && !busy);
   return { browser, page, errors, requests, responses };
 }
+
+test('home paths open a full guide or exploration; return navigation preserves the selected goal and shared typography', async () => {
+  const browser = await playwright.chromium.launch({ headless: true, channel: 'msedge' });
+  try {
+    for (const width of [1440, 390]) {
+      const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
+      await page.route('https://**', route => route.abort());
+      await page.goto(pageUrl);
+      await page.locator('#btn-explore-learning').waitFor();
+      assert.equal(await page.locator('#step-guide').isVisible(), false);
+      assert.equal(await page.locator('#btn-open-guide').isVisible(), true);
+      assert.equal(await page.locator('#step-goal').isVisible(), false);
+      await page.locator('#btn-open-guide').click();
+      assert.equal(await page.locator('#step-home').isVisible(), false);
+      assert.equal(await page.locator('#step-guide .experience-section').isVisible(), true);
+      assert.equal(await page.locator('#step-guide .guide-section').count(), 6);
+      await page.locator('.guide-contents a[href="#guide-review"]').click();
+      await page.locator('#guide-review-title').waitFor({ state: 'visible' });
+      const fonts = await page.evaluate(() => ['.site-brand strong', '.entry-title', '#guide-heading', '#btn-open-guide', '#guide-review-title'].map(selector => getComputedStyle(document.querySelector(selector)).fontFamily));
+      assert.equal(new Set(fonts).size, 1);
+      await page.locator('#btn-guide-home-bottom').click();
+      assert.equal(await page.locator('#step-home').isVisible(), true);
+      await page.locator('#btn-open-guide').click();
+      await page.locator('[data-start-exploring]').first().click();
+      assert.equal(await page.locator('#step-goal').isVisible(), true);
+      await page.locator('#btn-back-home').click();
+      const surfaces = await page.evaluate(() => ['.entry-intro', '.experience-section', '.home-selection'].map(selector => {
+        const style = getComputedStyle(document.querySelector(selector));
+        return [style.backgroundColor, style.borderTopWidth, style.borderBottomWidth];
+      }));
+      assert.ok(surfaces.every(([color, top, bottom]) => color === 'rgba(0, 0, 0, 0)' && top === '0px' && bottom === '0px'));
+      await page.locator('#btn-explore-learning').click();
+      assert.equal(await page.locator('#step-home').isVisible(), false);
+      assert.equal(await page.locator('#step-goal').isVisible(), true);
+      assert.equal(await page.locator('#panel-config').evaluate(el => el.scrollTop), 0);
+      await page.locator('[data-goal=高考]').click();
+      await page.locator('#btn-back-home').click();
+      assert.equal(await page.locator('#step-home').isVisible(), true);
+      await page.locator('#btn-explore-learning').click();
+      assert.equal(await page.locator('[data-goal=高考]').getAttribute('aria-pressed'), 'true');
+      await page.locator('#btn-goal-next').click();
+      assert.equal(await page.locator('#step-exam-script').isVisible(), true);
+      await page.locator('#btn-back-exam-goal').click();
+      await page.locator('#btn-home').click();
+      assert.equal(await page.locator('#step-home').isVisible(), true);
+      await page.close();
+    }
+  } finally { await browser.close(); }
+});
 
 test('phone generation: screenshot configuration accepts normalized hints and equivalent character fields', async () => {
   const plan = fixture();
@@ -204,11 +258,276 @@ test('desktop: language blocking, private role book, task ticks and optional voc
     await page.locator('#vp-spell-input').fill('gift');
     await page.locator('#vp-spell-btn').click();
     assert.equal(await page.evaluate(() => vocabBook.has('gift')), true);
+    assert.deepEqual(await page.evaluate(() => Object.keys(localStorage).filter(key => /^wp_(daily_progress|vocab_book|learning_vocab|script_history)/.test(key))), []);
     await noOverflow(page);
     if (artifacts) await page.screenshot({ path: path.join(artifacts, 'desktop.png') });
     await page.locator('#btn-reset').click();
+    await page.locator('#btn-exit-switch').click();
     await page.locator('#btn-open-vocab-book').click();
     assert.match(await page.locator('#vocab-book-list').innerText(), /gift/);
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('explicit save restores the locked story, evidence, search options, translations and draft without another opening', async () => {
+  const { browser, page, errors, requests, responses } = await setup({ width: 1280, height: 900 }, 'zh');
+  try {
+    assert.equal(await page.evaluate(() => scriptRunStatusText(currentRun())), '本次未保存');
+    const ask = 'Please inspect record one';
+    responses.push(reply({ task_type: 'search', options: ['Inspect record one', 'Inspect record two'],
+      option_translations: ['查看记录一', '查看记录二'], task_events: [actionEvent(1, 1, ask, 'C1', 'public observation 0')] }));
+    await page.locator('#inp-msg').fill(ask); await page.locator('#btn-send').click();
+    await page.waitForFunction(() => !busy);
+    await page.evaluate(() => { searchedItems.add('inspect record one'); deductionProgress = { questionId: 'Q1', wrongStreak: 2 }; });
+    await page.locator('.translate-btn').last().click();
+    await page.locator('#inp-msg').fill('我还想看看另一份记录');
+    const before = await page.evaluate(() => ({ plan: scriptPlan, messages, id: currentRunId, task: taskProgressDescription(1),
+      appearances: [...learningVocab.values()].map(v => v.appearances), transcript: currentRun().transcript.length }));
+    const requestCount = requests.length;
+    await page.locator('#btn-reset').click();
+    assert.match(await page.locator('#exit-guest-note').innerText(), /刷新.*清空/);
+    await page.locator('#btn-exit-save').click();
+    assert.equal(await page.locator('#step-home').isVisible(), true);
+    assert.equal(await page.evaluate(() => scriptHistory[0].status), 'playing');
+    await page.locator('#btn-open-script-history').click();
+    assert.match(await page.locator('.run-badge').innerText(), /进行中/);
+    await page.locator('.run-card').click(); await page.locator('.btn-resume-run').click();
+    assert.equal(await page.locator('#panel-playing').isVisible(), true);
+    const after = await page.evaluate(() => ({ plan: scriptPlan, messages, id: currentRunId, task: taskProgressDescription(1),
+      appearances: [...learningVocab.values()].map(v => v.appearances), transcript: currentRun().transcript.length }));
+    assert.deepEqual(after, before);
+    assert.equal(await page.evaluate(() => Object.isFrozen(scriptData) && Object.isFrozen(scriptData.characters)), true);
+    assert.equal(requests.length, requestCount);
+    assert.equal(await page.locator('#inp-msg').inputValue(), '我还想看看另一份记录');
+    assert.match(await page.locator('#sb-player-script').innerText(), /PLAYER_SECRET/);
+    assert.equal(await page.locator('.translation-box:not(.hidden)').count(), 1);
+    assert.equal(await page.locator('.option-btn').count(), 1);
+    assert.match(await page.locator('#options-area').innerText(), /record two/);
+    assert.deepEqual(await page.evaluate(() => deductionProgress), { questionId: 'Q1', wrongStreak: 2 });
+    await page.locator('.option-btn .opt-prefix').click(); await page.waitForFunction(() => !busy);
+    assert.equal(requests.length, requestCount + 1);
+    assert.equal(requests.at(-1).messages.filter(m => m.role === 'user').at(-1).content, 'Inspect record two');
+    await page.locator('#btn-reset').click(); await page.locator('#btn-exit-switch').click();
+    assert.equal(await page.evaluate(() => scriptHistory[0].status), 'left');
+    assert.equal(await page.evaluate(() => !!scriptHistory[0].resume), false);
+    await page.reload(); await page.waitForFunction(() => EXAM_LEXICON.ready);
+    assert.equal(await page.evaluate(() => scriptHistory.length + vocabBook.size + learningVocab.size), 0);
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('word cards hide Chinese until rated, support corrections, repeat review and shared mastered filters in both themes', async () => {
+  const { browser, page, errors } = await setup({ width: 390, height: 844 });
+  try {
+    await page.evaluate(() => {
+      const word = [...learningVocab.values()].find(v => v.word.toLowerCase() === 'gift');
+      word.example = 'This gift is for you.'; word.example_cn = '这个礼物是给你的。';
+      addVocabEntry(word);
+    });
+    await page.locator('#btn-game-panel').click(); await page.locator('#btn-reset').click();
+    await page.locator('#btn-exit-switch').click(); await page.locator('#btn-open-vocab-book').click();
+    assert.match(await page.locator('#step-vocab-book .wizard-sub').innerText(), /自测.*已掌握.*未掌握.*重复复习/);
+    await page.locator('.vocab-book-item').click();
+    assert.equal(await page.locator('#review-meaning-wrap').isVisible(), false);
+    assert.equal(await page.locator('#review-example-cn').isVisible(), false);
+    assert.equal(await page.locator('#review-example-en').innerText(), 'This gift is for you.');
+    assert.equal(await page.locator('#review-nav').isVisible(), false);
+    assert.equal(await page.locator('#review-extra').innerText().then(t => /词表第|词频|排名/.test(t)), false);
+    const firstTheme = await page.locator('#review-modal').evaluate(el => getComputedStyle(el).getPropertyValue('--rv-bg'));
+    if (artifacts) await page.screenshot({ path: path.join(artifacts, 'word-self-test-dark.png') });
+    await page.locator('.review-rate.known').click();
+    assert.equal(await page.locator('#review-meaning-wrap').isVisible(), true);
+    assert.equal(await page.locator('#review-example-cn').innerText(), '这个礼物是给你的。');
+    assert.match(await page.locator('#review-hint').innerText(), /已加入【已掌握】/);
+    assert.equal(await page.evaluate(() => vocabBook.get('gift').mastered), true);
+    assert.equal(await page.evaluate(() => [...learningVocab.values()].find(v => v.word === 'gift').mastered), true);
+    if (artifacts) await page.screenshot({ path: path.join(artifacts, 'word-self-test-revealed.png') });
+    await page.locator('#btn-review-undo').click();
+    assert.equal(await page.evaluate(() => learningStatusOf(vocabBook.get('gift'))), 'unknown');
+    assert.equal(await page.evaluate(() => vocabBook.get('gift').srs.reviews), 1);
+    assert.match(await page.locator('#review-hint').innerText(), /已加入【未掌握】/);
+    assert.equal(await page.locator('#btn-review-undo').isVisible(), false);
+    await page.locator('#btn-review-close').click();
+    await page.locator('#book-status-filter').selectOption('mastered');
+    assert.equal(await page.locator('.vocab-book-item').count(), 0);
+    await page.locator('#book-status-filter').selectOption('unknown');
+    assert.equal(await page.locator('.vocab-book-item').count(), 1);
+    await page.locator('.vocab-book-item').click();
+    assert.equal(await page.locator('#review-meaning-wrap').isVisible(), false);
+    await page.locator('.review-rate.known').click();
+    await page.locator('#btn-review-next').click();
+    assert.equal(await page.locator('#review-word').innerText(), '本组复习完成');
+    await page.locator('#btn-review-done').click();
+    await page.locator('#btn-close-vocab-book').click(); await page.locator('#btn-open-vocab-review').click();
+    await page.locator('#review-status-filter').selectOption('mastered');
+    assert.equal(await page.locator('.learning-word-main').count(), 1);
+    await page.locator('#theme-toggle').click();
+    await page.locator('.learning-word-main').click();
+    assert.equal(await page.locator('#review-meaning-wrap').isVisible(), false);
+    assert.notEqual(await page.locator('#review-modal').evaluate(el => getComputedStyle(el).getPropertyValue('--rv-bg')), firstTheme);
+    if (artifacts) await page.screenshot({ path: path.join(artifacts, 'word-self-test-light.png') });
+    await page.locator('.review-rate.unknown').click();
+    assert.equal(await page.evaluate(() => learningStatusOf(vocabBook.get('gift'))), 'unknown');
+    assert.match(await page.locator('#review-hint').innerText(), /已加入【未掌握】/);
+    await page.locator('#btn-review-close').click();
+    await page.locator('#review-status-filter').selectOption('unknown');
+    assert.equal(await page.locator('.learning-word-main').count(), 1);
+    assert.deepEqual(await page.evaluate(() => Object.keys(localStorage).filter(k => /^wp_(vocab_book|learning_vocab)/.test(k))), []);
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('exit waits for the current reply; warm conversation colors and review controls fit both themes and small screens', async () => {
+  const { browser, page, errors } = await setup({ width: 390, height: 844 });
+  let release;
+  const gate = new Promise(resolve => { release = resolve; });
+  try {
+    async function preview(name) {
+      const style = await page.locator('.msg-row.npc .bubble').last().evaluate(el => ({
+        background: getComputedStyle(el).backgroundColor, expected: getComputedStyle(el).getPropertyValue('--dialogue-surface').trim() }));
+      assert.ok(style.background && style.expected);
+      await noOverflow(page);
+      if (artifacts) await page.screenshot({ path: path.join(artifacts, name) });
+      return style.background;
+    }
+    const dark = await preview('warm-chat-dark.png');
+    await page.locator('#theme-toggle').click();
+    const light = await preview('warm-chat-light.png'); assert.notEqual(dark, light);
+    await page.route('**/api/chat', async route => {
+      await gate;
+      await route.fulfill({ contentType: 'text/event-stream', body: 'data: ' + JSON.stringify({ choices: [{ delta: { content: JSON.stringify(reply()) } }] }) + '\n\ndata: [DONE]\n\n' });
+    });
+    await page.locator('#inp-msg').fill('Please show me the gift.'); await page.locator('#btn-send').click();
+    await page.waitForFunction(() => busy);
+    await page.locator('#btn-game-panel').click(); await page.locator('#btn-reset').click();
+    assert.equal(await page.locator('#btn-exit-save').isDisabled(), true);
+    assert.equal(await page.locator('#btn-exit-switch').isDisabled(), true);
+    assert.equal(await page.locator('#btn-exit-save').evaluate(el => {
+      const r = el.getBoundingClientRect(); return el.contains(document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2));
+    }), true);
+    release(); await page.waitForFunction(() => !busy);
+    assert.equal(await page.locator('#btn-exit-save').isEnabled(), true);
+    if (artifacts) await page.screenshot({ path: path.join(artifacts, 'save-exit-light.png') });
+    await page.locator('#btn-exit-save').click(); await page.locator('#btn-open-script-history').click();
+    if (artifacts) await page.screenshot({ path: path.join(artifacts, 'saved-history-light.png') });
+    await page.locator('#btn-close-script-history').click(); await page.locator('#btn-open-vocab-review').click();
+    await page.locator('#btn-start-review').click();
+    const count = await page.evaluate(() => reviewSession.queue.length); assert.ok(count >= 2);
+    await page.locator('.review-rate.known').click(); await page.locator('#btn-review-next').click();
+    assert.equal(await page.locator('#review-meaning-wrap').isVisible(), false);
+    assert.equal(await page.locator('#review-example-cn').isVisible(), false);
+    assert.equal(await page.locator('#review-nav').isVisible(), false);
+    await page.setViewportSize({ width: 320, height: 568 });
+    const bounds = await page.locator('.review-actions').boundingBox();
+    assert.ok(bounds.x >= 0 && bounds.x + bounds.width <= 321 && bounds.y + bounds.height <= 569);
+    assert.deepEqual(errors, []);
+  } finally { release(); await browser.close(); }
+});
+
+test('English option mode completes every story stage by selection, blocks typed submissions and restores saved choices', async () => {
+  const first = "I'd like to inspect record one.";
+  const { browser, page, errors, responses, requests } = await setup({ width: 390, height: 844 }, 'en', true, false, { replyMode: 'options' });
+  try {
+    assert.equal(await page.locator('.input-box').isVisible(), false);
+    assert.match(await page.locator('#sm-reply-language').textContent(), /英文选项模式/);
+    const count = requests.length;
+    await page.evaluate(() => sendMessage('This is typed input.'));
+    assert.equal(requests.length, count);
+    assert.match(await page.locator('#input-error').innerText(), /点击本轮.*选项/);
+    const second = "I'd like to inspect record two.", alice = 'Alice, what did you notice?', bob = 'Bob, what did you notice?';
+    const explanation = 'I think the two accounts describe the same event.';
+    const final = 'My final answer is a misunderstanding because the accounts disagree.';
+    const ending = 'Please show us what happened after the vote.', review = 'Please review the clues and explain the ending.';
+    async function choose(text, next, override = {}) {
+      responses.push(reply({ task_type: 'choice', options: [next, 'Could you repeat that?'], option_translations: ['下一步', '可以再说一次吗？'], ...override }));
+      await page.locator('.option-btn').filter({ hasText: text }).first().click();
+      await page.waitForFunction(() => !busy);
+      assert.equal(requests.at(-1).messages.filter(m => m.role === 'user').at(-1).content, text);
+      assert.ok(requests.at(-1).messages.some(m => m.content.includes('玩家全程只能点击')));
+      assert.equal(await page.locator('.input-box').isVisible(), false);
+    }
+    await choose(first, second, { speaker: 'DM', npc_dialogue: 'Here is public observation 0.', task_events: [actionEvent(1, 1, first, 'C1', 'public observation 0')] });
+    await choose(second, alice, { speaker: 'DM', npc_dialogue: 'Here is public observation 1.', task_events: [actionEvent(1, 1, second, 'C2', 'public observation 1')] });
+    assert.equal(await page.evaluate(() => completedTasks.has(1)), true);
+    await choose(alice, bob, { speaker: 'Alice', npc_dialogue: 'I saw the gift by the door.', task_events: [actionEvent(2, 1, alice, 'Alice', 'I saw the gift by the door.')] });
+    await choose(bob, explanation, { speaker: 'Bob', npc_dialogue: 'I saw the record by the gift.', task_events: [actionEvent(2, 1, bob, 'Bob', 'I saw the record by the gift.')] });
+    await choose(explanation, final, { task_events: [actionEvent(2, 2, explanation)] });
+    assert.equal(await page.evaluate(() => completedTasks.has(2)), true);
+    await page.locator('#btn-game-panel').click(); await page.locator('#btn-reset').click(); await page.locator('#btn-exit-save').click();
+    await page.locator('#btn-open-script-history').click(); await page.locator('.run-card').click(); await page.locator('.btn-resume-run').click();
+    assert.equal(await page.evaluate(() => scriptInfo.replyMode), 'options');
+    assert.equal(await page.locator('.input-box').isVisible(), false);
+    await choose(final, ending, { story_phase: 'ballot', task_events: [actionEvent(3, 1, final), actionEvent(3, 2, 'because the accounts disagree.')], game_over: true });
+    assert.equal(await page.evaluate(() => completedTasks.size), 3);
+    assert.equal(await page.evaluate(() => gameOverPending), false);
+    await choose(ending, review, { story_phase: 'ending', game_over: true });
+    assert.equal(await page.evaluate(() => gameOverPending), false);
+    await choose(review, 'I understand the story now.', { story_phase: 'review', game_over: true });
+    assert.equal(await page.evaluate(() => gameOverPending), true);
+    assert.equal(await page.locator('.review-entry-btn').isVisible(), true);
+    if (artifacts) await page.screenshot({ path: path.join(artifacts, 'option-mode-phone-complete.png') });
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('answer mode fields and dual pronunciation cards work on desktop and phones with no More menu', async () => {
+  const { browser, page, errors } = await setup({ width: 1280, height: 800 }, 'zh');
+  try {
+    await page.locator('#btn-reset').click(); await page.locator('#btn-exit-switch').click();
+    await page.locator('[data-goal=高考]').click(); await page.locator('#btn-goal-next').click();
+    for (const width of [1280, 390, 320]) {
+      await page.setViewportSize({ width, height: width === 1280 ? 800 : 720 });
+      for (const [select, field] of [['sel-reply-mode', 'reply-language-exam'], ['sel-daily-reply-mode', 'reply-language-daily'], ['sel-random-reply-mode', 'reply-language-random']]) {
+        await page.evaluate(({ select, mode }) => { const el = document.getElementById(select); el.value = mode; el.dispatchEvent(new Event('change')); }, { select, mode: 'options' });
+        assert.equal(await page.locator('#' + field).evaluate(el => el.classList.contains('hidden')), true);
+        await page.evaluate(({ select, mode }) => { const el = document.getElementById(select); el.value = mode; el.dispatchEvent(new Event('change')); }, { select, mode: 'free' });
+        assert.equal(await page.locator('#' + field).evaluate(el => el.classList.contains('hidden')), false);
+      }
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+      await page.locator('#sel-reply-mode').scrollIntoViewIfNeeded();
+      if (artifacts) await page.screenshot({ path: path.join(artifacts, 'reply-config-' + width + '.png') });
+    }
+    await page.evaluate(() => { addVocabEntry({ word: 'door', meaning: '门', example: 'The door was locked from inside.' }); });
+    await page.locator('#btn-home').click(); await page.locator('#btn-open-vocab-review').click();
+    assert.equal(await page.locator('.review-more, #btn-import-learning, #btn-export-learning-json').count(), 0);
+    assert.equal(await page.locator('#btn-export-learning').isVisible(), true);
+    await page.locator('#btn-home').click(); await page.locator('#btn-open-vocab-book').click();
+    await page.locator('.vocab-book-item').click();
+    await page.waitForFunction(() => !!PRONUNCIATIONS.words.door);
+    const uk = await page.locator('#review-phonetic-uk').innerText(), us = await page.locator('#review-phonetic-us').innerText();
+    assert.match(uk, /ɔː/); assert.match(us, /ɔ/); assert.notEqual(uk, us);
+    await page.evaluate(() => { window.testPronunciations = []; speechSynthesis.speak = u => window.testPronunciations.push(u.lang); speechSynthesis.getVoices = () => []; });
+    await page.locator('#btn-review-speak-uk').click(); await page.locator('#btn-review-speak-us').click();
+    assert.deepEqual(await page.evaluate(() => window.testPronunciations), ['en-GB', 'en-US']);
+    assert.equal(await page.locator('#review-meaning-wrap').isVisible(), false);
+    for (const width of [1280, 390, 320]) {
+      await page.setViewportSize({ width, height: width === 1280 ? 800 : 568 });
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+      const r = await page.locator('#review-actions').boundingBox(); assert.ok(r.y + r.height <= (width === 1280 ? 800 : 568) + 1);
+      if (artifacts) await page.screenshot({ path: path.join(artifacts, 'dual-phonetics-' + width + '.png') });
+    }
+    if (!(await page.evaluate(() => document.body.classList.contains('light')))) await page.locator('#theme-toggle').click();
+    if (artifacts) await page.screenshot({ path: path.join(artifacts, 'dual-phonetics-light-320.png') });
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('option mode repairs missing or Chinese options locally and keeps at least two selectable English replies', async () => {
+  const { browser, page, errors, responses, requests } = await setup({ width: 320, height: 568 }, 'en', false, false, {
+    replyMode: 'options', openingReply: reply({ task_type: 'grammar', options: ['我想查看记录。'], grammar_task: '请自己输入一句话' })
+  });
+  try {
+    assert.equal(await page.locator('#grammar-task-slot-active').count(), 0);
+    assert.equal(await page.locator('.input-box').isVisible(), false);
+    assert.ok(await page.locator('.option-btn').count() >= 2);
+    assert.equal(await page.evaluate(() => currentOptions.some(containsChineseAnswer)), false);
+    const count = requests.length;
+    responses.push(reply({ options: [], task_type: 'free' }));
+    await page.locator('.option-btn').first().click(); await page.waitForFunction(() => !busy);
+    assert.equal(requests.length, count + 1);
+    assert.ok(await page.locator('.option-btn').count() >= 2);
+    assert.equal(await page.evaluate(() => currentOptions.some(containsChineseAnswer)), false);
+    if (artifacts) await page.screenshot({ path: path.join(artifacts, 'option-mode-small-phone.png') });
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
 });
@@ -269,6 +588,7 @@ test('screenshot regression: Lazy alone cannot complete the two-person task or s
     assert.match(requests.at(-1).messages.at(-1).content, /verified.*懒洋洋/);
     if (artifacts) await page.screenshot({ path: path.join(artifacts, 'verified-task-progress.png') });
     await page.locator('#btn-reset').click();
+    await page.locator('#btn-exit-switch').click();
     assert.equal(await page.evaluate(() => taskProgressState.records.size), 0);
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
@@ -308,6 +628,7 @@ test('phone: drawer, keyboard focus, word popup, small screens, landscape and re
     await page.setViewportSize({ width: 390, height: 844 });
     await page.locator('#btn-game-panel').click();
     await page.locator('#btn-reset').click();
+    await page.locator('#btn-exit-switch').click();
     await page.locator('#panel-config').waitFor({ state: 'visible' });
     assert.equal(await page.locator('body').evaluate(e => e.classList.contains('sidebar-open')), false);
     assert.deepEqual(errors, []);

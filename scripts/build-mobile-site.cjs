@@ -8,7 +8,7 @@ async function build() {
   fs.mkdirSync(path.join(output, 'data/daily'), { recursive: true });
   // Only runtime assets, never config.json, account files, exports or deployment credentials.
   fs.copyFileSync(path.join(root, 'index.html'), path.join(output, 'index.html'));
-  for (const name of ['scenes.jsonl', 'scene_catalog.json', 'vocabulary.json', 'sources.json', 'exam_lexicon.json', 'cet_core.json']) {
+  for (const name of ['scenes.jsonl', 'scene_catalog.json', 'vocabulary.json', 'sources.json', 'exam_lexicon.json', 'cet_core.json', 'pronunciations.json', 'pronunciation-LICENSE.txt']) {
     fs.copyFileSync(path.join(root, 'data/daily', name), path.join(output, 'data/daily', name));
   }
   fs.writeFileSync(path.join(output, 'site-config.json'), JSON.stringify({ accountApiBase: '', sameOriginAccounts: true }, null, 2) + '\n');
