@@ -436,19 +436,33 @@
     background: var(--bg-sidebar); border-right: 1px solid var(--border);
     display: flex; flex-direction: column; padding: 20px 16px;
   }
-  .sidebar h3 { font-size: 15px; margin-bottom: 6px; }
+  .sidebar h3 { font-size: 15px; margin-bottom: 6px; display: flex; align-items: center; gap: 7px; }
+  .sb-ico {
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--case-gold); opacity: .92; flex-shrink: 0;
+  }
+  .sb-ico svg { width: 14px; height: 14px; display: block; }
   .sidebar-content { flex: 1; min-height: 0; overflow-y: auto; padding-right: 3px; }
   .player-script-panel { font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
   .player-script-panel h4 { color: var(--accent); margin: 8px 0 4px; font-size: 14px; }
   .player-script-panel p { margin: 5px 0 12px; white-space: pre-wrap; }
   .public-background { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 12px; line-height: 1.8; }
-  .public-background summary { cursor: pointer; color: var(--text-dim); }
+  .public-background summary {
+    cursor: pointer; color: var(--text-dim); list-style: none;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .public-background summary::-webkit-details-marker { display: none; }
+  .public-background summary::before {
+    content: "▸"; color: var(--case-gold); font-size: 10px; line-height: 1;
+    transition: transform .18s ease;
+  }
+  .public-background[open] summary::before { transform: rotate(90deg); }
   .public-background p { margin-top: 8px; white-space: pre-wrap; }
   .panel-close, .mobile-game-toolbar, .sidebar-backdrop { display: none; }
   .task-criterion { display: block; margin-top: 3px; color: var(--text-dim); font-size: 11px; line-height: 1.6; }
   .reply-language-field { margin-top: 18px; }
   .sidebar .script-name { font-size: 15px; font-weight: 700; color: var(--accent); line-height: 1.5; margin-bottom: 4px; }
-  .sidebar .script-meta { font-size: 11.5px; color: var(--text-dim); margin-bottom: 16px; }
+  .sidebar .script-meta { font-size: 11.5px; color: var(--text-dim); margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
   .sidebar .section-label {
     font-size: 12px; color: var(--text-dim); text-transform: uppercase;
     letter-spacing: 1px; margin: 14px 0 8px;
@@ -760,6 +774,7 @@
     transition: transform .18s, border-color .18s, background .18s;
   }
   .theme-toggle:hover { border-color: var(--case-gold); background: var(--bg-panel); transform: rotate(-8deg); }
+  body.light .theme-toggle { background: var(--bg-panel); border-color: var(--case-gold); color: var(--case-gold); }
 
   /* NPC 说话人标签 & 头像 */
   .speaker-label { font-size: 12px; color: var(--text-dim); margin-bottom: 4px; letter-spacing: .5px; }
@@ -798,24 +813,24 @@
 
   /* ===== 浅色（白天）主题 ===== */
   body.light {
-    --bg: #f2f0ea;
-    --bg-panel: #fffdf8;
-    --bg-sidebar: #f7f5ef;
-    --bg-bubble-npc: #e9ecf0;
-    --bg-bubble-user: #2f6fed;
-    --bg-input: #f5f3ed;
-    --border: #ddd8cb;
-    --text: #252a31;
-    --text-dim: #59616d;
-    --accent: #2f6fed;
-    --accent-soft: rgba(47, 111, 237, 0.1);
-    --case-gold: #806126;
-    --case-on-accent: #ffffff;
-    --case-gold-soft: rgba(128, 97, 38, 0.11);
-    --panel-shadow: 0 18px 54px rgba(40, 40, 32, 0.12);
-    --focus-ring: rgba(47, 111, 237, 0.76);
+    --bg: #f4efe4;
+    --bg-panel: #fffaf0;
+    --bg-sidebar: #eee6d7;
+    --bg-bubble-npc: #fffaf0;
+    --bg-bubble-user: #43372b;
+    --bg-input: #fbf6eb;
+    --border: #d8cbb5;
+    --text: #352c23;
+    --text-dim: #786c5c;
+    --accent: #8b6729;
+    --accent-soft: rgba(139, 103, 41, 0.12);
+    --case-gold: #8b6729;
+    --case-on-accent: #fffaf0;
+    --case-gold-soft: rgba(139, 103, 41, 0.13);
+    --panel-shadow: 0 18px 54px rgba(86, 66, 35, 0.13);
+    --focus-ring: rgba(139, 103, 41, 0.68);
   }
-  body.light .center-screen { background: radial-gradient(ellipse at 50% 12%, rgba(128, 97, 38, 0.045), transparent 62%); }
+  body.light .center-screen { background: radial-gradient(ellipse at 50% 12%, rgba(139, 103, 41, 0.055), transparent 62%); }
   body.light .config-card, body.light .planning-card { box-shadow: var(--panel-shadow); }
   body.light .grammar-tip { color: #8a6a00; background: rgba(240, 201, 72, 0.14); }
   body.light .translation-box { color: #5b6575; background: rgba(0, 0, 0, 0.04); }
@@ -927,11 +942,11 @@
   /* Vivian-inspired spacing and composition; retain 词狱's existing gold/beige palette. */
   :root {
     --bg: #101923; --bg-panel: #182330; --bg-sidebar: #141e29; --bg-input: #121c27;
-    --bg-bubble-npc: #1b2a39; --border: #33414e; --text-dim: #aab5c1;
+    --bg-bubble-npc: #1b2a39; --bg-bubble-user: #b68a48; --border: #33414e; --text-dim: #aab5c1;
     --radius: 16px; --ui-font: 'Times New Roman', Times, 'Songti SC', SimSun, 'Noto Serif CJK SC', 'Source Han Serif SC', STSong, serif;
     --soft-shadow: 0 16px 52px rgba(0,0,0,.16); --hero-glow: rgba(209,173,104,.19);
   }
-  body.light { --soft-shadow: 0 16px 52px rgba(68,54,25,.07); --hero-glow: rgba(209,173,104,.24); }
+  body.light { --soft-shadow: 0 16px 52px rgba(86,66,35,.09); --hero-glow: rgba(181,145,81,.22); }
   body { font-family: var(--ui-font); -webkit-font-smoothing: antialiased; }
   button, input, select, textarea { -webkit-tap-highlight-color: transparent; }
   :focus-visible { outline: 2px solid var(--case-gold); outline-offset: 4px; }
@@ -949,6 +964,16 @@
   .account-chip { max-width: 130px; }
   .config-top-actions { display: flex; flex: 1; align-items: center; justify-content: center; gap: 8px; }
   .shortcut-link { background: transparent; border-color: transparent; padding: 8px 12px; min-height: 42px; border-radius: 999px; color: var(--text-dim); gap: 6px; font-size: 13px; white-space: nowrap; }
+  .topbar-back {
+    order: 2; display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto;
+    white-space: nowrap; cursor: pointer; min-height: 38px; padding: 9px 16px;
+    font: 500 12.5px/1 var(--ui-font); letter-spacing: .02em;
+    color: var(--text-dim); background: var(--bg-input);
+    border: 1px solid var(--border); border-radius: 999px;
+    transition: color .15s, border-color .15s, background .15s;
+  }
+  .topbar-back:hover { color: var(--case-gold); border-color: color-mix(in srgb, var(--case-gold) 55%, var(--border)); background: var(--case-gold-soft); }
+  .topbar-back .tb-arrow { color: var(--case-gold); font-size: 12px; line-height: 1; }
   .shortcut-link:hover { background: var(--case-gold-soft); border-color: transparent; color: var(--text); transform: none; }
   .shortcut-icon { display: none; }
   .shortcut-count { position: static; margin-left: 2px; min-width: 18px; background: var(--case-gold-soft); }
@@ -1073,21 +1098,89 @@
   .sidebar .script-name { color: var(--text); font-size: 22px; line-height: 1.5; font-weight: 650; }
   .sidebar .script-meta { margin-top: 10px; margin-bottom: 26px; line-height: 1.75; }
   .sidebar .section-label { text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--text); margin: 24px 0 12px; }
-  .task-goal-box, body.light .task-goal-box { background: var(--bg-input); border-radius: 18px; padding: 14px; color: var(--text); }
+  .task-goal-box, body.light .task-goal-box {
+    background: var(--bg-input); border-radius: 18px; padding: 14px; color: var(--text);
+    border-left: 2px solid color-mix(in srgb, var(--case-gold) 45%, transparent);
+  }
   .task-item { padding: 7px 0; }
   .task-criterion { line-height: 1.85; }
   .player-script-panel { line-height: 1.95; }
   .player-script-panel h4 { color: var(--case-gold); font-weight: 600; margin: 16px 0 8px; }
   .main-area { background: var(--bg); }
   .chat-area { padding: 68px max(32px, calc((100vw - 1260px) / 2)) 12px; }
-  .msg-row { margin-bottom: 28px; }
+  .msg-row { align-items: flex-start; margin-bottom: 30px; }
   .bubble-wrap { max-width: min(78%, 680px); }
-  .bubble { padding: 16px 20px; border-radius: 22px; line-height: 1.9; }
-  .msg-row.npc .bubble { background: var(--bg-panel); border: 1px solid var(--border); border-top-left-radius: 6px; }
-  .msg-row.user .bubble { background: var(--case-gold); color: var(--case-on-accent); border-top-right-radius: 6px; }
-  .msg-row.npc .avatar, .msg-row.user .avatar { background: var(--case-gold-soft); border: 1px solid var(--border); border-radius: 12px; color: var(--case-gold); }
+  .avatar {
+    position: relative; width: 44px; height: 44px; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid color-mix(in srgb, var(--case-gold) 58%, transparent); border-radius: 50%;
+    background: color-mix(in srgb, var(--case-gold) 8%, var(--bg-panel));
+    color: var(--avatar-accent, var(--case-gold));
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+    font-family: Georgia, "Times New Roman", serif; font-size: 18px;
+    letter-spacing: 0; line-height: 1;
+  }
+  .player-avatar {
+    color: color-mix(in srgb, var(--case-gold) 72%, #2b2318);
+    font-size: 15px; font-weight: 600; line-height: 1; letter-spacing: .5px;
+  }
+  .msg-row.npc .avatar { margin-right: 16px; }
+  .msg-row.user .avatar { margin-left: 16px; order: 2; }
+  .speaker-label {
+    display: flex; align-items: center; gap: 8px; margin: 0 0 8px 14px;
+    color: var(--case-gold); font-size: 13px; letter-spacing: .08em;
+  }
+  .speaker-label::before { content: ""; width: 24px; border-top: 1px solid currentColor; opacity: .55; }
+  .bubble {
+    position: relative; padding: 17px 21px; border-radius: 20px;
+    font-size: 15px; line-height: 1.9; word-break: break-word; white-space: pre-wrap;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .08);
+  }
+  .msg-row.npc .bubble {
+    background: var(--bg-bubble-npc); border: 1px solid var(--border);
+    border-radius: 5px 20px 20px 20px;
+  }
+  .msg-row.npc .bubble::before {
+    content: ""; position: absolute; top: -1px; left: -9px;
+    border-top: 9px solid var(--border); border-right: 9px solid transparent;
+  }
+  .msg-row.npc .bubble::after {
+    content: ""; position: absolute; top: 1px; left: -7px;
+    border-top: 7px solid var(--bg-bubble-npc); border-right: 7px solid transparent;
+  }
+  .msg-row.user .bubble {
+    background: var(--bg-bubble-user); color: var(--case-on-accent);
+    border: 1px solid color-mix(in srgb, var(--case-gold) 65%, transparent);
+    border-radius: 20px 5px 20px 20px;
+    box-shadow: 0 8px 22px rgba(55, 36, 17, .18);
+  }
+  .msg-row.user .bubble::after {
+    content: ""; position: absolute; top: -1px; right: -9px;
+    border-top: 9px solid var(--bg-bubble-user); border-left: 9px solid transparent;
+  }
+  .msg-row.npc .avatar, .msg-row.user .avatar { background: var(--case-gold-soft); border-color: var(--case-gold); border-radius: 50%; color: var(--case-gold); }
+  body.light .avatar { border-color: rgba(156, 117, 38, .50); background: #fbf5e7; box-shadow: 0 1px 3px rgba(86, 66, 35, .08); }
+  body.light .msg-row.user .bubble { color: #fffaf0; }
+  body.light .translation-box { color: #887b68; }
+  .avatar-icon, .npc-mask-icon { width: 28px; height: 28px; display: block; color: var(--avatar-accent, currentColor); }
+  body.light .msg-row.npc .bubble { box-shadow: inset 0 0 0 3px rgba(216, 203, 181, .34), 0 8px 22px rgba(86, 66, 35, .08); }
+  body.light .msg-row.npc .bubble::before { border-top-color: var(--border); }
+  body.light .msg-row.npc .bubble::after { border-top-color: var(--bg-bubble-npc); }
+  body.light .msg-row.user .avatar { background: #f7efdd; }
+  body.light .msg-row.user .bubble { background: #43372b; border-color: #43372b; }
+  @media (max-width: 720px) {
+    .msg-row { margin-bottom: 23px; }
+    .msg-row.npc .avatar { margin-right: 11px; }
+    .msg-row.user .avatar { margin-left: 11px; }
+    .bubble-wrap { max-width: calc(100% - 51px); }
+    .avatar { width: 38px; height: 38px; font-size: 15px; }
+    .avatar-icon, .npc-mask-icon { width: 23px; height: 23px; }
+    .msg-row.npc .bubble { border-radius: 4px 17px 17px 17px; }
+    .msg-row.user .bubble { border-radius: 17px 4px 17px 17px; }
+  }
   .translation-box, body.light .translation-box { color: var(--text-dim); background: transparent; border-left: 1px solid var(--border); padding: 8px 14px; }
-  .translate-btn { padding: 8px 4px; }
+  .translate-btn { padding: 8px 4px; color: var(--text-dim); font-size: 12px; }
+  .translate-btn:hover { color: var(--case-gold); }
   .input-area { padding: 6px max(32px, calc((100vw - 1260px) / 2)) max(12px, env(safe-area-inset-bottom)); }
   .input-box { border-radius: 26px; background: var(--bg-panel); box-shadow: var(--soft-shadow); padding: 10px 12px 10px 20px; }
   .input-box:focus-within { border-color: var(--case-gold); box-shadow: 0 0 0 3px var(--case-gold-soft); }
@@ -1288,7 +1381,7 @@
   .opening-icon { flex: 0 0 54px; width: 54px; height: 54px; color: var(--opening-gold); }
   .opening-highlights h2 { font-size: 28px; font-weight: 600; line-height: 1.4; margin: 0 0 7px; color: var(--opening-ink); }
   .opening-highlights p { font-size: 17px; line-height: 1.8; color: var(--opening-muted); }
-  .opening-flow { margin-top: 32px; }
+  .opening-flow { margin-bottom: 32px; }
   .opening-flow h2 { color: var(--opening-ink); font-size: 22px; font-weight: 600; margin-bottom: 20px; }
   .opening-flow ol { list-style: none; display: flex; align-items: center; gap: 0; padding: 0; margin: 0; }
   .opening-flow li { display: flex; align-items: center; gap: 7px; white-space: nowrap; font-size: 16px; line-height: 1.7; color: var(--opening-ink); }
@@ -1329,7 +1422,7 @@
     .opening-icon { flex-basis: 40px; width: 40px; height: 40px; }
     .opening-highlights h2 { font-size: 23px; }
     .opening-highlights p { font-size: 15px; }
-    .opening-flow { margin-top: 28px; }
+    .opening-flow { margin-bottom: 28px; }
     .opening-flow ol { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; }
     .opening-flow li { font-size: 16px; gap: 9px; }
     .opening-flow li:not(:last-child)::after { display: none; }
@@ -1348,11 +1441,10 @@
   .opening-highlights h2 { font-size: 26px; }
   .opening-highlights p { font-size: 16px; }
   .opening-icon { flex-basis: 48px; width: 48px; height: 48px; }
-  .opening-flow { margin-top: 28px; }
+  .opening-flow { margin-bottom: 28px; }
   .opening-flow h2 { font-size: 21px; }
   .opening-flow li { font-size: 15px; gap: 6px; }
   .opening-flow li:not(:last-child)::after { width: clamp(10px, 1.5vw, 22px); margin-right: 8px; }
-  .opening-record-note { font-size: 13px; line-height: 1.8; margin-top: 14px; color: var(--opening-muted); }
   @media (min-width: 901px) and (max-width: 1100px) {
     #step-home .entry-intro { padding-left: 32px; padding-right: 32px; gap: 32px; }
     #step-home .entry-title { font-size: 43px; }
@@ -1382,8 +1474,8 @@
   }
 
   /* 对话、词汇与自测沿用词狱的纸张 / 棕金主题。 */
-  :root { --word-accent: #e4c183; --dialogue-surface: #202c38; --accent: var(--word-accent); --accent-soft: rgba(209,173,104,.12); }
-  body.light { --word-accent: #875b2d; --dialogue-surface: #f6efdf; --accent: var(--word-accent); --accent-soft: rgba(139,105,56,.09); }
+  :root { --word-accent: #e4c183; --dialogue-surface: #1b2a39; --accent: var(--word-accent); --accent-soft: rgba(209,173,104,.12); }
+  body.light { --word-accent: #875b2d; --dialogue-surface: #fffaf0; --accent: var(--word-accent); --accent-soft: rgba(139,105,56,.11); }
   .vocab-word.vocab-target, body.light .vocab-word.vocab-target,
   .vocab-book-item .vbi-word, body.light .vocab-book-item .vbi-word,
   .learning-word-main strong, body.light .learning-word-main strong,
@@ -1419,7 +1511,30 @@
   .option-mode .option-btn { width: 100%; min-height: 48px; background: var(--case-gold-soft); border-color: var(--border); }
   .option-mode .option-btn:hover { border-color: var(--case-gold); }
   .choice-mode-hint { color: var(--text-dim); font-size: 12px; line-height: 1.7; }
-  #reply-language-exam { grid-column: 2; }
+  .row-2 > #reply-language-exam { grid-column: 1 / -1; }
+  /* 白天模式把残留的蓝色强调统一收回纸张、墨棕与哑金体系。 */
+  body.light .vocab-word.vocab-target,
+  body.light .vocab-item .w,
+  body.light .vocab-popover .pw,
+  body.light .vocab-book-item .vbi-word,
+  body.light .learning-word-main strong,
+  body.light .sh-label,
+  body.light .sh-char b,
+  body.light .sh-turn.player .sh-who,
+  body.light .option-btn,
+  body.light .em-ribbon,
+  body.light .em-title,
+  body.light .em-label,
+  body.light .vocab-chip { color: var(--word-accent); }
+  body.light .vocab-progress-bar { background: linear-gradient(90deg, #8b6729, #c19a59); }
+  body.light .review-entry-btn { color: #fffaf0; background: linear-gradient(135deg, #4b3c2d, #8b6729); box-shadow: 0 6px 18px rgba(91, 65, 27, .22); }
+  body.light .review-entry-btn:hover { box-shadow: 0 8px 22px rgba(91, 65, 27, .3); }
+  body.light .vocab-popover .vp-example { color: #745b3d; }
+  body.light .dot-anim.big i { background: var(--case-gold); }
+  body.light .config-top-actions .shortcut-link,
+  body.light .site-brand small,
+  body.light .input-hint { color: #665a4c; }
+  body.light .input-hint { font-size: 12px; }
   @media (max-width: 720px) {
     .option-mode .options-area { max-height: 46%; padding-right: 12px; padding-left: 12px; }
     .option-mode .chat-area { padding-bottom: 8px; }
@@ -1444,6 +1559,7 @@
         <button type="button" class="shortcut-link" id="btn-open-vocab-review"><span class="shortcut-icon" aria-hidden="true">复</span><span>我的词汇复习</span><span class="shortcut-count" id="learning-vocab-count" hidden></span></button>
         <button type="button" class="shortcut-link" id="btn-open-script-history"><span class="shortcut-icon" aria-hidden="true">档</span><span>玩过的剧本</span><span class="shortcut-count" id="script-history-count" hidden></span></button>
       </nav>
+      <button type="button" class="topbar-back hidden" id="btn-topbar-home"><span class="tb-arrow" aria-hidden="true">←</span>返回主界面</button>
     </div>
     <div class="wizard-progress" aria-label="学习流程"><span class="active"></span><span></span><span></span></div>
     <section class="config-step" id="step-home">
@@ -1454,9 +1570,18 @@
             <h1 class="entry-title">每一句英语，<br>都是一条线索。</h1>
             <p class="entry-copy">一个人开局，AI 扮演除你之外的所有角色。<br class="opening-desktop-break">从读本、对话到搜证，在故事里练习英语。</p>
             <p class="hero-note">六类剧本，自选语言挑战。日常交流与考试英语，都能从这里开始。</p>
-            <div class="hero-actions"><button type="button" class="btn hero-action" id="btn-explore-learning">开始沉浸探索</button><button type="button" class="btn-ghost hero-secondary" id="btn-open-guide">查看详情</button></div><p class="opening-record-note">游客记录刷新即清空，登录后保存游玩记录。</p>
+            <div class="hero-actions"><button type="button" class="btn hero-action" id="btn-explore-learning">开始沉浸探索</button><button type="button" class="btn-ghost hero-secondary" id="btn-open-guide">查看详情</button></div>
           </div>
           <div class="opening-overview">
+            <div class="opening-flow">
+              <h2>怎么玩</h2>
+              <ol>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v16H6zM9 7h6M9 11h6M9 15h3M6 19l-3 2V6"/></svg><span>选目标</span></li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5c3-1 5-1 7 1 2-2 4-2 7-1v15c-3-1-5-1-7 1-2-2-4-2-7-1ZM12 6v15"/></svg><span>开局读本</span></li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11a9 9 0 0 1-9 9H5l-3 2 1-7a9 9 0 1 1 18-4Z"/><path d="M7 11h.1M12 11h.1M17 11h.1"/></svg><span>对话搜证</span></li>
+                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 16-1 5 5-1L21 8l-4-4ZM14 7l4 4M3 23h19"/></svg><span>表决复盘</span></li>
+              </ol>
+            </div>
             <ul class="opening-highlights" aria-label="词狱玩法亮点">
               <li>
                 <svg class="opening-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="18" r="8"/><path d="M19 49v-7a13 13 0 0 1 26 0v7Z"/><circle cx="10" cy="25" r="5"/><path d="M5 45v-7a7 7 0 0 1 10-6"/><circle cx="54" cy="25" r="5"/><path d="M59 45v-7a7 7 0 0 0-10-6"/></svg>
@@ -1471,15 +1596,6 @@
                 <div><h2>言辞即线索</h2><p>在台词中查词，把实际遇见的重点词带进复习。</p></div>
               </li>
             </ul>
-            <div class="opening-flow">
-              <h2>怎么玩</h2>
-              <ol>
-                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v16H6zM9 7h6M9 11h6M9 15h3M6 19l-3 2V6"/></svg><span>选目标</span></li>
-                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5c3-1 5-1 7 1 2-2 4-2 7-1v15c-3-1-5-1-7 1-2-2-4-2-7-1ZM12 6v15"/></svg><span>开局读本</span></li>
-                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11a9 9 0 0 1-9 9H5l-3 2 1-7a9 9 0 1 1 18-4Z"/><path d="M7 11h.1M12 11h.1M17 11h.1"/></svg><span>对话搜证</span></li>
-                <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 16-1 5 5-1L21 8l-4-4ZM14 7l4 4M3 23h19"/></svg><span>表决复盘</span></li>
-              </ol>
-            </div>
           </div>
         </header>
       </div>
@@ -1618,7 +1734,6 @@
       </div>
       <p class="learning-feedback" id="learning-feedback" aria-live="polite"></p>
       <div class="learning-vocab-list" id="learning-vocab-list"></div>
-      <div class="wizard-actions"><button class="btn-ghost" id="btn-close-vocab-review">← 返回主界面</button></div>
     </section>
 
     <section class="config-step hidden" id="step-vocab-book">
@@ -1632,7 +1747,6 @@
       </div>
       <div class="field book-status-field"><label for="book-status-filter">复习状态</label><select id="book-status-filter"><option value="all">全部</option><option value="review">待复习</option><option value="mastered">已掌握</option><option value="unknown">未掌握</option></select></div>
       <div class="learning-vocab-list" id="vocab-book-list"></div>
-      <div class="wizard-actions"><button class="btn-ghost" id="btn-close-vocab-book">← 返回主界面</button></div>
     </section>
 
     <section class="config-step hidden" id="step-script-history">
@@ -1646,7 +1760,6 @@
       </div>
       <div class="learning-vocab-list script-history-list" id="script-history-list"></div>
       <div class="script-history-detail hidden" id="script-history-detail"></div>
-      <div class="wizard-actions"><button class="btn-ghost" id="btn-close-script-history">← 返回主界面</button></div>
     </section>
 
     <section class="config-step hidden" id="step-daily-mode">
@@ -1700,7 +1813,7 @@
         </div>
         <div class="field reply-mode-field">
           <label for="sel-reply-mode">你的回答模式</label>
-          <select id="sel-reply-mode" class="reply-mode-select"><option value="options">英文选项模式</option><option value="free" selected>自由对话模式</option></select>
+          <select id="sel-reply-mode" class="reply-mode-select"><option value="options" selected>英文选项模式</option><option value="free">自由对话模式</option></select>
         </div>
         <div class="field" id="reply-language-exam">
           <label for="sel-reply-language">你的回答语言</label>
@@ -1742,7 +1855,7 @@
         <button class="choice-card" data-daily-level="B1"><strong>B1 进阶</strong><small>自然对话，补充原因、偏好和细节</small></button>
         <button class="choice-card" data-daily-level="B2"><strong>B2 挑战</strong><small>更灵活的表达、委婉语气和复杂交涉</small></button>
       </div>
-      <div class="field reply-language-field"><label for="sel-daily-reply-mode">你的回答模式</label><select id="sel-daily-reply-mode" class="reply-mode-select"><option value="options">英文选项模式</option><option value="free" selected>自由对话模式</option></select></div>
+      <div class="field reply-language-field"><label for="sel-daily-reply-mode">你的回答模式</label><select id="sel-daily-reply-mode" class="reply-mode-select"><option value="options" selected>英文选项模式</option><option value="free">自由对话模式</option></select></div>
       <div class="field reply-language-field" id="reply-language-daily"><label for="sel-daily-reply-language">你的回答语言</label><select id="sel-daily-reply-language" class="reply-language-select"><option value="en">英文回答（仅允许英文）</option><option value="zh">中文回答（中英文均可）</option></select></div>
       <div class="wizard-actions"><button class="btn-ghost" id="btn-back-daily-scene">← 返回场景</button><button id="btn-start-daily-stage" class="btn btn-start" disabled>开始这一关</button></div>
     </section>
@@ -1763,7 +1876,7 @@
         <button class="choice-card" data-random-level="B1"><strong>B1 进阶</strong><small>加入细节说明和协商</small></button>
         <button class="choice-card" data-random-level="B2"><strong>B2 挑战</strong><small>复杂情况和更灵活表达</small></button>
       </div>
-      <div class="field reply-language-field"><label for="sel-random-reply-mode">你的回答模式</label><select id="sel-random-reply-mode" class="reply-mode-select"><option value="options">英文选项模式</option><option value="free" selected>自由对话模式</option></select></div>
+      <div class="field reply-language-field"><label for="sel-random-reply-mode">你的回答模式</label><select id="sel-random-reply-mode" class="reply-mode-select"><option value="options" selected>英文选项模式</option><option value="free">自由对话模式</option></select></div>
       <div class="field reply-language-field" id="reply-language-random"><label for="sel-random-reply-language">你的回答语言</label><select id="sel-random-reply-language" class="reply-language-select"><option value="en">英文回答（仅允许英文）</option><option value="zh">中文回答（中英文均可）</option></select></div>
       <p class="wizard-note" id="random-assessment-note">完成九大板块全部 72 个场景后，此模式将按已学内容生成综合测评，并指出薄弱场景。</p>
       <div class="wizard-actions"><button class="btn-ghost" id="btn-back-random-mode">← 返回练习方式</button><button id="btn-generate-daily" class="btn btn-start" disabled>🎲 随机生成剧本</button></div>
@@ -1882,14 +1995,14 @@
   <aside class="sidebar" id="game-sidebar" aria-label="角色与任务" tabindex="-1">
     <button id="btn-close-game-panel" class="btn-ghost panel-close" aria-label="关闭角色与任务面板">✕ 关闭</button>
     <div class="sidebar-content">
-    <h3 id="sb-title-label">🎭 当前剧本</h3>
+    <h3 id="sb-title-label"><span class="sb-ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.3c-2.9 0-4.9 1.9-4.9 4.6v.4c0 3.7 2 6.2 4.9 7.3 2.9-1.1 4.9-3.6 4.9-7.3v-.4c0-2.7-2-4.6-4.9-4.6Z"/><path d="M4.9 7.1c.9-.8 1.9-.7 2.7.1-.8.9-1.9.9-2.7-.1Z"/><path d="M8.4 7.2c.8-.8 1.8-.9 2.7-.1-.8 1-1.9 1-2.7.1Z"/><path d="M6.4 10.2c1 .6 2.2.6 3.2 0"/></svg></span>当前剧本</h3>
     <div class="script-name" id="sb-script-name">—</div>
     <div class="script-meta" id="sb-script-meta">—</div>
 
-    <div class="section-label">🎯 任务目标</div>
+    <div class="section-label"><span class="sb-ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="5.3"/><circle cx="8" cy="8" r="1.9"/><path d="M8 2.7v1.2M8 12.1v1.2M2.7 8h1.2M12.1 8h1.2"/></svg></span>任务目标</div>
     <div class="task-goal-box" id="sb-task-goal">—</div>
 
-    <div class="section-label">📜 我的角色本</div>
+    <div class="section-label"><span class="sb-ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.9" y="2.8" width="10.2" height="10.4" rx="1.2"/><path d="M5.2 5.9h5.6M5.2 8h5.6M5.2 10.1h3.4"/></svg></span>我的角色本</div>
     <div id="sb-player-script" class="player-script-panel"></div>
     <details class="public-background"><summary>回看故事背景与登场角色</summary><div id="sb-story-background"></div></details>
     </div>
@@ -2699,9 +2812,11 @@ function taskProgressDescription(taskId) {
     if (["inspect", "inquire"].includes(r.kind)) {
       const action = r.kind === "inspect" ? "查看" : "询问";
       const unit = r.kind === "inspect" ? "处" : "人";
+      const recorded = r.targets.filter(t => records.has(t.id)).slice(0, r.required).map(t => t.label);
       const pending = r.targets.filter(t => !records.has(t.id)).map(t => t.label);
-      return "已" + action + Math.min(records.size, r.required) + "/" + r.required + unit +
-        (records.size < r.required ? "（待" + action + "：" + pending.join("、") + "）" : "");
+      return "已" + action + " " + Math.min(records.size, r.required) + "/" + r.required + unit +
+        (recorded.length ? "（" + recorded.join("、") + "）" : "") +
+        (records.size < r.required ? "；还需" + action + "：" + pending.slice(0, r.required - records.size).join("、") : "");
     }
     return (records.size ? "已" : "尚未") + taskRequirementLabel(r);
   }).join("；");
@@ -2754,7 +2869,7 @@ function applyTaskEvidence(data, isBoot, userText, turnId) {
         if (!target || responseQuote.length < 4 || ![data.npc_dialogue, data.translation].some(s => taskEvidenceText(s).includes(responseQuote))) continue;
         const mentions = rule.targets.filter(t => taskTargetMention(userText, t));
         if (rule.kind === "inspect") {
-          if (/\b(?:cannot|can't|won't|unable to|not yet|later)\b|暂时不能|不能(?:给|查|看)|稍后|以后再|尚未提供/.test(responseQuote)) continue;
+          if (/\b(?:cannot|can't|won't|unable to)\s+(?:show|give|provide|open|read|release|disclose|access|let you (?:see|view|read))\b|\b(?:not yet|not available|not accessible|not provided|not released|won't be available|come back later|check back later|try again later|return later)\b|暂时(?:不能|无法|不可以)|不能(?:给|让你|提供|查看|查阅)|稍后再(?:来|查|看|问)|以后再(?:来|查|看|问)|尚未(?:提供|开放|解锁)|还不能(?:提供|查看)/i.test(responseQuote)) continue;
           if (!taskTargetMention(quote, target) || !scriptData.clues.some(c => c.id === target.id &&
             (c.act === 1 || (c.act === 2 && !["reading", "introduction"].includes(taskProgressState.phase))))) continue;
         } else {
@@ -2804,6 +2919,22 @@ function applyScriptTurnRules(data, isBoot = false, userText = "", turnId = 0) {
   const canReview = storyPhases.has("ballot") && storyPhases.has("ending") && phase === "review";
   if (phase === "ballot" || (phase === "ending" && storyPhases.has("ballot")) || canReview) storyPhases.add(phase);
   data.game_over = data.game_over === true && canReview;
+}
+
+/* 有些模型会把结案台词写对，却漏填 story_phase。完成必要任务和表决后，
+   用明确的中英文结案句兜底，避免选项停留在已经结束的剧情下面。 */
+function hasCaseClosureSignal(dialogue, translation = "") {
+  const sentences = (String(dialogue || "") + "\n" + String(translation || ""))
+    .split(/[.!?。！？\n]+/).map(s => s.trim()).filter(Boolean);
+  return sentences.some(sentence => {
+    const english = /\b(?:case|investigation|mystery|report)\b.{0,40}\b(?:is|was|has been|have been)\s+(?:(?:now|finally|officially)\s+)?(?:closed|solved|resolved|finished|completed|complete|over|done)\b/i;
+    const chinese = /(?:案件|案子|调查|案情|报告)(?:现在|终于|已经|已|正式|彻底)?(?:结案|结束|解决|告破|完成|告一段落|水落石出)/;
+    const match = english.exec(sentence);
+    const englishClosed = match && !/\b(?:not|never|don't|doesn't|didn't|isn't|wasn't|can't|cannot|won't|yet)\b[^.!?]{0,60}$/i.test(sentence.slice(0, match.index));
+    const chineseMatch = chinese.exec(sentence);
+    const chineseClosed = chineseMatch && !/(?:没有|并未|尚未|未|不|并不|还没|没能|无法|不能)[^，,。！？.!?]{0,40}$/.test(sentence.slice(0, chineseMatch.index));
+    return Boolean(englishClosed || chineseClosed);
+  });
 }
 
 /* ================= 全局状态 ================= */
@@ -3687,6 +3818,9 @@ function showConfigStep(stepId) {
   $("panel-config").scrollTo({ top: 0, behavior: "instant" });
   const segment = ["step-vocab-review", "step-vocab-book", "step-script-history"].includes(stepId) ? 0 : stepId === "step-goal" ? 1 : ["step-daily-mode", "step-exam-script"].includes(stepId) ? 2 : 3;
   document.querySelectorAll(".wizard-progress span").forEach((item, i) => item.classList.toggle("active", i < segment));
+  /* 顶部「返回主界面」只在个人记录类页面出现，主界面保持原样 */
+  const topBack = $("btn-topbar-home");
+  if (topBack) topBack.classList.toggle("hidden", !["step-vocab-review", "step-vocab-book", "step-script-history"].includes(stepId));
   hideBanner();
 }
 
@@ -4014,13 +4148,40 @@ function typewriter(text, onChar, interval) {
   });
 }
 
-/* ================= NPC 角色头像：名字 → 专属 emoji + 底色 ================= */
+/* ================= 头像徽章：每个角色固定一个道具符号，靠形状区分而不是靠色相 ================= */
+const AVATAR_SVG_OPEN = '<svg class="avatar-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">';
+function avatarGlyph(inner) { return AVATAR_SVG_OPEN + inner + '</svg>'; }
+const AVATAR_GLYPHS = {
+  mask:   '<path d="M16 3.6C10.2 3.6 6 7.2 6 12.6v1.2c0 7 4 11.6 10 13.9 6-2.3 10-6.9 10-13.9v-1.2C26 7.2 21.8 3.6 16 3.6Z"/>' +
+          '<circle cx="16" cy="7.1" r=".85"/>' +
+          '<path d="M9.4 13.4c1.6-1.5 3.6-1.4 5.1.1-1.5 1.7-3.5 1.7-5.1-.1Z"/>' +
+          '<path d="M17.5 13.5c1.5-1.5 3.5-1.6 5.1-.1-1.5 1.8-3.5 1.8-5.1.1Z"/>' +
+          '<path d="M12.4 19.6c2.3 1.1 4.9 1.1 7.2 0"/>',
+  watch:  '<circle cx="16" cy="18.4" r="8"/><path d="M13.6 6.9h4.8M16 6.9V4.5"/><path d="M16 18.4v-4.6M16 18.4l3.1 2.1"/>',
+  key:    '<circle cx="11.2" cy="11.2" r="4.1"/><path d="M14.3 14.3 24.2 24.2"/><path d="M21.4 21.4l2.3-2.3"/><path d="M23.2 23.2l2.2-2.2"/>',
+  letter: '<rect x="5.6" y="9.2" width="20.8" height="14.2" rx="2.2"/><path d="M6.4 10.6 16 17.6 25.6 10.6"/>',
+  scale:  '<path d="M16 6.4v18.8M9.6 9.6h12.8M11.4 25.2h9.2"/><path d="M9.6 9.6 6.6 17.2h6Z"/><path d="M22.4 9.6l-3 7.6h6Z"/>',
+  candle: '<path d="M16 5.4c1.5 1.8 2.1 3 2.1 4.2 0 1.4-1 2.4-2.1 2.4s-2.1-1-2.1-2.4c0-1.2.6-2.4 2.1-4.2Z"/><rect x="12.7" y="13.6" width="6.6" height="10.6" rx="1"/><path d="M9.8 25.4h12.4"/>',
+  glass:  '<circle cx="14.4" cy="14.4" r="7.2"/><path d="M19.6 19.6 25.2 25.2"/>',
+  quill:  '<path d="M11.6 25.4c.5-2.9 1.5-5.3 3.3-7.9"/><path d="M14.9 17.5c5-4.4 8.4-6.2 11.9-7-1 3.5-3.1 7.2-6.4 9.9-1.9 1.4-3.5 1.6-5.5-.5Z"/><path d="M20.6 12.4c-1.8 1.5-3.3 3-4.5 4.7"/>',
+  lock:   '<rect x="9.2" y="15" width="13.6" height="10.2" rx="1.8"/><path d="M11.8 15v-3.2a4.2 4.2 0 1 1 8.4 0V15"/><circle cx="16" cy="20.1" r="1.15"/>',
+  eye:    '<path d="M5.6 16S9.5 9.4 16 9.4 26.4 16 26.4 16 22.5 22.6 16 22.6 5.6 16 5.6 16Z"/><circle cx="16" cy="16" r="2.5"/>',
+  cards:  '<rect x="7.4" y="9.8" width="11" height="14.6" rx="1.6"/><rect x="14.2" y="7.6" width="11" height="14.6" rx="1.6"/>'
+};
+/* NPC 只能取以下十个符号；quill 留给玩家自己。 */
 const AVATAR_POOL = [
-  { e: "🕵️", c: "#3a2f6b" }, { e: "👩‍🔬", c: "#2d4a3a" }, { e: "👨‍✈️", c: "#4a3a2d" },
-  { e: "🧙", c: "#2d3a4a" }, { e: "👩‍⚕️", c: "#4a2d3a" }, { e: "🤖", c: "#3a4a4a" },
-  { e: "👽", c: "#2d4a2d" }, { e: "🦹", c: "#4a2d4a" }, { e: "👨‍🌾", c: "#4a462d" },
-  { e: "🧝", c: "#2d4a5e" }
+  { e: avatarGlyph(AVATAR_GLYPHS.mask),   c: "#9a7438" },
+  { e: avatarGlyph(AVATAR_GLYPHS.watch),  c: "#8a6a35" },
+  { e: avatarGlyph(AVATAR_GLYPHS.key),    c: "#7d6236" },
+  { e: avatarGlyph(AVATAR_GLYPHS.letter), c: "#9c7b41" },
+  { e: avatarGlyph(AVATAR_GLYPHS.scale),  c: "#87703c" },
+  { e: avatarGlyph(AVATAR_GLYPHS.candle), c: "#a8813c" },
+  { e: avatarGlyph(AVATAR_GLYPHS.glass),  c: "#6f5b3b" },
+  { e: avatarGlyph(AVATAR_GLYPHS.lock),   c: "#7b6238" },
+  { e: avatarGlyph(AVATAR_GLYPHS.eye),    c: "#8f7440" },
+  { e: avatarGlyph(AVATAR_GLYPHS.cards),  c: "#9f7c3e" }
 ];
+const PLAYER_AVATAR_ICON = avatarGlyph(AVATAR_GLYPHS.quill);
 const avatarRegistry = new Map();
 function getAvatar(name) {
   if (!avatarRegistry.has(name)) {
@@ -4225,7 +4386,7 @@ function addUserBubble(text) {
   row.className = "msg-row user";
   row.innerHTML =
     '<div class="bubble-wrap"><div class="bubble"></div></div>' +
-    '<div class="avatar">🧑</div>';
+    '<div class="avatar player-avatar" aria-hidden="true">我</div>';
   row.querySelector(".bubble").textContent = text;
   elChatArea.appendChild(row);
   scrollChatBottom();
@@ -4236,7 +4397,7 @@ function addNpcBubble() {
   const row = document.createElement("div");
   row.className = "msg-row npc";
   row.innerHTML =
-    '<div class="avatar npc-avatar">🎭</div>' +
+    '<div class="avatar npc-avatar" aria-hidden="true">' + AVATAR_POOL[0].e + '</div>' +
     '<div class="bubble-wrap">' +
       '<div class="speaker-label hidden"></div>' +
       '<div class="bubble"><span class="bubble-text"></span><span class="stream-cursor"></span></div>' +
@@ -4522,14 +4683,11 @@ function finalizeNpcBubble(ui, data, rawText) {
   /* 用角色头像与名字区分说话者，气泡统一跟随日夜主题。 */
   if (speaker) {
     const av = getAvatar(speaker);
-    ui.avatar.textContent = av.e;
-    ui.avatar.style.background = "var(--case-gold-soft)";
+    ui.avatar.innerHTML = av.e;
+    ui.avatar.style.setProperty("--avatar-accent", av.c);
     ui.speakerLabel.textContent = speaker;
     ui.speakerLabel.style.color = "var(--word-accent)";
     ui.speakerLabel.classList.remove("hidden");
-    /* 使用主题变量，切换日夜模式时不残留角色原来的紫色底。 */
-    ui.bubble.style.background = "var(--dialogue-surface)";
-    ui.bubble.style.borderLeft = "3px solid var(--case-gold)";
   }
 
   /* 日常场景：本轮的口语常用词组（只收台词里原样出现的多词搭配） */
@@ -4563,7 +4721,7 @@ function finalizeNpcBubble(ui, data, rawText) {
   if (translation) {
     const btn = document.createElement("button");
     btn.className = "translate-btn";
-    btn.textContent = "🌐 查看翻译";
+    btn.textContent = "查看翻译";
     btn.addEventListener("click", () => {
       /* 首次点击要先建出翻译框（建出来时是隐藏状态），否则新框没有 hidden 类，
          会被当成「已展开」立即收起，表现出来就是要连点两下才出来。 */
@@ -4576,7 +4734,7 @@ function finalizeNpcBubble(ui, data, rawText) {
       }
       const visible = !box.classList.contains("hidden");
       box.classList.toggle("hidden", visible);
-      btn.textContent = visible ? "🌐 查看翻译" : "🙈 收起翻译";
+      btn.textContent = visible ? "查看翻译" : "收起翻译";
       scrollChatBottom();
     });
     ui.extra.appendChild(btn);
@@ -4623,10 +4781,15 @@ function finalizeNpcBubble(ui, data, rawText) {
   if (!scriptInfo.dailyMode) renderScriptTasks();
   /* 重点词覆盖：只统计本轮台词中真实出现过的重点词，并刷新进度条 */
   collectAppearedWords(dialogue);
-  /* 剧本模式须演完表决、结局与复盘；日常关卡沿用全部任务完成即可回顾。 */
+  /* 剧本模式通常须演完表决、结局与复盘；若结案台词已经收束且全部任务都核验通过，
+     直接显示结算入口，避免玩家被留在结案后的无效选项列表里。 */
   const allTasksDone = Boolean(scriptData && Array.isArray(scriptData.tasks) && scriptData.tasks.length &&
     completedTasks.size >= scriptData.tasks.length);
-  if (scriptInfo.dailyMode ? (gameOver || allTasksDone) : gameOver) showReviewEntryButton();
+  const endingComplete = !scriptInfo.dailyMode && allTasksDone && storyPhases.has("ballot") &&
+    ((data && data.story_phase === "ending") || hasCaseClosureSignal(dialogue, translation));
+  if (scriptInfo.dailyMode ? (gameOver || allTasksDone) : allTasksDone && (gameOver || endingComplete)) {
+    showReviewEntryButton(endingComplete && !gameOver ? "查看学习结算" : "进入回顾");
+  }
   scrollChatBottom();
 }
 
@@ -4651,7 +4814,7 @@ function renderGrammarTask(taskText) {
   scrollChatBottom();
 }
 
-/* mode: "choice" | "search"。搜证模式下已探索过的选项不再渲染，点击后从清单划掉 */
+/* mode: "choice" | "search"。普通搜证方向点击后隐藏；未核验的必需任务行动会保留。 */
 function renderOptions(options, mode, translations) {
   elOptionsArea.innerHTML = "";
   const isSearch = mode === "search";
@@ -4661,16 +4824,18 @@ function renderOptions(options, mode, translations) {
   }));
   if (isSearch) {
     const hint = document.createElement("div");
-    hint.className = "search-hint";
-    const left = items.filter(it => !searchedItems.has(it.text.trim().toLowerCase()));
+    hint.className = "choice-mode-hint";
+    const pendingTaskActions = isOptionMode() ? pendingTaskOptionSpecs() : [];
+    const left = items.filter(it => !searchedItems.has(it.text.trim().toLowerCase()) ||
+      pendingTaskActions.some(spec => optionMatchesPendingTaskAction(it.text, spec)));
     hint.textContent = left.length
-      ? "🔍 搜证：选择一项进行探索（搜过的会自动消失），也可以直接用英语描述你要搜的地方"
-      : "✅ 可探索的方向都已搜完，用英语说出你的推理或下一步行动吧";
+      ? pendingTaskActions.length ? "选择一个方向进行探索；尚未核验的任务行动会继续保留在选项中。" : "选择一个方向进行探索，搜过的会自动消失。"
+      : "可探索的方向已搜完，继续推进剧情。";
     elOptionsArea.appendChild(hint);
     items = left;
   }
   currentOptions = items.map(it => it.text);
-  if (isOptionMode()) {
+  if (isOptionMode() && !isSearch) {
     const hint = document.createElement("p"); hint.className = "choice-mode-hint";
     hint.textContent = "点击一个英文选项继续，也可以展开选项的中文翻译。";
     elOptionsArea.prepend(hint);
@@ -4683,7 +4848,7 @@ function renderOptions(options, mode, translations) {
     const btn = document.createElement("button");
     btn.className = "option-btn";
     /* 选项文本与台词一致地高亮当前重点词：点词看释义，不算作提交该选项 */
-    const prefix = document.createElement("span"); prefix.className = "opt-prefix"; prefix.textContent = isSearch ? "🔍" : "◆";
+    const prefix = document.createElement("span"); prefix.className = "opt-prefix"; prefix.textContent = "◆";
     btn.appendChild(prefix);
     if (isOptionMode()) btn.appendChild(document.createTextNode(it.text));
     else btn.insertAdjacentHTML("beforeend", renderTextWithVocab(it.text));
@@ -6197,7 +6362,7 @@ document.addEventListener("click", async (e) => {
 });
 
 /* ================= 全部任务完成 → 先给「进入回顾」入口 ================= */
-function showReviewEntryButton() {
+function showReviewEntryButton(label = "进入回顾") {
   if (gameEnded || gameOverPending) return;
   gameOverPending = true;
   elOptionsArea.innerHTML = "";
@@ -6206,7 +6371,7 @@ function showReviewEntryButton() {
   const btn = document.createElement("button");
   btn.type = "button";
   btn.className = "review-entry-btn";
-  btn.textContent = "进入回顾";
+  btn.textContent = label;
   btn.addEventListener("click", () => {
     if (gameEnded) return;
     wrap.remove();
@@ -6757,31 +6922,38 @@ function optionModeRule() {
   return "【英文选项模式·最高优先级交互规则】玩家全程只能点击你提供的英文选项，不能手动输入。每轮包括开场、自我介绍、搜证、公聊、私聊、推理、表决、结局及复盘，都必须给出2至4个可直接点击的英文完整句子options和逐项对应的中文option_translations。task_type用choice或search，禁止free、grammar或要求玩家另行打字。选项必须贴合当前已公开信息和任务的可观察完成条件，包含可以实际执行的查看、向具体角色询问、提出解释、提交判断及理由等行动；用玩家第一人称写可选择的观点，选择即代表玩家采纳该观点，task_events仍只引用玩家本轮实际点击的逐字句子，不替玩家自动完成其他任务。不得用选项提前公开尚未释放的线索、凶手、秘密或固定真相，也不得改变开局锁定结局。阶段已满足后给出进入下一幕或表决、结局、复盘的选项；复盘完整后再按原规则game_over。选项不得全是重复追问或无关闲聊，不得要求玩家提供你未给出的文字。";
 }
 
+function optionMatchesPendingTaskAction(optionText, spec) {
+  return taskPlayerActionMatches(spec.kind, optionText) &&
+    (spec.target ? taskTargetMention(optionText, spec.target) : true);
+}
+
 function ensureOptionModeReply(data) {
   if (!isOptionMode()) return data;
-  const pairs = (Array.isArray(data.options) ? data.options : []).map((text, i) => ({ text: String(text || "").trim(), cn: String((data.option_translations || [])[i] || "") }))
+  let pairs = (Array.isArray(data.options) ? data.options : []).map((text, i) => ({ text: String(text || "").trim(), cn: String((data.option_translations || [])[i] || "") }))
     .filter(p => p.text && /[A-Za-z]/.test(p.text) && !containsChineseAnswer(p.text))
     .filter((p, i, a) => a.findIndex(x => x.text === p.text) === i);
-  if (data.task_type === "search") for (let i = pairs.length - 1; i >= 0; i--) if (searchedItems.has(pairs[i].text.toLowerCase())) pairs.splice(i, 1);
+  const requiredActions = pendingTaskOptionSpecs();
+  if (data.task_type === "search") pairs = pairs.filter(pair => !searchedItems.has(pair.text.trim().toLowerCase()) ||
+    requiredActions.some(spec => optionMatchesPendingTaskAction(pair.text, spec)));
+
+  // 始终把最早未完成任务所需的行动放进选项，模型给出其他选项时也不能把任务线索挤掉。
+  const usedPairs = new Set();
+  const prioritized = requiredActions.map(spec => {
+    const match = pairs.find(pair => !usedPairs.has(pair) && optionMatchesPendingTaskAction(pair.text, spec));
+    if (match) { usedPairs.add(match); return match; }
+    return { text: spec.text, cn: spec.cn };
+  });
+  pairs = [...prioritized, ...pairs.filter(pair => !usedPairs.has(pair))]
+    .filter((pair, i, all) => all.findIndex(other => other.text.trim().toLowerCase() === pair.text.trim().toLowerCase()) === i)
+    .slice(0, 4);
+
   // 模型偶尔漏发选项时使用当前可见任务的安全行动，不能让选项模式卡在空输入区。
   if (pairs.length < 2) {
-    const add = (text, cn) => { if (!containsChineseAnswer(text) && !pairs.some(p => p.text === text) && !searchedItems.has(text.toLowerCase())) pairs.push({ text, cn }); };
-    const englishName = t => [...(t.aliases || []), t.label, t.id].find(v => /^[A-Za-z][A-Za-z0-9 '\-]*$/.test(String(v || ""))) || "";
-    const criteria = (scriptData && scriptData.task_criteria) || [];
-    for (const c of criteria) {
-      if (completedTasks.has(c.task_id)) continue;
-      (c.requirements || []).forEach((r, i) => {
-        const seen = taskRequirementRecords(c.task_id, i + 1);
-        if (r.kind === "inspect" || r.kind === "inquire") for (const t of (r.targets || [])) if (!seen.has(t.id)) {
-          const name = englishName(t);
-          if (!name) continue;
-          add(r.kind === "inspect" ? `I'd like to inspect ${name}.` : `${name}, what did you notice?`, r.kind === "inspect" ? `我想查看${t.label || name}。` : `${t.label || name}，你注意到了什么？`);
-        }
-      });
-      if ((c.requirements || []).some(r => r.kind === "explain")) add("I think these accounts may describe the same event.", "我认为这些说法可能描述了同一件事。");
-      if ((c.requirements || []).some(r => r.kind === "judge")) add("My final answer is that the evidence is incomplete because the accounts do not fully agree.", "我的最终判断是证据仍不完整，因为各方说法尚未完全一致。");
-      if (pairs.length >= 2) break;
-    }
+    const add = (text, cn) => {
+      const key = text.toLowerCase();
+      if (!containsChineseAnswer(text) && !pairs.some(p => p.text.toLowerCase() === key) &&
+        (data.task_type !== "search" || !searchedItems.has(key))) pairs.push({ text, cn });
+    };
     if (!storyPhases.has("ballot")) add("I'm ready to share my judgment and hear the vote.", "我准备好表达判断并听取表决了。");
     else if (!storyPhases.has("ending")) add("Please show us what happened after the vote.", "请展示表决之后发生的事情。");
     else add("Please review the clues and explain the ending.", "请复盘线索并解释结局。");
@@ -6793,6 +6965,42 @@ function ensureOptionModeReply(data) {
   if (data.task_type !== "search") data.task_type = "choice";
   data.grammar_task = "";
   return data;
+}
+
+function pendingTaskOptionSpecs() {
+  if (!scriptData || !Array.isArray(scriptData.task_criteria)) return [];
+  const criterion = scriptData.task_criteria.find(c => c && !taskEvidenceComplete(c.task_id));
+  if (!criterion) return [];
+  const specs = [];
+  const englishName = target => [...(target.aliases || []), target.label, target.id]
+    .find(value => /^[A-Za-z][A-Za-z0-9 '\-]*$/.test(String(value || ""))) || "";
+  for (let i = 0; i < (criterion.requirements || []).length; i++) {
+    const rule = criterion.requirements[i];
+    const records = taskRequirementRecords(criterion.task_id, i + 1);
+    if (["inspect", "inquire"].includes(rule.kind)) {
+      const needed = Math.max(0, rule.required - records.size);
+      const targets = rule.targets.filter(target => !records.has(target.id) &&
+        (rule.kind !== "inspect" || (scriptData.clues || []).some(clue => clue.id === target.id &&
+          (clue.act === 1 || (clue.act === 2 && !["reading", "introduction"].includes(taskProgressState.phase))))))
+        .slice(0, needed);
+      for (const target of targets) {
+        const name = englishName(target);
+        if (!name) continue;
+        specs.push({ kind: rule.kind, target,
+          text: rule.kind === "inspect" ? `I'd like to inspect ${name}.` : `${name}, what did you notice?`,
+          cn: rule.kind === "inspect" ? `我想查看${target.label || name}。` : `${target.label || name}，你注意到了什么？` });
+      }
+    } else if (records.size < rule.required && rule.kind === "explain") {
+      specs.push({ kind: rule.kind, text: "I think these accounts may describe the same event.", cn: "我认为这些说法可能描述了同一件事。" });
+    } else if (records.size < rule.required && rule.kind === "judge") {
+      specs.push({ kind: rule.kind,
+        text: "My final judgment is that I need more evidence, because the timeline is still unclear.",
+        cn: "我的最终判断是还需要更多证据，因为时间线仍不清楚。" });
+    } else if (records.size < rule.required && rule.kind === "reason") {
+      specs.push({ kind: rule.kind, text: "Because the recorder and witness timeline do not agree.", cn: "因为录音内容和目击者时间线并不一致。" });
+    }
+  }
+  return specs;
 }
 
 function replyLanguageLabel() {
@@ -7356,7 +7564,7 @@ function renderAccountBar() {
   if (authInfo && authInfo.token) {
     const chip = document.createElement("span");
     chip.className = "account-chip";
-    chip.textContent = "👤 " + (authInfo.username || "已登录");
+    chip.textContent = authInfo.username || "已登录";
     chip.title = accountSyncReady ? "学习记录会同步到该账号" : "账号暂未完成同步，本机学习记录会保留";
     const out = document.createElement("button");
     out.type = "button";
@@ -7370,7 +7578,7 @@ function renderAccountBar() {
   const login = document.createElement("button");
   login.type = "button";
   login.className = "btn-ghost";
-  login.textContent = "👤 登录 / 注册";
+  login.textContent = "登录 / 注册";
   login.addEventListener("click", openAuth);
   bar.appendChild(login);
 }
@@ -7524,7 +7732,8 @@ $("btn-open-vocab-book").addEventListener("click", () => {
   renderVocabBookPage();
   showConfigStep("step-vocab-book");
 });
-$("btn-close-vocab-book").addEventListener("click", () => {
+/* 顶部导航栏「返回主界面」统一处理（生词本 / 我的词汇复习 / 玩过的剧本） */
+$("btn-topbar-home").addEventListener("click", () => {
   scriptHistoryDetailId = "";
   showConfigStep("step-home");
 });
@@ -7539,16 +7748,11 @@ $("btn-open-vocab-review").addEventListener("click", () => {
   renderReviewQueueCount();
   showConfigStep("step-vocab-review");
 });
-$("btn-close-vocab-review").addEventListener("click", () => showConfigStep("step-home"));
 /* 玩过的剧本 */
 $("btn-open-script-history").addEventListener("click", () => {
   scriptHistoryDetailId = "";
   renderScriptHistoryPage();
   showConfigStep("step-script-history");
-});
-$("btn-close-script-history").addEventListener("click", () => {
-  scriptHistoryDetailId = "";
-  showConfigStep("step-home");
 });
 $("btn-export-script-history").addEventListener("click", exportScriptHistoryPdf);
 ["review-goal-filter", "review-level-filter", "review-status-filter"].forEach(id => {
