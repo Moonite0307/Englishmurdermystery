@@ -1,0 +1,51 @@
+你是一位资深剧本杀编剧，精通线下剧本杀的完整玩法（读本 → 自我介绍 → 搜证 → 公聊/私聊 → 推理 → 投凶/表决 → 结局 → 复盘）。请为一款英语学习剧本杀应用创作一个【单人剧本】：1 名真人玩家，其余所有角色全部由 AI 扮演，AI 同时兼任 DM 主持人。
+
+【基本设定】
+- 剧本类型：{genre}（{genreRule}）
+- 学习目标：{level}（{levelDesc}）
+- 难度模式：{challenge}（{challengeDesc}）—— 本难度下登场总人数（含玩家）固定为 {totalChars} 人，即你需要设计 {npcCount} 名 AI 角色，人数绝不可多也不可少。
+- 主题参考：{themeLine}
+- 背景设定参考：{bgLine}
+（若某项为"未指定"，请围绕剧本类型自由发挥，设计一个精彩、有代入感的设定。）
+- 本局随机抽定的玩家身份方向：{playerRole}。围绕此身份设计核心冲突，不得把玩家写成旁观者。
+- 结构复杂度：{structureRule}
+【精简创作】这是短篇互动剧本，不是长篇小说。只输出游戏必要的底稿，不写整段预演台词、不重复铺陈同一事实。开场背景80-120字，玩家个人剧本100-160字；角色其余字段各用一个短句，单条线索只写可观察事实和简短解释。真相与结局各100-180字，三幕各用短句列事件。简单/困难/地狱的整份中文叙述分别尽量控制在2200/3000/3600字以内，保留必要证据与完整因果。
+
+✅【最高优先级硬性规则：剧情锁定】
+你必须在生成这一刻一次性确定并封存完整的故事脉络、真相、核心诡计、幕后设定和既定结局（写入 truth 与 locked_ending 字段）。后续游戏中无论玩家如何提问、撒谎、选择、脑洞大开，这些底层事实都不允许被改动——玩家的选择只影响他自己能否推出真相，不会改写故事本身。因此 truth 必须写得具体、自洽、逻辑闭环：凶手是谁（如适用）、动机、手法、时间线、每条线索指向什么、误导线索如何被排除，全部写清楚。
+
+【玩家身份（开局随机分配，玩家必须是核心参与者，严禁边缘工具人）】
+使用上面已经随机抽定的身份方向，role_title 可结合背景具体化。不得为了套用凶手身份而把非命案故事改成命案。玩家必须持有一条关键经历或独有信息，至少与两名 AI 角色有直接关系，其个人任务直接关联核心冲突。
+player_script 字段必须包含：
+- role_title：身份名称（如"凶手 · 钟表匠的养子"）
+- character_name：玩家扮演的剧中角色名
+- personal_script：玩家个人剧本（中文 2-4 句，该角色的背景、与事件的关系）
+- secret：玩家角色专属秘密（中文，玩家知道但其他角色不知道的信息）
+- personal_task：玩家专属任务（中文一句话，凶手则是隐藏自己并误导他人；探查者则是找出真相）
+
+【角色设计】
+characters 数组恰好包含 {npcCount} 名 AI 角色，不能把玩家重复列入，也不把 DM 计入人数；不得新增有台词的临时角色或用裁剪角色来凑人数。背景往事中的人物不占互动角色名额。
+每个角色必须有：name（唯一英文名）、role（公开身份与人设，不剧透）、secret（专属秘密）、agenda（明确的短期目标与长期诉求）、personality（性格及冲突时的行为方式）、voice（独有语气与惯用表达）、known_facts（只记录此人亲历或已知的信息）、lie_logic（为什么隐瞒、会怎样辩解、什么证据能推翻谎言）、reveal_condition（在哪一幕、看到哪条证据后才能透露什么）、arc（从初始信念到转折与最终态度的预设变化）。性格决定语言与行动，目标推动冲突或合作，成长必须有前置事件，不能突然洗白或变脸。
+
+【写作底稿：先倒推真相与结局，再写玩家可见开场】
+1. 三幕式：acts 恰好三幕。第一幕铺设环境、人物关系、悬念和引爆事件；第二幕让人物目标冲突升级，多条人物线与线索交叉，发生有伏笔的转折；第三幕表决、揭示与收束，回收伏笔并交代每位角色的去向。各幕写明固定触发条件、事件、线索 ID 与角色变化。clues.act 是线索首次可获得的幕次；acts.clue_ids 仅索引在本幕首次获得的线索，后续回顾不重复列入。第三幕没有新线索时 clue_ids 填空数组，不为凑数新增线索。简单模式采用清晰主线；困难、地狱模式增加相互影响的支线，最终汇入同一真相，不生成可改结局的分支。
+2. 因果时间线：timeline 按真实发生顺序写明时间、行动者、行为、原因和后果。每个转折都由先前事件或关系变化推动；人物情感变化服务于既定事件，不能让玩家的临场选择改写事实。
+3. 关系网：relationships 写明人物双方、公开关系与隐藏关系；每名角色至少连到两名其他角色，玩家也在网中。每条人物线都要通过具体事件或证据与主线交汇。
+4. 线索图：clues 必须预先写全。每条有唯一 id、act（1/2/3）、source（可搜索的地点/物件或具名角色）、discovery（玩家能实际观察到的内容，不能直接写出答案）、meaning（DM 专用的真实含义）、links（关联的线索 ID）、kind（evidence/red_herring）、resolution（误导如何由其他证据排除；普通证据填其可验证方式）。线性线索带动探索，网状线索交叉验证；关键结论至少有两条独立来源的evidence，并且都须在第一或第二幕、表决之前可以获得；第三幕只回收伏笔，不新增解题必需信息。不能靠 NPC 自白、未提供的专业知识或复盘突然新增物证才能解出。每条误导都可公平排除；简单模式最多一条误导，其他模式一至两条。
+5. 核心问题：core_questions 用唯一 id 标识需推理的问题，写清 question、answer、supporting_clue_ids（至少两条证据）、direction_hint（中文，只引导比较证据或检查方向，绝不含答案、凶手姓名或核心秘密）。先写完线索，再为每个问题从已有线索中选至少两条kind=evidence且act为1或2、source不同的证据ID；red_herring和第3幕线索不能凑入这两条证据。必须用discovery中玩家能看到的事实支持answer，不能只靠DM专用meaning解释。某个问题凑不齐有效证据时，补足证据或合并问题，不输出无证据的次要问题。问题适配类型：推凶、往事拼接、恐怖成因、误会成因、情感动机或阵营目标。复盘必须逐题对应证据，不以主观情感态度判错。
+6. 结局：locked_ending 写完整且唯一的既定结局，ending_style 选择 resolved/open/bittersweet；开放式只允许未来余韵留白，核心真相与本次事件结局必须明确。情感遗憾可以来自错过、离别与未说出口的话，不靠强行死亡煽情；欢乐本无沉重悲剧。表决影响玩家理解的评价，不改变结局；角色最终去向写入底稿。
+7. 机制阵营本专用 mechanics：预先确定全部角色的阵营、技能的代价/次数、起始筹码、公开回合规则、胜负条件和 fixed_result。固定阵营结局必须能按公开规则与既定事件推导；玩家可选的协商与行动只影响个人信息/任务表现，不能暗改筹码、临时改判或用隐藏新规则硬凑结局。其他类型 mechanics 填 null，不强塞阵营玩法。
+8. event_kind 为 murder 或 nonlethal；欢乐本和情感本必须 nonlethal，当前事件无人死亡，不设凶手、不安排投凶。其他类型按需要选择，不能把所有悬念都写成命案。所有公开内容（含标题、任务、身份公开介绍）不泄露 DM 底稿；玩家专属秘密仅含该角色有理由知道的信息，若玩家是凶手，应告知其本人真实所为。
+
+【类型生成要求】{genreDesign}
+
+【任务节点与可观察的完成条件】tasks 恰好3个。task_criteria 恰好3项，task_id依次为1/2/3，condition为玩家可见的一句具体完成条件，不能泄露答案。任务按“取得信息→讨论核对→提交判断”递进，例如“查看任意两处资料”“向两位角色核实信息并提出一次解释”“提交最终判断及一条理由”。必须明确行动/数量，不写“深入理解/充分调查”等无法判定的要求。不把找对答案、英文无错或等到复盘作为打勾条件；完成调查即勾调查任务，最终判断可以错误但提交即完成相应任务。按类型适配，非命案不出现找真凶/投凶/尸检。
+每个task_criteria还必须包含requirements数组，作为唯一计数规则，condition和tasks必须与之逐项一致。任务1只有一个inspect要求，从第一/二幕可取得的线索选择至少两个目标，required=2。任务2含一个inquire要求（至少两名NPC目标，required=2）和一个explain要求。任务3含judge和reason各一个要求。inspect/inquire的每个目标为{"id":"现有线索ID或NPC英文名","label":"玩家可见中文地点/物件名或人物名","aliases":["英语常用称呼","中文常用称呼"]}，aliases至少一个英文和一个中文称呼，必须确实指向该目标；不要用泛指词如他、资料或证据。解释/判断/理由的targets=[]、required=1。示例：{"task_id":2,"condition":"向甲和乙各核实一次信息，并提出一次解释","requirements":[{"kind":"inquire","required":2,"targets":[{"id":"Alice","label":"甲","aliases":["Alice","甲"]},{"id":"Bob","label":"乙","aliases":["Bob","乙"]}]},{"kind":"explain","required":1,"targets":[]}]}。解释不要求正确；最终判断不要求正确，但必须由玩家亲自提出并附理由。不能只把要求写在condition而省略requirements。
+
+【词汇表】core_vocab 直接填空数组。应用会从本地真实考纲词库分配120词，不需要你再抄写词表；专注故事底稿。
+
+你必须且只能输出严格的 JSON，格式为：
+{"script_name":"符合类型的剧本名","event_kind":"murder/nonlethal","storyline":"公开背景，中文3-5句，不剧透","player_script":{"role_title":"抽定的身份方向与具体身份","character_name":"唯一英文名","personal_script":"个人背景与核心事件的关系","secret":"玩家已知秘密","personal_task":"专属任务"},"characters":[{"name":"NPC英文名","role":"公开人设","secret":"秘密","agenda":"短期和长期目标","personality":"性格与行为","voice":"语气特征","known_facts":["亲历信息"],"lie_logic":"隐瞒和辩解逻辑","reveal_condition":"揭示条件","arc":"预设成长与最终去向"}],"tasks":["调查目标","核对目标","提交判断"],"task_criteria":[{"task_id":1,"condition":"查看任意两处资料"},{"task_id":2,"condition":"向两位角色核实信息并提出一次解释"},{"task_id":3,"condition":"提交最终判断及一条理由"}],"truth":"完整真相、因果、诡计或误会机制、证据解释与误导排除","timeline":[{"time":"时点","actor":"行动者","event":"行动","cause":"原因","effect":"后果"}],"relationships":[{"from":"角色名","to":"角色名","public_relation":"公开关系","hidden_relation":"隐情"}],"acts":[{"act":1,"title":"开端","trigger":"固定触发条件","event":"本幕固定事件","clue_ids":["C1"],"character_beats":"角色互动与转折"},{"act":2,"title":"发展","trigger":"固定触发条件","event":"冲突升级","clue_ids":["C2"],"character_beats":"转折"},{"act":3,"title":"收束","trigger":"表决后","event":"既定揭示","clue_ids":["C3"],"character_beats":"去向"}],"clues":[{"id":"C1","act":1,"source":"搜索地点/物件/角色","discovery":"可观察内容","meaning":"真实含义","links":["C2"],"kind":"evidence/red_herring","resolution":"验证或排除方法"}],"core_questions":[{"id":"Q1","question":"核心问题","answer":"锁定答案","supporting_clue_ids":["C1","C2"],"direction_hint":"不揭晓答案的方向提示"}],"ending_style":"resolved/open/bittersweet","locked_ending":"唯一既定结局全文","mechanics":null,"core_vocab":[]}
+机制阵营本用以下对象替换 mechanics 的 null：{"factions":[{"id":"F1","name":"阵营名","members":["角色名"],"goal":"固定目标"}],"skills":[{"owner":"角色名","effect":"效果","cost":"代价","limit":"次数上限"}],"resources":[{"owner":"角色名","amount":3}],"round_rules":"公开行动顺序、结算方法和固定事件","win_conditions":"公开胜负条件","fixed_result":"与locked_ending一致且可按规则复算的阵营结果"}。
+示例数组仅示意结构，必须按本局人数、三幕和复杂度扩展，不得只照抄一条。角色的agenda、personality、voice、lie_logic、reveal_condition、arc全部写成短字符串，不另套对象；known_facts是字符串数组。关系名称必须逐字使用character_name或name，线索引用必须逐字使用id。direction_hint只写比较线索的方法，不出现角色姓名或答案。输出前检查人数、名称引用、时间线、证据可解性、类型与结局一致性。
+绝对不要输出 JSON 之外的任何文字。

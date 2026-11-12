@@ -38,11 +38,16 @@ async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false,
   const responses = [];
   if (generation.openingReply) responses.push(generation.openingReply);
   page.on('pageerror', e => errors.push(e.message));
-  await page.route('**/api/config', r => staticMode ? r.fulfill({ status: 404, body: 'Static site' }) : r.fulfill({ json: { configured: true, model: 'mock' } }));
+  await page.route('**/api/config', r => staticMode ? r.fulfill({ status: 404, body: 'Static site' }) : r.fulfill({ json: { configured: true, model: 'mock', ...(generation.secureModel ? { modelAuth: 'play-session' } : {}) } }));
+  if (generation.secureModel) await page.route('**/api/play-session', r => {
+    generation.sessionRequests = (generation.sessionRequests || 0) + 1;
+    return r.fulfill({ json: { token: 'play_' + 'a'.repeat(64), expiresAt: Date.now() + 7200000 } });
+  });
   // No external requests, including any fallback model or dictionary API.
   await page.route('https://**', r => r.abort());
   const handleChat = async route => {
     const req = route.request().postDataJSON(); requests.push(req);
+    if (generation.secureModel) assert.equal(route.request().headers().authorization, 'Bearer play_' + 'a'.repeat(64));
     const isPlan = req.messages[0].content.includes('资深剧本杀编剧');
     const planned = isPlan && generation.replies && generation.replies.shift();
     const result = isPlan ? (planned ? planned.data : fixture()) : (responses.shift() || (generation.replyMode === 'options' ? reply({
@@ -83,11 +88,36 @@ async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false,
 test('home paths open a full guide or exploration; return navigation preserves the selected goal and shared typography', async () => {
   const browser = await playwright.chromium.launch({ headless: true, channel: 'msedge' });
   try {
-    for (const width of [1440, 390]) {
+    for (const width of [1440, 390, 320]) {
       const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
+      const fontRequests = [];
+      page.on('request', request => { if (request.resourceType() === 'font') fontRequests.push(request.url()); });
       await page.route('https://**', route => route.abort());
       await page.goto(pageUrl);
       await page.locator('#btn-explore-learning').waitFor();
+      assert.match(await page.title(), /词境寻真/);
+      assert.equal(await page.locator('.site-brand strong').innerText(), '词境寻真');
+      await page.evaluate(() => document.fonts.load('600 25px "Cijing Serif SC"', '词境寻真'));
+      await page.evaluate(() => document.fonts.ready);
+      const cdp = await page.context().newCDPSession(page);
+      await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
+      const { root } = await cdp.send('DOM.getDocument');
+      const { nodeId } = await cdp.send('DOM.querySelector', { nodeId: root.nodeId, selector: '.site-brand strong' });
+      const rendered = await cdp.send('CSS.getPlatformFontsForNode', { nodeId });
+      assert.ok(rendered.fonts.some(font => font.isCustomFont && font.glyphCount >= 4), JSON.stringify(rendered));
+      assert.ok(fontRequests.length > 0 && fontRequests.every(url => url.startsWith(new URL('assets/fonts/', pageUrl).href)));
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+      if (width <= 390) {
+        await page.evaluate(() => { authInfo = { username: '很长的中文测试用户名', token: 'test-only' }; renderAccountBar(); });
+        const header = await page.evaluate(() => {
+          const brand = document.querySelector('.site-brand').getBoundingClientRect();
+          const account = document.querySelector('.home-account-row').getBoundingClientRect();
+          return { right: brand.right, accountLeft: account.left, pageWidth: document.documentElement.scrollWidth, width: innerWidth };
+        });
+        assert.ok(header.right <= header.accountLeft && header.pageWidth <= header.width, JSON.stringify(header));
+        if (artifacts) await page.screenshot({ path: path.join(artifacts, 'brand-font-mobile-' + width + '.png') });
+        await page.evaluate(() => { authInfo = null; renderAccountBar(); });
+      }
       if (width === 1440) {
         if (artifacts) await page.screenshot({ path: path.join(artifacts, 'home-night.png') });
         const nightPalette = await page.locator('body').evaluate(el => getComputedStyle(el).getPropertyValue('--bg').trim());
@@ -121,6 +151,7 @@ test('home paths open a full guide or exploration; return navigation preserves t
       await page.locator('#guide-review-title').waitFor({ state: 'visible' });
       const fonts = await page.evaluate(() => ['.site-brand strong', '.entry-title', '#guide-heading', '#btn-open-guide', '#guide-review-title'].map(selector => getComputedStyle(document.querySelector(selector)).fontFamily));
       assert.equal(new Set(fonts).size, 1);
+      assert.match(fonts[0], /Cijing Serif SC/);
       await page.locator('#btn-guide-home-bottom').click();
       assert.equal(await page.locator('#step-home').isVisible(), true);
       await page.locator('#btn-open-guide').click();
@@ -171,6 +202,21 @@ test('phone generation: screenshot configuration accepts normalized hints and eq
   } finally { await browser.close(); }
 });
 
+test('public model proxy uses a reusable guest session in memory without a provider key', async () => {
+  const generation = { secureModel: true };
+  const { browser, page, errors, requests } = await setup({ width: 390, height: 844 }, 'zh', false, false, generation);
+  try {
+    assert.equal(await page.evaluate(() => state), 'PLAYING');
+    await page.locator('#inp-msg').fill('我想查看资料。'); await page.locator('#btn-send').click();
+    await page.waitForFunction(() => !busy);
+    assert.equal(generation.sessionRequests, 1);
+    assert.ok(requests.length >= 3);
+    const settings = await page.evaluate(() => ({ key: getSettings().apiKey, stored: JSON.stringify({ ...localStorage, ...sessionStorage }) }));
+    assert.equal(settings.key, ''); assert.ok(!settings.stored.includes('play_'));
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
 test('generation retries a length-limited draft and reaches a playable script', async () => {
   const { browser, page, errors, requests } = await setup({ width: 1280, height: 800 }, 'en', false, false,
     { replies: [{ data: '{"script_name":"partial', finishReason: 'length' }, { data: fixture() }] });
@@ -183,7 +229,7 @@ test('generation retries a length-limited draft and reaches a playable script', 
   } finally { await browser.close(); }
 });
 
-test('generation repairs missing character links without rewriting the script', async () => {
+test('generation accepts sparse character links without a paid repair and keeps the story unchanged', async () => {
   const plan = fixture('推理本');
   plan.relationships = plan.relationships.filter(r => r.from !== 'Alice' && r.to !== 'Alice');
   const { browser, page, errors, requests } = await setup({ width: 1280, height: 800 }, 'zh', true, false,
@@ -191,10 +237,27 @@ test('generation repairs missing character links without rewriting the script', 
       replies: [{ data: plan }, { data: { updates: { relationships: fixture('推理本').relationships } } }] });
   try {
     const plans = requests.filter(r => r.messages[0].content.includes('资深剧本杀编剧'));
-    assert.equal(plans.length, 2);
-    assert.match(plans[1].messages[2].content, /只返回JSON补丁/);
-    assert.match(plans[1].messages[2].content, /relationships/);
-    assert.equal(await page.evaluate(() => validateScriptPlan(scriptData).length), 0);
+    assert.equal(plans.length, 1);
+    assert.equal(await page.evaluate(() => assessScriptPlan(scriptData).errors.length), 0);
+    assert.equal(await page.evaluate(() => scriptData.truth), plan.truth);
+    assert.equal(await page.evaluate(() => scriptData.locked_ending), plan.locked_ending);
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('an older task schema missing requirements reaches a playable phone game in one generation', async () => {
+  const plan = fixture();
+  plan.task_criteria.forEach(c => delete c.requirements);
+  plan.relationships = [];
+  delete plan.characters[0].voice;
+  const { browser, page, errors, requests } = await setup({ width: 390, height: 844 }, 'zh', false, false, { replies: [{ data: plan }] });
+  try {
+    assert.equal(requests.filter(r => r.messages[0].content.includes('资深剧本杀编剧')).length, 1);
+    assert.equal(await page.evaluate(() => state), 'PLAYING');
+    assert.equal(await page.evaluate(() => scriptTaskRequirementsErrors(scriptData).length), 0);
+    assert.equal(await page.locator('.task-item').count(), 3);
+    assert.equal(await page.evaluate(() => Object.isFrozen(scriptData)), true);
+    assert.equal(await page.evaluate(() => scriptData.truth), plan.truth);
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
 });
@@ -422,7 +485,7 @@ test('exit waits for the current reply; warm conversation colors and review cont
         expected: getComputedStyle(el).getPropertyValue('--dialogue-surface').trim(),
         light: document.body.classList.contains('light'),
         speaker: el.closest('.msg-row').querySelector('.speaker-label').textContent,
-        icon: el.closest('.msg-row').querySelectorAll('.avatar-icon').length,
+        icon: el.closest('.msg-row').querySelectorAll('.npc-mask-icon').length,
         role: el.closest('.msg-row').querySelector('.avatar').getAttribute('aria-hidden') }));
       assert.ok(style.background && style.expected);
       assert.equal(style.background, (() => {
@@ -606,9 +669,7 @@ test('answer mode fields and dual pronunciation cards work on desktop and phones
     await page.waitForFunction(() => !!PRONUNCIATIONS.words.door);
     const uk = await page.locator('#review-phonetic-uk').innerText(), us = await page.locator('#review-phonetic-us').innerText();
     assert.match(uk, /ɔː/); assert.match(us, /ɔ/); assert.notEqual(uk, us);
-    await page.evaluate(() => { window.testPronunciations = []; speechSynthesis.speak = u => window.testPronunciations.push(u.lang); speechSynthesis.getVoices = () => []; });
-    await page.locator('#btn-review-speak-uk').click(); await page.locator('#btn-review-speak-us').click();
-    assert.deepEqual(await page.evaluate(() => window.testPronunciations), ['en-GB', 'en-US']);
+    assert.equal(await page.locator('#review-modal .review-speak, #btn-review-speak-uk, #btn-review-speak-us').count(), 0);
     assert.equal(await page.locator('#review-meaning-wrap').isVisible(), false);
     for (const width of [1280, 390, 320]) {
       await page.setViewportSize({ width, height: width === 1280 ? 800 : 568 });
@@ -618,6 +679,69 @@ test('answer mode fields and dual pronunciation cards work on desktop and phones
     }
     if (!(await page.evaluate(() => document.body.classList.contains('light')))) await page.locator('#theme-toggle').click();
     if (artifacts) await page.screenshot({ path: path.join(artifacts, 'dual-phonetics-light-320.png') });
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('minimal inline NPC masks have no name divider and warm slim scrollbars remain usable', async () => {
+  const { browser, page, errors, responses } = await setup({ width: 1280, height: 800 }, 'zh');
+  try {
+    const first = await page.locator('.npc-avatar svg').first().innerHTML();
+    assert.equal(await page.locator('.npc-avatar img, .npc-avatar image').count(), 0);
+    assert.equal(await page.locator('.npc-avatar .npc-mask-icon').count(), 1);
+    assert.equal(await page.locator('.npc-mask-icon circle, .npc-mask-icon image, .npc-mask-icon g').count(), 0);
+    assert.equal(await page.locator('.npc-mask-icon path[fill-rule="evenodd"]').count(), 1);
+    const pool = await page.evaluate(() => {
+      const names = ['Alice', 'Bob', 'Carol', 'DM', 'Eve', 'Frank', 'Grace'];
+      const icons = names.map(name => getAvatar(name).e);
+      return { icons, sameCharacter: getAvatar('Alice').e === icons[0], colors: names.map(name => getAvatar(name).c) };
+    });
+    assert.equal(new Set(pool.icons).size, 1);
+    assert.equal(pool.sameCharacter, true);
+    assert.ok(pool.icons.every(icon => icon.includes('class="npc-mask-icon"') && icon.includes('viewBox="0 0 64 64"') && !icon.includes('src=') && !icon.includes('href=')));
+    assert.ok(pool.colors.every(color => color === 'var(--case-gold)'));
+    for (const speaker of ['Bob', 'Carol', 'Alice']) {
+      responses.push(reply({ speaker, npc_dialogue: 'Let us compare the two records carefully.' }));
+      await page.locator('#inp-msg').fill('Please tell me more.'); await page.locator('#btn-send').click();
+      await page.waitForFunction(() => !busy);
+    }
+    assert.equal(await page.locator('.npc-avatar svg').last().innerHTML(), first);
+    assert.equal(await page.locator('.player-avatar').last().innerText(), '我');
+    await page.evaluate(() => {
+      const p = document.createElement('p'); p.textContent = 'Remember the people you met and compare their accounts. '.repeat(60);
+      document.querySelector('.player-script-panel').appendChild(p);
+    });
+    for (const width of [1280, 390, 320]) {
+      await page.setViewportSize({ width, height: width === 1280 ? 800 : 720 });
+      for (const theme of ['dark', 'light']) {
+        if ((await page.evaluate(() => document.body.classList.contains('light'))) !== (theme === 'light')) await page.locator('#theme-toggle').click();
+        await noOverflow(page);
+        assert.ok(await page.locator('.speaker-label').first().evaluate(el => ['none', 'normal'].includes(getComputedStyle(el, '::before').content)));
+        const metrics = await page.locator('.npc-avatar').last().evaluate(el => {
+          const svg = el.querySelector('svg'), box = el.getBoundingClientRect(), icon = svg.getBoundingClientRect(), drawing = svg.getBBox();
+          return { color: getComputedStyle(svg).color,
+            pathsFit: drawing.x >= 0 && drawing.y >= 0 && drawing.x + drawing.width <= 64 && drawing.y + drawing.height <= 64,
+            border: getComputedStyle(el).borderTopWidth,
+            fit: icon.x >= box.x && icon.y >= box.y && icon.right <= box.right && icon.bottom <= box.bottom };
+        });
+        assert.ok(metrics.fit && metrics.pathsFit);
+        assert.equal(metrics.border, '0px');
+        assert.equal(metrics.color, await page.evaluate(() => {
+          const probe = document.createElement('span'); probe.style.color = 'var(--case-gold)'; document.body.appendChild(probe);
+          const color = getComputedStyle(probe).color; probe.remove(); return color;
+        }));
+        const scrollbars = await page.evaluate(() => ['.sidebar-content', '.task-goal-box'].map(selector => {
+          const el = document.querySelector(selector); el.scrollTop = 30;
+          return { width: getComputedStyle(el, '::-webkit-scrollbar').width,
+            color: getComputedStyle(el, '::-webkit-scrollbar-thumb').backgroundColor, scrollTop: el.scrollTop };
+        }));
+        assert.ok(scrollbars.every(bar => bar.width === '4px'));
+        assert.ok(scrollbars.every(bar => bar.color === (theme === 'light' ? 'rgb(198, 182, 152)' : 'rgb(118, 102, 79)')));
+        if (width === 1280) assert.ok(scrollbars.every(bar => bar.scrollTop > 0));
+        if (artifacts) await page.screenshot({ path: path.join(artifacts, 'npc-masks-' + theme + '-' + width + '.png') });
+        if (artifacts && width === 1280) await page.locator('.npc-avatar').last().screenshot({ path: path.join(artifacts, 'mask-detail-' + theme + '.png'), scale: 'css' });
+      }
+    }
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
 });

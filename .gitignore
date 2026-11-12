@@ -1,5 +1,12 @@
 # 包含真实 API 密钥，严禁上传 GitHub
 config.json
+.env
+.env.*
+!.env.example
+config.local.json
+config.private.json
+*.pem
+*.key
 
 # WorkBuddy 工作区数据
 .workbuddy/

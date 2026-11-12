@@ -39,7 +39,7 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 SCRIPT_PATH = Path(__file__).resolve()
 REPO_DIR = SCRIPT_PATH.parents[2]            # Englishmurdermystery
-PROJECT_ROOT = REPO_DIR.parent               # 词狱 Word Prison
+PROJECT_ROOT = REPO_DIR.parent               # 词境寻真 Cijing Xunzhen
 TRAIN_DIR = PROJECT_ROOT / "训练资料"
 DAILY_SRC_DIR = TRAIN_DIR / "日常场景交涉"
 OUT_DIR = REPO_DIR / "data" / "daily"

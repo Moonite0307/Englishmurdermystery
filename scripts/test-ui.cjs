@@ -8,6 +8,9 @@ const publicFiles = new Set(['/index.html', '/site-config.json', ...[
   'scenes.jsonl', 'scene_catalog.json', 'vocabulary.json', 'sources.json',
   'exam_lexicon.json', 'cet_core.json', 'pronunciations.json', 'pronunciation-LICENSE.txt'
 ].map(name => '/data/daily/' + name)]);
+for (const name of fs.readdirSync(path.join(root, 'assets/fonts'))) {
+  if (/^(?:noto-serif-sc-\d{3}\.woff2|chinese-serif\.css|OFL\.txt)$/.test(name)) publicFiles.add('/assets/fonts/' + name);
+}
 
 // Serve only runtime assets. Browser tests mock model requests and isolate account storage.
 const server = http.createServer((req, res) => {
@@ -16,7 +19,7 @@ const server = http.createServer((req, res) => {
   if (!publicFiles.has(file)) { res.writeHead(404); res.end(); return; }
   fs.readFile(path.join(root, file.slice(1)), (error, bytes) => {
     if (error) { res.writeHead(404); res.end(); return; }
-    res.setHeader('Content-Type', file.endsWith('.html') ? 'text/html; charset=utf-8' : file.endsWith('.json') ? 'application/json; charset=utf-8' : 'text/plain; charset=utf-8');
+    res.setHeader('Content-Type', file.endsWith('.html') ? 'text/html; charset=utf-8' : file.endsWith('.json') ? 'application/json; charset=utf-8' : file.endsWith('.css') ? 'text/css; charset=utf-8' : file.endsWith('.woff2') ? 'font/woff2' : 'text/plain; charset=utf-8');
     res.end(bytes);
   });
 });

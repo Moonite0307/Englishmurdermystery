@@ -10,7 +10,7 @@ const source = html.slice(html.indexOf('async function callLLM'), html.indexOf('
 function environment(response, backendMode = false) {
   const requests = [];
   const ctx = vm.createContext({
-    backendMode, TextDecoder,
+    backendMode, modelBackendBase: '', modelRequiresPlaySession: false, TextDecoder,
     getSettings: () => ({ apiBase: 'https://provider.invalid/v1', apiKey: 'test-placeholder', model: 'test-model' }),
     fetch: async (url, options) => { requests.push({ url, body: JSON.parse(options.body) }); return response; }
   });

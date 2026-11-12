@@ -1,11 +1,11 @@
-# Englishmurdermystery
+# 词境寻真 · Englishmurdermystery
 英语学习剧本杀工具：一名真人玩家，AI 扮演其他角色并兼任主持人。
 
 手机试玩入口：https://englishmurdermystery-mobile.pages.dev
 
 ## 协作与本地运行
 
-**接口安全：**公共前端不得包含共享 API Key。此前公开过的 Key 必须在供应商平台撤销，仅从当前源码删除无法消除 Git 历史和已下载副本。当前线上生成临时停用，账号与词汇复习保留；恢复前应使用私密服务端配置，并为模型代理增加鉴权、限流及费用上限。不要将新 Key 写回 HTML 或提交 Git。
+**接口安全：**公共前端不包含共享 API Key。线上模型通过 Cloudflare 服务端转发，供应商密钥仅存加密 Secret；游客使用短期游玩会话，账号沿用原有登录，服务端设有频率与每日调用上限。此前公开过的旧 Key 仍须在供应商平台撤销。不要将新 Key 写回 HTML 或提交 Git。详见 [安全部署说明](docs/SAFE_DEPLOYMENT.md)。
 
 1. 克隆仓库并进入目录：`git clone https://github.com/Moonite0307/Englishmurdermystery.git`，然后 `cd Englishmurdermystery`。
 2. 安装 Node.js 18 或以上版本；Windows 双击 `启动.bat`，或运行 `npm start`，打开 `http://127.0.0.1:8787/`。保持服务窗口开启；更新后请关闭旧服务再启动。

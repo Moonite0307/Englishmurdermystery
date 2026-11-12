@@ -22,3 +22,15 @@ CREATE TABLE IF NOT EXISTS auth_limits (
   expires_at INTEGER NOT NULL
 );
 CREATE INDEX IF NOT EXISTS auth_limits_expiry ON auth_limits(expires_at);
+CREATE TABLE IF NOT EXISTS play_sessions (
+  token_hash TEXT PRIMARY KEY,
+  ip_hash TEXT NOT NULL,
+  expires_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS play_sessions_expiry ON play_sessions(expires_at);
+CREATE TABLE IF NOT EXISTS model_limits (
+  bucket TEXT PRIMARY KEY,
+  hits INTEGER NOT NULL,
+  expires_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS model_limits_expiry ON model_limits(expires_at);

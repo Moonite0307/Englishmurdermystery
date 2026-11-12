@@ -3,8 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>沉浸式 AI 剧本杀语言学习助手</title>
+<title>词境寻真 · 沉浸式英语剧本杀</title>
+<link rel="stylesheet" href="assets/fonts/chinese-serif.css">
 <style>
+  /* Limit the local English face to Latin: some systems substitute Chinese glyphs
+     inside Times New Roman before reaching the intended Chinese web font. */
+  @font-face {
+    font-family: 'Cijing Latin'; font-style: normal; font-weight: 100 500;
+    src: local('Times New Roman'), local('TimesNewRomanPSMT');
+    unicode-range: U+0000-024F, U+1E00-1EFF, U+2000-206F;
+  }
+  @font-face {
+    font-family: 'Cijing Latin'; font-style: normal; font-weight: 600 900;
+    src: local('Times New Roman Bold'), local('TimesNewRomanPS-BoldMT');
+    unicode-range: U+0000-024F, U+1E00-1EFF, U+2000-206F;
+  }
   :root {
     --bg: #0d1118;
     --bg-panel: #151b24;
@@ -25,9 +38,11 @@
     --tip-yellow: #f0c948;
     --danger: #ef5350;
     --radius: 12px;
+    --scrollbar-thumb: #76664f;
+    --scrollbar-hover: #ab9064;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
+  html, body { height: 100%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   body {
     font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif;
     background: var(--bg);
@@ -78,11 +93,9 @@
   .review-word { color: var(--rv-text); font-size: clamp(36px, 8.5vw, 72px); font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; word-break: break-word; }
   .review-phonetic-row { display: flex; align-items: center; gap: 9px; color: var(--rv-dim); }
   .review-accent { font-size: 12px; padding: 2px 8px; border: 1px solid var(--rv-border); border-radius: 999px; color: var(--rv-dim); }
-  .review-speak { border: 0; background: transparent; color: var(--rv-accent-text); font-size: 18px; cursor: pointer; padding: 4px; border-radius: 8px; }
-  .review-speak:hover { background: var(--rv-soft-hover); }
   .review-phonetic { font-size: 17px; overflow-wrap: anywhere; min-width: 0; }
   .review-pronunciations { display: grid; gap: 8px; }
-  .review-phonetic-row .review-accent, .review-phonetic-row .review-speak { flex-shrink: 0; }
+  .review-phonetic-row .review-accent { flex-shrink: 0; }
   .review-phonetic-note { color: var(--rv-dim); font-size: 12px; line-height: 1.6; }
   .review-reveal { align-self: flex-start; margin-top: 4px; color: var(--rv-text); border-color: var(--rv-border); }
   .review-meaning-wrap {
@@ -759,10 +772,16 @@
   .input-box:has(#inp-msg[aria-invalid="true"]) { border-color: var(--danger); }
 
   /* 滚动条 */
-  ::-webkit-scrollbar { width: 8px; }
+  body.light { --scrollbar-thumb: #c6b698; --scrollbar-hover: #a88a58; }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #2c3444; border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: #3a4356; }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 999px; min-height: 28px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-hover); }
+  ::-webkit-scrollbar-corner { background: transparent; }
+  .sidebar-content::-webkit-scrollbar, .task-goal-box::-webkit-scrollbar { width: 4px; }
+  @supports not selector(::-webkit-scrollbar) {
+    * { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) transparent; }
+  }
 
   /* 昼夜主题切换按钮 */
   .theme-toggle {
@@ -939,11 +958,11 @@
   .quiz-score { font-size: 13px; color: #69db7c; margin-top: 4px; }
   .em-foot { margin-top: 22px; }
   .em-foot .btn { width: 100%; }
-  /* Vivian-inspired spacing and composition; retain 词狱's existing gold/beige palette. */
+  /* Vivian-inspired spacing and composition; retain 词境寻真's existing gold/beige palette. */
   :root {
     --bg: #101923; --bg-panel: #182330; --bg-sidebar: #141e29; --bg-input: #121c27;
     --bg-bubble-npc: #1b2a39; --bg-bubble-user: #b68a48; --border: #33414e; --text-dim: #aab5c1;
-    --radius: 16px; --ui-font: 'Times New Roman', Times, 'Songti SC', SimSun, 'Noto Serif CJK SC', 'Source Han Serif SC', STSong, serif;
+    --radius: 16px; --ui-font: 'Cijing Latin', 'Cijing Serif SC', 'Times New Roman', Times, 'Songti SC', 'Noto Serif CJK SC', 'Source Han Serif SC', SimSun, STSong, 'PingFang SC', 'Microsoft YaHei', serif;
     --soft-shadow: 0 16px 52px rgba(0,0,0,.16); --hero-glow: rgba(209,173,104,.19);
   }
   body.light { --soft-shadow: 0 16px 52px rgba(86,66,35,.09); --hero-glow: rgba(181,145,81,.22); }
@@ -956,7 +975,7 @@
   body.light .config-card { box-shadow: none; }
   .config-shortcuts { position: sticky; top: 0; z-index: 30; display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; padding: 17px max(36px, calc((100% - 1200px) / 2)); padding-right: max(100px, calc((100% - 1200px) / 2)); margin: 0; min-height: 80px; background: var(--bg-panel); border-bottom: 1px solid var(--border); }
   .site-brand { border: 0; padding: 0; background: transparent; cursor: pointer; text-align: left; font: inherit; flex: 0 0 auto; display: flex; align-items: center; gap: 12px; }
-  .site-brand strong { color: var(--case-gold); font: 600 29px/1.2 var(--ui-font); letter-spacing: .06em; }
+  .site-brand strong { color: var(--case-gold); font: 600 29px/1.2 var(--ui-font); letter-spacing: .06em; white-space: nowrap; }
   .site-brand small { color: var(--text-dim); font-size: 11px; line-height: 1.5; border-left: 1px solid var(--border); padding-left: 12px; }
   .home-account-row { order: 3; border: 0; padding: 0; flex-shrink: 0; gap: 0; }
   .home-account-label { display: none; }
@@ -1130,7 +1149,6 @@
     display: flex; align-items: center; gap: 8px; margin: 0 0 8px 14px;
     color: var(--case-gold); font-size: 13px; letter-spacing: .08em;
   }
-  .speaker-label::before { content: ""; width: 24px; border-top: 1px solid currentColor; opacity: .55; }
   .bubble {
     position: relative; padding: 17px 21px; border-radius: 20px;
     font-size: 15px; line-height: 1.9; word-break: break-word; white-space: pre-wrap;
@@ -1162,7 +1180,9 @@
   body.light .avatar { border-color: rgba(156, 117, 38, .50); background: #fbf5e7; box-shadow: 0 1px 3px rgba(86, 66, 35, .08); }
   body.light .msg-row.user .bubble { color: #fffaf0; }
   body.light .translation-box { color: #887b68; }
-  .avatar-icon, .npc-mask-icon { width: 28px; height: 28px; display: block; color: var(--avatar-accent, currentColor); }
+  .avatar-icon { width: 28px; height: 28px; display: block; color: var(--avatar-accent, currentColor); }
+  .msg-row.npc .avatar.npc-avatar { background: transparent; border: 0; box-shadow: none; }
+  .npc-mask-icon { width: 44px; height: 44px; display: block; flex-shrink: 0; color: var(--case-gold); }
   body.light .msg-row.npc .bubble { box-shadow: inset 0 0 0 3px rgba(216, 203, 181, .34), 0 8px 22px rgba(86, 66, 35, .08); }
   body.light .msg-row.npc .bubble::before { border-top-color: var(--border); }
   body.light .msg-row.npc .bubble::after { border-top-color: var(--bg-bubble-npc); }
@@ -1174,7 +1194,8 @@
     .msg-row.user .avatar { margin-left: 11px; }
     .bubble-wrap { max-width: calc(100% - 51px); }
     .avatar { width: 38px; height: 38px; font-size: 15px; }
-    .avatar-icon, .npc-mask-icon { width: 23px; height: 23px; }
+    .avatar-icon { width: 23px; height: 23px; }
+    .npc-mask-icon { width: 38px; height: 38px; }
     .msg-row.npc .bubble { border-radius: 4px 17px 17px 17px; }
     .msg-row.user .bubble { border-radius: 17px 4px 17px 17px; }
   }
@@ -1213,7 +1234,7 @@
   @media (max-width: 720px) {
     #panel-config { scroll-padding-top: 145px; }
     .config-shortcuts { position: sticky; display: grid; grid-template-columns: 1fr auto; padding: max(12px, env(safe-area-inset-top)) 66px 10px 20px; gap: 10px 12px; min-height: 110px; }
-    .site-brand strong { font-size: 25px; }
+    .site-brand strong { font-size: clamp(20px, 6.3vw, 25px); }
     .site-brand small { display: none; }
     .config-top-actions { grid-row: 2; grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 4px; margin-right: -46px; }
     .shortcut-link { flex: 1; flex-direction: row; min-height: 38px; padding: 7px 5px; font-size: 12px; gap: 4px; }
@@ -1473,7 +1494,7 @@
     .opening-flow li { font-size: 15px; }
   }
 
-  /* 对话、词汇与自测沿用词狱的纸张 / 棕金主题。 */
+  /* 对话、词汇与自测沿用词境寻真的纸张 / 棕金主题。 */
   :root { --word-accent: #e4c183; --dialogue-surface: #1b2a39; --accent: var(--word-accent); --accent-soft: rgba(209,173,104,.12); }
   body.light { --word-accent: #875b2d; --dialogue-surface: #fffaf0; --accent: var(--word-accent); --accent-soft: rgba(139,105,56,.11); }
   .vocab-word.vocab-target, body.light .vocab-word.vocab-target,
@@ -1551,7 +1572,7 @@
 <div id="panel-config" class="center-screen">
   <div class="config-card">
     <div class="config-shortcuts">
-      <button type="button" class="site-brand" id="btn-home" aria-label="词狱，返回首页"><strong>词狱</strong><small>沉浸式
+      <button type="button" class="site-brand" id="btn-home" aria-label="词境寻真，返回首页"><strong>词境寻真</strong><small>沉浸式
 英语学习</small></button>
       <div class="home-account-row"><span class="home-account-label">账号</span><div class="account-bar" id="account-bar"></div></div>
       <nav class="config-top-actions" aria-label="个人学习记录">
@@ -1566,7 +1587,7 @@
       <div class="home-workspace">
         <header class="entry-intro">
           <div class="opening-copy">
-            <div class="entry-brand"><b>词狱 · 千面</b><span>沉浸式英语剧本杀</span></div>
+            <div class="entry-brand"><b>词境寻真 · 千面</b><span>沉浸式英语剧本杀</span></div>
             <h1 class="entry-title">每一句英语，<br>都是一条线索。</h1>
             <p class="entry-copy">一个人开局，AI 扮演除你之外的所有角色。<br class="opening-desktop-break">从读本、对话到搜证，在故事里练习英语。</p>
             <p class="hero-note">六类剧本，自选语言挑战。日常交流与考试英语，都能从这里开始。</p>
@@ -1582,7 +1603,7 @@
                 <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 16-1 5 5-1L21 8l-4-4ZM14 7l4 4M3 23h19"/></svg><span>表决复盘</span></li>
               </ol>
             </div>
-            <ul class="opening-highlights" aria-label="词狱玩法亮点">
+            <ul class="opening-highlights" aria-label="词境寻真玩法亮点">
               <li>
                 <svg class="opening-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="18" r="8"/><path d="M19 49v-7a13 13 0 0 1 26 0v7Z"/><circle cx="10" cy="25" r="5"/><path d="M5 45v-7a7 7 0 0 1 10-6"/><circle cx="54" cy="25" r="5"/><path d="M59 45v-7a7 7 0 0 0-10-6"/></svg>
                 <div><h2>一人千面</h2><p>AI 兼任主持与其他角色，不用凑人开局。</p></div>
@@ -1605,7 +1626,7 @@
       <div class="guide-topbar"><button type="button" class="btn-ghost" id="btn-guide-home">← 返回首页</button><button type="button" class="btn" data-start-exploring>开始沉浸探索</button></div>
       <section class="experience-section" aria-labelledby="guide-heading">
         <div class="experience-copy">
-          <p class="guide-eyebrow">词狱 · 玩法指南</p>
+          <p class="guide-eyebrow">词境寻真 · 玩法指南</p>
           <h1 id="guide-heading" tabindex="-1">把故事读懂，<br>把英语说出来。</h1>
           <p>一个人，也能进入一场完整的剧本。你带着身份、秘密与任务入场，AI 扮演其他角色并主持故事。每一次提问、搜证和解释，都是一次有情境的英语练习。</p>
           <ul class="experience-points">
@@ -1692,7 +1713,7 @@
         </section>
         <div class="guide-ending"><h2>准备好，成为故事里的那个人。</h2><p>选择目标与剧本，带着你的第一个问题入场。</p><button type="button" class="btn" data-start-exploring>开始沉浸探索</button><button type="button" class="btn-ghost" id="btn-guide-home-bottom">返回首页</button></div>
       </div>
-      <footer class="home-footer"><b>词狱</b><span>在故事里开口，在交流中学会。</span></footer>
+      <footer class="home-footer"><b>词境寻真</b><span>在故事里开口，在交流中学会。</span></footer>
     </section>
 
 
@@ -1898,8 +1919,8 @@
     <div class="review-body">
       <div id="review-word" class="review-word"></div>
       <div class="review-pronunciations" id="review-pronunciations">
-        <div class="review-phonetic-row"><span class="review-accent">英</span><button type="button" id="btn-review-speak-uk" class="review-speak" aria-label="英式发音">🔊</button><span id="review-phonetic-uk" class="review-phonetic"></span></div>
-        <div class="review-phonetic-row"><span class="review-accent">美</span><button type="button" id="btn-review-speak-us" class="review-speak" aria-label="美式发音">🔊</button><span id="review-phonetic-us" class="review-phonetic"></span></div>
+        <div class="review-phonetic-row"><span class="review-accent">英</span><span id="review-phonetic-uk" class="review-phonetic"></span></div>
+        <div class="review-phonetic-row"><span class="review-accent">美</span><span id="review-phonetic-us" class="review-phonetic"></span></div>
         <p id="review-phonetic-note" class="review-phonetic-note hidden"></p>
       </div>
       <div id="review-example" class="review-example">
@@ -2158,13 +2179,15 @@ characters 数组恰好包含 {npcCount} 名 AI 角色，不能把玩家重复�
 
 【类型生成要求】{genreDesign}
 
+【输出可靠性】先保证完整真相、既定结局、准确人数、三幕流程和可实际完成的三项任务。线索与核心问题的推荐数量、人物关系密度、误导数量、语气与成长描述是创作目标，不要为凑数新增矛盾或重复事实。篇幅紧张时优先精简这些次要描述，不能省略 truth、locked_ending、玩家角色本、characters、clues、core_questions、acts 或任务 requirements。JSON 示例中的 NPC1/NPC2 与资料名称都只是占位，必须换成 characters 中的真实姓名、现有线索 ID 和该线索 source；禁止照抄占位名称。
+
 【任务节点与可观察的完成条件】tasks 恰好3个。task_criteria 恰好3项，task_id依次为1/2/3，condition为玩家可见的一句具体完成条件，不能泄露答案。任务按“取得信息→讨论核对→提交判断”递进，例如“查看任意两处资料”“向两位角色核实信息并提出一次解释”“提交最终判断及一条理由”。必须明确行动/数量，不写“深入理解/充分调查”等无法判定的要求。不把找对答案、英文无错或等到复盘作为打勾条件；完成调查即勾调查任务，最终判断可以错误但提交即完成相应任务。按类型适配，非命案不出现找真凶/投凶/尸检。
 每个task_criteria还必须包含requirements数组，作为唯一计数规则，condition和tasks必须与之逐项一致。任务1只有一个inspect要求，从第一/二幕可取得的线索选择至少两个目标，required=2。任务2含一个inquire要求（至少两名NPC目标，required=2）和一个explain要求。任务3含judge和reason各一个要求。inspect/inquire的每个目标为{"id":"现有线索ID或NPC英文名","label":"玩家可见中文地点/物件名或人物名","aliases":["英语常用称呼","中文常用称呼"]}，aliases至少一个英文和一个中文称呼，必须确实指向该目标；不要用泛指词如他、资料或证据。解释/判断/理由的targets=[]、required=1。示例：{"task_id":2,"condition":"向甲和乙各核实一次信息，并提出一次解释","requirements":[{"kind":"inquire","required":2,"targets":[{"id":"Alice","label":"甲","aliases":["Alice","甲"]},{"id":"Bob","label":"乙","aliases":["Bob","乙"]}]},{"kind":"explain","required":1,"targets":[]}]}。解释不要求正确；最终判断不要求正确，但必须由玩家亲自提出并附理由。不能只把要求写在condition而省略requirements。
 
 【词汇表】core_vocab 直接填空数组。应用会从本地真实考纲词库分配120词，不需要你再抄写词表；专注故事底稿。
 
 你必须且只能输出严格的 JSON，格式为：
-{"script_name":"符合类型的剧本名","event_kind":"murder/nonlethal","storyline":"公开背景，中文3-5句，不剧透","player_script":{"role_title":"抽定的身份方向与具体身份","character_name":"唯一英文名","personal_script":"个人背景与核心事件的关系","secret":"玩家已知秘密","personal_task":"专属任务"},"characters":[{"name":"NPC英文名","role":"公开人设","secret":"秘密","agenda":"短期和长期目标","personality":"性格与行为","voice":"语气特征","known_facts":["亲历信息"],"lie_logic":"隐瞒和辩解逻辑","reveal_condition":"揭示条件","arc":"预设成长与最终去向"}],"tasks":["调查目标","核对目标","提交判断"],"task_criteria":[{"task_id":1,"condition":"查看任意两处资料"},{"task_id":2,"condition":"向两位角色核实信息并提出一次解释"},{"task_id":3,"condition":"提交最终判断及一条理由"}],"truth":"完整真相、因果、诡计或误会机制、证据解释与误导排除","timeline":[{"time":"时点","actor":"行动者","event":"行动","cause":"原因","effect":"后果"}],"relationships":[{"from":"角色名","to":"角色名","public_relation":"公开关系","hidden_relation":"隐情"}],"acts":[{"act":1,"title":"开端","trigger":"固定触发条件","event":"本幕固定事件","clue_ids":["C1"],"character_beats":"角色互动与转折"},{"act":2,"title":"发展","trigger":"固定触发条件","event":"冲突升级","clue_ids":["C2"],"character_beats":"转折"},{"act":3,"title":"收束","trigger":"表决后","event":"既定揭示","clue_ids":["C3"],"character_beats":"去向"}],"clues":[{"id":"C1","act":1,"source":"搜索地点/物件/角色","discovery":"可观察内容","meaning":"真实含义","links":["C2"],"kind":"evidence/red_herring","resolution":"验证或排除方法"}],"core_questions":[{"id":"Q1","question":"核心问题","answer":"锁定答案","supporting_clue_ids":["C1","C2"],"direction_hint":"不揭晓答案的方向提示"}],"ending_style":"resolved/open/bittersweet","locked_ending":"唯一既定结局全文","mechanics":null,"core_vocab":[]}
+{"script_name":"符合类型的剧本名","event_kind":"murder/nonlethal","storyline":"公开背景，中文3-5句，不剧透","player_script":{"role_title":"抽定的身份方向与具体身份","character_name":"唯一英文名","personal_script":"个人背景与核心事件的关系","secret":"玩家已知秘密","personal_task":"专属任务"},"characters":[{"name":"NPC英文名","role":"公开人设","secret":"秘密","agenda":"短期和长期目标","personality":"性格与行为","voice":"语气特征","known_facts":["亲历信息"],"lie_logic":"隐瞒和辩解逻辑","reveal_condition":"揭示条件","arc":"预设成长与最终去向"}],"tasks":["调查目标","核对目标","提交判断"],"task_criteria":[{"task_id":1,"condition":"查看任意两处资料","requirements":[{"kind":"inspect","required":2,"targets":[{"id":"C1","label":"第一处资料的实际名称","aliases":["实际英文名称","实际中文名称"]},{"id":"C2","label":"第二处资料的实际名称","aliases":["另一实际英文名称","另一实际中文名称"]}]}]},{"task_id":2,"condition":"向两位角色核实信息并提出一次解释","requirements":[{"kind":"inquire","required":2,"targets":[{"id":"NPC1","label":"第一位NPC的实际姓名","aliases":["NPC1","第一位NPC的实际中文称呼"]},{"id":"NPC2","label":"第二位NPC的实际姓名","aliases":["NPC2","第二位NPC的实际中文称呼"]}]},{"kind":"explain","required":1,"targets":[]}]},{"task_id":3,"condition":"提交最终判断及一条理由","requirements":[{"kind":"judge","required":1,"targets":[]},{"kind":"reason","required":1,"targets":[]}]}],"truth":"完整真相、因果、诡计或误会机制、证据解释与误导排除","timeline":[{"time":"时点","actor":"行动者","event":"行动","cause":"原因","effect":"后果"}],"relationships":[{"from":"角色名","to":"角色名","public_relation":"公开关系","hidden_relation":"隐情"}],"acts":[{"act":1,"title":"开端","trigger":"固定触发条件","event":"本幕固定事件","clue_ids":["C1"],"character_beats":"角色互动与转折"},{"act":2,"title":"发展","trigger":"固定触发条件","event":"冲突升级","clue_ids":["C2"],"character_beats":"转折"},{"act":3,"title":"收束","trigger":"表决后","event":"既定揭示","clue_ids":["C3"],"character_beats":"去向"}],"clues":[{"id":"C1","act":1,"source":"搜索地点/物件/角色","discovery":"可观察内容","meaning":"真实含义","links":["C2"],"kind":"evidence/red_herring","resolution":"验证或排除方法"}],"core_questions":[{"id":"Q1","question":"核心问题","answer":"锁定答案","supporting_clue_ids":["C1","C2"],"direction_hint":"不揭晓答案的方向提示"}],"ending_style":"resolved/open/bittersweet","locked_ending":"唯一既定结局全文","mechanics":null,"core_vocab":[]}
 机制阵营本用以下对象替换 mechanics 的 null：{"factions":[{"id":"F1","name":"阵营名","members":["角色名"],"goal":"固定目标"}],"skills":[{"owner":"角色名","effect":"效果","cost":"代价","limit":"次数上限"}],"resources":[{"owner":"角色名","amount":3}],"round_rules":"公开行动顺序、结算方法和固定事件","win_conditions":"公开胜负条件","fixed_result":"与locked_ending一致且可按规则复算的阵营结果"}。
 示例数组仅示意结构，必须按本局人数、三幕和复杂度扩展，不得只照抄一条。角色的agenda、personality、voice、lie_logic、reveal_condition、arc全部写成短字符串，不另套对象；known_facts是字符串数组。关系名称必须逐字使用character_name或name，线索引用必须逐字使用id。direction_hint只写比较线索的方法，不出现角色姓名或答案。输出前检查人数、名称引用、时间线、证据可解性、类型与结局一致性。
 绝对不要输出 JSON 之外的任何文字。`;
@@ -2451,8 +2474,7 @@ function scriptTaskRequirementsErrors(d) {
         : (Array.isArray(d.characters) ? d.characters : []).map(c => c && c.name);
       if (r.targets.length < r.required || new Set(r.targets.map(t => t && t.id)).size !== r.targets.length || r.targets.some(t =>
         !t || !validIds.includes(t.id) || typeof t.label !== "string" || !t.label.trim() || !Array.isArray(t.aliases) || !t.aliases.length ||
-        t.aliases.some(a => typeof a !== "string" || a.trim().length < 2) ||
-        !t.aliases.some(a => typeof a === "string" && /[a-zA-Z]/.test(a)) || !t.aliases.some(a => typeof a === "string" && /\p{Script=Han}/u.test(a)))) errors.push(label + "的目标须引用现有角色或前两幕线索，名称与中英文别名须完整且唯一");
+        t.aliases.some(a => typeof a !== "string" || !a.trim()))) errors.push(label + "的目标须引用现有角色或前两幕线索，名称与可识别别名须完整且唯一");
       const aliases = new Map();
       for (const t of r.targets) if (t && Array.isArray(t.aliases)) {
         for (const alias of [t.id, t.label, ...t.aliases]) {
@@ -2545,6 +2567,10 @@ function normalizeScriptPlanReferences(d) {
     for (const c of d.clues) if (c && typeof c === "object") c.links = normalizeIds(c.links);
     for (const q of (Array.isArray(d.core_questions) ? d.core_questions : [])) if (q && typeof q === "object") q.supporting_clue_ids = normalizeIds(q.supporting_clue_ids);
   }
+  normalizeScriptTaskMetadata(d, nameRef);
+  // 只补展示/索引元数据，不补写真相、秘密、证据内容或剧情事件。
+  if (d.ending_style == null || d.ending_style === "") d.ending_style = "resolved";
+  for (const c of (Array.isArray(d.clues) ? d.clues : [])) if (c && c.links == null) c.links = [];
   if (!Array.isArray(d.acts)) return d;
   d.acts.forEach(normalizeAct);
   // 无明确所属幕的线索必须由编剧修复，不能由前端猜测或提前发放。
@@ -2560,8 +2586,67 @@ function normalizeScriptPlanReferences(d) {
   return d;
 }
 
+function normalizeScriptTaskMetadata(d, nameRef) {
+  const clues = Array.isArray(d.clues) ? d.clues : [];
+  const chars = Array.isArray(d.characters) ? d.characters : [];
+  const early = clues.filter(c => c && [1, 2].includes(c.act) && typeof c.id === "string" && typeof c.source === "string" && c.source.trim());
+  const sources = new Set();
+  const targets = early.filter(c => {
+    const key = taskEvidenceText(c.source);
+    if (sources.has(key)) return false;
+    sources.add(key); return true;
+  }).slice(0, 2).map(c => ({ id: c.id, label: c.source, aliases: [c.id, c.source] }));
+  const people = chars.filter(c => c && typeof c.name === "string" && c.name.trim()).slice(0, 2)
+    .map(c => ({ id: c.name, label: c.name, aliases: [c.name] }));
+  const defaults = [
+    targets.length === 2 ? [{ kind: "inspect", required: 2, targets }] : null,
+    people.length === 2 ? [{ kind: "inquire", required: 2, targets: people }, { kind: "explain", required: 1, targets: [] }] : null,
+    [{ kind: "judge", required: 1, targets: [] }, { kind: "reason", required: 1, targets: [] }]
+  ];
+  // 旧示例只有任务文案时，按应用既有的三类行动生成计数元数据并同步可见条件。
+  if (d.task_criteria == null && Array.isArray(d.tasks) && d.tasks.length === 3) d.task_criteria = d.tasks.map((condition, i) => ({ task_id: i + 1, condition }));
+  if (!Array.isArray(d.task_criteria) || d.task_criteria.length !== 3) return;
+  const ids = d.task_criteria.map(c => c && Number(c.task_id));
+  if (new Set(ids).size === 3 && ids.every(id => [1, 2, 3].includes(id))) d.task_criteria.sort((a, b) => Number(a.task_id) - Number(b.task_id));
+  const order = [["inspect"], ["inquire", "explain"], ["judge", "reason"]];
+  for (const [i, c] of d.task_criteria.entries()) {
+    if (!c || typeof c !== "object" || Number(c.task_id) !== i + 1) continue;
+    c.task_id = i + 1;
+    if (c.requirements == null && defaults[i]) c.requirements = defaults[i];
+    if (!Array.isArray(c.requirements)) continue;
+    for (const r of c.requirements) {
+      if (!r || typeof r !== "object") continue;
+      if (typeof r.kind === "string") r.kind = r.kind.trim().toLowerCase();
+      if (typeof r.required === "string" && /^[12]$/.test(r.required.trim())) r.required = Number(r.required.trim());
+      if (["explain", "judge", "reason"].includes(r.kind) && r.targets == null) r.targets = [];
+      for (const t of (Array.isArray(r.targets) ? r.targets : [])) {
+        if (!t || typeof t !== "object") continue;
+        if (r.kind === "inquire") t.id = nameRef(t.id);
+        if (r.kind === "inspect" && typeof t.id === "string") {
+          const matches = clues.filter(clue => clue && typeof clue.id === "string" && clue.id.toLowerCase() === t.id.trim().toLowerCase());
+          if (matches.length === 1) t.id = matches[0].id;
+        }
+        const target = r.kind === "inspect" ? clues.find(clue => clue && clue.id === t.id) : chars.find(person => person && person.name === t.id);
+        if (t.label == null || t.label === "") t.label = target && (r.kind === "inspect" ? target.source : target.name);
+        const aliases = Array.isArray(t.aliases) ? t.aliases : typeof t.aliases === "string" ? [t.aliases] : [];
+        t.aliases = [...new Set([...aliases, t.id, t.label].filter(a => typeof a === "string" && a.trim()).map(a => a.trim()))];
+      }
+    }
+    if (c.requirements.length === order[i].length && new Set(c.requirements.map(r => r && r.kind)).size === order[i].length && order[i].every(kind => c.requirements.some(r => r && r.kind === kind))) {
+      c.requirements.sort((a, b) => order[i].indexOf(a.kind) - order[i].indexOf(b.kind));
+    }
+  }
+  if (!scriptTaskRequirementsErrors(d).length) {
+    if (d.tasks == null) d.tasks = [];
+    for (const [i, c] of d.task_criteria.entries()) {
+      c.condition = c.requirements.map(taskRequirementLabel).join("；");
+      if (Array.isArray(d.tasks)) d.tasks[i] = c.condition;
+    }
+  }
+}
+
 /* 编剧底稿须在开局前完整；不裁角色、不把未校验的原始文本暴露给玩家。 */
-function validateScriptPlan(d) {
+function validateScriptPlan(d, { qualityStrict = true } = {}) {
   const errors = [];
   const textOK = value => typeof value === "string" && Boolean(value.trim());
   const need = (obj, fields, label) => {
@@ -2579,7 +2664,7 @@ function validateScriptPlan(d) {
   const chars = Array.isArray(d.characters) ? d.characters : [];
   if (chars.length !== npcCount()) errors.push("AI角色必须恰好" + npcCount() + "人，不含玩家与DM");
   for (const [i, c] of chars.entries()) {
-    need(c, ["name", "role", "secret", "agenda", "personality", "voice", "lie_logic", "reveal_condition", "arc"], "AI角色第" + (i + 1) + "项");
+    need(c, ["name", "role", "secret", "agenda", "lie_logic", "reveal_condition", ...(qualityStrict ? ["personality", "voice", "arc"] : [])], "AI角色第" + (i + 1) + "项");
     if (!Array.isArray(c && c.known_facts) || !c.known_facts.length || !c.known_facts.every(textOK)) errors.push("角色缺少known_facts");
   }
   const names = [d.player_script && d.player_script.character_name, ...chars.map(c => c && c.name)].filter(textOK);
@@ -2588,7 +2673,7 @@ function validateScriptPlan(d) {
   const hasName = n => names.includes(n);
   const clues = Array.isArray(d.clues) ? d.clues : [];
   const minClues = { "简单模式": 4, "困难模式": 6, "地狱模式": 8 }[scriptInfo.challenge] || 4;
-  if (clues.length < minClues) errors.push("至少需要" + minClues + "条预写线索");
+  if (clues.length < (qualityStrict ? minClues : 2)) errors.push("至少需要" + (qualityStrict ? minClues : 2) + "条预写线索");
   const clueIds = new Set(clues.map(c => c && c.id).filter(textOK));
   if (clueIds.size !== clues.length) errors.push("线索ID缺失或重复");
   for (const [i, c] of clues.entries()) {
@@ -2597,7 +2682,7 @@ function validateScriptPlan(d) {
     if (!Array.isArray(c && c.links) || c.links.some(id => !clueIds.has(id) || id === c.id)) errors.push("线索links引用无效");
   }
   const redCount = clues.filter(c => c && c.kind === "red_herring").length;
-  if (redCount > (scriptInfo.challenge === "简单模式" ? 1 : 2) || (scriptInfo.challenge !== "简单模式" && redCount < 1)) errors.push("误导线索数量不符合难度");
+  if (qualityStrict && (redCount > (scriptInfo.challenge === "简单模式" ? 1 : 2) || (scriptInfo.challenge !== "简单模式" && redCount < 1))) errors.push("误导线索数量不符合难度");
   const acts = Array.isArray(d.acts) ? d.acts : [];
   if (acts.length !== 3 || acts.some((a, i) => !a || a.act !== i + 1)) errors.push("必须按顺序预写三幕");
   for (const [i, a] of acts.entries()) {
@@ -2607,7 +2692,7 @@ function validateScriptPlan(d) {
   if (clues.some(c => c && !acts.some(a => a && a.act === c.act && Array.isArray(a.clue_ids) && a.clue_ids.includes(c.id)))) errors.push("每条线索都必须分配到对应幕");
   const questions = Array.isArray(d.core_questions) ? d.core_questions : [];
   const minQuestions = { "简单模式": 1, "困难模式": 2, "地狱模式": 3 }[scriptInfo.challenge] || 1;
-  if (questions.length < minQuestions || questions.length > minQuestions + 1) errors.push("核心问题数量不符合难度");
+  if (qualityStrict ? questions.length < minQuestions || questions.length > minQuestions + 1 : questions.length < 1) errors.push("核心问题数量不符合难度");
   if (new Set(questions.map(q => q && q.id).filter(textOK)).size !== questions.length) errors.push("核心问题ID缺失或重复");
   for (const [i, q] of questions.entries()) {
     need(q, ["id", "question", "answer", "direction_hint"], "核心问题第" + (i + 1) + "项");
@@ -2625,7 +2710,7 @@ function validateScriptPlan(d) {
     }
     if (textOK(q && q.direction_hint) && (q.direction_hint.includes(q.answer) || chars.some(c => textOK(c && c.name) && q.direction_hint.toLowerCase().includes(c.name.toLowerCase())))) errors.push("方向提示不能包含答案或NPC姓名");
   }
-  if (!Array.isArray(d.timeline) || d.timeline.length < 3) errors.push("缺少完整因果时间线");
+  if (!Array.isArray(d.timeline) || d.timeline.length < (qualityStrict ? 3 : 1)) errors.push("缺少完整因果时间线");
   for (const t of (Array.isArray(d.timeline) ? d.timeline : [])) need(t, ["time", "actor", "event", "cause", "effect"], "时间线");
   const relations = Array.isArray(d.relationships) ? d.relationships : [];
   const neighbors = new Map(names.map(n => [n, new Set()]));
@@ -2634,7 +2719,7 @@ function validateScriptPlan(d) {
     if (!r || !hasName(r.from) || !hasName(r.to) || r.from === r.to) errors.push("关系必须引用不同的本局角色");
     else { neighbors.get(r.from).add(r.to); neighbors.get(r.to).add(r.from); }
   }
-  for (const n of names) if (neighbors.get(n).size < 2) errors.push("每名角色（含玩家）须关联至少两人：" + n + "目前只关联" + neighbors.get(n).size + "人，请补全已有设定中的直接关系");
+  if (qualityStrict) for (const n of names) if (neighbors.get(n).size < 2) errors.push("每名角色（含玩家）须关联至少两人：" + n + "目前只关联" + neighbors.get(n).size + "人，请补全已有设定中的直接关系");
   if (scriptInfo.genre === "机制阵营本") {
     const m = d.mechanics;
     need(m, ["round_rules", "win_conditions", "fixed_result"], "机制规则");
@@ -2655,6 +2740,13 @@ function validateScriptPlan(d) {
     for (const r of resources) if (!r || !hasName(r.owner) || !Number.isFinite(r.amount) || r.amount < 0) errors.push("起始筹码必须有效且非负");
   } else if (d.mechanics !== null) errors.push("非阵营本mechanics必须为null");
   return [...new Set(errors)];
+}
+
+// 严格检查继续供编剧审阅；开局只阻止无法游玩或破坏既定约束的问题。
+function assessScriptPlan(d) {
+  const errors = validateScriptPlan(d, { qualityStrict: false });
+  const warnings = validateScriptPlan(d).filter(error => !errors.includes(error));
+  return { errors, warnings };
 }
 
 function freezeScriptPlan(value) {
@@ -2737,8 +2829,12 @@ async function generateValidatedScript(prompt) {
       else try { data = normalizeScriptPlanReferences(parseModelJson(raw)); } catch (_) {}
     }
     if (!data && repairFields && currentData && !incomplete) data = currentData;
-    const errors = incomplete ? ["模型输出达到长度上限，JSON底稿被截断"] : validateScriptPlan(data);
-    if (!errors.length) return data;
+    const assessment = incomplete ? { errors: ["模型输出达到长度上限，JSON底稿被截断"], warnings: [] } : assessScriptPlan(data);
+    const errors = assessment.errors;
+    if (!errors.length) {
+      if (assessment.warnings.length) console.info("[剧本质量建议·不影响开局]", assessment.warnings);
+      return data;
+    }
     console.warn("[剧本校对]", errors);
     if (attempt === 2) {
       const failure = new Error(incomplete
@@ -2956,7 +3052,11 @@ let currentTaskType = "free";        // 当前互动模式（search/free/choice/
 let currentOptions = [];            // 本轮可提交的选项，选项模式只接受列表内的点击
 let busy = false;                   // 请求进行中，防止并发发送
 let lastUserPayload = null;         // 供失败重试
-let backendMode = false;            // 由 server.js 托管时为 true（密钥在后端 config.json）
+let backendMode = false;            // 本地服务或线上私密模型代理；前端不持有共享密钥。
+let modelBackendBase = "";
+let modelRequiresPlaySession = false;
+let modelPlaySession = null;
+let modelPlaySessionPromise = null;
 
 /* ================= DOM 引用 ================= */
 const $ = (id) => document.getElementById(id);
@@ -4036,18 +4136,42 @@ function hideBanner() {
 
 /* ================= 后端模式探测 ================= */
 async function detectBackend() {
-  try {
+  const probe = async base => {
     const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 1500);
-    const r = await fetch("/api/config", { signal: ctrl.signal });
-    clearTimeout(timer);
-    if (!r.ok) throw new Error("no backend");
-    const j = await r.json();
-    if (j && j.configured) {
-      backendMode = true;
-      return;
-    }
-  } catch (e) { /* 静态托管没有模型后端，不使用共享密钥兜底。 */ }
+    const timer = setTimeout(() => ctrl.abort(), base ? 8000 : 2000);
+    try {
+      const r = await fetch(base + "/api/config", { signal: ctrl.signal, cache: "no-store" });
+      if (!r.ok) throw new Error("no backend");
+      const j = await r.json();
+      if (!j || !j.configured) throw new Error("not configured");
+      return { base, session: j.modelAuth === "play-session" };
+    } finally { clearTimeout(timer); }
+  };
+  let found;
+  try { found = await probe(""); } catch (_) {}
+  if (!found) {
+    try {
+      const r = await fetch("site-config.json", { cache: "no-store", signal: AbortSignal.timeout(8000) });
+      const config = await r.json();
+      const bases = [...new Set([config.accountApiBase, ...(config.accountApiFallbacks || [])].filter(base => typeof base === "string" && /^https:\/\//.test(base)).map(base => base.replace(/\/+$/, "")))];
+      found = await Promise.any(bases.map(probe));
+    } catch (_) { /* 保持安全停用；绝不回退到公开共享密钥。 */ }
+  }
+  if (found) { modelBackendBase = found.base; modelRequiresPlaySession = found.session; backendMode = true; }
+}
+
+async function modelSessionHeaders() {
+  if (authInfo && authInfo.token) return { Authorization: "Bearer " + authInfo.token };
+  if (modelPlaySession && modelPlaySession.expiresAt > Date.now() + 10000) return { Authorization: "Bearer " + modelPlaySession.token };
+  if (!modelPlaySessionPromise) modelPlaySessionPromise = (async () => {
+    const response = await fetch(modelBackendBase + "/api/play-session", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}", signal: AbortSignal.timeout(15000) });
+    const data = await response.json();
+    if (!response.ok || !/^play_[a-f0-9]{64}$/.test(data.token) || !Number.isFinite(data.expiresAt)) throw new Error(data.error || "暂时无法进入游戏，请稍后重试。");
+    modelPlaySession = { token: data.token, expiresAt: data.expiresAt };
+    return modelPlaySession;
+  })();
+  try { const session = await modelPlaySessionPromise; return { Authorization: "Bearer " + session.token }; }
+  finally { modelPlaySessionPromise = null; }
 }
 
 /* ================= 大模型调用（流式 + 逐字动画兜底） ================= */
@@ -4059,9 +4183,9 @@ async function detectBackend() {
 async function callLLM(msgs, onChunk, options = {}) {
   let url, headers, payload;
   if (backendMode) {
-    /* 后端代理模式：密钥在服务器端 config.json，前端零 Key */
-    url = "/api/chat";
-    headers = { "Content-Type": "application/json" };
+    /* API 密钥只在服务端；这里最多携带短期游玩凭证或账号会话。 */
+    url = modelBackendBase + "/api/chat";
+    headers = { "Content-Type": "application/json", ...(modelRequiresPlaySession ? await modelSessionHeaders() : {}) };
     payload = { messages: msgs, temperature: 0.8 };
   } else {
     /* 仅本机开发可使用私人配置；公共网页无内置密钥。 */
@@ -4079,12 +4203,14 @@ async function callLLM(msgs, onChunk, options = {}) {
     res = await fetch(url, { method: "POST", headers, body: JSON.stringify(payload) });
   } catch (err) {
     throw new Error(backendMode
-      ? "无法连接本地后端（server.js 是否在运行？）：" + err.message
+      ? "暂时无法连接游玩服务，请检查网络后重试。"
       : "网络请求失败：" + err.message + "（浏览器直连多数接口有跨域限制，建议用启动.bat 走本地后端）");
   }
   if (!res.ok) {
     const t = await res.text().catch(() => "");
-    throw new Error("接口返回错误 " + res.status + "：" + t.slice(0, 300));
+    let detail = t.slice(0, 300);
+    try { const parsed = JSON.parse(t); if (typeof parsed.error === "string") detail = parsed.error; } catch (_) {}
+    throw new Error("接口返回错误 " + res.status + "：" + detail);
   }
 
   const contentType = res.headers.get("content-type") || "";
@@ -4148,7 +4274,7 @@ function typewriter(text, onChar, interval) {
   });
 }
 
-/* ================= 头像徽章：每个角色固定一个道具符号，靠形状区分而不是靠色相 ================= */
+/* ================= 剧场面具：同一角色固定一枚，随日夜主题换色 ================= */
 const AVATAR_SVG_OPEN = '<svg class="avatar-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">';
 function avatarGlyph(inner) { return AVATAR_SVG_OPEN + inner + '</svg>'; }
 const AVATAR_GLYPHS = {
@@ -4168,19 +4294,11 @@ const AVATAR_GLYPHS = {
   eye:    '<path d="M5.6 16S9.5 9.4 16 9.4 26.4 16 26.4 16 22.5 22.6 16 22.6 5.6 16 5.6 16Z"/><circle cx="16" cy="16" r="2.5"/>',
   cards:  '<rect x="7.4" y="9.8" width="11" height="14.6" rx="1.6"/><rect x="14.2" y="7.6" width="11" height="14.6" rx="1.6"/>'
 };
-/* NPC 只能取以下十个符号；quill 留给玩家自己。 */
-const AVATAR_POOL = [
-  { e: avatarGlyph(AVATAR_GLYPHS.mask),   c: "#9a7438" },
-  { e: avatarGlyph(AVATAR_GLYPHS.watch),  c: "#8a6a35" },
-  { e: avatarGlyph(AVATAR_GLYPHS.key),    c: "#7d6236" },
-  { e: avatarGlyph(AVATAR_GLYPHS.letter), c: "#9c7b41" },
-  { e: avatarGlyph(AVATAR_GLYPHS.scale),  c: "#87703c" },
-  { e: avatarGlyph(AVATAR_GLYPHS.candle), c: "#a8813c" },
-  { e: avatarGlyph(AVATAR_GLYPHS.glass),  c: "#6f5b3b" },
-  { e: avatarGlyph(AVATAR_GLYPHS.lock),   c: "#7b6238" },
-  { e: avatarGlyph(AVATAR_GLYPHS.eye),    c: "#8f7440" },
-  { e: avatarGlyph(AVATAR_GLYPHS.cards),  c: "#9f7c3e" }
-];
+// 简洁的化装舞会半面具：对称轮廓与镂空眼孔，省去人脸五官和外圆框。
+const NPC_MASK_ICON = '<svg class="npc-mask-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
+  '<path fill="currentColor" fill-opacity=".14" fill-rule="evenodd" d="M6.5 20c8.1-6.8 17.7-5.1 25.5 2C39.8 14.9 49.4 13.2 57.5 20l-3 15C52.2 46 45 49 38.7 42L32 35l-6.7 7C19 49 11.8 46 9.5 35ZM14 27.3c4.5-3.9 9.8-3.1 13.5 1.9-4.7 4.8-10.2 4.4-13.5-1.9Zm36 0c-4.5-3.9-9.8-3.1-13.5 1.9 4.7 4.8 10.2 4.4 13.5-1.9Z"/>' +
+  '</svg>';
+const AVATAR_POOL = [{ e: NPC_MASK_ICON, c: "var(--case-gold)" }];
 const PLAYER_AVATAR_ICON = avatarGlyph(AVATAR_GLYPHS.quill);
 const avatarRegistry = new Map();
 function getAvatar(name) {
@@ -5752,23 +5870,6 @@ function renderReviewPronunciations(item) {
   $("review-phonetic-note").classList.toggle("hidden", !p.note);
 }
 
-function speakReviewWord(accent = "en-US") {
-  const s = reviewSession;
-  if (!s || s.index >= s.queue.length) return;
-  const item = s.queue[s.index];
-  const text = String(item.word || item.lemma || "");
-  if (!text || typeof window.speechSynthesis === "undefined") return;
-  try {
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = accent;
-    const voice = window.speechSynthesis.getVoices().find(v => v.lang.toLowerCase() === accent.toLowerCase());
-    if (voice) utter.voice = voice;
-    utter.rate = 0.9;
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utter);
-  } catch (_) { /* 浏览器不支持语音时静默跳过 */ }
-}
-
 /* ================= 导出 PDF：排版成打印稿，由浏览器「另存为 PDF」 ================= */
 function pdfText(value) {
   return String(value == null ? "" : value)
@@ -6822,7 +6923,7 @@ function coreVocabText() {
 }
 
 async function startGame() {
-  if (!scriptInfo.dailyMode && (!scriptData || validateScriptPlan(scriptData).length)) {
+  if (!scriptInfo.dailyMode && (!scriptData || assessScriptPlan(scriptData).errors.length)) {
     showBanner("剧本底稿尚未完整锁定，请重新生成剧本。");
     return;
   }
@@ -7766,8 +7867,6 @@ $("btn-start-review").addEventListener("click", openReviewSession);
 $("btn-review-close").addEventListener("click", closeReviewSession);
 $("btn-review-done").addEventListener("click", closeReviewSession);
 $("btn-review-undo").addEventListener("click", undoReview);
-$("btn-review-speak-uk").addEventListener("click", () => speakReviewWord("en-GB"));
-$("btn-review-speak-us").addEventListener("click", () => speakReviewWord("en-US"));
 $("btn-review-next").addEventListener("click", () => stepReviewCard(1));
 document.addEventListener("keydown", (e) => {
   if (!reviewSession || reviewSession.mode !== "browse") return;

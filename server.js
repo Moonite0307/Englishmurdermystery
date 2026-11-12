@@ -34,7 +34,8 @@ const MIME = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".svg": "image/svg+xml",
-  ".ico": "image/x-icon"
+  ".ico": "image/x-icon",
+  ".woff2": "font/woff2"
 };
 
 /* 前端需要读取的只读数据文件白名单（日常场景资料）。
@@ -52,6 +53,10 @@ const PUBLIC_FILES = new Set([
   "/data/daily/pronunciations.json",
   "/data/daily/pronunciation-LICENSE.txt"
 ]);
+// Only the packaged, licensed font files are public; keep private files blocked.
+for (const name of fs.readdirSync(path.join(ROOT, "assets/fonts"))) {
+  if (/^(?:noto-serif-sc-\d{3}\.woff2|chinese-serif\.css|OFL\.txt)$/.test(name)) PUBLIC_FILES.add("/assets/fonts/" + name);
+}
 
 function loadConfig() {
   /* 每次请求实时读取，改完配置立即生效 */

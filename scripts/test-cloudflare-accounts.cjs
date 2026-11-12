@@ -10,11 +10,12 @@ const { buildMigration } = require('./export-cloudflare-accounts.cjs');
 const root = path.resolve(__dirname, '..');
 const schema = fs.readFileSync(path.join(root, 'cloudflare/schema.sql'), 'utf8');
 const origin = 'https://moonite0307.github.io';
-function runtime(storage) {
-  const options = convertV4MiniflareOptions({ name: 'accounts-test-worker', modules: true, scriptPath: path.join(root, 'cloudflare/worker.mjs'),
+const bundle = require('esbuild').buildSync({ entryPoints: [path.join(root, 'cloudflare/worker.mjs')], bundle: true, write: false, format: 'esm', platform: 'neutral', external: ['node:*'] }).outputFiles[0].text;
+function runtime(storage, model = {}) {
+  const options = convertV4MiniflareOptions({ name: 'accounts-test-worker', modules: true, script: bundle,
     compatibilityDate: '2026-11-09', compatibilityFlags: ['nodejs_compat'],
     d1Databases: { DB: 'accounts-test' }, d1Persist: storage,
-    bindings: { ALLOWED_ORIGINS: origin } });
+    bindings: { ALLOWED_ORIGINS: origin, ...model.bindings }, ...(model.outboundService ? { outboundService: model.outboundService } : {}) });
   options.resourcePersistencePath = storage;
   return new Miniflare(options);
 }
@@ -29,6 +30,47 @@ async function request(mf, url, method = 'GET', body, token, source = origin) {
     ...(body ? { body: JSON.stringify(body) } : {}) });
   return { status: res.status, headers: res.headers, data: res.status === 204 ? null : await res.json() };
 }
+
+test('private model proxy enforces sessions and quotas, sanitizes streams and never exposes its secret', async () => {
+  const storage = fs.mkdtempSync(path.join(os.tmpdir(), 'english-model-proxy-'));
+  const secret = 'test-private-provider-value-never-public';
+  let calls = 0, behavior = 'normal';
+  const mf = runtime(storage, { bindings: { MODEL_API_KEY: secret, MODEL_DAILY_REQUEST_LIMIT: '3' }, outboundService: async req => {
+    calls++;
+    assert.equal(req.url, 'https://api.deepseek.com/chat/completions');
+    assert.equal(req.headers.get('authorization'), 'Bearer ' + secret);
+    const body = await req.json();
+    assert.equal(body.max_tokens, 8192); assert.equal(body.model, 'deepseek-chat');
+    assert.equal(body.apiKey, undefined); assert.equal(body.tools, undefined);
+    if (behavior === 'error') return new Response(secret, { status: 401 });
+    const pieces = behavior === 'echo' ? [secret.slice(0, 9), secret.slice(9)] : ['Hello detective.'];
+    return new Response(pieces.map(content => 'data: ' + JSON.stringify({ choices: [{ delta: { content } }] }) + '\n\n').join('') +
+      'data: ' + JSON.stringify({ choices: [{ delta: {}, finish_reason: 'stop' }] }) + '\n\ndata: [DONE]\n\n', { headers: { 'Content-Type': 'text/event-stream' } });
+  } });
+  try {
+    const db = await prepare(mf);
+    const status = await request(mf, '/api/config');
+    assert.deepEqual(status.data, { configured: true, modelAuth: 'play-session' });
+    assert.ok(!JSON.stringify(status).includes(secret));
+    const payload = { messages: [{ role: 'user', content: 'Hello' }], max_tokens: 99999, apiKey: 'ignored', tools: [{}] };
+    assert.equal((await request(mf, '/api/chat', 'POST', payload)).status, 401);
+    assert.equal(calls, 0);
+    const lease = await request(mf, '/api/play-session', 'POST', {});
+    assert.match(lease.data.token, /^play_[a-f0-9]{64}$/);
+    const ask = async (token = lease.data.token, ip = '') => {
+      const res = await mf.dispatchFetch('https://accounts.example/api/chat', { method: 'POST', headers: { Origin: origin, 'Content-Type': 'application/json', Authorization: 'Bearer ' + token, ...(ip ? { 'cf-connecting-ip': ip } : {}) }, body: JSON.stringify(payload) });
+      return { status: res.status, text: await res.text() };
+    };
+    assert.equal((await ask(lease.data.token, '198.51.100.20')).status, 401);
+    assert.equal(calls, 0);
+    const normal = await ask(); assert.equal(normal.status, 200, JSON.stringify({ ...normal, calls })); assert.match(normal.text, /Hello detective/);
+    behavior = 'echo'; const echoed = await ask(); assert.ok(!echoed.text.includes(secret)); assert.match(echoed.text, /redacted/);
+    behavior = 'error'; const failed = await ask(); assert.equal(failed.status, 502); assert.ok(!failed.text.includes(secret));
+    assert.equal((await ask()).status, 429); assert.equal(calls, 3);
+    await db.prepare('UPDATE play_sessions SET expires_at=0').run();
+    assert.equal((await ask()).status, 401);
+  } finally { await mf.dispose(); fs.rmSync(storage, { recursive: true, force: true }); }
+});
 
 test('free Worker: health, native password verification, state isolation, expiry, CORS and persistent restart', async () => {
   const storage = fs.mkdtempSync(path.join(os.tmpdir(), 'english-cloudflare-test-'));

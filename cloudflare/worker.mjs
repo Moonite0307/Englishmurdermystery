@@ -1,5 +1,6 @@
 import { createHash, randomBytes, scrypt, timingSafeEqual } from 'node:crypto';
 import { promisify } from 'node:util';
+import { modelRoute } from './model-proxy.mjs';
 
 const derive = promisify(scrypt);
 const TTL = 30 * 24 * 3600 * 1000;
@@ -70,6 +71,8 @@ export default {
     if (!env.DB) return json(503, { error: '账号数据库尚未连接，请完成免费部署步骤' });
     try {
       const db = env.DB;
+      const modelResponse = await modelRoute(request, env, { json, readBody, sessionUser, headers });
+      if (modelResponse) return modelResponse;
       if (url.pathname === '/api/health' && request.method === 'GET') {
         await db.prepare('SELECT id FROM users LIMIT 1').first();
         return json(200, { service: 'englishmurdermystery', accounts: true });
@@ -134,7 +137,9 @@ export default {
   async scheduled(_event, env) {
     await env.DB.batch([
       env.DB.prepare('DELETE FROM sessions WHERE expires_at<=?').bind(Date.now()),
-      env.DB.prepare('DELETE FROM auth_limits WHERE expires_at<=?').bind(Date.now())
+      env.DB.prepare('DELETE FROM auth_limits WHERE expires_at<=?').bind(Date.now()),
+      env.DB.prepare('DELETE FROM play_sessions WHERE expires_at<=?').bind(Date.now()),
+      env.DB.prepare('DELETE FROM model_limits WHERE expires_at<=?').bind(Date.now())
     ]);
   }
 };

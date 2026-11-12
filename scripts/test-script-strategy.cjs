@@ -223,7 +223,7 @@ test('two repairs are bounded and use only the latest draft with generation-spec
   assert.equal(result.truth, 'HIDDEN_TRUTH');
 });
 
-test('focused relationship repair patches only missing edges and preserves the locked story', async () => {
+test('sparse character relationships are a quality warning and never trigger a paid rewrite', async () => {
   const { ctx, run } = environment(); const calls = [];
   const original = fixture();
   original.relationships = original.relationships.filter(r => r.from !== 'Alice' && r.to !== 'Alice');
@@ -234,12 +234,11 @@ test('focused relationship repair patches only missing edges and preserves the l
     return JSON.stringify({ updates: { relationships: fixture().relationships } });
   };
   const result = await run('generateValidatedScript("Create a plan")');
-  assert.equal(calls.length, 2);
-  assert.match(calls[1][2].content, /只返回JSON补丁/);
-  assert.match(calls[1][2].content, /relationships/);
+  assert.equal(calls.length, 1);
   assert.equal(JSON.stringify({ truth: result.truth, ending: result.locked_ending, clues: result.clues, characters: result.characters }), snapshot);
   ctx.scriptResult = result;
-  assert.equal(run('validateScriptPlan(scriptResult).length'), 0);
+  assert.equal(run('assessScriptPlan(scriptResult).errors.length'), 0);
+  assert.ok(run('assessScriptPlan(scriptResult).warnings.some(e => /关联/.test(e))'));
 });
 
 test('focused evidence repair updates question references only when independent clues already exist', async () => {
@@ -261,17 +260,88 @@ test('focused evidence repair updates question references only when independent 
 
 test('focused patches reject unknown or malformed fields and still enforce full validation', async () => {
   const { ctx, run } = environment(); let calls = 0;
-  const original = fixture(); original.relationships = [];
+  const original = fixture(); original.core_questions[0].supporting_clue_ids = ['C1', 'UNKNOWN'];
   ctx.callLLM = async () => {
     calls++;
     if (calls === 1) return JSON.stringify(original);
-    return JSON.stringify({ updates: { truth: 'CHANGED', relationships: fixture().relationships } });
+    return JSON.stringify({ updates: { truth: 'CHANGED', core_questions: fixture().core_questions } });
   };
   await assert.rejects(run('generateValidatedScript("Create a plan")'), error => {
-    assert.ok(error.validationErrors.some(e => /关系/.test(e)));
+    assert.ok(error.validationErrors.some(e => /证据/.test(e)));
     return true;
   });
   assert.equal(calls, 3);
+});
+
+test('complete playable drafts with editorial omissions pass once without changing story facts', async () => {
+  for (const challenge of ['简单模式', '困难模式', '地狱模式']) {
+    const { ctx, run } = environment('欢乐本', challenge);
+    const plan = fixture('欢乐本', challenge);
+    plan.clues = plan.clues.slice(0, 2);
+    plan.core_questions = plan.core_questions.slice(0, 1);
+    plan.timeline = plan.timeline.slice(0, 1);
+    plan.relationships = [];
+    plan.characters.forEach(c => { delete c.voice; delete c.arc; delete c.personality; });
+    let calls = 0;
+    ctx.callLLM = async () => { calls++; return JSON.stringify(plan); };
+    const result = await run('generateValidatedScript("Create a plan")');
+    assert.equal(calls, 1);
+    assert.equal(result.truth, plan.truth);
+    assert.equal(result.locked_ending, plan.locked_ending);
+    assert.deepEqual(JSON.parse(JSON.stringify(result.clues)), plan.clues);
+    ctx.result = result;
+    assert.equal(run('assessScriptPlan(result).errors.length'), 0);
+    assert.ok(run('assessScriptPlan(result).warnings.length') > 0);
+  }
+});
+
+test('legacy task examples and missing aliases are rebuilt locally from existing public targets', async () => {
+  const { ctx, run } = environment();
+  const plan = fixture();
+  plan.task_criteria.forEach(c => delete c.requirements);
+  delete plan.ending_style;
+  delete plan.clues[0].links;
+  let calls = 0;
+  ctx.callLLM = async () => { calls++; return JSON.stringify(plan); };
+  const result = await run('generateValidatedScript("Create a plan")');
+  assert.equal(calls, 1);
+  assert.deepEqual(JSON.parse(JSON.stringify(result.task_criteria[0].requirements[0].targets.map(t => t.id))), ['C1', 'C2']);
+  assert.equal(result.task_criteria[1].requirements[0].targets[0].id, 'Alice');
+  assert.equal(result.tasks[1], result.task_criteria[1].condition);
+  assert.equal(result.truth, plan.truth);
+  assert.equal(result.locked_ending, plan.locked_ending);
+  ctx.plan = fixture();
+  run(`plan.task_criteria.reverse();
+    for (const c of plan.task_criteria) { c.task_id = String(c.task_id); c.requirements.reverse();
+      for (const r of c.requirements) { r.required = String(r.required);
+        for (const t of r.targets) { t.id = t.id.toLowerCase(); delete t.aliases; delete t.label; }
+      }
+    }
+    normalizeScriptPlanReferences(plan)`);
+  assert.equal(run('assessScriptPlan(plan).errors.join(";")'), '');
+  assert.equal(run('plan.task_criteria[0].requirements[0].targets[0].id'), 'C1');
+});
+
+test('relaxed startup still rejects missing facts, wrong cast, invalid targets and impossible evidence', () => {
+  const { ctx, run } = environment();
+  for (const damage of [p => delete p.truth, p => delete p.locked_ending, p => p.characters.pop(),
+    p => p.characters[1].name = p.characters[0].name, p => p.event_kind = 'murder',
+    p => delete p.characters[0].secret, p => p.clues[1].act = 3,
+    p => p.clues[1].source = p.clues[0].source, p => p.core_questions = [],
+    p => p.core_questions[0].supporting_clue_ids = ['C1', 'UNKNOWN'], p => p.acts.pop(),
+    p => p.task_criteria[0].requirements[0].targets[1].id = 'UNKNOWN',
+    p => p.task_criteria[1].requirements[0].targets[1].aliases.push('Alice')]) {
+    ctx.plan = fixture(); damage(ctx.plan);
+    run('normalizeScriptPlanReferences(plan)');
+    assert.ok(run('assessScriptPlan(plan).errors.length') > 0, damage.toString());
+  }
+});
+
+test('generation prompt JSON example includes all five task requirement types', () => {
+  const { run } = environment();
+  const prompt = run('PROMPT_GENERATE_PLAN');
+  const sample = JSON.parse(prompt.split('\n').find(line => line.startsWith('{"script_name"')));
+  assert.deepEqual(sample.task_criteria.map(c => c.requirements.map(r => r.kind)), [['inspect'], ['inquire', 'explain'], ['judge', 'reason']]);
 });
 
 test('length-limited drafts retry as compact full JSON; authentication errors do not retry', async () => {

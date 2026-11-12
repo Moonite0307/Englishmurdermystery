@@ -40,7 +40,7 @@ from pathlib import Path
 
 SCRIPT_PATH = Path(__file__).resolve()
 REPO_DIR = SCRIPT_PATH.parents[2]            # Englishmurdermystery
-PROJECT_ROOT = REPO_DIR.parent               # 词狱 Word Prison
+PROJECT_ROOT = REPO_DIR.parent               # 词境寻真 Cijing Xunzhen
 DATA_DIR = REPO_DIR / "data" / "daily"
 
 SCENES = DATA_DIR / "scenes.jsonl"

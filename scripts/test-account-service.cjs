@@ -145,6 +145,15 @@ test('actual service: register, old account login, disk persistence, CORS and pr
   try {
     server = await startServer(temp);
     assert.deepEqual((await api(server.base, '/api/health')).data, { service: 'englishmurdermystery', accounts: true });
+    const fontCss = await fetch(server.base + '/assets/fonts/chinese-serif.css');
+    assert.equal(fontCss.status, 200);
+    assert.match(fontCss.headers.get('content-type'), /text\/css/);
+    const fontPath = (await fontCss.text()).match(/url\(\.\/([^)]*\.woff2)\)/)[1];
+    const font = await fetch(server.base + '/assets/fonts/' + fontPath);
+    assert.equal(font.status, 200);
+    assert.equal(font.headers.get('content-type'), 'font/woff2');
+    assert.equal(Buffer.from(await font.arrayBuffer()).subarray(0, 4).toString(), 'wOF2');
+    assert.equal((await fetch(server.base + '/assets/fonts/README.md')).status, 404);
     const pronunciations = await fetch(server.base + '/data/daily/pronunciations.json');
     assert.equal(pronunciations.status, 200);
     const door = (await pronunciations.json()).words.door;

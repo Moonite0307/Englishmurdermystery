@@ -38,7 +38,8 @@ async function deploy() {
   }
   const boundId = project.deployment_configs?.production?.d1_databases?.DB?.id;
   if (boundId && boundId !== config.d1_databases[0].database_id) throw new Error('Existing Pages project uses another database; stopped without replacing it.');
-  await api('/pages/projects/' + name, 'PATCH', { deployment_configs: { production: settings, preview: settings } });
+  // Existing bindings and encrypted secrets must survive later UI deployments.
+  // New projects received settings during creation; existing projects are reused.
   const output = await build();
   try {
     const result = command(['pages', 'deploy', output, '--project-name', name, '--branch', 'main', '--commit-dirty=true']);
