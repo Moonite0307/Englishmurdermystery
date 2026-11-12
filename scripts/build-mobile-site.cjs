@@ -5,6 +5,7 @@ const root = path.resolve(__dirname, '..');
 const output = path.join(root, '.cloudflare-private/mobile-site');
 
 async function build() {
+  require('./check-public-assets.cjs').assertPublicAssets(root);
   fs.mkdirSync(path.join(output, 'data/daily'), { recursive: true });
   // Only runtime assets, never config.json, account files, exports or deployment credentials.
   fs.copyFileSync(path.join(root, 'index.html'), path.join(output, 'index.html'));

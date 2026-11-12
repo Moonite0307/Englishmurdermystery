@@ -3866,21 +3866,19 @@ function resetGame(keepSavedRun = false) {
 }
 
 /* ================= 内部连接配置（不在学习界面展示） ================= */
-/* 静态托管（GitHub Pages）下的内置默认接口配置：玩家打开即玩，无需填写。
-   注意：静态网页源码公开，此 Key 对访客可见，请务必在 DeepSeek 控制台设置消费上限。
-   如需更换 Key，直接修改下面三行即可（运营改这里 = 原来的 config.json）。 */
-const STATIC_DEFAULTS = {
-  apiBase: "https://api.deepseek.com/v1",
-  apiKey: "sk-6525610955094d2fbd545ecbc31109b6",
-  model: "deepseek-chat"
-};
+/* 公共静态资源严禁携带共享密钥。线上生成须由有鉴权和用量限制的后端代理提供；
+   移除旧密钥不能使历史副本失效，泄露过的密钥必须在供应商平台撤销。 */
+const STATIC_DEFAULTS = { apiBase: "", apiKey: "", model: "" };
 const LS_KEY = "script-kill-llm-settings";
 
 function getSettings() {
-  /* 兼容已有本地配置；未配置时直接使用内置连接。 */
+  /* 只兼容本机开发的私人配置。公共网址不能从旧缓存恢复共享直连密钥。 */
   let saved = {};
-  try { saved = JSON.parse(localStorage.getItem(LS_KEY) || "{}") || {}; }
-  catch (_) { /* 损坏或不可用的存储不影响使用内置连接。 */ }
+  const local = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
+  try {
+    if (local) saved = JSON.parse(localStorage.getItem(LS_KEY) || "{}") || {};
+    else localStorage.removeItem(LS_KEY);
+  } catch (_) { /* 不可用的存储不影响页面其他功能。 */ }
   const value = key => typeof saved[key] === "string" && saved[key].trim() || STATIC_DEFAULTS[key];
   const apiBase = value("apiBase").replace(/\/+$/, "");
   const apiKey = value("apiKey");
@@ -3915,7 +3913,7 @@ async function detectBackend() {
       backendMode = true;
       return;
     }
-  } catch (e) { /* 静态托管等环境自动使用内置连接。 */ }
+  } catch (e) { /* 静态托管没有模型后端，不使用共享密钥兜底。 */ }
 }
 
 /* ================= 大模型调用（流式 + 逐字动画兜底） ================= */
@@ -3932,8 +3930,9 @@ async function callLLM(msgs, onChunk, options = {}) {
     headers = { "Content-Type": "application/json" };
     payload = { messages: msgs, temperature: 0.8 };
   } else {
-    /* 直连模式：使用界面中填写的设置 */
+    /* 仅本机开发可使用私人配置；公共网页无内置密钥。 */
     const { apiBase, apiKey, model } = getSettings();
+    if (!apiBase || !apiKey || !model) throw new Error("AI 剧本生成暂时维护中：共享接口已停用，请等待管理员接通安全的模型服务。账号与词汇复习仍可使用。");
     url = apiBase + "/chat/completions";
     headers = { "Content-Type": "application/json", "Authorization": "Bearer " + apiKey };
     payload = { model, messages: msgs, stream: true, temperature: 0.8 };
@@ -6491,7 +6490,7 @@ async function generateDailyPlan(mode, level, opts) {
   hideBanner();
   const s = getSettings();
   if (!validateSettings(s)) {
-    showBanner("学习助手暂时无法连接，请稍后重试或联系管理员。");
+    showBanner("AI 剧本生成暂时维护中：共享接口已停用。账号与词汇复习仍可使用，请等待管理员接通安全的模型服务。");
     return;
   }
   if (!DAILY_DATA.ready) {
@@ -6566,7 +6565,7 @@ async function generatePlan() {
   hideBanner();
   const s = getSettings();
   if (!validateSettings(s)) {
-    showBanner("学习助手暂时无法连接，请稍后重试或联系管理员。");
+    showBanner("AI 剧本生成暂时维护中：共享接口已停用。账号与词汇复习仍可使用，请等待管理员接通安全的模型服务。");
     return;
   }
 

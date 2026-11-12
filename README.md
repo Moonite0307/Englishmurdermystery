@@ -5,6 +5,8 @@
 
 ## 协作与本地运行
 
+**接口安全：**公共前端不得包含共享 API Key。此前公开过的 Key 必须在供应商平台撤销，仅从当前源码删除无法消除 Git 历史和已下载副本。当前线上生成临时停用，账号与词汇复习保留；恢复前应使用私密服务端配置，并为模型代理增加鉴权、限流及费用上限。不要将新 Key 写回 HTML 或提交 Git。
+
 1. 克隆仓库并进入目录：`git clone https://github.com/Moonite0307/Englishmurdermystery.git`，然后 `cd Englishmurdermystery`。
 2. 安装 Node.js 18 或以上版本；Windows 双击 `启动.bat`，或运行 `npm start`，打开 `http://127.0.0.1:8787/`。保持服务窗口开启；更新后请关闭旧服务再启动。
 3. 需要本地模型代理时，将 `config.example.json` 复制为 `config.json` 并填写自己的配置。真实配置不提交；不要把账号数据或 Cloudflare 授权文件放入仓库。

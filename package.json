@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node --test scripts/test-task-progress.cjs scripts/test-script-strategy.cjs scripts/test-reply-parsing.cjs scripts/test-model-transport.cjs scripts/test-launcher.cjs",
+    "test": "node --test scripts/test-task-progress.cjs scripts/test-script-strategy.cjs scripts/test-reply-parsing.cjs scripts/test-model-transport.cjs scripts/test-launcher.cjs scripts/test-public-assets.cjs",
     "test:ui": "node scripts/test-ui.cjs",
     "deploy:accounts": "node scripts/deploy-free-accounts.cjs",
     "deploy:mobile": "node scripts/deploy-mobile-site.cjs",
