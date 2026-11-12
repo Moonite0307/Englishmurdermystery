@@ -1,7 +1,7 @@
 # 词境寻真 · Englishmurdermystery
 英语学习剧本杀工具：一名真人玩家，AI 扮演其他角色并兼任主持人。
 
-手机试玩入口：https://englishmurdermystery-mobile.pages.dev
+电脑、手机游玩入口：https://englishmurdermystery.pages.dev/
 
 ## 协作与本地运行
 

@@ -1,6 +1,6 @@
 # 词境寻真：公开源码与私密模型服务
 
-玩家可直接打开或转发 https://englishmurdermystery-mobile.pages.dev/ ，电脑、手机共用同一响应式页面。GitHub Pages 源码站也可通过 site-config.json 中的公开服务地址连接模型与账号；网页链接不是 API 密钥。
+玩家可直接打开或转发 https://englishmurdermystery.pages.dev/ ，电脑、手机共用同一响应式页面。域名不含 mobile，链接无需 wechat2 等版本参数。原先带 -mobile 的网址继续保留，账号仍使用同一个数据库。GitHub Pages 源码站也可通过 site-config.json 中的公开服务地址连接模型与账号；网页链接不是 API 密钥。
 
 微信兼容：连接探测与游客凭证申请不依赖 Promise.any 或 AbortSignal.timeout。主站和备用服务并行探测，点击生成时会等待或重新连接；临时网络失败不再显示“共享接口已停用”。备用账号 Worker 同时承载私密模型代理，两处服务使用同一个 D1 会话与用量数据库，因此切换不会另起额度或替换账号。两处密钥均为 Cloudflare 加密 Secret。
 

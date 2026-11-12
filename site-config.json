@@ -1,5 +1,5 @@
 {
-  "accountApiBase": "https://englishmurdermystery-mobile.pages.dev",
+  "accountApiBase": "https://englishmurdermystery.pages.dev",
   "accountApiFallbacks": [
     "https://englishmurdermystery-accounts.englishmystery-8b38553515.workers.dev"
   ]

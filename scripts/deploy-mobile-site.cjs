@@ -5,7 +5,7 @@ const { execFileSync } = require('node:child_process');
 const { build } = require('./build-mobile-site.cjs');
 const root = path.resolve(__dirname, '..');
 const wrangler = path.join(root, 'node_modules/wrangler/bin/wrangler.js');
-const name = 'englishmurdermystery-mobile';
+const name = 'englishmurdermystery';
 
 async function deploy() {
   const { ProxyAgent, setGlobalDispatcher } = require('undici');
@@ -45,7 +45,7 @@ async function deploy() {
     const result = command(['pages', 'deploy', output, '--project-name', name, '--branch', 'main', '--commit-dirty=true']);
     console.log(result.replace(/\x1b\[[0-9;]*m/g, ''));
   } catch (_) { throw new Error('Pages upload failed; private command output was withheld.'); }
-  console.log('Mobile site: https://' + name + '.pages.dev');
+  console.log('Site: https://' + name + '.pages.dev');
   console.log('Reused the existing account database; no migration or account replacement performed.');
 }
 module.exports = { deploy };
