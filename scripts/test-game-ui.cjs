@@ -391,7 +391,7 @@ test('word cards hide Chinese until rated, support corrections, repeat review an
     await page.locator('#btn-review-next').click();
     assert.equal(await page.locator('#review-word').innerText(), '本组复习完成');
     await page.locator('#btn-review-done').click();
-    await page.locator('#btn-close-vocab-book').click(); await page.locator('#btn-open-vocab-review').click();
+    await page.locator('#btn-home').click(); await page.locator('#btn-open-vocab-review').click();
     await page.locator('#review-status-filter').selectOption('mastered');
     assert.equal(await page.locator('.learning-word-main').count(), 1);
     await page.locator('#theme-toggle').click();
@@ -466,7 +466,7 @@ test('exit waits for the current reply; warm conversation colors and review cont
     if (artifacts) await page.screenshot({ path: path.join(artifacts, 'save-exit-light.png') });
     await page.locator('#btn-exit-save').click(); await page.locator('#btn-open-script-history').click();
     if (artifacts) await page.screenshot({ path: path.join(artifacts, 'saved-history-light.png') });
-    await page.locator('#btn-close-script-history').click(); await page.locator('#btn-open-vocab-review').click();
+    await page.locator('#btn-home').click(); await page.locator('#btn-open-vocab-review').click();
     await page.locator('#btn-start-review').click();
     const count = await page.evaluate(() => reviewSession.queue.length); assert.ok(count >= 2);
     await page.locator('.review-rate.known').click(); await page.locator('#btn-review-next').click();
