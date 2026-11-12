@@ -3057,6 +3057,7 @@ let modelBackendBase = "";
 let modelRequiresPlaySession = false;
 let modelPlaySession = null;
 let modelPlaySessionPromise = null;
+let modelConnectionProbe = null;
 
 /* ================= DOM 引用 ================= */
 const $ = (id) => document.getElementById(id);
@@ -4135,36 +4136,72 @@ function hideBanner() {
 }
 
 /* ================= 后端模式探测 ================= */
+function fetchModelResource(url, options = {}, timeoutMs = 12000) {
+  // Older WeChat WebViews do not implement AbortSignal.timeout / Promise.any.
+  const ctrl = typeof AbortController === "function" ? new AbortController() : null;
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => { if (ctrl) ctrl.abort(); reject(new Error("连接超时")); }, timeoutMs);
+    fetch(url, { ...options, ...(ctrl ? { signal: ctrl.signal } : {}) }).then(
+      response => { clearTimeout(timer); resolve(response); },
+      error => { clearTimeout(timer); reject(error); }
+    );
+  });
+}
+
 async function detectBackend() {
+  if (modelConnectionProbe) return modelConnectionProbe;
+  modelConnectionProbe = connectModelBackend();
+  try { return await modelConnectionProbe; }
+  finally { modelConnectionProbe = null; }
+}
+
+async function connectModelBackend() {
   const probe = async base => {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), base ? 8000 : 2000);
-    try {
-      const r = await fetch(base + "/api/config", { signal: ctrl.signal, cache: "no-store" });
+      const r = await fetchModelResource(base + "/api/config", { cache: "no-store" });
       if (!r.ok) throw new Error("no backend");
       const j = await r.json();
       if (!j || !j.configured) throw new Error("not configured");
       return { base, session: j.modelAuth === "play-session" };
-    } finally { clearTimeout(timer); }
   };
-  let found;
-  try { found = await probe(""); } catch (_) {}
-  if (!found) {
-    try {
-      const r = await fetch("site-config.json", { cache: "no-store", signal: AbortSignal.timeout(8000) });
+  const alternatives = (async () => {
+      const r = await fetchModelResource("site-config.json", { cache: "no-store" });
       const config = await r.json();
-      const bases = [...new Set([config.accountApiBase, ...(config.accountApiFallbacks || [])].filter(base => typeof base === "string" && /^https:\/\//.test(base)).map(base => base.replace(/\/+$/, "")))];
-      found = await Promise.any(bases.map(probe));
-    } catch (_) { /* 保持安全停用；绝不回退到公开共享密钥。 */ }
-  }
-  if (found) { modelBackendBase = found.base; modelRequiresPlaySession = found.session; backendMode = true; }
+      const bases = [...new Set([config.accountApiBase, ...(Array.isArray(config.accountApiFallbacks) ? config.accountApiFallbacks : [])].filter(base => typeof base === "string" && /^https:\/\//.test(base)).map(base => base.replace(/\/+$/, "")))];
+      if (!bases.length) throw new Error("no alternatives");
+      return new Promise((resolve, reject) => {
+        let pending = bases.length;
+        bases.forEach(base => probe(base).then(resolve, () => { if (!--pending) reject(new Error("no backend")); }));
+      });
+  })();
+  try {
+    // Probe the current origin and configured fallbacks concurrently, without a
+    // newer Promise API. A slow/blocked endpoint must not delay a working one.
+    const found = await new Promise((resolve, reject) => {
+      let pending = 2;
+      [probe(""), alternatives].forEach(task => task.then(resolve, () => { if (!--pending) reject(new Error("no backend")); }));
+    });
+    modelBackendBase = found.base; modelRequiresPlaySession = found.session; backendMode = true;
+    return true;
+  } catch (_) { return false; } // Never restore a public shared credential.
+}
+
+async function ensureModelReady(buttonId) {
+  if (validateSettings(getSettings())) return true;
+  const button = $(buttonId), label = button && button.textContent;
+  if (button && button.disabled) return false;
+  if (button) { button.disabled = true; button.textContent = "正在连接游玩服务…"; }
+  try {
+    if (await detectBackend()) return true;
+    showBanner("暂时无法连接游玩服务，请检查网络后再次点击生成。如果你在微信内打开，可尝试右上角“…”选择在浏览器打开；已有账号和进度不会被删除。");
+    return false;
+  } finally { if (button) { button.disabled = false; button.textContent = label; } }
 }
 
 async function modelSessionHeaders() {
   if (authInfo && authInfo.token) return { Authorization: "Bearer " + authInfo.token };
   if (modelPlaySession && modelPlaySession.expiresAt > Date.now() + 10000) return { Authorization: "Bearer " + modelPlaySession.token };
   if (!modelPlaySessionPromise) modelPlaySessionPromise = (async () => {
-    const response = await fetch(modelBackendBase + "/api/play-session", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}", signal: AbortSignal.timeout(15000) });
+    const response = await fetchModelResource(modelBackendBase + "/api/play-session", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" }, 15000);
     const data = await response.json();
     if (!response.ok || !/^play_[a-f0-9]{64}$/.test(data.token) || !Number.isFinite(data.expiresAt)) throw new Error(data.error || "暂时无法进入游戏，请稍后重试。");
     modelPlaySession = { token: data.token, expiresAt: data.expiresAt };
@@ -4190,7 +4227,7 @@ async function callLLM(msgs, onChunk, options = {}) {
   } else {
     /* 仅本机开发可使用私人配置；公共网页无内置密钥。 */
     const { apiBase, apiKey, model } = getSettings();
-    if (!apiBase || !apiKey || !model) throw new Error("AI 剧本生成暂时维护中：共享接口已停用，请等待管理员接通安全的模型服务。账号与词汇复习仍可使用。");
+    if (!apiBase || !apiKey || !model) throw new Error("暂时无法连接游玩服务，请检查网络或重新打开页面后重试。");
     url = apiBase + "/chat/completions";
     headers = { "Content-Type": "application/json", "Authorization": "Bearer " + apiKey };
     payload = { model, messages: msgs, stream: true, temperature: 0.8 };
@@ -6754,11 +6791,7 @@ function buildDailyPrompt(mode, level, ctx, mood, randomAssessment) {
 async function generateDailyPlan(mode, level, opts) {
   opts = opts || {};
   hideBanner();
-  const s = getSettings();
-  if (!validateSettings(s)) {
-    showBanner("AI 剧本生成暂时维护中：共享接口已停用。账号与词汇复习仍可使用，请等待管理员接通安全的模型服务。");
-    return;
-  }
+  if (!await ensureModelReady(mode === "闯关模式" ? "btn-start-daily-stage" : "btn-generate-daily")) return;
   if (!DAILY_DATA.ready) {
     showBanner("日常场景资料尚未加载完成，暂时无法进入关卡。请稍候或刷新页面（请通过本地后端访问）。");
     return;
@@ -6829,11 +6862,7 @@ async function generateDailyPlan(mode, level, opts) {
 
 async function generatePlan() {
   hideBanner();
-  const s = getSettings();
-  if (!validateSettings(s)) {
-    showBanner("AI 剧本生成暂时维护中：共享接口已停用。账号与词汇复习仍可使用，请等待管理员接通安全的模型服务。");
-    return;
-  }
+  if (!await ensureModelReady("btn-generate")) return;
 
   scriptInfo = {
     genre: $("sel-genre").value,

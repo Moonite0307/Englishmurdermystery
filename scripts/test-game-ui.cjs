@@ -33,21 +33,33 @@ async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false,
   const browser = await playwright.chromium.launch({ headless: true, channel: 'msedge' });
   const context = await browser.newContext({ viewport, isMobile: viewport.width <= 720, hasTouch: viewport.width <= 720 });
   const page = await context.newPage();
+  if (generation.legacyWechat) await page.addInitScript(() => {
+    Promise.any = undefined;
+    AbortSignal.timeout = undefined;
+  });
   const errors = [];
   const requests = [];
   const responses = [];
   if (generation.openingReply) responses.push(generation.openingReply);
   page.on('pageerror', e => errors.push(e.message));
-  await page.route('**/api/config', r => staticMode ? r.fulfill({ status: 404, body: 'Static site' }) : r.fulfill({ json: { configured: true, model: 'mock', ...(generation.secureModel ? { modelAuth: 'play-session' } : {}) } }));
+  // Specific mocked API routes below override this external-network block.
+  await page.route('https://**', r => r.abort());
+  if (generation.fallbackModel) await page.route('**/site-config.json', r => r.fulfill({ json: { accountApiBase: 'https://mock.invalid' } }));
+  await page.route('**/api/config', async r => {
+    if (generation.fallbackModel && new URL(r.request().url()).origin === new URL(pageUrl).origin) return r.fulfill({ status: 404, body: 'Static site' });
+    if (generation.startDisconnected && !generation.modelAvailable) return r.fulfill({ status: 503, json: { error: 'Temporary network failure' } });
+    if (generation.configDelayMs) await new Promise(resolve => setTimeout(resolve, generation.configDelayMs));
+    return staticMode ? r.fulfill({ status: 404, body: 'Static site' }) : r.fulfill({ json: { configured: true, model: 'mock', ...(generation.secureModel ? { modelAuth: 'play-session' } : {}) } });
+  });
   if (generation.secureModel) await page.route('**/api/play-session', r => {
     generation.sessionRequests = (generation.sessionRequests || 0) + 1;
     return r.fulfill({ json: { token: 'play_' + 'a'.repeat(64), expiresAt: Date.now() + 7200000 } });
   });
-  // No external requests, including any fallback model or dictionary API.
-  await page.route('https://**', r => r.abort());
+  // All model responses are synthetic; no paid provider requests.
   const handleChat = async route => {
     const req = route.request().postDataJSON(); requests.push(req);
     if (generation.secureModel) assert.equal(route.request().headers().authorization, 'Bearer play_' + 'a'.repeat(64));
+    if (generation.fallbackModel) assert.ok(route.request().url().startsWith('https://mock.invalid/api/chat'));
     const isPlan = req.messages[0].content.includes('资深剧本杀编剧');
     const planned = isPlan && generation.replies && generation.replies.shift();
     const result = isPlan ? (planned ? planned.data : fixture()) : (responses.shift() || (generation.replyMode === 'options' ? reply({
@@ -61,7 +73,7 @@ async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false,
   await page.route('https://mock.invalid/v1/chat/completions', handleChat);
   if (staticMode) await page.addInitScript(() => localStorage.setItem('script-kill-llm-settings', JSON.stringify({ apiBase: 'https://mock.invalid/v1', apiKey: 'test-only', model: 'mock' })));
   await page.goto(pageUrl);
-  await page.waitForFunction(wantStatic => (wantStatic ? !backendMode : backendMode) && EXAM_LEXICON.ready, staticMode);
+  await page.waitForFunction(disconnected => (disconnected ? !backendMode && modelConnectionProbe === null : backendMode) && EXAM_LEXICON.ready, staticMode || generation.startDisconnected);
   assert.equal(await page.locator('#api-settings, #backend-badge, #direct-mode-hint, #inp-api-base, #inp-api-key, #inp-model').count(), 0);
   await page.locator('#btn-explore-learning').click();
   await page.locator('[data-goal="' + (generation.goal || '高考') + '"]').click();
@@ -72,6 +84,7 @@ async function setup(viewport, mode = 'en', staticMode = false, eofOnly = false,
   if (generation.replyMode !== 'options') await page.locator('#sel-reply-language').selectOption(mode);
   if (generation.theme) await page.locator('#inp-theme').fill(generation.theme);
   if (generation.background) await page.locator('#inp-background').fill(generation.background);
+  if (generation.startDisconnected) generation.modelAvailable = true;
   await page.locator('#btn-generate').click();
   if (generation.expectFailure) {
     await page.locator('#error-banner').waitFor({ state: 'visible' });
@@ -213,6 +226,31 @@ test('public model proxy uses a reusable guest session in memory without a provi
     assert.ok(requests.length >= 3);
     const settings = await page.evaluate(() => ({ key: getSettings().apiKey, stored: JSON.stringify({ ...localStorage, ...sessionStorage }) }));
     assert.equal(settings.key, ''); assert.ok(!settings.stored.includes('play_'));
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('older WeChat reconnects on generate after initial failure and tolerates a slow config response', async () => {
+  const generation = { secureModel: true, legacyWechat: true, startDisconnected: true, configDelayMs: 2300 };
+  const { browser, page, errors, requests } = await setup({ width: 390, height: 844 }, 'zh', false, false, generation);
+  try {
+    assert.equal(await page.evaluate(() => state), 'PLAYING');
+    assert.equal(await page.evaluate(() => typeof Promise.any), 'undefined');
+    assert.equal(await page.evaluate(() => typeof AbortSignal.timeout), 'undefined');
+    assert.equal(generation.sessionRequests, 1);
+    assert.equal(requests.filter(req => req.messages[0].content.includes('资深剧本杀编剧')).length, 1);
+    assert.equal(await page.locator('#error-banner').isVisible(), false);
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
+
+test('older WeChat opens a static link through the fallback proxy without newer Promise or AbortSignal APIs', async () => {
+  const generation = { secureModel: true, legacyWechat: true, fallbackModel: true };
+  const { browser, page, errors } = await setup({ width: 390, height: 844 }, 'zh', false, false, generation);
+  try {
+    assert.equal(await page.evaluate(() => state), 'PLAYING');
+    assert.equal(await page.evaluate(() => modelBackendBase), 'https://mock.invalid');
+    assert.equal(generation.sessionRequests, 1);
     assert.deepEqual(errors, []);
   } finally { await browser.close(); }
 });

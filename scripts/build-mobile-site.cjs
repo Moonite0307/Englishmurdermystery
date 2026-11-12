@@ -13,7 +13,8 @@ async function build() {
   for (const name of ['scenes.jsonl', 'scene_catalog.json', 'vocabulary.json', 'sources.json', 'exam_lexicon.json', 'cet_core.json', 'pronunciations.json', 'pronunciation-LICENSE.txt']) {
     fs.copyFileSync(path.join(root, 'data/daily', name), path.join(output, 'data/daily', name));
   }
-  fs.writeFileSync(path.join(output, 'site-config.json'), JSON.stringify({ accountApiBase: '', sameOriginAccounts: true }, null, 2) + '\n');
+  fs.writeFileSync(path.join(output, 'site-config.json'), JSON.stringify({ accountApiBase: '', sameOriginAccounts: true,
+    accountApiFallbacks: ['https://englishmurdermystery-accounts.englishmystery-8b38553515.workers.dev'] }, null, 2) + '\n');
   fs.writeFileSync(path.join(output, '_routes.json'), JSON.stringify({ version: 1, include: ['/api/*'], exclude: [] }, null, 2) + '\n');
   fs.writeFileSync(path.join(output, '_headers'), '/site-config.json\n  Cache-Control: no-store\n/index.html\n  Cache-Control: no-cache\n');
   await require('esbuild').build({ entryPoints: [path.join(root, 'cloudflare/pages-worker.mjs')], outfile: path.join(output, '_worker.js'),

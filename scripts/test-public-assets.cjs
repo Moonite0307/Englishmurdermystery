@@ -43,6 +43,6 @@ test('missing model configuration fails locally without contacting a paid provid
     fetch: () => { requests++; throw new Error('must not call'); } });
   const source = html.slice(html.indexOf('async function callLLM'), html.indexOf('function typewriter'));
   vm.runInContext(source, ctx);
-  await assert.rejects(vm.runInContext('callLLM([], null)', ctx), /共享接口已停用/);
+  await assert.rejects(vm.runInContext('callLLM([], null)', ctx), /暂时无法连接游玩服务/);
   assert.equal(requests, 0);
 });

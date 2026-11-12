@@ -422,6 +422,7 @@ test('generation entry fills the strategy prompt and freezes a validated plan', 
   ctx.hideBanner = () => {};
   ctx.getSettings = () => ({});
   ctx.validateSettings = () => true;
+  ctx.ensureModelReady = async () => true;
   ctx.examCandidateText = () => 'gift,record';
   ctx.setState = () => {};
   ctx.showPlanningLoading = () => {};
